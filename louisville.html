@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Louisville, IL | Support My Local Community</title>
+    
+    <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
+    
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="louisville-bg">
 
     <header class="header">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" 
-             alt="Support My Local Community Banner" 
-             class="header-logo">
-        
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo">
         <nav class="nav-bar">
-            <ul class="nav-links">
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="clay-city.html">Clay City</a></li>
                 <li><a href="flora.html">Flora</a></li>
@@ -25,17 +26,50 @@
         </nav>
     </header>
 
-    <main class="container">
-        <section class="card">
-            <h3>Welcome to Flora</h3>
-            <p>Discover local businesses, upcoming events, and community news specifically for the Flora area.</p>
-        </section>
-
-        <div class="card">
-            <h3>Local Flora Directory</h3>
-            <p>Business listings for Flora are currently being updated. Check back soon!</p>
+    <div class="town-outer-wrap">
+        <div class="town-hero-container">
+            <img src="https://images.squarespace-cdn.com/content/v1/56c6248d62cd944a178ec33e/1461686733240-E82QY9H3D4Z4R3Y3QY3Q/Louisville+IL+Courthouse.jpg" alt="Louisville, Illinois">
+            <div class="town-overlay">
+                <h1>Louisville, Illinois</h1>
+                <p class="town-subtitle">County Seat of Clay County | 62858</p>
+            </div>
         </div>
-    </main>
+    </div>
 
+    <div class="town-wp-wrapper">
+        <div class="town-wp-container">
+            <div class="town-wp-section">
+                <h2>The Heart of the County</h2>
+                <p>As the county seat, Louisville serves as the central hub for Clay County. Home to the historic courthouse and a community built on tradition, it remains a vital part of our local heritage.</p>
+            </div>
+
+            <div class="town-wp-section">
+                <h2>Community & Culture</h2>
+                <div class="town-wp-grid">
+                    <div class="town-wp-card">
+                        <span class="town-wp-tag">History</span>
+                        <h3>Historic Courthouse</h3>
+                        <p>The Clay County Courthouse stands as a landmark of justice and community governance since its completion.</p>
+                    </div>
+                    <div class="town-wp-card">
+                        <span class="town-wp-tag">Recreation</span>
+                        <h3>Local Parks</h3>
+                        <p>Louisville offers beautiful green spaces for families to enjoy, maintaining that small-town Illinois charm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
+        <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    </script>
 </body>
 </html>
