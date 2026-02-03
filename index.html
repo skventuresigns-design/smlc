@@ -12,28 +12,29 @@
             margin: 0;
             padding: 0;
             color: #333;
+            overflow-x: hidden; /* Prevents unwanted side-scrolling */
         }
 
-        /* --- HEADER & RESPONSIVE LOGO --- */
+        /* --- FULL WIDTH HEADER --- */
         .header {
             background-color: #fffdf6; /* Your Page Background */
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #eee;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: block;
+            border-bottom: 2px solid #222;
         }
 
         .header-logo {
-            max-width: 100%;    /* Ensures it never overflows the screen */
+            width: 100%;        /* Forces image to span full width */
             height: auto;       /* Maintains aspect ratio */
-            display: block;
-            margin: 0 auto;
-            max-height: 250px;  /* Adjust this if you want the logo taller or shorter */
+            display: block;     /* Removes bottom gap in some browsers */
         }
 
         /* --- CONTAINER & CARDS --- */
         .container {
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
         }
 
@@ -49,11 +50,14 @@
             margin-top: 0;
             font-family: "Times New Roman", Times, serif;
             text-transform: uppercase;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
         }
 
+        /* --- MOBILE TWEAKS --- */
         @media (max-width: 600px) {
-            .header {
-                padding: 15px;
+            .container {
+                padding: 10px;
             }
         }
     </style>
@@ -62,14 +66,15 @@
 
     <div class="header">
         <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" 
-             alt="Support My Local Community Logo" 
+             alt="Support My Local Community Banner" 
              class="header-logo">
     </div>
 
     <div class="container">
         <div class="card">
             <h3>Join our Newsletter</h3>
-            </div>
+            <p>Stay updated with the latest local discounts and community news.</p>
+        </div>
 
         <div class="card">
             <h3>Local News & Updates</h3>
