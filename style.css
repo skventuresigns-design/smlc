@@ -1,147 +1,78 @@
 /* --- GLOBAL STYLES --- */
 body {
-    background-color: #e5e5e5;
     font-family: sans-serif;
     margin: 0;
     padding: 0;
     color: #333;
-}
-
-.header {
-    background-color: #fffdf6;
-    width: 100%;
-    border-bottom: 2px solid #222;
-}
-
-.header-logo {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* --- NAVIGATION --- */
-.nav-bar {
-    background-color: #fffdf6;
-    padding: 15px 0;
-    position: relative;
-    border-bottom: 1px solid #222;
-}
-
-.nav-links {
-    list-style: none;
-    margin: 0;
-    padding: 20px 0; /* Added vertical padding to the container */
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* Increased padding between each link */
-.nav-links li {
-    margin: 10px 30px; 
-}
-
-.nav-links a {
-    font-family: "Times New Roman", Times, serif;
-    color: #222222;
-    text-decoration: underline;
-    text-transform: capitalize;
-    font-weight: bold;
-    font-size: 18px;
-    transition: color 0.3s;
-}
-
-.nav-links a.active { color: #1414fe !important; }
-.nav-links a:hover { color: #1414fe; }
-
-/* --- HAMBURGER MENU (MOBILE ONLY) --- */
-.hamburger {
-    display: none; /* Hidden on desktop */
     flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin: 10px auto; /* Centers the icon on mobile */
-    z-index: 10;
 }
 
-.hamburger span {
-    width: 30px;
-    height: 4px; /* Slightly thicker for better visibility */
-    background-color: #222222;
-    border-radius: 10px;
-    transition: all 0.3s linear;
-    position: relative;
+/* --- THE FENCE BACKGROUND --- */
+/* This will now apply to any page where you add class="fence-bg" to the body */
+.fence-bg {
+    background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #e5e5e5; /* Fallback color */
 }
 
-/* --- MOBILE RESPONSIVENESS (Screens < 768px) --- */
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex; /* Forces visibility on small screens */
-    }
+/* --- HEADER & NAV --- */
+.header { background-color: #fffdf6; width: 100%; border-bottom: 2px solid #222; }
+.header-logo { width: 100%; height: auto; display: block; }
+.nav-bar { background-color: #fffdf6; padding: 15px 0; position: relative; border-bottom: 1px solid #222; }
+.nav-links { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; }
+.nav-links li { margin: 10px 30px; }
+.nav-links a { font-family: "Times New Roman", serif; color: #222222; text-decoration: underline; text-transform: capitalize; font-weight: bold; font-size: 18px; }
+.nav-links a.active { color: #1414fe !important; }
 
-    .nav-links {
-        display: none; /* Hide links initially */
-        flex-direction: column;
-        width: 100%;
-        background-color: #fffdf6;
-        padding: 0;
-    }
-
-    .nav-links.open {
-        display: flex; /* Shows links when hamburger is clicked */
-    }
-
-    .nav-links li {
-        margin: 20px 0; /* More vertical space for thumb-tapping */
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
-    }
-}
-
-/* --- CONTAINER & CARDS --- */
-.container {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-}
-
-.card {
-    background: #fcf6de;
-    border: 1px solid #222;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
-}
-
-h3 {
-    font-family: "Times New Roman", serif;
-    text-transform: uppercase;
-    border-bottom: 2px solid #222;
-    padding-bottom: 5px;
-}
-
-
-/* --- UNIVERSAL TOWN STYLES --- */
+/* --- TOWN CONTENT WRAPPERS --- */
 .town-outer-wrap { width: 100%; overflow: hidden; }
 .town-hero-container { position: relative; width: 100%; height: 400px; }
 .town-hero-container img { width: 100%; height: 100%; object-fit: cover; }
-.town-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
-.town-overlay h1 { font-family: 'Times New Roman', serif; font-size: clamp(2.5rem, 8vw, 4rem); text-shadow: 0 4px 15px rgba(0,0,0,0.5); margin: 0; }
-.town-subtitle { letter-spacing: 2px; margin-top: 10px; font-weight: bold; }
+.town-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+.town-overlay h1 { font-family: 'Times New Roman', serif; font-size: clamp(2.5rem, 8vw, 4rem); text-shadow: 0 4px 15px rgba(0,0,0,0.5); margin: 0; color: white !important; }
 
-.town-wp-container { max-width: 1000px; margin: 40px auto; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); padding: 40px; border: 1px solid #222; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+.town-wp-container { 
+    max-width: 1000px; 
+    margin: 40px auto; 
+    background: rgba(255, 255, 255, 0.9); 
+    backdrop-filter: blur(12px); 
+    padding: 40px; 
+    border: 1px solid #222; 
+    flex: 1; /* Pushes footer down */
+}
+
 .town-wp-section h2 { font-family: 'Times New Roman', serif; border-bottom: 3px solid #d4af37; display: inline-block; margin-bottom: 25px; padding-bottom: 5px; }
 .town-wp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
 .town-wp-card { background: rgba(255, 255, 255, 0.6); padding: 25px; border: 1px solid #222; }
-.town-wp-tag { background: #2c3e50; color: #fff; padding: 4px 12px; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; display: inline-block; margin-bottom: 10px; }
 
-/* Louisville Background - You can swap the URL when ready */
-.louisville-bg {
-    background: #e5e5e5; /* Placeholder color or your fence image */
-    background-size: cover;
+/* --- BLACK FOOTER (STRICT) --- */
+.site-footer {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    text-align: center;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: auto; /* Keeps footer at bottom of short pages */
+    width: 100%;
+}
+.site-footer a {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+/* --- MOBILE --- */
+.hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; }
+.hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; }
+
+@media (max-width: 768px) {
+    .hamburger { display: flex; margin: 0 auto; }
+    .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; }
+    .nav-links.open { display: flex; }
+    .nav-links li { margin: 15px 0; }
+    .town-hero-container { height: 300px; }
+    .town-wp-container { margin: 20px 10px; padding: 20px; }
 }
