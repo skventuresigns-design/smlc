@@ -1,19 +1,15 @@
 /* --- GLOBAL STYLES --- */
 body {
-    background-color: #e5e5e5; /* Your Listing Card Background */
+    background-color: #e5e5e5;
     font-family: sans-serif;
     margin: 0;
     padding: 0;
     color: #333;
-    overflow-x: hidden;
 }
 
-/* --- FULL WIDTH HEADER --- */
 .header {
-    background-color: #fffdf6; /* Your Page Background */
+    background-color: #fffdf6;
     width: 100%;
-    margin: 0;
-    padding: 0;
     border-bottom: 2px solid #222;
 }
 
@@ -23,11 +19,11 @@ body {
     display: block;
 }
 
-/* --- RESPONSIVE MENU --- */
+/* --- NAVIGATION --- */
 .nav-bar {
-    background-color: #fffdf6; /* Matching the header background */
-    padding: 15px 0;
-    border-bottom: 1px solid #222;
+    background-color: #fffdf6;
+    padding: 10px 0;
+    position: relative;
 }
 
 .nav-links {
@@ -36,7 +32,6 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 .nav-links li {
@@ -44,23 +39,60 @@ body {
 }
 
 .nav-links a {
-    /* Font Requirements */
     font-family: "Times New Roman", Times, serif;
     color: #222222;
-    text-decoration: underline; /* Links underlined */
-    text-transform: capitalize; /* Capitalize first letter */
+    text-decoration: underline;
+    text-transform: capitalize;
     font-weight: bold;
     font-size: 18px;
-    transition: color 0.2s ease;
 }
 
-/* Active Link Requirement */
-.nav-links a.active {
-    color: #1414fe !important;
+.nav-links a.active { color: #1414fe !important; }
+
+/* --- HAMBURGER STYLES --- */
+.hamburger {
+    display: none; /* Hidden on desktop */
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px 20px;
+    width: fit-content;
 }
 
-.nav-links a:hover {
-    color: #1414fe;
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #222;
+    margin: 2px 0;
+    transition: 0.3s;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex; /* Show hamburger on mobile */
+    }
+
+    .nav-links {
+        display: none; /* Hide links by default */
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: #fffdf6;
+        border-top: 1px solid #222;
+    }
+
+    .nav-links.open {
+        display: flex; /* Show links when toggled */
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    /* Animation for Hamburger to "X" */
+    .hamburger.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
 }
 
 /* --- CONTAINER & CARDS --- */
@@ -71,31 +103,14 @@ body {
 }
 
 .card {
-    background: #fcf6de; /* Your established listing card color */
-    border-radius: 0; /* Newspaper style look */
+    background: #fcf6de;
     border: 1px solid #222;
     padding: 20px;
-    box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
     margin-bottom: 20px;
 }
 
 h3 {
-    margin-top: 0;
-    font-family: "Times New Roman", Times, serif;
+    font-family: "Times New Roman", serif;
     text-transform: uppercase;
     border-bottom: 2px solid #222;
-    padding-bottom: 5px;
-}
-
-/* --- MOBILE TWEAKS --- */
-@media (max-width: 600px) {
-    .container {
-        padding: 10px;
-    }
-    .nav-links li {
-        margin: 5px 10px;
-    }
-    .nav-links a {
-        font-size: 16px;
-    }
 }
