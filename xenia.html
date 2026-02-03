@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flora, IL | Support My Local Community</title>
+    <title>Xenia, IL | Support My Local Community</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="xenia-bg">
 
     <header class="header">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" 
-             alt="Support My Local Community Banner" 
-             class="header-logo">
-        
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo">
         <nav class="nav-bar">
-            <ul class="nav-links">
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="clay-city.html">Clay City</a></li>
                 <li><a href="flora.html">Flora</a></li>
@@ -25,17 +23,66 @@
         </nav>
     </header>
 
-    <main class="container">
-        <section class="card">
-            <h3>Welcome to Flora</h3>
-            <p>Discover local businesses, upcoming events, and community news specifically for the Flora area.</p>
-        </section>
-
-        <div class="card">
-            <h3>Local Flora Directory</h3>
-            <p>Business listings for Flora are currently being updated. Check back soon!</p>
+    <div class="xenia-outer-wrap">
+        <div class="xenia-hero-container">
+            <img src="https://i.ytimg.com/vi/wiDLoAFjWaI/sddefault.jpg" alt="Xenia, Illinois">
+            <div class="xenia-overlay">
+                <h1>Xenia, Illinois</h1>
+                <p class="xenia-subtitle">Est. 1853 | 62899</p>
+            </div>
         </div>
-    </main>
+    </div>
 
+    <div class="xenia-wp-wrapper">
+        <div class="xenia-wp-container">
+            <div class="xenia-wp-section">
+                <h2>Historic Roots</h2>
+                <p>While records point to an 1853 survey for a town called Xenia in what became Clay County, it's sometimes linked to the area that became Atlanta. <strong>Clay & Wayne</strong>. Began as early hunting grounds, with the town formally established around 1830 when Dr. Davenport opened the first post office, named from the Greek word for "hospitality". Its growth was spurred by the 1854 railroad, connecting it to the wider region.</p>
+            </div>
+
+            <div class="xenia-wp-section">
+                <h2>Attractions & Landmark Beauty</h2>
+                <div class="xenia-wp-grid">
+                    <div>
+                        <img src="http://www.landsat.com/town-aerial-map/illinois/xenia-il-1783739.jpg" class="xenia-wp-img" alt="Xenia Park">
+                        <h3 style="margin-top:0;">Community Park</h3>
+                        <p>Enjoy a blend of small-town appeal and natural beauty, located just minutes from <strong>Charley Brown Memorial Park</strong>.</p>
+                    </div>
+                    <div>
+                        <img src="https://ourflora.com/wp-content/uploads/2026/01/Xenia-FishFry.jpg" class="xenia-wp-img" alt="Main Street">
+                        <h3 style="margin-top:0;">Fish Fry</h3>
+                        <p>Come and help <strong>XFPD</strong> with our annual Fish Fry. All funds go to purchase of safety equipment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="xenia-wp-section">
+                <h2>Local Work & Spirit</h2>
+                <div class="xenia-wp-grid">
+                    <div class="xenia-wp-card">
+                        <span class="xenia-wp-tag">Agriculture</span>
+                        <h3 style="margin-top:0;">The Heartland Labor</h3>
+                        <p>Farming is the backbone of Xenia. Our local families work the land, providing grain and livestock.</p>
+                    </div>
+                    <div class="xenia-wp-card">
+                        <span class="xenia-wp-tag">Community</span>
+                        <h3 style="margin-top:0;">The Xenia Spirit</h3>
+                        <p>From local tradesmen to small business owners, the work ethic here is built on handshakes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
+        <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    </script>
 </body>
 </html>
