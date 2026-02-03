@@ -64,6 +64,85 @@ body {
     text-decoration: underline;
 }
 
+/* --- GLOBAL STYLES --- */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- TOWN SPECIFIC BACKGROUNDS --- */
+/* Xenia Background */
+.xenia-bg {
+    background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #e5e5e5;
+}
+
+/* Placeholder for other towns - you can add URLs here later */
+.flora-bg, .louisville-bg, .clay-city-bg, .sailor-springs-bg {
+    background-color: #e5e5e5; 
+}
+
+/* --- HEADER & NAVIGATION --- */
+.header { background-color: #fffdf6; width: 100%; border-bottom: 2px solid #222; }
+.header-logo { width: 100%; height: auto; display: block; }
+.nav-bar { background-color: #fffdf6; padding: 15px 0; position: relative; border-bottom: 1px solid #222; }
+.nav-links { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; }
+.nav-links li { margin: 10px 30px; }
+.nav-links a { font-family: "Times New Roman", serif; color: #222222; text-decoration: underline; text-transform: capitalize; font-weight: bold; font-size: 18px; }
+.nav-links a.active { color: #1414fe !important; }
+
+/* --- CONTENT CONTAINERS --- */
+.town-outer-wrap { width: 100%; overflow: hidden; }
+.town-hero-container { position: relative; width: 100%; height: 400px; }
+.town-hero-container img { width: 100%; height: 100%; object-fit: cover; }
+.town-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+.town-overlay h1 { font-family: 'Times New Roman', serif; font-size: clamp(2.5rem, 8vw, 4rem); text-shadow: 0 4px 15px rgba(0,0,0,0.5); margin: 0; color: white !important; }
+
+.town-wp-container { 
+    max-width: 1000px; 
+    margin: 40px auto; 
+    background: rgba(255, 255, 255, 0.9); 
+    backdrop-filter: blur(12px); 
+    padding: 40px; 
+    border: 1px solid #222; 
+    flex: 1; 
+}
+
+/* --- THE BLACK FOOTER --- */
+.site-footer {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    text-align: center;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: auto;
+    width: 100%;
+}
+.site-footer a {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+/* --- MOBILE STYLES --- */
+.hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; }
+.hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; }
+
+@media (max-width: 768px) {
+    .hamburger { display: flex; margin: 0 auto; }
+    .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; }
+    .nav-links.open { display: flex; }
+    .nav-links li { margin: 15px 0; }
+    .town-wp-container { margin: 20px 10px; padding: 20px; }
+}
+
 /* --- MOBILE --- */
 .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; }
 .hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; }
