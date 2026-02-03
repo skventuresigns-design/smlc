@@ -22,20 +22,23 @@ body {
 /* --- NAVIGATION --- */
 .nav-bar {
     background-color: #fffdf6;
-    padding: 10px 0;
+    padding: 15px 0;
     position: relative;
+    border-bottom: 1px solid #222;
 }
 
 .nav-links {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 20px 0; /* Added vertical padding to the container */
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
+/* Increased padding between each link */
 .nav-links li {
-    margin: 5px 15px;
+    margin: 10px 30px; 
 }
 
 .nav-links a {
@@ -45,54 +48,59 @@ body {
     text-transform: capitalize;
     font-weight: bold;
     font-size: 18px;
+    transition: color 0.3s;
 }
 
 .nav-links a.active { color: #1414fe !important; }
+.nav-links a:hover { color: #1414fe; }
 
-/* --- HAMBURGER STYLES --- */
+/* --- HAMBURGER MENU (MOBILE ONLY) --- */
 .hamburger {
     display: none; /* Hidden on desktop */
     flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    padding: 10px 20px;
-    width: fit-content;
+    padding: 0;
+    margin: 10px auto; /* Centers the icon on mobile */
+    z-index: 10;
 }
 
 .hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: #222;
-    margin: 2px 0;
-    transition: 0.3s;
+    width: 30px;
+    height: 4px; /* Slightly thicker for better visibility */
+    background-color: #222222;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
 }
 
-/* --- MOBILE RESPONSIVENESS --- */
+/* --- MOBILE RESPONSIVENESS (Screens < 768px) --- */
 @media (max-width: 768px) {
     .hamburger {
-        display: flex; /* Show hamburger on mobile */
+        display: flex; /* Forces visibility on small screens */
     }
 
     .nav-links {
-        display: none; /* Hide links by default */
+        display: none; /* Hide links initially */
         flex-direction: column;
         width: 100%;
-        text-align: center;
         background-color: #fffdf6;
-        border-top: 1px solid #222;
+        padding: 0;
     }
 
     .nav-links.open {
-        display: flex; /* Show links when toggled */
+        display: flex; /* Shows links when hamburger is clicked */
     }
 
     .nav-links li {
-        margin: 15px 0;
+        margin: 20px 0; /* More vertical space for thumb-tapping */
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
     }
-
-    /* Animation for Hamburger to "X" */
-    .hamburger.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
 }
 
 /* --- CONTAINER & CARDS --- */
@@ -107,10 +115,12 @@ body {
     border: 1px solid #222;
     padding: 20px;
     margin-bottom: 20px;
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
 }
 
 h3 {
     font-family: "Times New Roman", serif;
     text-transform: uppercase;
     border-bottom: 2px solid #222;
+    padding-bottom: 5px;
 }
