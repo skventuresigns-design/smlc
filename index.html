@@ -4,83 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support My Local Community | Clay County</title>
-    <style>
-        /* --- GLOBAL STYLES --- */
-        body {
-            background-color: #e5e5e5; /* Your Listing Card Background */
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            overflow-x: hidden; /* Prevents unwanted side-scrolling */
-        }
-
-        /* --- FULL WIDTH HEADER --- */
-        .header {
-            background-color: #fffdf6; /* Your Page Background */
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            display: block;
-            border-bottom: 2px solid #222;
-        }
-
-        .header-logo {
-            width: 100%;        /* Forces image to span full width */
-            height: auto;       /* Maintains aspect ratio */
-            display: block;     /* Removes bottom gap in some browsers */
-        }
-
-        /* --- CONTAINER & CARDS --- */
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        h3 {
-            margin-top: 0;
-            font-family: "Times New Roman", Times, serif;
-            text-transform: uppercase;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        /* --- MOBILE TWEAKS --- */
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="header">
+    <header class="header">
         <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" 
              alt="Support My Local Community Banner" 
              class="header-logo">
-    </div>
+        
+        <nav class="nav-bar">
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="clay-city.html">Clay City</a></li>
+                <li><a href="flora.html">Flora</a></li>
+                <li><a href="louisville.html">Louisville</a></li>
+                <li><a href="sailor-springs.html">Sailor Springs</a></li>
+                <li><a href="xenia.html">Xenia</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="container">
-        <div class="card">
+    <main class="container">
+        <section class="card">
             <h3>Join our Newsletter</h3>
             <p>Stay updated with the latest local discounts and community news.</p>
-        </div>
+        </section>
 
-        <div class="card">
+        <section class="card">
             <h3>Local News & Updates</h3>
             <p>Content coming soon...</p>
-        </div>
-    </div>
+        </section>
+    </main>
 
 </body>
 </html>
