@@ -14,7 +14,13 @@
              class="header-logo">
         
         <nav class="nav-bar">
-            <ul class="nav-links">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="clay-city.html">Clay City</a></li>
                 <li><a href="flora.html">Flora</a></li>
@@ -37,5 +43,14 @@
         </section>
     </main>
 
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            hamburger.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
