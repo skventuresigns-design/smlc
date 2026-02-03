@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support My Local Community | Clay County</title>
     <style>
-        /* Your Brand Colors */
+        /* --- GLOBAL STYLES --- */
         body {
             background-color: #e5e5e5; /* Your Listing Card Background */
             font-family: sans-serif;
@@ -13,17 +13,30 @@
             padding: 0;
             color: #333;
         }
+
+        /* --- HEADER & RESPONSIVE LOGO --- */
         .header {
             background-color: #fffdf6; /* Your Page Background */
-            padding: 40px;
+            padding: 20px;
             text-align: center;
             border-bottom: 2px solid #eee;
         }
+
+        .header-logo {
+            max-width: 100%;    /* Ensures it never overflows the screen */
+            height: auto;       /* Maintains aspect ratio */
+            display: block;
+            margin: 0 auto;
+            max-height: 250px;  /* Adjust this if you want the logo taller or shorter */
+        }
+
+        /* --- CONTAINER & CARDS --- */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
+
         .card {
             background: white;
             border-radius: 8px;
@@ -31,13 +44,26 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
+
+        h3 {
+            margin-top: 0;
+            font-family: "Times New Roman", Times, serif;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>Support My Local Community</h1>
-        <p>Serving Flora, Louisville, and the Clay County Area</p>
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" 
+             alt="Support My Local Community Logo" 
+             class="header-logo">
     </div>
 
     <div class="container">
