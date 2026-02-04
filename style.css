@@ -76,6 +76,28 @@ body {
 }
 .intricate-col { width: 100%; display: flex; flex-direction: column; gap: 40px; }
 
+/* --- ORANGE MASTER SECTION --- */
+.orange-master-section { width: 100%; background-color: #ff6005; padding: 60px 0; margin: 40px 0; border-top: 3px solid #222; border-bottom: 3px solid #222;}
+
+/* Row 1: Heading Logic */
+.news-heading-bar { text-align: center; margin-bottom: 40px;}
+.news-heading-bar h2 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0;}
+
+/* Row 2: 85% Split Grid */
+.orange-grid-row { width: 85%; max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; align-items: center; /* Vertically centers the image with the form */}
+
+.orange-col { flex: 1;}
+
+.news-img-styled { width: 100%; height: auto; border: 2px solid #222; box-shadow: 10px 10px 0px rgba(0,0,0,0.2);}
+
+/* Ensure the form parent matches the orange background */
+.wf-parent { background-color: #ff6005 !important; padding: 0 !important;}
+
+/* Mobile Logic */
+@media (max-width: 980px) { .orange-grid-row { flex-direction: column; width: 90%;}}
+
+
+
 /* =========================================
    CHAPTER 4: TOWN LAYOUTS
    ========================================= */
