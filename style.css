@@ -1,6 +1,5 @@
 /* =========================================
    CHAPTER 1: GLOBAL BRANDING & RESET
-   (The "bones" of the site)
    ========================================= */
 * {
     box-sizing: border-box;
@@ -29,7 +28,6 @@ body {
 
 /* =========================================
    CHAPTER 2: HEADER & NAVIGATION
-   (Unified across all pages)
    ========================================= */
 .header { background-color: #fffdf6; width: 100%; border-bottom: 2px solid #222; }
 .header-logo { width: 100%; height: auto; display: block; }
@@ -45,8 +43,9 @@ body {
    ========================================= */
 
 /* --- 3A: HERO & SLIDER --- */
-.home-hero-cta { width: 100%; background-color: #0c2ef1; padding: 35px 20px; text-align: center; border-bottom:none; }
+.home-hero-cta { width: 100%; background-color: #0c2ef1; padding: 35px 20px; text-align: center; border-bottom: none; }
 .home-hero-cta h1 { color: #000000 !important; font-family: 'Times New Roman', serif; font-size: clamp(1.2rem, 3vw, 2rem); margin: 0; text-transform: uppercase; font-weight: bold;}
+
 .smlc-fullwidth-wrapper { width: 100%; overflow: hidden; background: #000; }
 .smlc-track { position: relative; width: 100%; height: 500px; }
 .smlc-item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; animation: smlcSimpleFade 30s infinite; }
@@ -58,69 +57,38 @@ body {
 .smlc-fade-3 { animation-delay: 20s; }
 
 /* --- 3B: GRID SECTIONS --- */
-.index-heading-row { text-align: center; padding: 60px 20px 20px; background-color: #fff;  margin-bottom: 50px;  /* }
-.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; margin: 0; color: black; }
+.index-heading-row { text-align: center; padding: 60px 20px 20px; background-color: #fff; margin-bottom: 50px; }
+.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; margin: 0; color: #000000 !important; }
 
-.news-heading-bar { background-color: #707070; width: 85%; margin: 40px auto; padding: 25px 20px; text-align: center; border-radius: 8px; }
-.news-heading-bar h2 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: 2rem; margin: 0; text-transform: uppercase; }
+/* --- ORANGE MASTER SECTION --- */
+.orange-master-section { width: 100%; background-color: #ff6005; padding: 60px 0; margin: 40px 0; border-top: 3px solid #222; border-bottom: 3px solid #222;}
+.news-heading-bar { background-color: #707070; width: 85%; margin: 0 auto 40px auto; padding: 25px 20px; text-align: center; border-radius: 8px; }
+.news-heading-bar h2 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0; text-transform: uppercase; }
+
+.orange-grid-row { width: 85%; max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; align-items: center; }
+.orange-col { flex: 1;}
+.news-img-styled { width: 100%; height: auto; border: 2px solid #222; box-shadow: 10px 10px 0px rgba(0,0,0,0.2);}
+.wf-parent { background-color: #ff6005 !important; padding: 0 !important;}
+
+/* --- DISCOVER CLAY COUNTY --- */
+.discover-clay-county-section { width: 100%; padding: 60px 0; background-color: #ffffff; }
+.courthouse-heading { text-align: center; color: #000000 !important; font-family: 'Times New Roman', serif; margin-bottom: 20px; font-size: 1.8rem;}
+.courthouse-img { width: 100%; height: auto; border: 2px solid #222; box-shadow: 5px 5px 15px rgba(0,0,0,0.3);}
+
+.index-grid-row { display: flex; gap: 40px; width: 90%; max-width: 1400px; margin: 0 auto; align-items: flex-start;}
+.index-col { flex: 1; }
 
 /* THE 95% INTRICATE GRID */
 .intricate-grid-container { display: grid; grid-template-columns: 30% 30% 30%; column-gap: 2.5%; width: 95%; margin: 40px auto; align-items: start; }
 .intricate-col { width: 100%; display: flex; flex-direction: column; gap: 40px; }
 
-/* --- ORANGE MASTER SECTION --- */
-.orange-master-section { width: 100%; background-color: #ff6005; padding: 60px 0; margin: 40px 0; border-top: 3px solid #222; border-bottom: 3px solid #222;}
-
-/* Row 1: Heading Logic */
-.news-heading-bar { text-align: center; margin-bottom: 40px;}
-.news-heading-bar h2 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0;}
-
-/* Row 2: 85% Split Grid */
-.orange-grid-row { width: 85%; max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; align-items: center; /* Vertically centers the image with the form */}
-
-.orange-col { flex: 1;}
-
-.news-img-styled { width: 100%; height: auto; border: 2px solid #222; box-shadow: 10px 10px 0px rgba(0,0,0,0.2);}
-
-/* Ensure the form parent matches the orange background */
-.wf-parent { background-color: #ff6005 !important; padding: 0 !important;}
-
-
-/* --- DISCOVER CLAY COUNTY MASTER CONTAINER --- */
-.discover-clay-county-section { width: 100%; padding: 60px 0; background-color: #ffffff; }
-
-/* Row 1: Heading */
-.index-heading-row { text-align: center; margin-bottom: 40px; width: 90%; max-width: 1400px; margin: 0 auto; align-items: center;}}
-
-.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; color: #ffffff;}
-
-/* Row 2: 2-Column Grid */
-.index-grid-row { display: flex; gap: 40px; width: 90%; max-width: 1400px; margin: 0 auto; align-items: flex-start;}
-
-.index-col { flex: 1; /* Ensures both columns take exactly 50% width */}
-
-/* Column 2 Specifics */
-.courthouse-heading { text-align: center; color: #000000; font-family: 'Times New Roman', serif; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); font-size: 1.8rem;}
-
-.courthouse-img { width: 100%; height: auto; border: 2px solid #222; box-shadow: 5px 5px 15px rgba(0,0,0,0.3);}
-
-
-/* Mobile Logic */
-@media (max-width: 980px) { .orange-grid-row { flex-direction: column; width: 90%;}}
-@media (max-width: 980px) { .index-grid-row { flex-direction: column; align-items: center;}
-    .index-col {width: 100%;}}
-
-
 /* =========================================
    CHAPTER 4: TOWN LAYOUTS
    ========================================= */
-
-/* --- CLAY CITY --- */
 .clay-city-hero-row { width: 100%; background-color: #0c2ef1; padding: 60px 20px; text-align: center; color: white; border-bottom: 2px solid white; }
 .clay-city-hero-row h1 { font-size: 4.5rem; margin: 0; font-family: 'Times New Roman', serif; text-transform: uppercase; }
 .clay-city-three-col { display: flex; gap: 30px; max-width: 1300px; width: 100%; justify-content: space-between; }
 
-/* --- LOUISVILLE --- */
 .louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; margin: 0 auto; }
 .Louisville-hero-container { 
     height: 300px; 
@@ -132,14 +100,12 @@ body {
 
 /* =========================================
    CHAPTER 5: REUSABLE COMPONENTS
-   (Newspaper clippings, Glossy boxes, etc.)
    ========================================= */
 .clay-county-news-box { background-color: #fffdf5; border: 1px solid #222; padding: 25px; box-shadow: 6px 6px 0px #222; width: 100%; }
 .clay-county-news-box img { width: 100%; height: auto; display: block; object-fit: contain; }
 
 .glossy-wrapper { padding: 60px 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center; border-radius: 20px; border: 2px solid #222}
-.glossy-box { max-width: 700px; margin: 0 auto; padding: 50px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);}
+.glossy-box { max-width: 700px; margin: 0 auto; padding: 50px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);}
 .yellow-text { color: #ffcc00 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); }
 .mission-text.yellow-border { border-left: 5px solid #ffcc00; padding-left: 20px; margin-top: 20px;}
 
@@ -159,7 +125,9 @@ body {
 
 @media (max-width: 980px) {
     .smlc-track { height: 350px; }
-    .index-grid-row { flex-direction: column; }
+    .orange-grid-row { flex-direction: column; width: 90%; }
+    .index-grid-row { flex-direction: column; align-items: center; }
+    .index-col { width: 100%; }
     .glossy-wrapper { padding: 40px 20px; }
     .glossy-box { padding: 40px; }
 }
