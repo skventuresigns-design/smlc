@@ -120,8 +120,8 @@ body {
    ========================================= */
 .louisville-content-wrapper { width: 100%; display: flex; justify-content: center; padding: 40px 0; }
 .louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; }
-.louisville-col-main { flex: 0 0 68%; min-width: 320px; }
-.louisville-col-side { flex: 0 0 28%; min-width: 280px; }
+.louisville-col-main { flex: 0 0 62%; min-width: 320px; }
+.louisville-col-side { flex: 0 0 33%; min-width: 300px; }
 
 /* Article Interior Styles */
 .article-container { background: white; border: 1px solid #222; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden; }
