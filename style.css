@@ -117,6 +117,9 @@ body {
     max-width: 100%;
     border: 1px solid #222;
     background: rgba(255, 255, 255, 0.6);
+    /* ADDED PADDING HERE: This keeps text away from the card edges */
+    padding: 25px; 
+    box-sizing: border-box;    
 }
 
 .xenia-wp-img { height: auto; display: block; object-fit: cover; }
