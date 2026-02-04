@@ -135,19 +135,25 @@ body {
 }
 
 /* =========================================
-   5. LOUISVILLE ARTICLE & SIDEBAR
+   5. LOUISVILLE ARTICLE & SIDEBAR ISOLATION
    ========================================= */
-.louisville-main-row {
+.louisville-content-wrapper {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    width: 95%;
-    margin: 40px auto;
-    gap: 2%;
-    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px 0;
 }
 
-.col-70 { width: 70%; min-width: 320px; }
-.col-25 { width: 25%; min-width: 280px; }
+.louisville-grid-row {
+    width: 95%;
+    max-width: 1400px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.louisville-col-main { flex: 0 0 70%; min-width: 320px; }
+.louisville-col-side { flex: 0 0 25%; min-width: 280px; }
 
 /* The Newspaper & Article Wrappers */
 .dv-custom-article-wrapper, .dv-newspaper-wrap { width: 100%; margin-bottom: 20px; }
@@ -179,11 +185,14 @@ body {
 .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; margin: 0 auto; }
 .hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; }
 
-@media (max-width: 992px) {
-    .col-70, .col-25 { width: 100%; }
+@media (max-width: 1024px) {
+    .louisville-grid-row { flex-direction: column; align-items: center; }
+    .louisville-col-main, .louisville-col-side { flex: 0 0 100%; width: 100%; }
 }
 
 @media (max-width: 768px) {
     .hamburger { display: flex; }
     .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; background-color: #fffdf6; }
-    .
+    .nav-links.open { display: flex; }
+    .nav-links li { margin: 15px 0; }
+}
