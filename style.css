@@ -149,6 +149,13 @@ body {
 .stat-label { text-transform: uppercase; font-size: 0.8rem; color: #aaa; }
 .newspaper-sidebar { background-color: #fdfaf0; border: 2px solid #222; padding: 25px; font-family: 'Times New Roman', serif; box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1); }
 
+/* --- FINAL LOUISVILLE FOOTER FIX --- */
+.louisville-bg .site-footer {background-color: #000000 !important; color: #ffffff !important; border-top: 1px solid #333; /* Subtle line to separate from the black body */
+    width: 100%; padding: 60px 20px; text-align: center; margin-top: auto; /* Pushes to bottom if content is short */}
+
+/* Ensure the body allows the footer to stick */
+.louisville-bg {display: flex; flex-direction: column; min-height: 100vh; margin: 0;}
+
 /* =========================================
    6. SAILOR SPRINGS CONTENT STYLES
    ========================================= */
