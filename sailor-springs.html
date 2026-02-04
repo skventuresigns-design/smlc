@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flora, IL | Support My Local Community</title>
+    <title>Sailor Springs, IL | Support My Local Community</title>
+    
+    <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
+    
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="sailor-springs-bg">
 
     <header class="header">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" 
-             alt="Support My Local Community Banner" 
-             class="header-logo">
-        
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo">
         <nav class="nav-bar">
-            <ul class="nav-links">
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="clay-city.html">Clay City</a></li>
                 <li><a href="flora.html">Flora</a></li>
@@ -25,17 +26,77 @@
         </nav>
     </header>
 
-    <main class="container">
-        <section class="card">
-            <h3>Welcome to Flora</h3>
-            <p>Discover local businesses, upcoming events, and community news specifically for the Flora area.</p>
-        </section>
-
-        <div class="card">
-            <h3>Local Flora Directory</h3>
-            <p>Business listings for Flora are currently being updated. Check back soon!</p>
+    <div class="SailorSprings-outer-wrap">
+        <div class="SailorSprings-hero-container">
+            <img src="https://github.com/skventuresigns-design/media/blob/main/sailorsprings.png?raw=true" alt="Sailor Springs, Illinois">
+            <div class="SailorSprings-overlay">
+                <h1>Sailor Springs, Illinois</h1>
+                <p class="SailorSprings-subtitle">Est. 1869 | 62879</p>
+            </div>
         </div>
-    </main>
+    </div>
 
+    <div id="sailor-springs-wp-wrapper">
+        <header class="spring-header">
+            <h1>Experience the rejuvenation of nature</h1>
+        </header>
+
+        <div class="content-container">
+            <div class="grid">
+                <div class="card">
+                    <h3>Olney Nearby</h3>
+                    <p>To see white Squirrels</p>
+                    <img src="https://www.enjoyillinois.com/assets/Images/Arts-+-Culture/White-squirrel-in-greenery-Olney__Resampled.jpg" alt="White Squirrel" class="grid-image">
+                    <img src="https://www.chicagotribune.com/wp-content/uploads/migration/2016/05/12/GCYAM4RM2VGOPMKFVZDQX2CU3Q.jpg?w=1200" alt="Olney IL" class="grid-image" style="margin-top:10px;">
+                </div>
+                
+                <div class="card">
+                    <h3>Little Wabash River</h3>
+                    <p><strong>Watershed:</strong> The area drains into the Little Wabash River. It flows south through Illinois and joins the main Wabash River near the border of White and Gallatin counties.</p>
+                    <p><strong>Nearby Features:</strong> Big Muddy Creek is another local waterway two miles northeast of Sailor Springs. The area has historical ties to the oil industry and railroads.</p>
+                    <p><strong>Recreation:</strong> While used for fishing and boating, swimming is often not recommended due to water quality concerns. Check USGS or NWS for real-time data.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Local History</h3>
+                    <p>Sailor Springs was once a resort town, famous for healing springs. The school, probably built in the 1890s with a "Romanesque" feel, reflects the town's peak era. Many buildings from the 1970s are now gone.</p>
+                    <img src="https://scontent-atl3-2.xx.fbcdn.net/v/t1.6435-9/40164761_2034018949974480_2788188181814575104_n.jpg?stp=dst-jpg_s590x590_tt6&_nc_cat=104&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=CGLVHUOw4XcQ7kNvwGBYYpe&_nc_oc=AdloRysoGOH4EdBGxlVASTvuPEj1KwQmO1zclncd9XU2ZdOdAGP2vggslN-SL24TOc8&_nc_zt=23&_nc_ht=scontent-atl3-2.xx&_nc_gid=rD1F-4fgLywy-8pVNXyLyQ&oh=00_AfoApqzXXoGmhZON33Zg0EtAkxD5iEpca8DtQwmDD2Xq2A&oe=69805339" alt="Historic School" class="grid-image">
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Pro Tip:</strong> A historic spot famous for its ghost town feel, springs, and unique roadside attractions.
+            </div>
+
+            <div class="spring-info">
+                <h3>Visitor Guidelines</h3>
+                <ul>
+                    <li><strong>COUNTY:</strong> Clay Cty</li>
+                    <li><strong>ROADS:</strong> 2WD Accessible</li>
+                    <li><strong>CLIMATE:</strong> Hot summer, cold winter</li>
+                    <li><strong>BEST TIME:</strong> All year</li>
+                    <li>Covered bridge nearby.</li>
+                    <li>Lincoln Log Cabin and cemetery nearby.</li>
+                    <li>Look for Big Muddy Post Office, smallest in the US.</li>
+                </ul>
+            </div>
+
+            <div class="image-grid-container" style="margin-top: 40px;">
+                <img src="https://www.ghosttowns.com/states/il/illinois/image4.JPG" alt="Sailor Springs Ghost Town 1" class="grid-image">
+                <img src="https://www.ghosttowns.com/states/il/illinois/image3.JPG" alt="Sailor Springs Ghost Town 2" class="grid-image">
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
+        <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    </script>
 </body>
 </html>
