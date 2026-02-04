@@ -182,7 +182,35 @@ body {
 @media (max-width: 900px) { .clay-city-three-col { flex-direction: column; }}
 
 /* =========================================
-   8. FOOTER & GLOBAL MOBILE FIXES
+   9. FOOTER & GLOBAL MOBILE FIXES
+   ========================================= */
+
+
+/* --- HOME HERO CTA --- */
+.home-hero-cta { width: 100%; background-color: #0c2ef1; padding: 30px 20px; text-align: center; transition: background 0.3s ease;}
+.home-hero-cta:hover { background-color: #091e9d; /* Subtle darken on hover */}
+.home-hero-cta h1 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: clamp(1.8rem, 5vw, 3rem); margin: 0; text-transform: uppercase;}
+
+/* --- SLIDER BREAK-OUT CONTAINER --- */
+.smlc-fullwidth-wrapper { width: 100%; overflow: hidden; background: #ffffff; display: block;}
+.smlc-track { position: relative; width: 100%; height: 500px; /* Adjusted height for desktop visibility */}
+.smlc-item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; animation: smlcSimpleFade 30s infinite;}
+.smlc-item img { width: 100%; height: 100%; object-fit: cover; /* Ensures image fills width/height */ display: block;}
+
+/* FADE ANIMATION LOGIC */
+@keyframes smlcSimpleFade { 0% { opacity: 0; } 3% { opacity: 1; } 33.33% { opacity: 1; } 41.66% { opacity: 0; } 100% { opacity: 0; }}
+.smlc-fade-1 { animation-delay: 0s; }
+.smlc-fade-2 { animation-delay: 10s; }
+.smlc-fade-3 { animation-delay: 20s; }
+
+/* RESPONSIVE HEIGHTS */
+@media (max-width: 980px) { .smlc-track { height: 350px; } }
+@media (max-width: 767px) { .smlc-track { height: 220px; } }
+
+
+
+/* =========================================
+   9. FOOTER & GLOBAL MOBILE FIXES
    ========================================= */
 .site-footer { 
     background-color: #000 !important; color: #fff !important; 
