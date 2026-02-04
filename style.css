@@ -70,7 +70,7 @@ body {
 .news-img-styled { width: 100%; height: auto; border: 2px solid #222; box-shadow: 10px 10px 0px rgba(0,0,0,0.2);}
 .wf-parent { background-color: #ff6005 !important; padding: 20px 0 !important;}
 /* --- NEWSLETTER NEWSPAPER CLIPPING STYLES --- */
-.wf-wrapper { max-width: 600px; margin: 0 auto; background-color: #fcf6de !important; /* The Aged Paper Tint */ border: 2px solid #222 !important; box-shadow: 8px 8px 0px #222 !important; /* Signature Heavy Shadow */
+.wf-wrapper { max-width: 600px; margin: 0 auto; background-color: #fffdf6 !important; /* The Aged Paper Tint */ border: 2px solid #222 !important; box-shadow: 8px 8px 0px #222 !important; /* Signature Heavy Shadow */
     padding: 40px; box-sizing: border-box; text-align: left;}
 .wf-header { font-family: "Times New Roman", Times, serif !important; font-size: 32px !important; font-weight: 900 !important; text-transform: uppercase; text-align: center;
     border-top: 4px solid #222; border-bottom: 2px solid #222; padding: 15px 0; margin-bottom: 30px; color: #222; line-height: 1.1;}
