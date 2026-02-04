@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clay City, IL | Support My Local Community</title>
+    <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="clay-city-bg">
 
     <header class="header">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" 
-             alt="Support My Local Community Banner" 
-             class="header-logo">
-        
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo">
         <nav class="nav-bar">
-            <ul class="nav-links">
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="clay-city.html" class="active">Clay City</a></li>
                 <li><a href="flora.html">Flora</a></li>
@@ -25,17 +24,54 @@
         </nav>
     </header>
 
-    <main class="container">
-        <section class="card">
-            <h3>Welcome to Flora</h3>
-            <p>Discover local businesses, upcoming events, and community news specifically for the Flora area.</p>
-        </section>
-
-        <div class="card">
-            <h3>Local Flora Directory</h3>
-            <p>Business listings for Flora are currently being updated. Check back soon!</p>
+    <div class="clay-city-hero">
+        <div class="clay-city-hero-overlay">
+            <h1>Clay City</h1>
+            <p>VILLAGE OF CLAY CITY | 62824</p>
         </div>
-    </main>
+    </div>
 
+    <div class="clay-city-content-wrapper">
+        <div class="clay-city-three-col">
+            
+            <div class="clay-city-col">
+                <div class="clay-city-card">
+                    <img src="https://github.com/skventuresigns-design/media/blob/main/clay-city-wolf.png?raw=true" alt="Clay City Wolf">
+                    <h3>Home of the Wolves</h3>
+                    <p>Pride and tradition run deep in Clay City. The Wolf represents the strength and unity of our local community and school spirit.</p>
+                </div>
+            </div>
+
+            <div class="clay-city-col">
+                <div class="clay-city-card">
+                    <div class="map-container">
+                        <img src="https://github.com/skventuresigns-design/media/blob/main/clay-city-map.png?raw=true" alt="Clay City Map">
+                    </div>
+                    <h3>Our Location</h3>
+                    <p>Nestled in the heart of Clay County along Route 50, Clay City is a vital link between the prairie and the river.</p>
+                </div>
+            </div>
+
+            <div class="clay-city-col">
+                <div class="clay-city-card">
+                    <img src="https://github.com/skventuresigns-design/media/blob/main/clay-city-school.png?raw=true" alt="Clay City School">
+                    <h3>Clay City Schools</h3>
+                    <p>Fostering excellence in education and athletics. Our schools are the foundation of our village's future.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
+        <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    </script>
 </body>
 </html>
