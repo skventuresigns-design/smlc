@@ -20,8 +20,10 @@ body {
     background-color: #e5e5e5;
 }
 
-/* Placeholders for future towns */
-.flora-bg, .louisville-bg, .clay-city-bg, .sailor-springs-bg {
+/* Sailor Springs Background - Now using the Fence image */
+.sailor-springs-bg {
+    background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed;
+    background-size: cover;
     background-color: #e5e5e5;
 }
 
