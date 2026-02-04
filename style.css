@@ -174,8 +174,97 @@ body {
 .image-grid-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
 .image-grid-container img { flex: 1 1 400px; width: 100%; height: auto; max-height: 400px; object-fit: cover; border: 1px solid #222; }
 
+
+/* =============================================
+   7. CLAY CITY SPECIFIC STYLES (#0c2ef1 Theme)
+   ============================================= */
+.clay-city-bg {
+    background-color: #0c2ef1 !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Full Width Blue Hero */
+.clay-city-hero {
+    width: 100%;
+    background-color: #0c2ef1;
+    padding: 60px 0;
+    text-align: center;
+    border-bottom: 5px solid #fff;
+}
+
+.clay-city-hero-overlay h1 {
+    font-family: 'Times New Roman', serif;
+    font-size: 4.5rem;
+    color: #ffffff;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.clay-city-hero-overlay p {
+    color: #ffffff;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* 3-Column Grid Layout */
+.clay-city-content-wrapper {
+    width: 100%;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.clay-city-three-col {
+    display: flex;
+    gap: 30px;
+    max-width: 1300px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.clay-city-col {
+    flex: 1; /* Makes all 3 columns equal width */
+}
+
+/* The Content Cards */
+.clay-city-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border: 2px solid #222;
+    height: 100%;
+    text-align: center;
+}
+
+.clay-city-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border: 1px solid #222;
+    margin-bottom: 20px;
+}
+
+.clay-city-card h3 {
+    font-family: 'Times New Roman', serif;
+    color: #0c2ef1;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+    .clay-city-three-col {
+        flex-direction: column;
+        align-items: center;
+    }
+    .clay-city-col {
+        width: 100%;
+    }
+}
+
 /* =========================================
-   7. FOOTER & MOBILE
+   8. FOOTER & MOBILE
    ========================================= */
 .site-footer { background-color: #000 !important; color: #fff !important; text-align: center; padding: 40px 20px; margin-top: auto; width: 100%; }
 .site-footer a { color: #fff !important; text-decoration: underline; }
