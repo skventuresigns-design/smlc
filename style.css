@@ -226,10 +226,12 @@ body {
 }
 
 .clay-county-news-box { 
-    margin-bottom: 25px !important; 
-    width: 100%; 
-    max-width: 500px; 
-    margin: 0 auto;
+   .clay-county-news-box {
+    background-color: #fffdf5;
+    border: 1px solid #222;
+    padding: 25px;
+    box-shadow: 6px 6px 0px #222;
+    width: 100%;
 }
 
 .orange-news-wrapper { 
@@ -244,6 +246,45 @@ body {
     margin-right: auto;
 }
 
+
+    /* --- IMAGE PROPORTION FIXES --- */
+.spotlight-image-wrap, .polaroid-wrap {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #222;
+    margin-bottom: 15px;
+}
+
+.clay-county-news-box img {
+    width: 100%;
+    height: auto;      /* Maintain aspect ratio */
+    display: block;
+    object-fit: contain; /* Ensures the whole image fits without cropping */
+}
+
+/* Specific Polaroid "Tilt" */
+.polaroid-wrap {
+    background: #fff;
+    padding: 10px 10px 25px 10px;
+    transform: rotate(-2deg);
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+}
+
+/* --- TYPOGRAPHY & HEADERS --- */
+.news-box-header, .event-clipping-header, .group-header, .invitation-header-main {
+    text-align: center;
+    border-top: 4px double #222;
+    border-bottom: 2px solid #222;
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+
+.clay-county-news-box h3 {
+    font-family: "Times New Roman", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+}
 /* =========================================
    9. HOME HERO & SLIDER
    ========================================= */
