@@ -72,10 +72,10 @@ body {
 
 /* --- DISCOVER CLAY COUNTY --- */
 .discover-clay-county-section { width: 100%; padding: 60px 0; background-color: #ffffff; }
-.courthouse-heading { text-align: center; color: #000000 !important; font-family: 'Times New Roman', serif; margin-bottom: 20px; font-size: 1.8rem;}
+.courthouse-heading { text-align: center; color: #000000 !important; font-family: 'Times New Roman', serif; margin-bottom: 20px; font-size: 1.8rem; line-height: 1.2;}
 .courthouse-img { width: 100%; height: auto; border: 2px solid #222; box-shadow: 5px 5px 15px rgba(0,0,0,0.3);}
 
-.index-grid-row { display: flex; gap: 40px; width: 90%; max-width: 1400px; margin: 0 auto; align-items: flex-start;}
+.index-grid-row { display: flex; gap: 40px; width: 90%; max-width: 1400px; margin: 0 auto; align-items: flex-start !important;}
 .index-col { flex: 1; }
 
 /* THE 95% INTRICATE GRID */
@@ -124,7 +124,7 @@ body {
 .clay-county-news-box { background-color: #fffdf5; border: 1px solid #222; padding: 25px; box-shadow: 6px 6px 0px #222; width: 100%; }
 .clay-county-news-box img { width: 100%; height: auto; display: block; object-fit: contain; }
 
-.glossy-wrapper { padding: 60px 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center; border-radius: 20px; border: 2px solid #222}
+.glossy-wrapper { padding: 60px 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); margin-top: 0 !important; background-size: cover; background-position: center; border-radius: 20px; border: 2px solid #222}
 .glossy-box { max-width: 700px; margin: 0 auto; padding: 50px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);}
 .yellow-text { color: #ffcc00 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); }
 .mission-text.yellow-border { border-left: 5px solid #ffcc00; padding-left: 20px; margin-top: 20px;}
