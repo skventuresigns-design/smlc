@@ -60,7 +60,7 @@ body {
 
 /* --- 3B: GRID SECTIONS --- */
 .index-heading-row { text-align: center; padding: 60px 20px 20px; background-color: #fff; }
-.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; margin: 0; }
+.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; margin: 0; color: black; }
 
 .news-heading-bar { background-color: #707070; width: 85%; margin: 40px auto; padding: 25px 20px; text-align: center; border-radius: 8px; }
 .news-heading-bar h2 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: 2rem; margin: 0; text-transform: uppercase; }
@@ -91,7 +91,7 @@ body {
 .discover-clay-county-section { width: 100%; padding: 60px 0; background-color: #ffffff; }
 
 /* Row 1: Heading */
-.index-heading-row { text-align: center; margin-bottom: 40px;}
+.index-heading-row { text-align: center; margin-bottom: 40px; width: 90%; max-width: 1400px; margin: 0 auto; align-items: center;}}
 
 .index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; color: #ffffff;}
 
@@ -101,7 +101,7 @@ body {
 .index-col { flex: 1; /* Ensures both columns take exactly 50% width */}
 
 /* Column 2 Specifics */
-.courthouse-heading { text-align: center; color: #ffffff; font-family: 'Times New Roman', serif; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);}
+.courthouse-heading { text-align: center; color: #000000; font-family: 'Times New Roman', serif; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); font-size: 1.8rem;}
 
 .courthouse-img { width: 100%; height: auto; border: 2px solid #222; box-shadow: 5px 5px 15px rgba(0,0,0,0.3);}
 
@@ -138,9 +138,11 @@ body {
 .clay-county-news-box { background-color: #fffdf5; border: 1px solid #222; padding: 25px; box-shadow: 6px 6px 0px #222; width: 100%; }
 .clay-county-news-box img { width: 100%; height: auto; display: block; object-fit: contain; }
 
-.glossy-wrapper { padding: 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center; border-radius: 20px; }
-.glossy-box { background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 40px; border-radius: 20px; }
-.yellow-text { color: #ffcc00 !important; }
+.glossy-wrapper { padding: 60px 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center; border-radius: 20px; border: 2px solid #222}
+.glossy-box { max-width: 700px; margin: 0 auto; padding: 50px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);}
+.yellow-text { color: #ffcc00 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); }
+.mission-text.yellow-border { border-left: 5px solid #ffcc00; padding-left: 20px; margin-top: 20px;}
 
 /* =========================================
    CHAPTER 6: FOOTER & MOBILE RESPONSIVENESS
@@ -159,6 +161,8 @@ body {
 @media (max-width: 980px) {
     .smlc-track { height: 350px; }
     .index-grid-row { flex-direction: column; }
+    .glossy-wrapper { padding: 40px 20px; }
+    .glossy-box { padding: 40px; }
 }
 
 @media (max-width: 768px) {
