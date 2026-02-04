@@ -25,6 +25,7 @@ body {
 
 .louisville-bg { background-color: #000000 !important; }
 .clay-city-bg { background-color: #0c2ef1 !important; }
+.home-bg { background-color: #ffffff; /* Pure white background for index.html only */ display: flex; flex-direction: column; min-height: 100vh; margin: 0;}
 
 /* =========================================
    2. HEADER & NAVIGATION
@@ -226,6 +227,18 @@ body {
 .glossy-wrapper { padding: 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center; border-radius: 20px;}
 .glossy-box { background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 40px; border-radius: 20px;}
 .yellow-text { color: #ffcc00 !important; }
+
+/* --- ORANGE NEWS WRAPPER --- */
+.orange-news-wrapper { background-color: #ff6005; padding: 30px 15px; border: 2px solid #222; margin-top: 20px; box-shadow: 6px 6px 0px #222;}
+
+/* --- INTRICATE ROW GRID --- */
+.intricate-row { align-items: flex-start !important; gap: 20px !important;}
+
+/* --- BULLETIN IFRAME CONTAINER --- */
+.clay-county-sync-container { width: 100%; max-width: 550px; margin: 0 auto; border: 2px solid #222; background: #fff; box-shadow: 6px 6px 0px #222;}
+
+/* Ensure newspaper cards don't float away */
+.clay-county-news-box { margin-bottom: 25px !important;}
 
 /* Mobile Adjustments for index grid */
 @media (max-width: 980px) {.index-grid-row { flex-direction: column; }.index-heading-row h2 { font-size: 1.8rem; }}
