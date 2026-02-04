@@ -175,7 +175,7 @@ body {
 
 /* --- CLIPPING COMPONENT STYLES --- */
 .clay-county-news-box {
-    background-color: #fcf6de; /* Aged paper tint */
+    background-color: #fffdf6; /* Aged paper tint */
     border: 2px solid #222;
     padding: 30px;
     box-shadow: 8px 8px 0px #222; /* Heavy signature shadow */
@@ -231,7 +231,7 @@ body {
 
 /* --- THE DIVI-STYLE NEWSPAPER CLIPPING --- */
 .clay-county-news-box {
-    background-color: #fcf6de !important; /* Aged Paper Tint */
+    background-color: #fffdf6 !important; /* Aged Paper Tint */
     border: 2px solid #222 !important;
     padding: 30px;
     box-shadow: 10px 10px 0px #222 !important; /* Bold Divi Shadow */
@@ -245,7 +245,7 @@ body {
 .news-box-header {
     text-align: center;
     border-top: 5px solid #222;
-    border-bottom: 2px solid #222;
+    border-bottom: 0px solid #222;
     padding: 20px 10px;
     margin-bottom: 20px;
     width: 100%;
