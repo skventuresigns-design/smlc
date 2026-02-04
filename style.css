@@ -168,12 +168,13 @@ body {
 .clay-city-content-wrapper { width: 100%; padding: 40px 20px; display: flex; justify-content: center; }
 .clay-city-three-col { display: flex; gap: 30px; max-width: 1300px; width: 100%; justify-content: space-between; }
 .clay-city-col { flex: 1; }
-.clay-city-card { 
-    background: rgba(255, 255, 255, 0.95); padding: 25px; 
-    border: 2px solid #222; height: 100%; text-align: center; 
-}
+.clay-city-card { background: rgba(255, 255, 255, 0.95); padding: 25px; border: 2px solid #222; height: 100%; text-align: center; }
 .clay-city-card img { width: 100%; height: 250px; object-fit: cover; border: 1px solid #222; margin-bottom: 20px; }
 .clay-city-card h3 { font-family: 'Times New Roman', serif; color: #0c2ef1; font-size: 1.5rem; margin-bottom: 10px; }
+.alternate-card { text-align: left !important; display: flex; flex-direction: column; gap: 15px;}
+.alternate-card h3 { border-bottom: 2px solid #091e9d; padding-bottom: 10px; margin-bottom: 5px;}
+.info-item strong {display: block; color: #091e9d; font-size: 1.1rem; margin-bottom: 2px;}
+.info-item p { margin: 0; font-size: 0.95rem; line-height: 1.4; color: #333;}
 
 /* =========================================
    8. FOOTER & GLOBAL MOBILE FIXES
