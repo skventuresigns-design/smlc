@@ -207,10 +207,32 @@ body {
 @media (max-width: 980px) { .smlc-track { height: 350px; } }
 @media (max-width: 767px) { .smlc-track { height: 220px; } }
 
+/* =========================================
+    9. Index page CSS
+   ========================================= */
+/* --- INDEX HEADING STYLES --- */
+.index-heading-row { text-align: center; padding: 60px 20px 20px; background-color: #fff;}
+.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; margin: 0;}
+
+/* --- THE 2-COLUMN GRID (Used for Courthouse & News) --- */
+.index-grid-row { display: flex; gap: 40px; padding: 40px 5%; align-items: center; max-width: 1400px; margin: 0 auto;}
+.index-col {flex: 1; min-width: 320px;}
+
+/* --- THE NEWS HEADING BAR --- */
+.news-heading-bar { background-color: #707070; width: 100%; padding: 25px 20px; text-align: center;}
+.news-heading-bar h2 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: 2rem; margin: 0; text-transform: uppercase;}
+
+/* --- GLOSSY BOX OVERRIDES --- */
+.glossy-wrapper { padding: 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center; border-radius: 20px;}
+.glossy-box { background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 40px; border-radius: 20px;}
+.yellow-text { color: #ffcc00 !important; }
+
+/* Mobile Adjustments for index grid */
+@media (max-width: 980px) {.index-grid-row { flex-direction: column; }.index-heading-row h2 { font-size: 1.8rem; }}
 
 
 /* =========================================
-   9. FOOTER & GLOBAL MOBILE FIXES
+    10. FOOTER & GLOBAL MOBILE FIXES
    ========================================= */
 .site-footer { 
     background-color: #000 !important; color: #fff !important; 
