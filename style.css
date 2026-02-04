@@ -80,54 +80,15 @@ body {
 }
 
 /* =========================================
-   4. FULL-WIDTH HERO SECTIONS
+   4. HERO SECTIONS (Xenia & Sailor Springs)
    ========================================= */
-.xenia-outer-wrap, .town-outer-wrap {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
+.SailorSprings-outer-wrap, .xenia-outer-wrap { width: 100%; overflow: hidden; }
+.SailorSprings-hero-container, .xenia-hero-container { position: relative; width: 100%; height: 400px; }
+.SailorSprings-hero-container img, .xenia-hero-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.SailorSprings-overlay, .xenia-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white !important; }
+.SailorSprings-overlay h1, .xenia-overlay h1 { font-family: 'Times New Roman', serif; font-size: clamp(2.5rem, 8vw, 3.5rem); margin: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+.SailorSprings-subtitle, .xenia-subtitle { letter-spacing: 2px; margin-top: 10px; font-weight: bold; text-transform: uppercase; }
 
-.xenia-hero-container, .town-hero-container {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-}
-
-.xenia-hero-container img, .town-hero-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.xenia-overlay, .town-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.35);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white !important;
-}
-
-.xenia-overlay h1, .town-overlay h1 {
-    font-family: 'Times New Roman', serif;
-    font-size: clamp(2.5rem, 8vw, 4rem);
-    margin: 0;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
-
-.xenia-subtitle, .town-subtitle {
-    letter-spacing: 2px;
-    margin-top: 10px;
-    font-weight: bold;
-}
 
 /* =========================================
    5. CONTENT CONTAINERS (GLASSMORPISM)
@@ -192,76 +153,39 @@ body {
 }
 
 /* =========================================
-   7. BLACK FOOTER
+   7. SAILOR SPRINGS CONTENT STYLES
    ========================================= */
-.site-footer {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    text-align: center;
-    padding: 40px 20px;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-top: auto; /* Sticky footer logic */
-    width: 100%;
-    box-sizing: border-box;
-}
+#sailor-springs-wp-wrapper { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6; background-color: transparent; flex: 1; }
+.spring-header { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://github.com/skventuresigns-design/media/blob/main/sailorsprings.png?raw=true') center/cover; color: white; padding: 60px 20px; text-align: center; }
+.spring-header h1 { font-size: 2.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
-.site-footer a {
-    color: #ffffff !important;
-    text-decoration: underline;
-}
+.content-container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); padding: 25px; border-radius: 0; border: 1px solid #222; border-top: 5px solid #c5a059; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.card h3 { font-family: "Times New Roman", serif; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+
+.highlight-box { background: rgba(232, 246, 243, 0.9); border-left: 10px solid #1abc9c; padding: 20px; margin: 40px 0; border-radius: 0 8px 8px 0; }
+.spring-info { background: rgba(44, 62, 80, 0.9); color: white; padding: 30px; border-radius: 0; border-left: 5px solid #1abc9c; }
+.spring-info ul { list-style-type: none; padding: 0; }
+.spring-info li { margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+
+/* Bottom Image Grid */
+.image-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid #222; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
 /* =========================================
-   8. MOBILE RESPONSIVENESS
+   8. BLACK FOOTER & MOBILE
    ========================================= */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 10px 20px;
-    border: none;
-    background: none;
-    margin: 0 auto;
-}
+.site-footer { background-color: #000 !important; color: #fff !important; text-align: center; padding: 40px 20px; font-size: 14px; margin-top: auto; }
+.site-footer a { color: #fff !important; text-decoration: underline; }
 
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: #222;
-    margin: 2px 0;
-    transition: 0.3s;
-}
+.hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; margin: 0 auto; }
+.hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; }
 
 @media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        background-color: #fffdf6;
-    }
-
-    .nav-links.open {
-        display: flex;
-    }
-
-    .nav-links li {
-        margin: 15px 0;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
-    }
-
-    .xenia-wp-container, .town-wp-container {
-        margin: 20px 10px;
-        padding: 20px;
-    }
-
-    .xenia-hero-container, .town-hero-container {
-        height: 300px;
-    }
+    .hamburger { display: flex; }
+    .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; background-color: #fffdf6; }
+    .nav-links.open { display: flex; }
+    .nav-links li { margin: 15px 0; }
+    .image-grid-container { grid-template-columns: 1fr; }
 }
