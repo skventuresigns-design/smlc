@@ -184,6 +184,8 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative; 
+    margin-top: 30px;
 }
 
 .clay-county-news-box h3 {
@@ -246,6 +248,23 @@ body {
     font-family: "Times New Roman", Times, serif;
     display: flex;
     flex-direction: column;
+}
+
+.clipping-tag-black {
+    position: absolute;
+    top: 0;                /* Start at the very top edge */
+    left: 20px;            /* Your 20px margin from the left */
+    transform: translateY(-50%); /* This pulls it up exactly halfway over the border */
+    background-color: #222;
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 12px;
+    font-family: "Times New Roman", serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    z-index: 10;           /* Ensures it stays on top of the border line */
+    border: 1px solid #fff; /* Optional: a tiny white border makes it pop against the black line */
 }
 
 /* Masthead Header Logic */
