@@ -104,25 +104,15 @@ body {
 .xenia-wp-section { margin-bottom: 50px; }
 .xenia-wp-section h2 { font-family: 'Times New Roman', serif; border-bottom: 3px solid #d4af37; display: inline-block; margin-bottom: 25px; padding-bottom: 5px; }
 
-/* Landmark Grid Fix */
-.xenia-wp-grid {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
+.xenia-wp-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
 .xenia-wp-img, .xenia-wp-card {
-    flex: 1 1 300px; /* Forces images side-by-side until mobile */
+    flex: 1 1 300px;
     max-width: 100%;
     border: 1px solid #222;
     background: rgba(255, 255, 255, 0.6);
-    /* ADDED PADDING HERE: This keeps text away from the card edges */
     padding: 25px; 
-    box-sizing: border-box;    
 }
-
-.xenia-wp-img { height: auto; display: block; object-fit: cover; }
+.xenia-wp-img { height: auto; display: block; object-fit: cover; padding: 0; }
 .xenia-wp-tag { background: #2c3e50; color: #fff; padding: 4px 12px; font-size: 0.75rem; font-weight: bold; display: inline-block; margin-bottom: 10px; }
 
 /* =========================================
@@ -132,83 +122,31 @@ body {
 .louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; }
 .louisville-col-main { flex: 0 0 68%; min-width: 320px; }
 .louisville-col-side { flex: 0 0 28%; min-width: 280px; }
-.louisville-bg {background-color: #000000 !important;}
 
-.article-container { background: white; border: 1px solid #222; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow:hidden }
-.newspaper-sidebar { background-color: #fdfaf0; border: 2px solid #222; padding: 25px; font-family: 'Times New Roman', serif; box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);}
+/* Article Interior Styles */
+.article-container { background: white; border: 1px solid #222; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden; }
+.article-container .hero-section { background: linear-gradient(180deg, #eb1c24 0%, #222 100%); color: white; padding: 60px 20px; text-align: center; border-bottom: 8px solid #ffcc00; }
+.article-container .category-tag { background: #ffcc00; color: #222; padding: 5px 15px; display: inline-block; font-weight: bold; margin-bottom: 20px; font-size: 0.8rem; text-transform: uppercase; }
+.article-container h1 { font-family: 'Times New Roman', serif; font-size: 3.5rem; margin: 0; color: white !important; }
+.article-container .article-body { padding: 40px; font-family: 'Times New Roman', serif; font-size: 1.2rem; line-height: 1.8; text-align: justify; color: #1a1a1a; }
+
+/* Sidebar/Stats Styles */
+.stat-sidebar { background: #222; color: white; padding: 25px; border-radius: 4px; margin-bottom: 20px; }
+.stat-number { font-size: 2.5rem; color: #ffcc00; display: block; font-weight: bold; }
+.stat-label { text-transform: uppercase; font-size: 0.8rem; color: #aaa; }
+.newspaper-sidebar { background-color: #fdfaf0; border: 2px solid #222; padding: 25px; font-family: 'Times New Roman', serif; box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1); }
 
 /* =========================================
-   6.  SAILOR SPRINGS CONTENT STYLES
+   6. SAILOR SPRINGS CONTENT STYLES
    ========================================= */
-#sailor-springs-wp-wrapper { 
-    font-family: 'Segoe UI', Tahoma, sans-serif; 
-    line-height: 1.6; 
-    background-color: transparent; 
-}
-
-.content-container { 
-    max-width: 1100px; 
-    margin: auto; 
-    padding: 40px 20px; 
-}
-
-/* Sailor Springs Grid - Side-by-Side Cards */
-#sailor-springs-wp-wrapper .grid { 
-    display: flex; 
-    gap: 30px; 
-    flex-wrap: wrap; 
-    justify-content: center; 
-}
-
-/* Frosted Cards with Padding */
-#sailor-springs-wp-wrapper .card { 
-    background: rgba(255, 255, 255, 0.85); 
-    backdrop-filter: blur(5px); 
-    padding: 25px; /* Added Padding for text clearance */
-    border: 1px solid #222; 
-    border-top: 5px solid #c5a059; 
-    flex: 1 1 300px;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-/* Bottom Ghost Town Image Grid */
-.image-grid-container { 
-    display: flex; 
-    gap: 20px; 
-    flex-wrap: wrap; 
-    justify-content: center;
-}
-
-.image-grid-container img { 
-    flex: 1 1 400px; /* Forces side-by-side images */
-    width: 100%; 
-    height: auto;
-    max-height: 400px;
-    object-fit: cover;
-    border: 1px solid #222;
-}
-
-
-
+#sailor-springs-wp-wrapper { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6; background-color: transparent; }
+.content-container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+#sailor-springs-wp-wrapper .grid { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+#sailor-springs-wp-wrapper .card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); padding: 25px; border: 1px solid #222; border-top: 5px solid #c5a059; flex: 1 1 300px; max-width: 100%; }
+.image-grid-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.image-grid-container img { flex: 1 1 400px; width: 100%; height: auto; max-height: 400px; object-fit: cover; border: 1px solid #222; }
 
 /* =========================================
    7. FOOTER & MOBILE
    ========================================= */
-.site-footer { background-color: #000 !important; color: #fff !important; text-align: center; padding: 40px 20px; margin-top: auto; width: 100%; }
-.site-footer a { color: #fff !important; text-decoration: underline; }
-
-.hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; margin: 0 auto; }
-.hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; transition: 0.3s; }
-
-@media (max-width: 1024px) {
-    .louisville-grid-row { flex-direction: column; align-items: center; }
-    .louisville-col-main, .louisville-col-side { flex: 1 1 100%; width: 100%; }
-}
-
-@media (max-width: 768px) {
-    .hamburger { display: flex; }
-    .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; background-color: #fffdf6; }
-    .nav-links.open { display: flex; }
-    .nav-links li { margin: 15px 0; }
-}
+.site-footer {
