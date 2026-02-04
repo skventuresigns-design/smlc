@@ -197,7 +197,10 @@ body {
 
 /* THE BUTTONS */
 .clipping-btn {
-    display: inline-block;
+    display: block;width: 100%;            /* Forces the button to stretch full width */
+    margin: 0 !important;   /* Removes the side margins so it touches the borders */
+    border-radius: 0;       /* Ensures the corners stay sharp and newspaper-like */
+    box-sizing: border-box;
     background-color: #222 !important;
     color: #fff !important;
     padding: 12px 25px;
@@ -209,7 +212,6 @@ body {
     letter-spacing: 1px;
     transition: 0.3s ease;
     border: none;
-    margin-top: 15px;
 }
 
 .clipping-btn:hover {
@@ -244,11 +246,23 @@ body {
 /* Masthead Header Logic */
 .news-box-header {
     text-align: center;
-    border-top: 0px solid #222;
+    border-top: 5px solid #222;
     border-bottom: 3px solid #222;
     padding: 20px 10px;
     margin-bottom: 20px;
     width: 100%;
+}
+
+.news-box-header span {
+    display: block;
+    border-top: none !important; /* This removes the middle line */
+    margin-top: 5px;             /* Keeps a little space between the two rows of text */
+    padding-top: 0; 
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #444;
+    font-weight: bold;
 }
 
 .news-box-header h3 {
