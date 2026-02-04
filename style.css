@@ -129,12 +129,13 @@ body {
    5. LOUISVILLE ARTICLE & SIDEBAR
    ========================================= */
 .louisville-content-wrapper { width: 100%; display: flex; justify-content: center; padding: 40px 0; }
-.louisville-grid-row { width: 95%; max-width: 1400px; display: flex; gap: 30px; align-items: flex-start; }
-.louisville-col-main { flex: 0 0 70%; min-width: 320px; }
-.louisville-col-side { flex: 0 0 25%; min-width: 280px; }
+.louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; }
+.louisville-col-main { flex: 0 0 68%; min-width: 320px; }
+.louisville-col-side { flex: 0 0 28%; min-width: 280px; }
+.louisville-bg {background-color: #000000 !important;}
 
-.article-container { background: white; border: 1px solid #222; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-.newspaper-sidebar { background-color: #fdfaf0; border: 2px solid #222; padding: 20px; font-family: 'Times New Roman', serif; }
+.article-container { background: white; border: 1px solid #222; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow:hidden }
+.newspaper-sidebar { background-color: #fdfaf0; border: 2px solid #222; padding: 25px; font-family: 'Times New Roman', serif; box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);}
 
 /* =========================================
    6.  SAILOR SPRINGS CONTENT STYLES
@@ -202,7 +203,7 @@ body {
 
 @media (max-width: 1024px) {
     .louisville-grid-row { flex-direction: column; align-items: center; }
-    .louisville-col-main, .louisville-col-side { flex: 0 0 100%; width: 100%; }
+    .louisville-col-main, .louisville-col-side { flex: 1 1 100%; width: 100%; }
 }
 
 @media (max-width: 768px) {
