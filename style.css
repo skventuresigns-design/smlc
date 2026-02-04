@@ -66,14 +66,7 @@ body {
 .news-heading-bar h2 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: 2rem; margin: 0; text-transform: uppercase; }
 
 /* THE 95% INTRICATE GRID */
-.intricate-grid-container { 
-    display: grid; 
-    grid-template-columns: 30% 30% 30%; 
-    column-gap: 2.5%; 
-    width: 95%; 
-    margin: 40px auto; 
-    align-items: start; 
-}
+.intricate-grid-container { display: grid; grid-template-columns: 30% 30% 30%; column-gap: 2.5%; width: 95%; margin: 40px auto; align-items: start; }
 .intricate-col { width: 100%; display: flex; flex-direction: column; gap: 40px; }
 
 /* --- ORANGE MASTER SECTION --- */
