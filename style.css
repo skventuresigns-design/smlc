@@ -80,7 +80,6 @@ body {
 .xenia-bg {
     background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed;
     background-size: cover;
-    background-color: #e5e5e5;
 }
 
 /* Placeholder for other towns - you can add URLs here later */
@@ -114,6 +113,60 @@ body {
     flex: 1; 
 }
 
+/* --- FULL WIDTH HERO SECTION --- */
+.xenia-outer-wrap { 
+    width: 100%; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.xenia-hero-container { 
+    position: relative; 
+    width: 100%; 
+    height: 400px; 
+    overflow: hidden; 
+}
+
+.xenia-hero-container img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+}
+
+.xenia-overlay { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.35); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    color: white !important; 
+}
+
+.xenia-overlay h1 { font-family: 'Times New Roman', serif; font-size: clamp(2.5rem, 8vw, 4rem); margin: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+.xenia-subtitle { letter-spacing: 2px; margin-top: 10px; font-weight: bold; }
+
+/* --- CONTENT CONTAINER --- */
+.xenia-wp-container { 
+    max-width: 1000px; 
+    margin: 40px auto; 
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(12px); 
+    padding: 40px; 
+    border: 1px solid #222; 
+    flex: 1; 
+}
+
+.xenia-wp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+.xenia-wp-img { width: 100%; height: 220px; object-fit: cover; border: 1px solid #222; margin-bottom: 10px; }
+.xenia-wp-card { background: rgba(255, 255, 255, 0.6); padding: 25px; border: 1px solid #222; }
+.xenia-wp-tag { background: #2c3e50; color: #fff; padding: 4px 12px; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+
 /* --- THE BLACK FOOTER --- */
 .site-footer {
     background-color: #000000 !important;
@@ -124,14 +177,10 @@ body {
     font-size: 14px;
     line-height: 1.6;
     margin-top: auto;
-    width: 100%;
 }
-.site-footer a {
-    color: #ffffff !important;
-    text-decoration: underline;
-}
+.site-footer a { color: #ffffff !important; text-decoration: underline; }
 
-/* --- MOBILE STYLES --- */
+/* --- MOBILE HAMBURGER --- */
 .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; }
 .hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; }
 
@@ -140,18 +189,4 @@ body {
     .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; }
     .nav-links.open { display: flex; }
     .nav-links li { margin: 15px 0; }
-    .town-wp-container { margin: 20px 10px; padding: 20px; }
-}
-
-/* --- MOBILE --- */
-.hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; }
-.hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; }
-
-@media (max-width: 768px) {
-    .hamburger { display: flex; margin: 0 auto; }
-    .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; }
-    .nav-links.open { display: flex; }
-    .nav-links li { margin: 15px 0; }
-    .town-hero-container { height: 300px; }
-    .town-wp-container { margin: 20px 10px; padding: 20px; }
 }
