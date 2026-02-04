@@ -300,3 +300,29 @@ body {
 .clipping-btn:hover {
     background-color: #1414fe !important; /* SMLC Brand Blue */
 }
+
+/* ACCENT STYLES FOR CLIPPINGS */
+.notice-tag-red {
+    background-color: #d9534f;
+    color: white;
+    padding: 5px 15px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 0 auto 15px auto;
+}
+
+/* Ensure images don't stretch weirdly in the circular/small boxes */
+.spotlight-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Hover state for all clipping buttons */
+.clipping-btn:hover {
+    background-color: #1414fe !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
