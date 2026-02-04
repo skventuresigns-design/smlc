@@ -29,7 +29,7 @@ body {
 /* =========================================
    CHAPTER 2: HEADER & NAVIGATION
    ========================================= */
-.header { background-color: #fffdf6; width: 100%; border-bottom: 2px solid #222; }
+.header { background-color: #fffdf6; width: 100%; border-bottom: 0px solid #222; }
 .header-logo { width: 100%; height: auto; display: block; }
 .nav-bar { background-color: #fffdf6; padding: 15px 0; position: relative; border-bottom: none; }
 .nav-links { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; }
@@ -244,8 +244,8 @@ body {
 /* Masthead Header Logic */
 .news-box-header {
     text-align: center;
-    border-top: 5px solid #222;
-    border-bottom: 0px solid #222;
+    border-top: 0px solid #222;
+    border-bottom: 3px solid #222;
     padding: 20px 10px;
     margin-bottom: 20px;
     width: 100%;
