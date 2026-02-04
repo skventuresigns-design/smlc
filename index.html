@@ -270,36 +270,18 @@
             <a href="https://www.facebook.com/SupportMyLocalCommunity" target="_blank" class="fb-action-btn">Enter the Conversation</a>
         </div>
 
-        <div class="clay-county-news-box group-clipping">
-            <div class="group-header">
-                <h3>Richards' News and Reviews</h3>
-                <span class="group-subtitle">Join the group</span>
-            </div>
-            <p class="group-text">"Get involved in the conversation! Richard's News and Reviews Facebook Group."</p>
-            <a href="https://www.facebook.com/groups/1069055660369865" target="_blank" class="group-btn">Visit Facebook Group</a>
-        </div>
-    </div>
-</div>
-
-<div class="news-feed-section">
-    <div class="news-feed-clipping">
+<div class="blue-news-frame">
+    <div class="news-content-90">
         <div id="github-news-container" class="news-iframe-wrapper"></div>
     </div>
 </div>
 
 <script>
 (function() {
-    // 1. Get the current path and clean it up
     const path = window.location.pathname;
-    
-    // 2. Filter out empty strings to find the actual page name
     const pathSegments = path.split('/').filter(segment => segment.length > 0);
     const slug = pathSegments.length > 0 ? pathSegments[pathSegments.length - 1] : '';
-
-    // 3. Define the base GitHub URL
     const baseUrl = "https://kfruti88.github.io/clay-county-news/";
-
-    // 4. Determine final URL: Use base if slug is empty, else append slug
     const finalUrl = slug ? `${baseUrl}${slug}/` : baseUrl;
 
     const container = document.getElementById('github-news-container');
@@ -317,8 +299,6 @@
     container.appendChild(iframe);
 })();
 </script>
-
-
 
     
    <div class="thankful-section">
