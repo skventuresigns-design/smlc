@@ -118,6 +118,11 @@ body {
 }
 .xenia-wp-img { height: auto; display: block; object-fit: cover; padding: 0; }
 .xenia-wp-tag { background: #2c3e50; color: #fff; padding: 4px 12px; font-size: 0.75rem; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+.xenia_bg {display: flex; flex-direction: column; min-height: 100vh; margin: 0;}
+
+/* Specific Footer look for Xenia (Solid Black to contrast the fence) */
+.xenia_bg .site-footer { background-color: #000000 !important; color: #ffffff !important; width: 100%; padding: 40px 20px; text-align: center; margin-top: auto; border-top: 2px solid #222;}
+
 
 /* =========================================
    5. LOUISVILLE ARTICLE & SIDEBAR
