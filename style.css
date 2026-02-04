@@ -130,6 +130,19 @@ body {
 .article-container h1 { font-family: 'Times New Roman', serif; font-size: 3.5rem; margin: 0; color: white !important; }
 .article-container .article-body { padding: 40px; font-family: 'Times New Roman', serif; font-size: 1.2rem; line-height: 1.8; text-align: justify; color: #1a1a1a; }
 
+/* --- THE NESTED GRID INSIDE THE 70% COLUMN --- */
+.article-container .main-layout {display: flex; gap: 30px; padding: 40px; /* Padding for the whole internal area */align-items: flex-start;}
+
+/* The actual text content inside the 70% column */
+.article-container .article-body {flex: 0 0 65%; /* This is the "50-60%" main part you mentioned */padding: 0;    /* Padding is handled by the parent layout now */}
+
+/* The Stats sidebar inside the 70% column */
+.article-container .sidebar {flex: 0 0 30%; /* This is the internal stats sidebar */}
+
+/* --- MOBILE FIX FOR NESTED GRID --- */
+@media (max-width: 900px) {.article-container .main-layout {flex-direction: column;}
+}
+
 /* Sidebar/Stats Styles */
 .stat-sidebar { background: #222; color: white; padding: 25px; border-radius: 4px; margin-bottom: 20px; }
 .stat-number { font-size: 2.5rem; color: #ffcc00; display: block; font-weight: bold; }
