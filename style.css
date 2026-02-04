@@ -88,8 +88,7 @@ body {
 
 
 /* --- DISCOVER CLAY COUNTY MASTER CONTAINER --- */
-.discover-clay-county-section { width: 100%; padding: 60px 0; /* This background image now covers the whole section */ background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000');
-    background-size: cover; background-position: center; background-attachment: scroll;}
+.discover-clay-county-section { width: 100%; padding: 60px 0; }
 
 /* Row 1: Heading */
 .index-heading-row { text-align: center; margin-bottom: 40px;}
