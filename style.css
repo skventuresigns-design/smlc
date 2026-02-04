@@ -88,12 +88,12 @@ body {
 
 
 /* --- DISCOVER CLAY COUNTY MASTER CONTAINER --- */
-.discover-clay-county-section { width: 100%; padding: 60px 0; }
+.discover-clay-county-section { width: 100%; padding: 60px 0; background-color: #ffffff; }
 
 /* Row 1: Heading */
 .index-heading-row { text-align: center; margin-bottom: 40px;}
 
-.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; color: #ffffff; /* Contrast against the dark background */ text-shadow: 2px 2px 4px rgba(0,0,0,0.7);}
+.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; color: #ffffff;}
 
 /* Row 2: 2-Column Grid */
 .index-grid-row { display: flex; gap: 40px; width: 90%; max-width: 1400px; margin: 0 auto; align-items: flex-start;}
