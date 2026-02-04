@@ -227,3 +227,76 @@ body {
     width: 100%;
     display: block;
 }
+
+/* --- THE DIVI-STYLE NEWSPAPER CLIPPING --- */
+.clay-county-news-box {
+    background-color: #fcf6de !important; /* Aged Paper Tint */
+    border: 2px solid #222 !important;
+    padding: 30px;
+    box-shadow: 10px 10px 0px #222 !important; /* Bold Divi Shadow */
+    margin-bottom: 40px;
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Masthead Header Logic */
+.news-box-header {
+    text-align: center;
+    border-top: 4px solid #222;
+    border-bottom: 2px solid #222;
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+
+.news-box-header h3 {
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 !important;
+    color: #222 !important;
+    font-size: 24px !important;
+}
+
+/* Image Wrap with "Printed" Look */
+.spotlight-image-wrap {
+    width: 100%;
+    border: 1px solid #222;
+    margin-bottom: 15px;
+    background-color: #fff;
+    padding: 5px; /* Creates a small white border around the photo */
+}
+
+.spotlight-image-wrap img {
+    width: 100%;
+    display: block;
+    filter: grayscale(20%) contrast(110%) sepia(10%); /* Vintage Newsprint Filter */
+}
+
+/* Description Text */
+.biz-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #222;
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+/* The Unified Button */
+.clipping-btn {
+    display: block;
+    text-align: center;
+    background-color: #222 !important;
+    color: #fff !important;
+    padding: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.clipping-btn:hover {
+    background-color: #1414fe !important; /* SMLC Brand Blue */
+}
