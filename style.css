@@ -1,3 +1,8 @@
+/* --- GLOBAL FIX: BORDER-BOX --- */
+* {
+    box-sizing: border-box;
+}
+
 /* =========================================
    1. GLOBAL RESET & LAYOUT
    ========================================= */
@@ -8,7 +13,7 @@ body {
     font-family: sans-serif;
     min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Pushes footer to the bottom */
+    flex-direction: column;
 }
 
 /* --- UNIVERSAL TOWN BACKGROUNDS --- */
@@ -19,7 +24,7 @@ body {
 }
 
 .louisville-bg {
-    background-color: #000000 !important; /* Strict Black Background */
+    background-color: #000000 !important;
 }
 
 /* =========================================
@@ -27,40 +32,15 @@ body {
    ========================================= */
 .header { background-color: #fffdf6; width: 100%; border-bottom: 2px solid #222; }
 .header-logo { width: 100%; height: auto; display: block; }
-
-.nav-bar {
-    background-color: #fffdf6;
-    padding: 15px 0;
-    position: relative;
-    border-bottom: 1px solid #222;
-}
-
-.nav-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
+.nav-bar { background-color: #fffdf6; padding: 15px 0; position: relative; border-bottom: 1px solid #222; }
+.nav-links { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; }
 .nav-links li { margin: 10px 30px; }
-
-.nav-links a {
-    font-family: "Times New Roman", serif;
-    color: #222222;
-    text-decoration: underline;
-    text-transform: capitalize;
-    font-weight: bold;
-    font-size: 18px;
-    transition: color 0.3s ease;
-}
-
+.nav-links a { font-family: "Times New Roman", serif; color: #222222; text-decoration: underline; text-transform: capitalize; font-weight: bold; font-size: 18px; transition: color 0.3s ease; }
 .nav-links a.active { color: #1414fe !important; }
 .nav-links a:hover { color: #1414fe; }
 
 /* =========================================
-   3. HERO SECTIONS (Xenia, Sailor Springs, Louisville)
+   3. HERO SECTIONS
    ========================================= */
 .xenia-outer-wrap, .SailorSprings-outer-wrap, .Louisville-outer-wrap { 
     width: 100%; 
@@ -75,7 +55,6 @@ body {
     background-position: center;
 }
 
-/* Louisville Hero Unique Blend */
 .Louisville-hero-container {
     height: 300px;
     background-image: linear-gradient(180deg, #eb1c24 0%, #040404 100%), 
@@ -110,10 +89,11 @@ body {
 }
 
 /* =========================================
-   4. CONTENT CONTAINERS & GRIDS
+   4. XENIA & CENTERED CONTENT
    ========================================= */
-.town-wp-container, .xenia-wp-container {
+.xenia-wp-container, .town-wp-container {
     max-width: 1000px;
+    width: 90%;
     margin: 40px auto;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
@@ -121,69 +101,46 @@ body {
     border: 1px solid #222;
 }
 
-.town-wp-grid, .xenia-wp-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+.xenia-wp-section { margin-bottom: 50px; }
+.xenia-wp-section h2 { font-family: 'Times New Roman', serif; border-bottom: 3px solid #d4af37; display: inline-block; margin-bottom: 25px; padding-bottom: 5px; }
+
+/* Landmark Grid Fix */
+.xenia-wp-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.town-wp-img, .xenia-wp-img {
-    width: 100%;
-    height: auto;
+.xenia-wp-img, .xenia-wp-card {
+    flex: 1 1 300px; /* Forces images side-by-side until mobile */
+    max-width: 100%;
     border: 1px solid #222;
-    display: block;
+    background: rgba(255, 255, 255, 0.6);
 }
+
+.xenia-wp-img { height: auto; display: block; object-fit: cover; }
+.xenia-wp-tag { background: #2c3e50; color: #fff; padding: 4px 12px; font-size: 0.75rem; font-weight: bold; display: inline-block; margin-bottom: 10px; }
 
 /* =========================================
-   5. LOUISVILLE ARTICLE & SIDEBAR ISOLATION
+   5. LOUISVILLE ARTICLE & SIDEBAR
    ========================================= */
-.louisville-content-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 40px 0;
-}
-
-.louisville-grid-row {
-    width: 95%;
-    max-width: 1400px;
-    display: flex;
-    gap: 30px;
-    align-items: flex-start;
-}
-
+.louisville-content-wrapper { width: 100%; display: flex; justify-content: center; padding: 40px 0; }
+.louisville-grid-row { width: 95%; max-width: 1400px; display: flex; gap: 30px; align-items: flex-start; }
 .louisville-col-main { flex: 0 0 70%; min-width: 320px; }
 .louisville-col-side { flex: 0 0 25%; min-width: 280px; }
 
-/* The Newspaper & Article Wrappers */
-.dv-custom-article-wrapper, .dv-newspaper-wrap { width: 100%; margin-bottom: 20px; }
-
 .article-container { background: white; border: 1px solid #222; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-
-.newspaper-sidebar {
-    background-color: #fdfaf0;
-    border: 2px solid #222;
-    padding: 20px;
-    font-family: 'Times New Roman', serif;
-}
+.newspaper-sidebar { background-color: #fdfaf0; border: 2px solid #222; padding: 20px; font-family: 'Times New Roman', serif; }
 
 /* =========================================
    6. FOOTER & MOBILE
    ========================================= */
-.site-footer {
-    background-color: #000 !important;
-    color: #fff !important;
-    text-align: center;
-    padding: 40px 20px;
-    margin-top: auto;
-    width: 100%;
-    box-sizing: border-box;
-}
-
+.site-footer { background-color: #000 !important; color: #fff !important; text-align: center; padding: 40px 20px; margin-top: auto; width: 100%; }
 .site-footer a { color: #fff !important; text-decoration: underline; }
 
 .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; margin: 0 auto; }
-.hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; }
+.hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; transition: 0.3s; }
 
 @media (max-width: 1024px) {
     .louisville-grid-row { flex-direction: column; align-items: center; }
