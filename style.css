@@ -82,6 +82,18 @@ body {
 .intricate-grid-container { display: grid; grid-template-columns: 30% 30% 30%; column-gap: 2.5%; width: 95%; margin: 40px auto; align-items: start; }
 .intricate-col { width: 100%; display: flex; flex-direction: column; gap: 40px; }
 
+
+/* --- THE BLUE NEWS FRAME - News Feed --- */
+.blue-news-frame { width: 100%; background-color: #0c2ef1; /* The Blue background */ padding: 60px 0;/* Creates the blue "border" on top and bottom */ margin: 40px 0; border-top: 2px solid #222; border-bottom: 2px solid #222;}
+.news-content-90 { width: 90%; /* 90% of the screen width */ margin: 0 auto; /* Centers it, leaving 5% blue on each side */ border: 2px solid #222; /* Optional: adds a crisp line between news and blue */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Gives the news feed some depth */}
+.news-iframe-wrapper { position: relative; width: 100%; padding-top: 100%; /* Keeps the feed square */ background: #ffffff; /* Shows white while the news loads */}
+
+/* Mobile Tweak */
+@media (max-width: 768px) { .news-content-90 { width: 95%; /* Shrink blue edges on mobile to give news more room */}
+    .blue-news-frame { padding: 30px 0;       /* Thinner blue top/bottom on small screens */}}
+
+
 /* --- THANKFUL SECTION (Above Footer) --- */
 .thankful-section { width: 100%; background-color: #ffffff; padding: 60px 20px; border-top: 1px solid #eee; /* Light divider from the section above */}
 .thankful-content { max-width: 1000px; margin: 0 auto; text-align: center;}
