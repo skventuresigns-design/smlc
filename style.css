@@ -221,22 +221,10 @@ body {
     box-shadow: inset 0 0 0 3px #ffffff;
 }
 
-.clipping-btn:hover {
-    background-color: #1414fe !important; /* Blue hover effect */
-}
-
-.spotlight-image-wrap {
-    width: 100%;
-    border: 1px solid #222;
-    padding: 5px;
-    background: #fff;
-    margin-bottom: 15px;
-}
-
-.spotlight-image-wrap img {
-    width: 100%;
-    display: block;
-}
+.clipping-btn:hover { background-color: #1414fe !important; /* Blue hover effect */}
+.event-clipping .news-box-header h3 { color: #d9534f !important; /* This is the specific accent red you've been using */}
+.spotlight-image-wrap { width: 100%; border: 1px solid #222; padding: 5px; background: #fff; margin-bottom: 15px;}
+.spotlight-image-wrap img { width: 100%; display: block;}
 
 /* --- THE DIVI-STYLE NEWSPAPER CLIPPING --- */
 .clay-county-news-box {
@@ -248,6 +236,8 @@ body {
     font-family: "Times New Roman", Times, serif;
     display: flex;
     flex-direction: column;
+   overflow: visible !important; 
+    position: relative;
 }
 
 .clipping-tag-black {
@@ -263,7 +253,7 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 1px;
-    z-index: 10;           /* Ensures it stays on top of the border line */
+    z-index: 999 !important;           /* Ensures it stays on top of the border line */
     border: 1px solid #fff; /* Optional: a tiny white border makes it pop against the black line */
 }
 
