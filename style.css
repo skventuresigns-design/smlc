@@ -132,7 +132,8 @@ body {
 /* =========================================
    CHAPTER 5: REUSABLE COMPONENTS
    ========================================= */
-.clay-county-news-box { background-color: #fffdf5; border: 1px solid #222; padding: 25px; box-shadow: 6px 6px 0px #222; width: 100%; }
+.clay-county-news-box { background-color: #fffdf6; border: 2px solid #222; padding: 0; box-shadow: 10px 10px 0px #222; width: 100%; margin-bottom: 40px; font-family: "Times New Roman", Times, serif;
+    display: flex; flex-direction: column; overflow: hidden; /* Keeps the internal content tidy */ }
 .clay-county-news-box img { width: 100%; height: auto; display: block; object-fit: contain; }
 
 .glossy-wrapper { padding: 60px 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); margin-top: 0 !important; background-size: cover; background-position: center; border-radius: 20px; border: 2px solid #222}
@@ -243,10 +244,11 @@ body {
 /* Masthead Header Logic */
 .news-box-header {
     text-align: center;
-    border-top: 4px solid #222;
+    border-top: 5px solid #222;
     border-bottom: 2px solid #222;
-    padding: 15px 0;
+    padding: 20px 10px;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .news-box-header h3 {
@@ -283,23 +285,10 @@ body {
 }
 
 /* The Unified Button */
-.clipping-btn {
-    display: block;
-    text-align: center;
-    background-color: #222 !important;
-    color: #fff !important;
-    padding: 15px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.3s;
-}
+.clipping-btn { margin: 0 25px 25px 25px; display: block; text-align: center; background-color: #222 !important; color: #fff !important; padding: 15px; text-transform: uppercase;
+    font-weight: bold; letter-spacing: 1px; text-decoration: none; font-size: 14px; transition: 0.3s;}
 
-.clipping-btn:hover {
-    background-color: #1414fe !important; /* SMLC Brand Blue */
-}
+.clipping-btn:hover { background-color: #1414fe !important; /* SMLC Brand Blue */}
 
 /* ACCENT STYLES FOR CLIPPINGS */
 .notice-tag-red {
