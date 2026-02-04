@@ -165,6 +165,8 @@ body {
 /* =========================================
    6. SAILOR SPRINGS CONTENT STYLES
    ========================================= */
+.sailor-springs-bg {background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed; background-size: cover; display: flex;
+    flex-direction: column; min-height: 100vh;}
 #sailor-springs-wp-wrapper { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6; background-color: transparent; }
 .content-container { max-width: 1100px; margin: auto; padding: 40px 20px; }
 #sailor-springs-wp-wrapper .grid { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
