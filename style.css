@@ -1,11 +1,11 @@
-/* --- GLOBAL FIX: BORDER-BOX --- */
+/* =========================================
+   CHAPTER 1: GLOBAL BRANDING & RESET
+   (The "bones" of the site)
+   ========================================= */
 * {
     box-sizing: border-box;
 }
 
-/* =========================================
-   1. GLOBAL RESET & LAYOUT
-   ========================================= */
 body {
     margin: 0;
     padding: 0;
@@ -16,25 +16,20 @@ body {
     flex-direction: column;
 }
 
-/* --- UNIVERSAL TOWN BACKGROUNDS --- */
+/* --- BACKGROUND LOGIC --- */
+.home-bg { background-color: #ffffff; }
+.louisville-bg { background-color: #000000 !important; }
+.clay-city-bg { background-color: #0c2ef1 !important; }
+
 .xenia_bg, .sailor-springs-bg {
     background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed;
     background-size: cover;
     background-color: #e5e5e5;
 }
 
-.louisville-bg { background-color: #000000 !important; }
-.clay-city-bg { background-color: #0c2ef1 !important; }
-.home-bg { 
-    background-color: #ffffff; 
-    display: flex; 
-    flex-direction: column; 
-    min-height: 100vh; 
-    margin: 0;
-}
-
 /* =========================================
-   2. HEADER & NAVIGATION
+   CHAPTER 2: HEADER & NAVIGATION
+   (Unified across all pages)
    ========================================= */
 .header { background-color: #fffdf6; width: 100%; border-bottom: 2px solid #222; }
 .header-logo { width: 100%; height: auto; display: block; }
@@ -46,298 +41,94 @@ body {
 .nav-links a:hover { color: #1414fe; }
 
 /* =========================================
-   3. HERO SECTIONS
+   CHAPTER 3: HOME PAGE PORTAL (index.html)
    ========================================= */
-.xenia-outer-wrap, .SailorSprings-outer-wrap, .Louisville-outer-wrap, .ClayCity-outer-wrap { 
-    width: 100%; 
-    overflow: hidden; 
-}
 
-.xenia-hero-container, .SailorSprings-hero-container, .Louisville-hero-container, .ClayCity-hero-container {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    background-size: cover;
-    background-position: center;
-}
+/* --- 3A: HERO & SLIDER --- */
+.home-hero-cta { width: 100%; background-color: #0c2ef1; padding: 35px 20px; text-align: center; border-bottom: 3px solid #ffffff; }
+.home-hero-cta h1 { color: #ffffff !important; font-family: 'Times New Roman', serif; font-size: clamp(1.5rem, 5vw, 2.8rem); margin: 0; text-transform: uppercase; font-weight: bold; }
 
-.Louisville-hero-container {
-    height: 300px;
-    background-image: linear-gradient(180deg, #eb1c24 0%, #040404 100%), 
-                      url('https://images.squarespace-cdn.com/content/v1/56c6248d62cd944a178ec33e/1461686733240-E82QY9H3D4Z4R3Y3QY3Q/Louisville+IL+Courthouse.jpg');
-    background-blend-mode: overlay;
-}
+.smlc-fullwidth-wrapper { width: 100%; overflow: hidden; background: #000; }
+.smlc-track { position: relative; width: 100%; height: 500px; }
+.smlc-item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; animation: smlcSimpleFade 30s infinite; }
+.smlc-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.xenia-hero-container img, .SailorSprings-hero-container img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-}
+@keyframes smlcSimpleFade { 0% { opacity: 0; } 5% { opacity: 1; } 33.33% { opacity: 1; } 38.33% { opacity: 0; } 100% { opacity: 0; }}
+.smlc-fade-1 { animation-delay: 0s; }
+.smlc-fade-2 { animation-delay: 10s; }
+.smlc-fade-3 { animation-delay: 20s; }
 
-.xenia-overlay, .SailorSprings-overlay, .Louisville-overlay, .ClayCity-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.35);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white !important;
-}
+/* --- 3B: GRID SECTIONS --- */
+.index-heading-row { text-align: center; padding: 60px 20px 20px; background-color: #fff; }
+.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; margin: 0; }
 
-.xenia-overlay h1, .SailorSprings-overlay h1, .Louisville-overlay h1, .ClayCity-overlay h1 {
-    font-family: 'Times New Roman', serif;
-    font-size: clamp(2.5rem, 8vw, 4rem);
-    text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    margin: 0;
-}
+.news-heading-bar { background-color: #707070; width: 85%; margin: 40px auto; padding: 25px 20px; text-align: center; border-radius: 8px; }
+.news-heading-bar h2 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: 2rem; margin: 0; text-transform: uppercase; }
 
-.ClayCity-subtitle, .Louisville-subtitle, .SailorSprings-subtitle {
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* =========================================
-   4. TOWN CENTERED CONTENT
-   ========================================= */
-.xenia-wp-container, .town-wp-container {
-    max-width: 1000px; width: 90%; margin: 40px auto;
-    background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px);
-    padding: 40px; border: 1px solid #222;
-}
-
-.xenia-wp-section { margin-bottom: 50px; }
-.xenia-wp-section h2 { font-family: 'Times New Roman', serif; border-bottom: 3px solid #d4af37; display: inline-block; margin-bottom: 25px; padding-bottom: 5px; }
-
-.xenia-wp-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-.xenia-wp-card, .xenia-wp-img {
-    flex: 1 1 300px; max-width: 100%; border: 1px solid #222;
-    background: rgba(255, 255, 255, 0.6); padding: 25px; 
-}
-.xenia-wp-img { padding: 0; object-fit: cover; }
-.xenia-wp-tag { background: #2c3e50; color: #fff; padding: 4px 12px; font-size: 0.75rem; font-weight: bold; display: inline-block; margin-bottom: 10px; }
-
-/* =========================================
-   5. LOUISVILLE ARTICLE & SIDEBAR
-   ========================================= */
-.louisville-content-wrapper { width: 100%; display: flex; justify-content: center; padding: 40px 0; }
-.louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; }
-.louisville-col-main { flex: 0 0 62%; min-width: 320px; }
-.louisville-col-side { flex: 0 0 33%; min-width: 300px; }
-
-.article-container { background: white; border: 1px solid #222; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden; }
-.article-container .hero-section { background: linear-gradient(180deg, #eb1c24 0%, #222 100%); color: white; padding: 60px 20px; text-align: center; border-bottom: 8px solid #ffcc00; }
-.article-container .category-tag { background: #ffcc00; color: #222; padding: 5px 15px; display: inline-block; font-weight: bold; margin-bottom: 20px; font-size: 0.8rem; text-transform: uppercase; }
-.article-container h1 { font-family: 'Times New Roman', serif; font-size: 3.5rem; margin: 0; color: white !important; }
-
-.article-container .main-layout { display: flex; gap: 30px; padding: 40px; align-items: flex-start; }
-.article-container .article-body { flex: 0 0 65%; padding: 0; font-family: 'Times New Roman', serif; font-size: 1.2rem; line-height: 1.8; text-align: justify; color: #1a1a1a; }
-.article-container .sidebar { flex: 0 0 30%; }
-
-.newspaper-sidebar { background-color: #fdfaf0; border: 2px solid #222; padding: 20px; font-family: 'Times New Roman', serif; color: #1a1a1a; }
-.news-masthead { text-align: center; padding-bottom: 10px; }
-.news-double-line { border-top: 4px double #222; margin: 10px 0 20px 0; }
-.news-headline-section { text-align: center; padding-bottom: 10px; }
-.news-headline-section h2 { margin: 0; font-size: 1.8rem; line-height: 1.1; }
-.news-dek { margin: 5px 0; font-style: italic; font-size: 1.1rem; }
-.news-single-line { border-top: 1px solid #222; margin: 15px 0; }
-.news-content-block p { text-align: justify; line-height: 1.4; margin: 0; padding: 5px 0; }
-.news-timeline div { margin-bottom: 12px; font-size: 0.95rem; }
-.news-footer { display: flex; justify-content: space-between; padding-top: 8px; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; }
-
-.stat-sidebar { background: #222; color: white; padding: 25px; border-radius: 4px; margin-bottom: 20px; }
-.stat-number { font-size: 2.5rem; color: #ffcc00; display: block; font-weight: bold; }
-.stat-label { text-transform: uppercase; font-size: 0.8rem; color: #aaa; }
-
-/* =========================================
-   6. SAILOR SPRINGS CONTENT STYLES
-   ========================================= */
-#sailor-springs-wp-wrapper { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6; }
-.content-container { max-width: 1100px; margin: auto; padding: 40px 20px; }
-#sailor-springs-wp-wrapper .grid { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
-#sailor-springs-wp-wrapper .card { 
-    background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); 
-    padding: 25px; border: 1px solid #222; border-top: 5px solid #c5a059; 
-    flex: 1 1 300px; max-width: 100%; 
-}
-.image-grid-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-.image-grid-container img { flex: 1 1 400px; width: 100%; height: auto; object-fit: cover; border: 1px solid #222; }
-
-/* =========================================
-   7. CLAY CITY SPECIFIC STYLES
-   ========================================= */
-.clay-city-content-wrapper { width: 100%; padding: 40px 20px; display: flex; justify-content: center; }
-.clay-city-three-col { display: flex; gap: 30px; max-width: 1300px; width: 100%; justify-content: space-between; }
-.clay-city-col { flex: 1; }
-.clay-city-card { background: rgba(255, 255, 255, 0.95); padding: 25px; border: 2px solid #222; height: 100%; text-align: center; }
-.clay-city-card img { width: 100%; height: auto; object-fit: cover; border: 1px solid #222; margin-bottom: 15px; }
-.clay-city-card h3 { font-family: 'Times New Roman', serif; color: #0c2ef1; font-size: 1.5rem; margin-bottom: 10px; }
-.alternate-card { text-align: left !important; display: flex; flex-direction: column; gap: 15px;}
-.alternate-card h3 { border-bottom: 2px solid #091e9d; padding-bottom: 10px; margin-bottom: 5px;}
-.info-item strong {display: block; color: #091e9d; font-size: 1.1rem; margin-bottom: 2px;}
-.info-item p { margin: 0; font-size: 0.95rem; line-height: 1.4; color: #333;}
-.clay-city-hero-row { width: 100%; background-color: #0c2ef1; padding: 60px 20px; text-align: center; color: white; border-bottom: 2px solid white;}
-.clay-city-hero-row h1 {font-size: 4.5rem; margin: 0; font-family: 'Times New Roman', serif; text-transform: uppercase;}
-.text-card h3 { color: #0c2ef1; border-bottom: 1px solid #ccc; margin-bottom: 15px; padding-bottom: 5px;}
-.text-card strong { display: block; margin-top: 15px; color: #222;}
-
-/* =========================================
-    8. INDEX PAGE & INTRICATE GRID
-   ========================================= */
-.index-heading-row { text-align: center; padding: 60px 20px 20px; background-color: #fff;}
-.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; margin: 0;}
-
-.index-grid-row { display: flex; gap: 40px; padding: 40px 5%; align-items: center; max-width: 1400px; margin: 0 auto;}
-.index-col {flex: 1; min-width: 320px;}
-
-.news-heading-bar { background-color: #707070; width: 100%; padding: 25px 20px; text-align: center;}
-.news-heading-bar h2 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: 2rem; margin: 0; text-transform: uppercase;}
-
-.glossy-wrapper { padding: 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center; border-radius: 20px;}
-.glossy-box { background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 40px; border-radius: 20px;}
-.yellow-text { color: #ffcc00 !important; }
-
-/* The Precision 95% Grid Row */
+/* THE 95% INTRICATE GRID */
 .intricate-grid-container { 
     display: grid; 
     grid-template-columns: 30% 30% 30%; 
     column-gap: 2.5%; 
     width: 95%; 
     margin: 40px auto; 
-    align-items: start;
+    align-items: start; 
 }
-
-.intricate-col { 
-    width: 100%; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 30px; 
-}
-
-.clay-county-sync-container { 
-    width: 100%; 
-    max-width: 550px; 
-    margin: 0 auto; 
-    border: 2px solid #222; 
-    background: #fff; 
-    box-shadow: 6px 6px 0px #222;
-}
-
-.clay-county-news-box { 
-   .clay-county-news-box {
-    background-color: #fffdf5;
-    border: 1px solid #222;
-    padding: 25px;
-    box-shadow: 6px 6px 0px #222;
-    width: 100%;
-}
-
-.orange-news-wrapper { 
-    background-color: #ff6005; 
-    padding: 30px 15px; 
-    border: 2px solid #222; 
-    margin-top: 20px; 
-    box-shadow: 6px 6px 0px #222; 
-    width: 100%; 
-    max-width: 500px; 
-    margin-left: auto; 
-    margin-right: auto;
-}
-
-
-    /* --- IMAGE PROPORTION FIXES --- */
-.spotlight-image-wrap, .polaroid-wrap {
-    width: 100%;
-    overflow: hidden;
-    border: 1px solid #222;
-    margin-bottom: 15px;
-}
-
-.clay-county-news-box img {
-    width: 100%;
-    height: auto;      /* Maintain aspect ratio */
-    display: block;
-    object-fit: contain; /* Ensures the whole image fits without cropping */
-}
-
-/* Specific Polaroid "Tilt" */
-.polaroid-wrap {
-    background: #fff;
-    padding: 10px 10px 25px 10px;
-    transform: rotate(-2deg);
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
-}
-
-/* --- TYPOGRAPHY & HEADERS --- */
-.news-box-header, .event-clipping-header, .group-header, .invitation-header-main {
-    text-align: center;
-    border-top: 4px double #222;
-    border-bottom: 2px solid #222;
-    padding: 15px 0;
-    margin-bottom: 20px;
-}
-
-.clay-county-news-box h3 {
-    font-family: "Times New Roman", serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin: 0;
-}
-/* =========================================
-   9. HOME HERO & SLIDER
-   ========================================= */
-.home-hero-cta { width: 100%; background-color: #0c2ef1; padding: 30px 20px; text-align: center; transition: background 0.3s ease;}
-.home-hero-cta:hover { background-color: #091e9d; }
-.home-hero-cta h1 { color: #ffffff; font-family: 'Times New Roman', serif; font-size: clamp(1.8rem, 5vw, 3rem); margin: 0; text-transform: uppercase;}
-
-.smlc-fullwidth-wrapper { width: 100%; overflow: hidden; background: #ffffff; display: block;}
-.smlc-track { position: relative; width: 100%; height: 500px; }
-.smlc-item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; animation: smlcSimpleFade 30s infinite;}
-.smlc-item img { width: 100%; height: 100%; object-fit: cover; display: block;}
-
-@keyframes smlcSimpleFade { 0% { opacity: 0; } 3% { opacity: 1; } 33.33% { opacity: 1; } 41.66% { opacity: 0; } 100% { opacity: 0; }}
-.smlc-fade-1 { animation-delay: 0s; }
-.smlc-fade-2 { animation-delay: 10s; }
-.smlc-fade-3 { animation-delay: 20s; }
+.intricate-col { width: 100%; display: flex; flex-direction: column; gap: 40px; }
 
 /* =========================================
-   10. FOOTER & MEDIA QUERIES
+   CHAPTER 4: TOWN LAYOUTS
    ========================================= */
-.site-footer { 
-    background-color: #000 !important; color: #fff !important; 
-    text-align: center; padding: 40px 20px; margin-top: auto; width: 100%; 
+
+/* --- CLAY CITY --- */
+.clay-city-hero-row { width: 100%; background-color: #0c2ef1; padding: 60px 20px; text-align: center; color: white; border-bottom: 2px solid white; }
+.clay-city-hero-row h1 { font-size: 4.5rem; margin: 0; font-family: 'Times New Roman', serif; text-transform: uppercase; }
+.clay-city-three-col { display: flex; gap: 30px; max-width: 1300px; width: 100%; justify-content: space-between; }
+
+/* --- LOUISVILLE --- */
+.louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; margin: 0 auto; }
+.Louisville-hero-container { 
+    height: 300px; 
+    background-image: linear-gradient(180deg, #eb1c24 0%, #040404 100%), 
+                      url('https://images.squarespace-cdn.com/content/v1/56c6248d62cd944a178ec33e/1461686733240-E82QY9H3D4Z4R3Y3QY3Q/Louisville+IL+Courthouse.jpg');
+    background-blend-mode: overlay;
+    background-size: cover;
 }
+
+/* =========================================
+   CHAPTER 5: REUSABLE COMPONENTS
+   (Newspaper clippings, Glossy boxes, etc.)
+   ========================================= */
+.clay-county-news-box { background-color: #fffdf5; border: 1px solid #222; padding: 25px; box-shadow: 6px 6px 0px #222; width: 100%; }
+.clay-county-news-box img { width: 100%; height: auto; display: block; object-fit: contain; }
+
+.glossy-wrapper { padding: 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center; border-radius: 20px; }
+.glossy-box { background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 40px; border-radius: 20px; }
+.yellow-text { color: #ffcc00 !important; }
+
+/* =========================================
+   CHAPTER 6: FOOTER & MOBILE RESPONSIVENESS
+   ========================================= */
+.site-footer { background-color: #000 !important; color: #fff !important; text-align: center; padding: 40px 20px; margin-top: auto; width: 100%; }
 .site-footer a { color: #fff !important; text-decoration: underline; }
-.louisville-bg .site-footer, .xenia_bg .site-footer { border-top: 1px solid #333; }
 
 .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; background: none; border: none; margin: 0 auto; }
 .hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; transition: 0.3s; }
 
-@media (max-width: 1024px) { 
-    .intricate-grid-container { grid-template-columns: 1fr; gap: 40px;}
+@media (max-width: 1024px) {
+    .intricate-grid-container { grid-template-columns: 1fr; gap: 40px; }
     .louisville-grid-row { flex-direction: column; align-items: center; }
-    .louisville-col-main, .louisville-col-side { flex: 1 1 100%; width: 100%; }
 }
 
 @media (max-width: 980px) {
-    .index-grid-row { flex-direction: column; }
-    .index-heading-row h2 { font-size: 1.8rem; }
     .smlc-track { height: 350px; }
-}
-
-@media (max-width: 900px) { 
-    .clay-city-three-col { flex-direction: column; align-items: center; }
-    .clay-city-col { width: 100%; }
-    .article-container .main-layout { flex-direction: column; }
+    .index-grid-row { flex-direction: column; }
 }
 
 @media (max-width: 768px) {
     .hamburger { display: flex; }
     .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; background-color: #fffdf6; }
     .nav-links.open { display: flex; }
-    .nav-links li { margin: 15px 0; }
 }
 
-@media (max-width: 767px) { .smlc-track { height: 220px; } }
+@media (max-width: 767px) { .smlc-track { height: 250px; } }
