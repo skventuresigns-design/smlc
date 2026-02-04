@@ -8,39 +8,25 @@ body {
     font-family: sans-serif;
     min-height: 100vh;
     display: flex;
-    flex-direction: column; /* This allows the sticky footer to work */
+    flex-direction: column; /* Pushes footer to the bottom */
 }
 
-/* =========================================
-   2. TOWN BACKGROUNDS
-   ========================================= */
-.xenia_bg {
+/* --- UNIVERSAL TOWN BACKGROUNDS --- */
+.xenia_bg, .sailor-springs-bg {
     background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed;
     background-size: cover;
     background-color: #e5e5e5;
 }
 
-/* Sailor Springs Background - Now using the Fence image */
-.sailor-springs-bg {
-    background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed;
-    background-size: cover;
-    background-color: #e5e5e5;
+.louisville-bg {
+    background-color: #000000 !important; /* Strict Black Background */
 }
 
 /* =========================================
-   3. HEADER & NAVIGATION
+   2. HEADER & NAVIGATION
    ========================================= */
-.header {
-    background-color: #fffdf6;
-    width: 100%;
-    border-bottom: 2px solid #222;
-}
-
-.header-logo {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+.header { background-color: #fffdf6; width: 100%; border-bottom: 2px solid #222; }
+.header-logo { width: 100%; height: auto; display: block; }
 
 .nav-bar {
     background-color: #fffdf6;
@@ -58,12 +44,10 @@ body {
     flex-wrap: wrap;
 }
 
-.nav-links li {
-    margin: 10px 30px; /* Standardized 30px padding */
-}
+.nav-links li { margin: 10px 30px; }
 
 .nav-links a {
-    font-family: "Times New Roman", Times, serif;
+    font-family: "Times New Roman", serif;
     color: #222222;
     text-decoration: underline;
     text-transform: capitalize;
@@ -72,118 +56,87 @@ body {
     transition: color 0.3s ease;
 }
 
-/* Active Link Color */
-.nav-links a.active {
-    color: #1414fe !important;
+.nav-links a.active { color: #1414fe !important; }
+.nav-links a:hover { color: #1414fe; }
+
+/* =========================================
+   3. HERO SECTIONS (Xenia, Sailor Springs, Louisville)
+   ========================================= */
+.xenia-outer-wrap, .SailorSprings-outer-wrap, .Louisville-outer-wrap { 
+    width: 100%; 
+    overflow: hidden; 
 }
 
-.nav-links a:hover {
-    color: #1414fe;
+.xenia-hero-container, .SailorSprings-hero-container, .Louisville-hero-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Louisville Hero Unique Blend */
+.Louisville-hero-container {
+    height: 300px;
+    background-image: linear-gradient(180deg, #eb1c24 0%, #040404 100%), 
+                      url('https://images.squarespace-cdn.com/content/v1/56c6248d62cd944a178ec33e/1461686733240-E82QY9H3D4Z4R3Y3QY3Q/Louisville+IL+Courthouse.jpg');
+    background-blend-mode: overlay;
+}
+
+.xenia-hero-container img, .SailorSprings-hero-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.xenia-overlay, .SailorSprings-overlay, .Louisville-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white !important;
+}
+
+.xenia-overlay h1, .SailorSprings-overlay h1, .Louisville-overlay h1 {
+    font-family: 'Times New Roman', serif;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    margin: 0;
 }
 
 /* =========================================
-   4. HERO SECTIONS (Xenia & Sailor Springs)
+   4. CONTENT CONTAINERS & GRIDS
    ========================================= */
-.SailorSprings-outer-wrap, .xenia-outer-wrap { width: 100%; overflow: hidden; }
-.SailorSprings-hero-container, .xenia-hero-container { position: relative; width: 100%; height: 400px; }
-.SailorSprings-hero-container img, .xenia-hero-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.SailorSprings-overlay, .xenia-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white !important; }
-.SailorSprings-overlay h1, .xenia-overlay h1 { font-family: 'Times New Roman', serif; font-size: clamp(2.5rem, 8vw, 3.5rem); margin: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-.SailorSprings-subtitle, .xenia-subtitle { letter-spacing: 2px; margin-top: 10px; font-weight: bold; text-transform: uppercase; }
-
-
-/* =========================================
-   5. CONTENT CONTAINERS (GLASSMORPISM)
-   ========================================= */
-.xenia-wp-container, .town-wp-container {
+.town-wp-container, .xenia-wp-container {
     max-width: 1000px;
     margin: 40px auto;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     padding: 40px;
     border: 1px solid #222;
-    flex: 1; /* Pushes footer to the bottom */
 }
 
-.xenia-wp-section, .town-wp-section {
-    margin-bottom: 50px;
-}
-
-.xenia-wp-section h2, .town-wp-section h2 {
-    font-family: 'Times New Roman', serif;
-    border-bottom: 3px solid #d4af37;
-    display: inline-block;
-    margin-bottom: 25px;
-    padding-bottom: 5px;
-}
-
-/* =========================================
-   6. GRID SYSTEM & CARDS
-   ========================================= */
-.xenia-wp-grid, .town-wp-grid {
+.town-wp-grid, .xenia-wp-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
 }
 
-.xenia-wp-img, .town-wp-img {
+.town-wp-img, .xenia-wp-img {
     width: 100%;
     height: auto;
-    max-height: 400px;
-    object-fit: cover;
     border: 1px solid #222;
-    margin-bottom: 10px;
     display: block;
 }
 
-.xenia-wp-card, .town-wp-card {
-    background: rgba(255, 255, 255, 0.6);
-    padding: 25px;
-    border: 1px solid #222;
-}
-
-.xenia-wp-tag, .town-wp-tag {
-    background: #2c3e50;
-    color: #fff;
-    padding: 4px 12px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 10px;
-}
-
 /* =========================================
-   7. SAILOR SPRINGS CONTENT STYLES
+   5. LOUISVILLE ARTICLE & SIDEBAR
    ========================================= */
-#sailor-springs-wp-wrapper { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6; background-color: transparent; flex: 1; }
-.spring-header { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://github.com/skventuresigns-design/media/blob/main/sailorsprings.png?raw=true') center/cover; color: white; padding: 60px 20px; text-align: center; }
-.spring-header h1 { font-size: 2.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-
-.content-container { max-width: 1100px; margin: auto; padding: 40px 20px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); padding: 25px; border-radius: 0; border: 1px solid #222; border-top: 5px solid #c5a059; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-.card h3 { font-family: "Times New Roman", serif; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-
-.highlight-box { background: rgba(232, 246, 243, 0.9); border-left: 10px solid #1abc9c; padding: 20px; margin: 40px 0; border-radius: 0 8px 8px 0; }
-.spring-info { background: rgba(44, 62, 80, 0.9); color: white; padding: 30px; border-radius: 0; border-left: 5px solid #1abc9c; }
-.spring-info ul { list-style-type: none; padding: 0; }
-.spring-info li { margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
-
-/* Bottom Image Grid */
-.image-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.grid-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid #222; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-
-/* =========================================
-   LOUISVILLE SPECIFIC STYLES
-   ========================================= */
-
-/* Black Background Requirement */
-.louisville-bg {
-    background-color: #000000 !important;
-}
-
 .louisville-main-row {
     display: flex;
     justify-content: space-between;
@@ -196,60 +149,41 @@ body {
 .col-70 { width: 70%; min-width: 320px; }
 .col-25 { width: 25%; min-width: 280px; }
 
-/* Mobile Stack for the 70/25 row */
-@media (max-width: 992px) {
-    .col-70, .col-25 { width: 100%; margin-bottom: 30px; }
-}
+/* The Newspaper & Article Wrappers */
+.dv-custom-article-wrapper, .dv-newspaper-wrap { width: 100%; margin-bottom: 20px; }
 
-/* Louisville Hero with Gradient Overlay */
-.Louisville-hero-container {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    background-image: linear-gradient(180deg, #eb1c24 0%, #040404 100%), 
-                      url('https://images.squarespace-cdn.com/content/v1/56c6248d62cd944a178ec33e/1461686733240-E82QY9H3D4Z4R3Y3QY3Q/Louisville+IL+Courthouse.jpg');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-position: center;
-}
+.article-container { background: white; border: 1px solid #222; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
 
-.Louisville-overlay h1 {
-    font-family: 'Playfair Display', serif !important;
-    font-size: clamp(2.5rem, 8vw, 4.5rem) !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0px 0px 20px rgba(0, 0, 0, 0.4);
-    color: #ffffff;
-    font-weight: 900;
-}
-
-/* Sidebar Styling Overrides */
-.dv-newspaper-wrap .newspaper-sidebar {
+.newspaper-sidebar {
     background-color: #fdfaf0;
     border: 2px solid #222;
     padding: 20px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    font-family: 'Times New Roman', serif;
 }
-
-.dv-custom-article-wrapper .article-container {
-    background: white;
-    border: 1px solid #222;
-}
-
-
-
 
 /* =========================================
-   8. BLACK FOOTER & MOBILE
+   6. FOOTER & MOBILE
    ========================================= */
-.site-footer { background-color: #000 !important; color: #fff !important; text-align: center; padding: 40px 20px; font-size: 14px; margin-top: auto; }
+.site-footer {
+    background-color: #000 !important;
+    color: #fff !important;
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .site-footer a { color: #fff !important; text-decoration: underline; }
 
 .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; border: none; background: none; margin: 0 auto; }
 .hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; }
 
+@media (max-width: 992px) {
+    .col-70, .col-25 { width: 100%; }
+}
+
 @media (max-width: 768px) {
     .hamburger { display: flex; }
     .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; background-color: #fffdf6; }
-    .nav-links.open { display: flex; }
-    .nav-links li { margin: 15px 0; }
-    .image-grid-container { grid-template-columns: 1fr; }
-}
+    .
