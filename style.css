@@ -390,7 +390,7 @@ body {
 
 /* Specifically targets the first column to push the iframe down */
 .intricate-col:first-child .clay-county-sync-container {
-    padding-top: 20px !important; /* This "fakes" the height of the newspaper header */
+    padding-top: 21px !important; /* This "fakes" the height of the newspaper header */
 }
 
 /* --- FACEBOOK LISTING ADJUSTMENTS --- */
@@ -411,3 +411,11 @@ body {
     /* Keeps the newspaper filter to match the other images */
     filter: grayscale(10%) contrast(105%) sepia(5%);
 }
+
+/* --- RICHARDS' GROUP CLIPPING SPECIAL STYLES --- */
+.group-header { text-align: center; border-top: 5px double #222; border-bottom: 2px solid #222; padding: 15px 10px; margin-bottom: 20px; width: 100%;}
+.group-header h3 { font-family: 'Times New Roman', serif; font-weight: 900; font-size: 24px; margin: 0; text-transform: uppercase;}
+.group-header span { display: block; font-family: 'Times New Roman', serif; font-size: 12px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; margin-top: 8px;}
+
+/* Ensures this box matches the #fffdf6 background and shadow of the others */
+.group-clipping { background-color: #fffdf6 !important; box-shadow: 10px 10px 0px #222 !important;}
