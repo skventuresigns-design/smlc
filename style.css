@@ -416,17 +416,19 @@ body {
     border: 2px solid #222;
     box-shadow: 10px 10px 0px #222;
     display: block !important; /* Switch from flex to block to prevent stretching */
-    padding: 40px 0 !important;
+    padding: 10px 0 !important;
     overflow-y: auto !important; /* Enable scrolling INSIDE this box */
     position: relative;
+    box-sizing: border-box;
 }
 
 #github-news-container iframe {
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
-    height: 800px !important; /* This is the window height */
+    height: 100% !important; /* This is the window height */
     margin: 0 auto !important;
     background: #fff;
-    border: 2px solid #222;
+    border: none;
     overflow: hidden !important; /* Chops off anything below 800px */
+    display:block;
 }
