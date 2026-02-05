@@ -127,53 +127,107 @@ body {
 .thankful-content a:hover { color: #1414fe;}
 
 /* =========================================
-   CHAPTER 4: TOWN LAYOUTS
+   CHAPTER 4: TOWN LAYOUTS & REUSABLE BOXES
    ========================================= */
-.clay-city-hero-row { width: 100%; background-color: #0c2ef1; padding: 60px 20px; text-align: center; color: white; border-bottom: 2px solid white; }
-.clay-city-hero-row h1 { font-size: 4.5rem; margin: 0; font-family: 'Times New Roman', serif; text-transform: uppercase; }
 
-/* CLAY CITY MASTER BOX */
-.clay-city-three-col { 
+/* --- CLAY CITY HERO --- */
+.clay-city-hero-row { 
+    width: 100%; 
+    background-color: #0c2ef1; 
+    padding: 60px 20px; 
+    text-align: center; 
+    color: white; 
+    border-bottom: 2px solid white; 
+}
+.clay-city-hero-row h1 { 
+    font-size: 4.5rem; 
+    margin: 0; 
+    font-family: 'Times New Roman', serif; 
+    text-transform: uppercase; 
+}
+
+/* --- THE 3-COLUMN CONTAINER (Clay City & Louisville) --- */
+.clay-city-three-col, .louisville-grid-row {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 25px;
+    gap: 30px;
     max-width: 1300px;
     width: 95%;
     margin: 40px auto !important;
-    align-items: stretch !important; /* Equal height floor */
+    align-items: stretch !important; /* Forces equal height */
     justify-content: center;
 }
 
-/* TARGET THE BOXES INSIDE CLAY CITY */
-.clay-city-three-col .clay-county-news-box {
-    flex: 1 !important;           /* Shares space equally */
-    width: 31% !important;        /* Forces 3 columns */
+/* --- THE NEWSPAPER BOX (Used Everywhere) --- */
+.clay-county-news-box { 
+    background-color: #fffdf6 !important; 
+    border: 2px solid #222 !important; 
+    padding: 30px; 
+    box-shadow: 10px 10px 0px #222 !important; 
+    margin-bottom: 40px; 
+    font-family: "Times New Roman", Times, serif;
+    display: flex !important; 
+    flex-direction: column !important; 
+    position: relative;
+}
+
+/* --- SPECIAL RULES FOR 3-COLUMN BOXES ONLY --- */
+/* This prevents the 100% width rule from breaking the town pages */
+.clay-city-three-col .clay-county-news-box, 
+.louisville-grid-row .clay-county-news-box {
+    flex: 1 !important;
+    width: 31% !important;
     margin: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    height: auto !important;
 }
 
-/* TARGET THE IMAGES INSIDE CLAY CITY */
-.clay-city-three-col .spotlight-image-wrap {
-    height: 200px !important;    /* Equal height tops */
+/* --- IMAGE HANDLING --- */
+.spotlight-image-wrap { 
+    width: 100%; 
+    border: 1px solid #222; 
+    margin-bottom: 15px; 
+    background-color: #fff; 
+    padding: 5px; 
+}
+
+.spotlight-image-wrap img { 
+    width: 100%; 
+    display: block; 
+    filter: grayscale(20%) contrast(110%) sepia(10%); 
+}
+
+/* Force town images to match in height */
+.clay-city-three-col .spotlight-image-wrap,
+.louisville-grid-row .spotlight-image-wrap {
+    height: 200px !important;
     overflow: hidden;
-    margin-bottom: 15px;
 }
 
-.clay-city-three-col .spotlight-image-wrap img {
-    width: 100%;
+.clay-city-three-col .spotlight-image-wrap img,
+.louisville-grid-row .spotlight-image-wrap img {
     height: 100%;
     object-fit: cover !important;
 }
 
-/* TARGET THE BUTTONS INSIDE CLAY CITY */
-.clay-city-three-col .clipping-btn {
-    margin-top: auto !important; /* Glues buttons to the bottom */
+/* --- THE UNIFIED BUTTON --- */
+.clipping-btn { 
+    margin: auto 0 0 0 !important; /* 'auto' top margin pushes button to the floor */
+    display: block; 
+    text-align: center; 
+    background-color: #222 !important; 
+    color: #fff !important; 
+    padding: 15px; 
+    text-transform: uppercase;
+    font-weight: bold; 
+    letter-spacing: 1px; 
+    text-decoration: none; 
+    font-size: 14px; 
+    transition: 0.3s;
+    box-shadow: inset 0 0 0 3px #ffffff;
 }
+.clipping-btn:hover { background-color: #1414fe !important; }
 
-.louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; margin: 0 auto; }
+/* --- LOUISVILLE SPECIFICS --- */
 .Louisville-hero-container { 
     height: 300px; 
     background-image: linear-gradient(180deg, #eb1c24 0%, #040404 100%), 
