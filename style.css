@@ -411,7 +411,7 @@ body {
     max-width: 1200px;
     height: 800px !important; 
     margin: auto;
-    background-color: #fff; /* Keeps the news area clean white */
+    background-color: #0c2ef1; /* Keeps the news area clean white */
     overflow: hidden;       /* This chops off anything that tries to spill out */
     border: 2px solid #222;
     /*box-shadow: 10px 10px 0px #222;*/
