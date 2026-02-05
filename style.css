@@ -390,5 +390,5 @@ body {
 
 /* Specifically targets the first column to push the iframe down */
 .intricate-col:first-child .clay-county-sync-container {
-    padding-top: 105px !important; /* This "fakes" the height of the newspaper header */
+    padding-top: 75px !important; /* This "fakes" the height of the newspaper header */
 }
