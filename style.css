@@ -188,32 +188,6 @@ body {
 .clay-county-news-box { background-color: #fffdf6; border: 2px solid #222; padding: 0; box-shadow: 10px 10px 0px #222; width: 100%; margin-bottom: 40px; font-family: "Times New Roman", Times, serif;
     display: flex; flex-direction: column; overflow: hidden; /* Keeps the internal content tidy */ }
 .clay-county-news-box img { width: 100%; height: auto; display: block; object-fit: contain; }
-.clay-city-three-col > div, 
-.clay-city-three-col .clay-county-news-box {
-    flex: 1 !important; /* Forces exactly 1/3 of the width */
-    width: 31% !important;
-    margin: 0 !important;    /* Removes the margin that was pushing them apart */
-   display: flex !important;    /* Makes the BOX itself a flex container */
-    flex-direction: column !important; 
-    height: auto !important;
-}
-
-.clay-city-three-col .clay-county-news-box {
-    flex: 1 !important;           /* Shares the row equally */
-    width: 30% !important;        /* Overrides the 100% global width */
-    max-width: 32% !important; 
-    margin: 0 !important;         /* Removes the bottom margin that pushes them out of alignment */
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-.clay-city-three-col .clipping-btn {
-    margin-top: auto !important; 
-}
-
-.clay-city-three-col .clay-county-news-box .clipping-btn {
-    margin-top: auto !important;
-}
 
 
 .glossy-wrapper { padding: 60px 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); margin-top: 0 !important; background-size: cover; background-position: center; border-radius: 20px; border: 2px solid #222}
