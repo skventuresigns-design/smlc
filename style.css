@@ -95,10 +95,20 @@ body {
 
 
 /* --- THE BLUE NEWS FRAME - News Feed --- */
-.blue-news-frame { width: 100%; background-color: #0c2ef1; /* The Blue background */ padding: 60px 0;/* Creates the blue "border" on top and bottom */ margin: 40px 0; border-top: 2px solid #222; border-bottom: 2px solid #222;}
-.news-content-90 { width: 90%; /* 90% of the screen width */ margin: 0 auto; /* Centers it, leaving 5% blue on each side */ border: 2px solid #222; /* Optional: adds a crisp line between news and blue */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Gives the news feed some depth */}
-.news-iframe-wrapper { position: relative; width: 100%; padding-top: 100%; /* Keeps the feed square */ background: #ffffff; /* Shows white while the news loads */}
+.blue-news-frame { width: 100%; 
+                  background-color: #0c2ef1; /* The Blue background */ 
+                  padding: 60px 0;/* Creates the blue "border" on top and bottom */ 
+                  margin: 40px 0;
+                  width: 100%;
+                  display: flex;
+                  justify-content: center;
+                  /*border-top: 2px solid #222; 
+                  border-bottom: 2px solid #222;*/}
+
+.news-content-90 { width: 90%; /* 90% of the screen width */ max-width: 1400px; Background: white; margin: 0 auto; /* Centers it, leaving 5% blue on each side */ border: 2px solid #222; /* Optional: adds a crisp line between news and blue */
+                   box-shadow: 10px 10px 0px #222; /* Gives the news feed some depth */ height: 800px; /* Forces a fixed height so it doesn't spill */ position: relative;}
+.news-iframe-wrapper { position: relative; width: 100%; padding-top: 100%; /* Keeps the feed square */ background: #ffffff; /* Shows white while the news loads */ position: relative;
+                   overflow: hidden;}
 
 /* Mobile Tweak */
 @media (max-width: 768px) { .news-content-90 { width: 95%; /* Shrink blue edges on mobile to give news more room */}
