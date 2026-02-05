@@ -102,6 +102,9 @@ body {
                   width: 100%;
                   display: flex;
                   justify-content: center;
+                  height: 900px !important; 
+                  max-height: 900px !important; 
+                  overflow: hidden !important;
                   /*border-top: 2px solid #222; 
                   border-bottom: 2px solid #222;*/}
 
@@ -404,15 +407,18 @@ body {
 
 #github-news-container {
     position: relative;
-    width: 100%;
-    /* This is the magic number. Adjust this to make the window taller or shorter */
-    height: 900px !important; 
+    width: 90%; /* This is the magic number. Adjust this to make the window taller or shorter */
+    max-width: 1200px;
+    height: 800px !important; 
+    margin: auto;
     background-color: #fff; /* Keeps the news area clean white */
     overflow: hidden;       /* This chops off anything that tries to spill out */
     border: 2px solid #222;
     box-shadow: 10px 10px 0px #222;
-   display: block !important; /* Switch from flex to block to prevent stretching */
+    display: block !important; /* Switch from flex to block to prevent stretching */
     padding: 40px 0 !important;
+    overflow-y: auto !important; /* Enable scrolling INSIDE this box */
+    position: relative;
 }
 
 #github-news-container iframe {
