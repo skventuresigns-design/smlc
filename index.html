@@ -187,32 +187,32 @@
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
     </script>
-   <script>
+  <script>
 (function() {
-    // 1. Get the current filename (e.g., 'clay-city.html' or 'index.html')
     const path = window.location.pathname;
     let slug = path.split('/').filter(s => s.length > 0).pop() || '';
-
-    // 2. Clean the slug: Remove '.html' and handle 'index'
     slug = slug.replace('.html', '');
-    if (slug === 'index' || slug === '') {
-        slug = ''; // Points to the main news folder for the homepage
-    }
 
-    // 3. Construct the URL to your news repository
+    // If we are on the home page, slug is empty. 
+    // If we are on a town page (e.g. clay-city), slug is 'clay-city'.
+    
     const baseUrl = "https://kfruti88.github.io/clay-county-news/";
-    const finalUrl = slug ? `${baseUrl}${slug}/` : baseUrl;
+    
+    // We force it to look for the index.html INSIDE the town folder
+    const finalUrl = slug && slug !== 'index' 
+        ? `${baseUrl}${slug}/index.html` 
+        : `${baseUrl}index.html`;
 
-    // 4. Inject the iframe into the container
     const container = document.getElementById('github-news-container');
     if (container) {
+        // Clear anything currently inside to prevent "ghost" content
+        container.innerHTML = ''; 
+        
         const iframe = document.createElement('iframe');
         iframe.src = finalUrl;
         iframe.style.width = "100%";
         iframe.style.height = "100%";
-        iframe.style.position = "absolute";
         iframe.style.border = "none";
-        iframe.setAttribute('allowfullscreen', '');
         container.appendChild(iframe);
     }
 })();
