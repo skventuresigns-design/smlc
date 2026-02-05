@@ -108,10 +108,10 @@ body {
                   /*border-top: 2px solid #222; 
                   border-bottom: 2px solid #222;*/}
 
-.news-content-90 { width: 90%; /* 90% of the screen width */ max-width: 1400px; Background: white; margin: 0 auto; /* Centers it, leaving 5% blue on each side */ border: 2px solid #222; /* Optional: adds a crisp line between news and blue */
-                   box-shadow: 10px 10px 0px #222; /* Gives the news feed some depth */ height: 800px; /* Forces a fixed height so it doesn't spill */ position: relative;}
-.news-iframe-wrapper { position: relative; width: 100%; padding-top: 100%; /* Keeps the feed square */ background: #ffffff; /* Shows white while the news loads */ position: relative;
-                   overflow: hidden;}
+.news-content-90 { width: 90%; /* 90% of the screen width */ max-width: 1400px; Background: #0c2ef1; margin: 0 auto; /* Centers it, leaving 5% blue on each side  
+                  border: 2px solid #222; Optional: adds a crisp line between news and blue   box-shadow: 10px 10px 0px #222; Gives the news feed some depth */ 
+                  height: 800px; /* Forces a fixed height so it doesn't spill */ position: relative;}
+.news-iframe-wrapper { position: relative; width: 100%; padding-top: 100%; /* Keeps the feed square */ background: #ffffff; /* Shows white while the news loads */ position: relative; overflow: hidden;}
 
 /* Mobile Tweak */
 @media (max-width: 768px) { .news-content-90 { width: 95%; /* Shrink blue edges on mobile to give news more room */}
