@@ -131,7 +131,15 @@ body {
    ========================================= */
 .clay-city-hero-row { width: 100%; background-color: #0c2ef1; padding: 60px 20px; text-align: center; color: white; border-bottom: 2px solid white; }
 .clay-city-hero-row h1 { font-size: 4.5rem; margin: 0; font-family: 'Times New Roman', serif; text-transform: uppercase; }
-.clay-city-three-col { display: flex; gap: 30px; max-width: 1300px; width: 100%; justify-content: space-between; }
+.clay-city-three-col { 
+    display: flex; 
+    gap: 30px; 
+    max-width: 1300px; 
+    width: 95%;            /* Gives a little breathing room on the edges */
+    margin: 0 auto;         /* THE FIX: This centers the whole row */
+    justify-content: center; /* Centers the boxes inside the row */
+    flex-wrap: wrap;       /* THE FIX: Prevents boxes from squishing on smaller screens */
+}
 
 .louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; margin: 0 auto; }
 .Louisville-hero-container { 
