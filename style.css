@@ -427,7 +427,7 @@ body {
     max-width: 1200px;
     height: 100% !important; /* This is the window height */
     margin: 0 auto !important;
-    background: #fff;
+    background: #0c2ef1;
     border: none;
     overflow: hidden !important; /* Chops off anything below 800px */
     display:block;
