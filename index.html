@@ -187,27 +187,24 @@
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
     </script>
-  <script>
+ <script>
 (function() {
     const path = window.location.pathname;
     let slug = path.split('/').filter(s => s.length > 0).pop() || '';
     slug = slug.replace('.html', '');
 
-    // If we are on the home page, slug is empty. 
-    // If we are on a town page (e.g. clay-city), slug is 'clay-city'.
+    // The Bridge: This points specifically to your 'local-news' folder
+    const baseUrl = "https://kfruti88.github.io/clay-county-news/local-news/";
     
-    const baseUrl = "https://kfruti88.github.io/clay-county-news/";
-    
-    // We force it to look for the index.html INSIDE the town folder
-    const finalUrl = slug && slug !== 'index' 
-        ? `${baseUrl}${slug}/index.html` 
-        : `${baseUrl}index.html`;
+    // If we are on index.html, we want the main feed. 
+    // Otherwise, we look for the town's specific file.
+    const finalUrl = (slug === 'index' || slug === '') 
+        ? `${baseUrl}index.html` 
+        : `${baseUrl}${slug}.html`;
 
     const container = document.getElementById('github-news-container');
     if (container) {
-        // Clear anything currently inside to prevent "ghost" content
         container.innerHTML = ''; 
-        
         const iframe = document.createElement('iframe');
         iframe.src = finalUrl;
         iframe.style.width = "100%";
