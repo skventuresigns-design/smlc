@@ -131,40 +131,46 @@ body {
    ========================================= */
 .clay-city-hero-row { width: 100%; background-color: #0c2ef1; padding: 60px 20px; text-align: center; color: white; border-bottom: 2px solid white; }
 .clay-city-hero-row h1 { font-size: 4.5rem; margin: 0; font-family: 'Times New Roman', serif; text-transform: uppercase; }
+
+/* CLAY CITY MASTER BOX */
 .clay-city-three-col { 
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important; /* Forces them to stay on one line */
-    gap: 30px;
+    flex-wrap: nowrap !important;
+    gap: 25px;
     max-width: 1300px;
     width: 95%;
     margin: 40px auto !important;
-    align-items: stretch !important;
+    align-items: stretch !important; /* Equal height floor */
+    justify-content: center;
 }
 
+/* TARGET THE BOXES INSIDE CLAY CITY */
+.clay-city-three-col .clay-county-news-box {
+    flex: 1 !important;           /* Shares space equally */
+    width: 31% !important;        /* Forces 3 columns */
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+}
+
+/* TARGET THE IMAGES INSIDE CLAY CITY */
 .clay-city-three-col .spotlight-image-wrap {
-    height: 200px !important; /* Forces all town photos to the same 'window' size */
+    height: 200px !important;    /* Equal height tops */
     overflow: hidden;
-   margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .clay-city-three-col .spotlight-image-wrap img {
     width: 100%;
     height: 100%;
-    object-fit: cover !important; /* Crops them perfectly to fit the 200px height */
-}
-
-/* 3. Ensure the text areas grow to fill the gap */
-.clay-city-three-col .biz-description {
-    flex-grow: 1; /* Pushes the button down to the very bottom */
-    margin-bottom: 20px;
-   width: 100%;
-    height: 100%;
     object-fit: cover !important;
 }
 
+/* TARGET THE BUTTONS INSIDE CLAY CITY */
 .clay-city-three-col .clipping-btn {
-    margin-top: auto !important; 
+    margin-top: auto !important; /* Glues buttons to the bottom */
 }
 
 .louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; margin: 0 auto; }
@@ -192,9 +198,23 @@ body {
     height: auto !important;
 }
 
+.clay-city-three-col .clay-county-news-box {
+    flex: 1 !important;           /* Shares the row equally */
+    width: 30% !important;        /* Overrides the 100% global width */
+    max-width: 32% !important; 
+    margin: 0 !important;         /* Removes the bottom margin that pushes them out of alignment */
+    display: flex !important;
+    flex-direction: column !important;
+}
+
 .clay-city-three-col .clipping-btn {
     margin-top: auto !important; 
 }
+
+.clay-city-three-col .clay-county-news-box .clipping-btn {
+    margin-top: auto !important;
+}
+
 
 .glossy-wrapper { padding: 60px 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); margin-top: 0 !important; background-size: cover; background-position: center; border-radius: 20px; border: 2px solid #222}
 .glossy-box { max-width: 700px; margin: 0 auto; padding: 50px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);}
