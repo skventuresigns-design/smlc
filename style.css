@@ -407,14 +407,14 @@ body {
 
 #github-news-container {
     position: relative;
-    width: 90%; /* This is the magic number. Adjust this to make the window taller or shorter */
+    width: 100%; /* This is the magic number. Adjust this to make the window taller or shorter */
     max-width: 1200px;
     height: 800px !important; 
     margin: auto;
     background-color: #fff; /* Keeps the news area clean white */
     overflow: hidden;       /* This chops off anything that tries to spill out */
     border: 2px solid #222;
-    box-shadow: 10px 10px 0px #222;
+    /*box-shadow: 10px 10px 0px #222;*/
     display: block !important; /* Switch from flex to block to prevent stretching */
     padding: 10px 0 !important;
     overflow-y: auto !important; /* Enable scrolling INSIDE this box */
