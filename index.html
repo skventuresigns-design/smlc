@@ -172,24 +172,24 @@
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
     </script>
 
-   <script>
+  <script>
 (function() {
-    // 1. Get the current page name
     const path = window.location.pathname;
-    const pathSegments = path.split('/').filter(segment => segment.length > 0);
-    const slug = pathSegments.length > 0 ? pathSegments[pathSegments.length - 1] : '';
+    let slug = path.split('/').filter(s => s.length > 0).pop() || '';
+    slug = slug.replace('.html', '');
 
-    // 2. Define the base GitHub URL
-    const baseUrl = "https://kfruti88.github.io/clay-county-news/";
+    // FIX: Pointing specifically to the 'local-news' folder in your repo
+    const baseUrl = "https://kfruti88.github.io/clay-county-news/local-news/";
 
-    // 3. This is his exact logic for building the link
-    const finalUrl = slug ? `${baseUrl}${slug}/` : baseUrl;
+    // FIX: If there is no slug (home page), use index.html. 
+    // Otherwise, add .html to the end of the town name.
+    const finalUrl = (slug === '' || slug === 'index') ? `${baseUrl}index.html` : `${baseUrl}${slug}.html`;
 
     const container = document.getElementById('github-news-container');
     if (container) {
+        container.innerHTML = ''; 
         const iframe = document.createElement('iframe');
         iframe.src = finalUrl;
-        iframe.setAttribute('allowfullscreen', '');
         container.appendChild(iframe);
     }
 })();
