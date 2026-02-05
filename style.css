@@ -345,3 +345,45 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
+
+
+/* --- TIGHTEN COLUMN SPACING --- */
+
+/* 1. Reduce the gap at the bottom of the Spotlight box */
+.spotlight-clipping {
+    margin-bottom: 25px !important; /* Was likely 40px or more */
+}
+
+/* 2. Adjust the top of the Event box to account for the hanging tag */
+.event-clipping {
+    margin-top: 15px !important; /* Provides just enough room for the tag without a huge gap */
+}
+
+/* 3. If there is still a gap, check the column itself */
+.intricate-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0px !important; /* Forces the boxes to rely only on their own margins */
+}
+
+/* --- ALIGN ALL COLUMNS TO THE TOP --- */
+
+.intricate-grid-container {
+    display: flex;
+    align-items: flex-start !important; /* Forces all columns to start at the top pixel */
+    gap: 30px; /* Adjust this to control the space BETWEEN the columns */
+    width: 95%;
+    margin: 40px auto;
+}
+
+/* Ensure the columns themselves don't have hidden top padding */
+.intricate-col {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Adjust the Bulletin Container to match the others */
+.clay-county-sync-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
