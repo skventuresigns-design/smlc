@@ -47,9 +47,9 @@ body {
 .home-hero-cta h1 { color: #000000 !important; font-family: 'Times New Roman', serif; font-size: clamp(1.2rem, 3vw, 2rem); margin: 0; text-transform: uppercase; font-weight: bold;}
 
 .smlc-fullwidth-wrapper { width: 100%; overflow: hidden; background: #000; }
-.smlc-track { position: relative; width: 100%; height: 500px; }
+.smlc-track { position: relative; width: 100%; height: 500px; background-color: #000; /* Keeps a clean black background if images are different sizes */}
 .smlc-item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; animation: smlcSimpleFade 30s infinite; }
-.smlc-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.smlc-item img { width: 100%; height: 100%; /* This is the key line */ object-fit: contain; display: block;}
 
 @keyframes smlcSimpleFade { 0% { opacity: 0; } 5% { opacity: 1; } 33.33% { opacity: 1; } 38.33% { opacity: 0; } 100% { opacity: 0; }}
 .smlc-fade-1 { animation-delay: 0s; }
