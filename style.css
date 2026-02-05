@@ -399,3 +399,22 @@ body {
 
 /* Ensures this box matches the #fffdf6 background and shadow of the others */
 .group-clipping { background-color: #fffdf6 !important; box-shadow: 10px 10px 0px #222 !important;}
+
+/* --- THE VIEWBOX LOCK --- */
+
+#github-news-container {
+    position: relative;
+    width: 100%;
+    /* This is the magic number. Adjust this to make the window taller or shorter */
+    height: 800px !important; 
+    background-color: #fff; /* Keeps the news area clean white */
+    overflow: hidden;       /* This chops off anything that tries to spill out */
+    border: 2px solid #222;
+    box-shadow: 10px 10px 0px #222;
+}
+
+#github-news-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
