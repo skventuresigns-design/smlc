@@ -387,3 +387,8 @@ body {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
+
+/* Specifically targets the first column to push the iframe down */
+.intricate-col:first-child .clay-county-sync-container {
+    padding-top: 105px !important; /* This "fakes" the height of the newspaper header */
+}
