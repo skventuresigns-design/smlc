@@ -187,18 +187,35 @@
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
     </script>
-    <script>
-        (function() {
-            const path = window.location.pathname;
-            const slug = path.split('/').filter(s => s.length > 0).pop() || '';
-            const baseUrl = "https://kfruti88.github.io/clay-county-news/";
-            const finalUrl = slug ? `${baseUrl}${slug}/` : baseUrl;
-            const container = document.getElementById('github-news-container');
-            const iframe = document.createElement('iframe');
-            iframe.src = finalUrl;
-            iframe.style.width = "100%"; iframe.style.height = "100%"; iframe.style.position = "absolute"; iframe.style.border = "none";
-            container.appendChild(iframe);
-        })();
-    </script>
+   <script>
+(function() {
+    // 1. Get the current filename (e.g., 'clay-city.html' or 'index.html')
+    const path = window.location.pathname;
+    let slug = path.split('/').filter(s => s.length > 0).pop() || '';
+
+    // 2. Clean the slug: Remove '.html' and handle 'index'
+    slug = slug.replace('.html', '');
+    if (slug === 'index' || slug === '') {
+        slug = ''; // Points to the main news folder for the homepage
+    }
+
+    // 3. Construct the URL to your news repository
+    const baseUrl = "https://kfruti88.github.io/clay-county-news/";
+    const finalUrl = slug ? `${baseUrl}${slug}/` : baseUrl;
+
+    // 4. Inject the iframe into the container
+    const container = document.getElementById('github-news-container');
+    if (container) {
+        const iframe = document.createElement('iframe');
+        iframe.src = finalUrl;
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.position = "absolute";
+        iframe.style.border = "none";
+        iframe.setAttribute('allowfullscreen', '');
+        container.appendChild(iframe);
+    }
+})();
+</script>
 </body>
 </html>
