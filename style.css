@@ -145,6 +145,7 @@ body {
 .clay-city-three-col .spotlight-image-wrap {
     height: 200px !important; /* Forces all town photos to the same 'window' size */
     overflow: hidden;
+   margin-bottom: 15px;
 }
 
 .clay-city-three-col .spotlight-image-wrap img {
@@ -157,6 +158,13 @@ body {
 .clay-city-three-col .biz-description {
     flex-grow: 1; /* Pushes the button down to the very bottom */
     margin-bottom: 20px;
+   width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+}
+
+.clay-city-three-col .clipping-btn {
+    margin-top: auto !important; 
 }
 
 .louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; margin: 0 auto; }
