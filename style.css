@@ -363,7 +363,7 @@ body {
 /* --- ALIGN ALL COLUMNS TO THE TOP --- */
 
 .intricate-grid-container { display: flex; align-items: flex-start !important; /* Forces all columns to start at the top pixel */
-    gap: 30px; /* Adjust this to control the space BETWEEN the columns */ width: 95%;  margin: 25px 0 25px 0 ;}
+    gap: 30px; /* Adjust this to control the space BETWEEN the columns */ width: 95%;  margin: 25px auto !important ;}
 
 /* Ensure the columns themselves don't have hidden top padding */
 .intricate-col { padding-top: 0 !important; margin-top: 0 !important;}
