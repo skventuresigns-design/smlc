@@ -139,6 +139,9 @@ body {
     margin: 0 auto;         /* THE FIX: This centers the whole row */
     justify-content: center; /* Centers the boxes inside the row */
     flex-wrap: wrap;       /* THE FIX: Prevents boxes from squishing on smaller screens */
+    flex: 1;               /* Tells them to grow equally */
+    min-width: 300px;      /* Prevents them from getting TOO skinny */
+    max-width: 400px;      /* Prevents them from getting TOO wide */
 }
 
 .louisville-grid-row { width: 95%; max-width: 1200px; display: flex; gap: 40px; align-items: flex-start; margin: 0 auto; }
