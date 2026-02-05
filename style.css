@@ -1,4 +1,3 @@
-/* =========================================
    CHAPTER 1: GLOBAL BRANDING & RESET
    ========================================= */
 * {
@@ -127,23 +126,16 @@ body {
 .thankful-content a:hover { color: #1414fe;}
 
 /* =========================================
-   CHAPTER 4: TOWN LAYOUTS & REUSABLE BOXES
+   CHAPTER 4: TOWN LAYOUTS
    ========================================= */
 
 /* --- CLAY CITY HERO --- */
 .clay-city-hero-row { 
-    width: 100%; 
-    background-color: #0c2ef1; 
-    padding: 60px 20px; 
-    text-align: center; 
-    color: white; 
-    border-bottom: 2px solid white; 
+    width: 100%; background-color: #0c2ef1; padding: 60px 20px; 
+    text-align: center; color: white; border-bottom: 2px solid white; 
 }
 .clay-city-hero-row h1 { 
-    font-size: 4.5rem; 
-    margin: 0; 
-    font-family: 'Times New Roman', serif; 
-    text-transform: uppercase; 
+    font-size: 4.5rem; margin: 0; font-family: 'Times New Roman', serif; text-transform: uppercase; 
 }
 
 /* --- THE 3-COLUMN CONTAINER (Clay City & Louisville) --- */
@@ -151,7 +143,7 @@ body {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 30px;
+    gap: 25px;
     max-width: 1300px;
     width: 95%;
     margin: 40px auto !important;
@@ -159,7 +151,7 @@ body {
     justify-content: center;
 }
 
-/* --- THE NEWSPAPER BOX (Used Everywhere) --- */
+/* --- THE NEWSPAPER BOX (The Global Style) --- */
 .clay-county-news-box { 
     background-color: #fffdf6 !important; 
     border: 2px solid #222 !important; 
@@ -170,10 +162,11 @@ body {
     display: flex !important; 
     flex-direction: column !important; 
     position: relative;
+    width: 100%; /* Default for Home Page */
 }
 
-/* --- SPECIAL RULES FOR 3-COLUMN BOXES ONLY --- */
-/* This prevents the 100% width rule from breaking the town pages */
+/* --- SPECIAL OVERRIDE FOR 3-COLUMN TOWNS --- */
+/* This forces the boxes to be 31% width ONLY on town pages */
 .clay-city-three-col .clay-county-news-box, 
 .louisville-grid-row .clay-county-news-box {
     flex: 1 !important;
@@ -181,28 +174,22 @@ body {
     margin: 0 !important;
 }
 
-/* --- IMAGE HANDLING --- */
+/* --- IMAGE HANDLING (The 'Printed' Look) --- */
 .spotlight-image-wrap { 
-    width: 100%; 
-    border: 1px solid #222; 
-    margin-bottom: 15px; 
-    background-color: #fff; 
-    padding: 5px; 
+    width: 100%; border: 1px solid #222; margin-bottom: 15px; 
+    background-color: #fff; padding: 5px; 
 }
-
 .spotlight-image-wrap img { 
-    width: 100%; 
-    display: block; 
+    width: 100%; display: block; 
     filter: grayscale(20%) contrast(110%) sepia(10%); 
 }
 
-/* Force town images to match in height */
+/* Force Town Images to be equal height */
 .clay-city-three-col .spotlight-image-wrap,
 .louisville-grid-row .spotlight-image-wrap {
     height: 200px !important;
     overflow: hidden;
 }
-
 .clay-city-three-col .spotlight-image-wrap img,
 .louisville-grid-row .spotlight-image-wrap img {
     height: 100%;
@@ -211,319 +198,35 @@ body {
 
 /* --- THE UNIFIED BUTTON --- */
 .clipping-btn { 
-    margin: auto 0 0 0 !important; /* 'auto' top margin pushes button to the floor */
-    display: block; 
-    text-align: center; 
-    background-color: #222 !important; 
-    color: #fff !important; 
-    padding: 15px; 
-    text-transform: uppercase;
-    font-weight: bold; 
-    letter-spacing: 1px; 
-    text-decoration: none; 
-    font-size: 14px; 
-    transition: 0.3s;
-    box-shadow: inset 0 0 0 3px #ffffff;
+    margin: auto 0 0 0 !important; /* Pushes button to bottom */
+    display: block; text-align: center; background-color: #222 !important; 
+    color: #fff !important; padding: 15px; text-transform: uppercase;
+    font-weight: bold; letter-spacing: 1px; text-decoration: none; 
+    font-size: 14px; transition: 0.3s; box-shadow: inset 0 0 0 3px #ffffff;
 }
 .clipping-btn:hover { background-color: #1414fe !important; }
 
-/* --- LOUISVILLE SPECIFICS --- */
+/* =========================================
+   CHAPTER 5: LOUISVILLE & EXTRAS
+   ========================================= */
 .Louisville-hero-container { 
     height: 300px; 
     background-image: linear-gradient(180deg, #eb1c24 0%, #040404 100%), 
                       url('https://images.squarespace-cdn.com/content/v1/56c6248d62cd944a178ec33e/1461686733240-E82QY9H3D4Z4R3Y3QY3Q/Louisville+IL+Courthouse.jpg');
-    background-blend-mode: overlay;
-    background-size: cover;
+    background-blend-mode: overlay; background-size: cover;
 }
 
-/* =========================================
-   CHAPTER 5: REUSABLE COMPONENTS
-   ========================================= */
-.clay-county-news-box { background-color: #fffdf6; border: 2px solid #222; padding: 0; box-shadow: 10px 10px 0px #222; width: 100%; margin-bottom: 40px; font-family: "Times New Roman", Times, serif;
-    display: flex; flex-direction: column; overflow: hidden; /* Keeps the internal content tidy */ }
-.clay-county-news-box img { width: 100%; height: auto; display: block; object-fit: contain; }
-
-
-.glossy-wrapper { padding: 60px 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); margin-top: 0 !important; background-size: cover; background-position: center; border-radius: 20px; border: 2px solid #222}
-.glossy-box { max-width: 700px; margin: 0 auto; padding: 50px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);}
-.yellow-text { color: #ffcc00 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); }
-.mission-text.yellow-border { border-left: 5px solid #ffcc00; padding-left: 20px; margin-top: 20px;}
+/* --- MISC COMPONENTS --- */
+.glossy-wrapper { padding: 60px 40px; background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); background-size: cover; border-radius: 20px; border: 2px solid #222; }
+.glossy-box { max-width: 700px; margin: 0 auto; padding: 50px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
 
 /* =========================================
-   CHAPTER 6: FOOTER & MOBILE RESPONSIVENESS
+   CHAPTER 6: FOOTER & NEWS FEED LOCK
    ========================================= */
 .site-footer { background-color: #000 !important; color: #fff !important; text-align: center; padding: 40px 20px; margin-top: auto; width: 100%; }
-.site-footer a { color: #fff !important; text-decoration: underline; }
-
-.hamburger { display: none; flex-direction: column; cursor: pointer; padding: 10px 20px; background: none; border: none; margin: 0 auto; }
-.hamburger span { width: 25px; height: 3px; background-color: #222; margin: 2px 0; transition: 0.3s; }
-
-@media (max-width: 1024px) {
-    .intricate-grid-container { grid-template-columns: 1fr; gap: 40px; }
-    .louisville-grid-row { flex-direction: column; align-items: center; }
-}
-
-@media (max-width: 980px) {
-    .smlc-track { height: 350px; }
-    .orange-grid-row { flex-direction: column; width: 90%; }
-    .index-grid-row { flex-direction: column; align-items: center; }
-    .index-col { width: 100%; }
-    .glossy-wrapper { padding: 40px 20px; }
-    .glossy-box { padding: 40px; }
-}
-
-@media (max-width: 768px) {
-    .hamburger { display: flex; }
-    .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; background-color: #fffdf6; }
-    .nav-links.open { display: flex; }
-}
-
-@media (max-width: 767px) { .smlc-track { height: 250px; } }
-
-
-/* --- CLIPPING COMPONENT STYLES --- */
-.clay-county-news-box {
-    background-color: #fffdf6; /* Aged paper tint */
-    border: 2px solid #222;
-    padding: 30px;
-    box-shadow: 8px 8px 0px #222; /* Heavy signature shadow */
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative; 
-    margin-top: 30px;
-}
-
-.clay-county-news-box h3 {
-    font-family: "Times New Roman", serif;
-    font-size: 24px;
-    text-transform: uppercase;
-    border-bottom: 2px solid #222;
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-}
-
-/* THE BUTTONS */
-.clipping-btn {
-   display: block;
-    width: 100%;            /* Stretches wall-to-wall */
-    margin: 0 !important;   /* Removes side spacing */
-    border-radius: 0;       /* Sharp corners */
-    box-sizing: border-box; /* Keeps padding inside the 100% width */
-    
-    background-color: #222 !important; /* Solid Black Background */
-    color: #fff !important;            /* White Text */
-    padding: 15px 0;                   /* Taller padding for a bolder look */
-    
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;       /* Extra bold text */
-    letter-spacing: 2px;    /* Spaced out letters */
-    text-decoration: none;
-    transition: 0.3s;
-
-    /* THE "PREMIUM" INNER BORDER TRICK */
-    /* inset | x-offset | y-offset | blur | thickness | color */
-    box-shadow: inset 0 0 0 3px #ffffff;
-}
-
-.clipping-btn:hover { background-color: #1414fe !important; /* Blue hover effect */}
-.event-clipping .news-box-header h3 { color: #d9534f !important; /* This is the specific accent red you've been using */}
-.spotlight-image-wrap { width: 100%; border: 1px solid #222; padding: 5px; background: #fff; margin-bottom: 15px;}
-.spotlight-image-wrap img { width: 100%; display: block;}
-
-/* --- THE DIVI-STYLE NEWSPAPER CLIPPING --- */
-.clay-county-news-box {
-    background-color: #fffdf6 !important; /* Aged Paper Tint */
-    border: 2px solid #222 !important;
-    padding: 30px;
-    box-shadow: 10px 10px 0px #222 !important; /* Bold Divi Shadow */
-    margin-bottom: 40px;
-    font-family: "Times New Roman", Times, serif;
-    display: flex;
-    flex-direction: column;
-   overflow: visible !important; 
-    position: relative;
-}
-
-.clipping-tag-black {
-    position: absolute;
-    top: 0;                /* Start at the very top edge */
-    left: 20px;            /* Your 20px margin from the left */
-    transform: translateY(-50%); /* This pulls it up exactly halfway over the border */
-    background-color: #222;
-    color: #fff;
-    padding: 5px 15px;
-    font-size: 12px;
-    font-family: "Times New Roman", serif;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    z-index: 999 !important;           /* Ensures it stays on top of the border line */
-    border: 1px solid #fff; /* Optional: a tiny white border makes it pop against the black line */
-}
-
-/* Masthead Header Logic */
-.news-box-header {
-    text-align: center;
-    border-top: 5px solid #222;
-    border-bottom: 3px solid #222;
-    padding: 10px 10px 15px 10px;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-.news-box-header span {
-    display: block;
-    border-top: none !important;
-    margin-top: 12px;            
-    padding-top: 0; 
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #444;
-    font-weight: bold;
-}
-
-.news-box-header h3 {
-    font-weight: 900 !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #222 !important;
-    font-size: 24px !important;
-   border-bottom: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Image Wrap with "Printed" Look */
-.spotlight-image-wrap {
-    width: 100%;
-    border: 1px solid #222;
-    margin-bottom: 15px;
-    background-color: #fff;
-    padding: 5px; /* Creates a small white border around the photo */
-}
-
-.spotlight-image-wrap img {
-    width: 100%;
-    display: block;
-    filter: grayscale(20%) contrast(110%) sepia(10%); /* Vintage Newsprint Filter */
-}
-
-/* Description Text */
-.biz-description {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #222;
-    text-align: justify;
-    margin-bottom: 25px;
-}
-
-/* The Unified Button */
-.clipping-btn { margin: 0 25px 25px 25px; display: block; text-align: center; background-color: #222 !important; color: #fff !important; padding: 15px; text-transform: uppercase;
-    font-weight: bold; letter-spacing: 1px; text-decoration: none; font-size: 14px; transition: 0.3s;}
-
-.clipping-btn:hover { background-color: #1414fe !important; /* SMLC Brand Blue */}
-
-/* ACCENT STYLES FOR CLIPPINGS */
-.notice-tag-red {
-    background-color: #d9534f;
-    color: white;
-    padding: 5px 15px;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-    display: inline-block;
-    margin: 0 auto 15px auto;
-}
-
-/* Ensure images don't stretch weirdly in the circular/small boxes */
-.spotlight-image-wrap img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Hover state for all clipping buttons */
-.clipping-btn:hover {
-    background-color: #1414fe !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-
-/* --- TIGHTEN COLUMN SPACING --- */
-
-/* 1. Reduce the gap at the bottom of the Spotlight box */
-.spotlight-clipping {
-    margin-bottom: 25px !important; /* Was likely 40px or more */
-}
-
-/* 2. Adjust the top of the Event box to account for the hanging tag */
-.event-clipping { margin-top: 15px !important; /* Provides just enough room for the tag without a huge gap */}
-
-/* 3. If there is still a gap, check the column itself */
-.intricate-col { display: flex; flex-direction: column; gap: 25px !important; /* Forces the boxes to rely only on their own margins */}
-
-/* --- ALIGN ALL COLUMNS TO THE TOP --- */
-
-.intricate-grid-container { display: flex; align-items: flex-start !important; /* Forces all columns to start at the top pixel */
-    gap: 30px; /* Adjust this to control the space BETWEEN the columns */ width: 95%;  margin: 25px auto !important ;}
-
-/* Ensure the columns themselves don't have hidden top padding */
-.intricate-col { padding-top: 0 !important; margin-top: 0 !important;}
-
-/* Adjust the Bulletin Container to match the others */
-.clay-county-sync-container { margin-top: 0 !important; padding-top: 0 !important;}
-
-/* Specifically targets the first column to push the iframe down */
-.intricate-col:first-child .clay-county-sync-container {
-    padding-top: 21px !important; /* This "fakes" the height of the newspaper header */}
-
-/* --- FACEBOOK LISTING ADJUSTMENTS --- */
-
-.fb-hero-image { width: 100% !important;   /* Makes it span the full width of the clipping */  max-width: none !important; margin: 0 0 15px 0 !important; /* Removes the center-align margin and tilt */
-    transform: none !important; /* Levels the image */ border: none !important; /* Optional: Removes the inner border for a cleaner look */ padding: 0 !important;}
-
-.fb-hero-image img { width: 100%; height: auto; display: block; /* Keeps the newspaper filter to match the other images */ filter: grayscale(10%) contrast(105%) sepia(5%);}
-
-/* --- RICHARDS' GROUP CLIPPING SPECIAL STYLES --- */
-.group-header { text-align: center; border-top: 5px double #222; border-bottom: 2px solid #222; padding: 15px 10px; margin-bottom: 20px; width: 100%;}
-.group-header h3 { font-family: 'Times New Roman', serif; font-weight: 900; font-size: 24px; margin: 0; text-transform: uppercase;}
-.group-header span { display: block; font-family: 'Times New Roman', serif; font-size: 12px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; margin-top: 8px;}
-
-/* Ensures this box matches the #fffdf6 background and shadow of the others */
-.group-clipping { background-color: #fffdf6 !important; box-shadow: 10px 10px 0px #222 !important;}
-
-/* --- THE VIEWBOX LOCK --- */
 
 #github-news-container {
-    position: relative;
-    width: 100%; /* This is the magic number. Adjust this to make the window taller or shorter */
-    /*max-width: 1200px;*/
-    height: 800px !important; 
-    margin: auto;
-    background-color: #0c2ef1; /* Keeps the news area clean white */
-    overflow: hidden;       /* This chops off anything that tries to spill out */
-    border: none;
-    /*box-shadow: 10px 10px 0px #222;*/
-    display: block !important; /* Switch from flex to block to prevent stretching */
-    padding: 10px 0 !important;
-    overflow-y: auto !important; /* Enable scrolling INSIDE this box */
-    position: relative;
-    box-sizing: border-box;
+    width: 100%; height: 800px !important; background-color: #0c2ef1; 
+    overflow: hidden; border: none; padding: 10px 0 !important; position: relative;
 }
-
-#github-news-container iframe {
-    width: 100%;
-    max-width: 1200px;
-    height: 100% !important; /* This is the window height */
-    margin: 0 auto !important;
-    background: #0c2ef1;
-    border: none;
-    overflow: hidden !important; /* Chops off anything below 800px */
-    display:block;
-}
+#github-news-container iframe { width: 100%; height: 100% !important; background: transparent; border: none; display:block; }
