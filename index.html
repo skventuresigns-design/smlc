@@ -167,8 +167,9 @@
     
 <div class="blue-news-frame">
     <div class="news-content-90">
-        <div id="github-news-container" class="news-iframe-wrapper"></div>
-    </div>
+        <div id="github-news-container">
+    <div id="news-loading-status">Connecting to News Center...</div>
+</div>
 </div>
 
 <div class="thankful-section">
@@ -187,29 +188,31 @@
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
     </script>
- <script>
+ <<script>
 (function() {
     const path = window.location.pathname;
     let slug = path.split('/').filter(s => s.length > 0).pop() || '';
+    
+    // Clean the slug (remove .html if it exists)
     slug = slug.replace('.html', '');
 
-    // The Bridge: This points specifically to your 'local-news' folder
+    // Point to the ACTUAL news folder we found in your repo
     const baseUrl = "https://kfruti88.github.io/clay-county-news/local-news/";
-    
-    // If we are on index.html, we want the main feed. 
-    // Otherwise, we look for the town's specific file.
-    const finalUrl = (slug === 'index' || slug === '') 
-        ? `${baseUrl}index.html` 
-        : `${baseUrl}${slug}.html`;
+
+    // Logic: If on home/index, show index.html. Otherwise show town.html
+    const fileName = (slug === 'index' || slug === '') ? 'index.html' : `${slug}.html`;
+    const finalUrl = `${baseUrl}${fileName}`;
 
     const container = document.getElementById('github-news-container');
+    
     if (container) {
-        container.innerHTML = ''; 
+        container.innerHTML = ''; // Remove the "Loading" text
         const iframe = document.createElement('iframe');
         iframe.src = finalUrl;
         iframe.style.width = "100%";
         iframe.style.height = "100%";
         iframe.style.border = "none";
+        iframe.setAttribute('allowfullscreen', '');
         container.appendChild(iframe);
     }
 })();
