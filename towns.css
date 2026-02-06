@@ -1,54 +1,70 @@
 /* =========================================
-   CLAY CITY: 3-COLUMN GRID
+   LOUISVILLE: MAGAZINE & NEWSPAPER LAYOUT
    ========================================= */
-.clay-city-three-col {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    gap: 25px !important;
-    max-width: 1300px;
-    width: 95%;
-    margin: 40px auto !important;
-}
 
-.clay-city-card {
-    flex: 1 !important;
-    width: 31% !important;
-    background-color: #fffdf6 !important;
-    border: 2px solid #222 !important;
-    padding: 30px;
-    box-shadow: 10px 10px 0px #222 !important;
-}
-
-/* =========================================
-   LOUISVILLE: 2-COLUMN SIDEBAR LAYOUT
-   ========================================= */
+/* --- 1. THE MAIN 2-COLUMN SPLIT --- */
 .louisville-grid-row {
     display: flex !important;
     flex-direction: row !important;
     gap: 40px !important;
-    max-width: 1300px;
+    max-width: 1400px;
     width: 95%;
     margin: 40px auto !important;
     align-items: flex-start !important;
 }
 
-/* THE SIDEBAR (First Column) */
-.louisville-sidebar-col {
-    flex: 0 0 30% !important; /* Sidebar stays exactly at 30% width */
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 25px;
+/* LEFT COLUMN: MAIN ARTICLE (70%) */
+.louisville-col-main {
+    flex: 0 0 68% !important;
+    background-color: #fff;
+    border: 2px solid #222;
+    padding: 40px;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
 }
 
-/* THE MAIN CONTENT (Second Column) */
-.louisville-main-col {
-    flex: 1 !important; /* Takes up the remaining 70% of the screen */
+/* RIGHT COLUMN: NEWSPAPER SIDEBAR (30%) */
+.louisville-col-side {
+    flex: 0 0 28% !important;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* Ensure boxes inside Louisville still look like newspaper clippings */
-.louisville-sidebar-col .clay-county-news-box,
-.louisville-main-col .clay-county-news-box {
-    width: 100% !important; /* They fill their specific column width */
-    margin-bottom: 30px;
+/* --- 2. THE RENEWABLE ENERGY FEATURE (Left Side) --- */
+.article-container h1 { font-family: 'Times New Roman', serif; font-size: 3rem; margin: 10px 0; }
+.category-tag { background: #222; color: #fff; display: inline-block; padding: 5px 15px; text-transform: uppercase; font-size: 12px; }
+.deck { font-style: italic; font-size: 1.2rem; color: #555; margin-bottom: 30px; }
+
+.main-layout { display: flex; gap: 30px; }
+.article-body { flex: 2; line-height: 1.8; font-family: serif; }
+.sidebar { flex: 1; border-left: 1px solid #ddd; padding-left: 20px; }
+
+/* --- 3. THE NEWSPAPER SIDEBAR (Right Side) --- */
+.newspaper-sidebar {
+    background-color: #fffdf6;
+    border: 2px solid #222;
+    padding: 20px;
+    box-shadow: 8px 8px 0px #222;
+    font-family: "Times New Roman", serif;
 }
+
+.news-masthead { text-align: center; border-bottom: 1px solid #222; padding-bottom: 10px; }
+.news-masthead h4 { margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+.news-double-line { border-top: 4px double #222; margin: 10px 0; }
+.news-single-line { border-top: 1px solid #222; margin: 15px 0; }
+.news-timeline div { margin-bottom: 10px; font-size: 0.9rem; line-height: 1.4; }
+
+/* --- 4. THE HERO SECTION --- */
+.Louisville-hero-container {
+    height: 350px;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                url('https://images.squarespace-cdn.com/content/v1/56c6248d62cd944a178ec33e/1461686733240-E82QY9H3D4Z4R3Y3QY3Q/Louisville+IL+Courthouse.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+.Louisville-hero-container h1 { font-size: 4rem; font-family: 'Times New Roman', serif; text-transform: uppercase; margin: 0; }
