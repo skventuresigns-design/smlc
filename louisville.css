@@ -1,0 +1,32 @@
+/* LOUISVILLE ISOLATED STYLES */
+
+/* The Courthouse Hero */
+.Louisville-hero-container {
+    height: 350px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('https://images.squarespace-cdn.com/content/v1/56c6248d62cd944a178ec33e/1461686733240-E82QY9H3D4Z4R3Y3QY3Q/Louisville+IL+Courthouse.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex; align-items: center; justify-content: center; color: white;
+}
+
+/* The 2-Column Split (70/30) */
+.louisville-grid-row {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 40px !important;
+    max-width: 1400px;
+    width: 95%;
+    margin: 40px auto !important;
+}
+
+.louisville-col-main { flex: 0 0 68% !important; background-color: #fff; border: 2px solid #222; padding: 40px; }
+.louisville-col-side { flex: 0 0 28% !important; }
+
+/* The "Magazine" split inside the main column */
+.main-layout { display: flex !important; gap: 20px; }
+.article-body { flex: 2; }
+.sidebar { flex: 1; border-left: 1px solid #ddd; padding-left: 20px; }
+
+/* The Newspaper Sidebar (Right side) */
+.newspaper-sidebar { background-color: #fffdf6; border: 2px solid #222; padding: 20px; box-shadow: 8px 8px 0px #222; }
