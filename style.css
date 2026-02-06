@@ -129,12 +129,6 @@ body {
 /* =========================================
    CHAPTER 4: TOWN LAYOUTS & REUSABLE BOXES
    ========================================= */
-
-.louisville-grid-row .spotlight-image-wrap img {
-    height: 100%;
-    object-fit: cover !important;
-}
-
 /* --- THE UNIFIED BUTTON --- */
 .clipping-btn { 
     margin: auto 0 0 0 !important; /* 'auto' top margin pushes button to the floor */
