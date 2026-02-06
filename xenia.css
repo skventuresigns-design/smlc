@@ -1,68 +1,74 @@
 /* =========================================
-   XENIA ISOLATED STYLES (xenia.css)
+   XENIA ISOLATED STYLES
    ========================================= */
 
-/* --- XENIA BACKGROUND & HERO --- */
-/* This ensures the fence background is locked and looks great */
+/* --- 1. BACKGROUND & HERO --- */
 #xenia-page {
+    /* Fixed background logic ensures the fence stays put while scrolling */
     background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed !important;
     background-size: cover !important;
 }
 
 .xenia-hero-row { 
     width: 100%; 
-    background-color: rgba(229, 229, 229, 0.9); /* Slight tint to match the fence */
+    background-color: rgba(255, 253, 246, 0.9); /* Matches your #fffdf6 header tint */
     padding: 60px 20px; 
     text-align: center; 
     border-bottom: 3px solid #222; 
 }
 
 .xenia-hero-row h1 { 
-    font-size: 4.5rem; 
+    font-size: clamp(2.5rem, 7vw, 4.5rem); /* Responsive sizing */
     margin: 0; 
     font-family: 'Times New Roman', serif; 
     text-transform: uppercase; 
     color: #222;
 }
 
-/* --- THE 3-COLUMN GRID --- */
+/* --- 2. THE 3-COLUMN GRID --- */
 .xenia-grid-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: nowrap !important; /* Prevents stacking on desktop */
     gap: 25px !important;
     max-width: 1300px;
     width: 95%;
     margin: 40px auto !important;
-    align-items: stretch !important;
+    align-items: stretch !important; /* Keeps all 3 boxes the same height */
 }
 
-/* --- THE XENIA CARDS (Newspaper Style) --- */
+/* --- 3. THE XENIA CARDS --- */
+/* We use a specific class to avoid fighting with style.css */
 .xenia-card {
     flex: 1 !important;
     width: 31% !important;
-    background-color: #fffdf6 !important; /* Aged Paper Tint */
-    border: 2px solid #222 !important;
-    padding: 30px;
-    box-shadow: 10px 10px 0px #222 !important;
     display: flex !important;
     flex-direction: column !important;
-    font-family: "Times New Roman", Times, serif;
+    /* Personality/Flare is now inherited from the global look, 
+       but we define the specific internal padding here */
+    padding: 30px;
 }
 
-/* --- THE IMAGE FLARE --- */
+/* --- 4. IMAGE & BUTTON ALIGNMENT --- */
 .xenia-card img {
     width: 100%;
     height: 200px !important;
-    object-fit: cover !important;
-    filter: grayscale(10%) contrast(105%) sepia(5%); /* Light Vintage Filter */
-    border: 1px solid #222;
-    padding: 5px;
-    background: #fff;
+    object-fit: cover !important; /* Perfectly crops images to match */
     margin-bottom: 15px;
 }
 
-/* --- THE BUTTONS --- */
 .xenia-card .clipping-btn {
-    margin-top: auto !important; /* Forces button to the bottom */
+    margin-top: auto !important; /* Glues the button to the bottom of the card */
+}
+
+/* --- 5. MOBILE OVERRIDE --- */
+@media (max-width: 980px) {
+    .xenia-grid-row {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    .xenia-card {
+        width: 100% !important;
+        margin-bottom: 30px;
+    }
 }
