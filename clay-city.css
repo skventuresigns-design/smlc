@@ -40,3 +40,34 @@
     background: #fff;
     margin-bottom: 15px;
 }
+
+/* --- CLAY CITY NEWSPAPER FLARE --- */
+
+.clay-city-card {
+    background-color: #fffdf6 !important; /* Aged Paper Tint */
+    box-shadow: 10px 10px 0px #222 !important; /* Signature Heavy Shadow */
+}
+
+.clay-city-card h3 {
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-top: 5px solid #222; /* Newspaper Masthead Top */
+    border-bottom: 3px solid #222; /* Newspaper Masthead Bottom */
+    padding: 10px 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.clay-city-card img {
+    filter: grayscale(20%) contrast(110%) sepia(10%); /* Vintage Newsprint Filter */
+    border: 1px solid #222;
+    padding: 5px;
+    background: #fff;
+}
+
+.clay-city-card p {
+    font-family: "Times New Roman", Times, serif;
+    line-height: 1.6;
+    text-align: justify;
+}
