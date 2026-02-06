@@ -49,8 +49,10 @@ body { margin: 0; padding: 0; color: #333; font-family: sans-serif; min-height: 
 }
 
 /* This targets stray 'empty' links or pseudo-elements */
-.nav-links li::before {
+.nav-links li::before, 
+.nav-links li::after {
     content: none !important;
+    display: none !important;
 }
 
 /* =========================================
