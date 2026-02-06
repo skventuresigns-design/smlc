@@ -12,48 +12,6 @@ body { margin: 0; padding: 0; color: #333; font-family: sans-serif; min-height: 
 /* =========================================
    CHAPTER 2: HEADER & NAVIGATION
    ========================================= */
-.header { 
-    background-color: #fffdf6; 
-    width: 100%; 
-    border-bottom: none; /* Removes stray border squares */
-    padding: 0; 
-    margin: 0;
-}
-
-.header-logo { 
-    width: 100%; 
-    height: auto; 
-    display: block; 
-    border: none; /* Ensures the image itself doesn't have a border */
-}
-
-.nav-bar { 
-    background-color: #fffdf6; 
-    padding: 15px 0; 
-    border: none; 
-}
-
-.nav-links { 
-    list-style: none !important; /* Forces bullets to disappear */
-    list-style-type: none !important; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
-    justify-content: center; 
-    flex-wrap: wrap; 
-}
-
-.nav-links li { 
-    margin: 10px 30px; 
-    list-style: none; /* Double-check for the square bullet */
-}
-
-/* This targets stray 'empty' links or pseudo-elements */
-.nav-links li::before, 
-.nav-links li::after {
-    content: none !important;
-    display: none !important;
-}
 
 /* =========================================
    CHAPTER 3: HOME PAGE PORTAL (index.html)
