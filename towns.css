@@ -62,3 +62,25 @@
     margin-bottom: 15px;
     font-weight: 900;
 }
+
+/* --- TEXT CARD POLISH --- */
+.clay-city-card.text-card {
+    justify-content: flex-start !important; /* Ensures text starts at the top */
+}
+
+.clay-city-card.text-card strong {
+    display: block;
+    font-family: "Times New Roman", serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-top: 20px;
+    color: #222;
+    border-left: 4px solid #0c2ef1; /* Blue brand accent line */
+    padding-left: 10px;
+}
+
+.clay-city-card.text-card p {
+    margin-top: 5px;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
