@@ -30,3 +30,51 @@
 
 /* The Newspaper Sidebar (Right side) */
 .newspaper-sidebar { background-color: #fffdf6; border: 2px solid #222; padding: 20px; box-shadow: 8px 8px 0px #222; }
+
+
+/* --- LOUISVILLE MAGAZINE & NEWS FLARE --- */
+
+/* The Modern Side (Left) */
+.category-tag {
+    background: #222;
+    color: #fff;
+    padding: 5px 15px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.deck {
+    font-style: italic;
+    font-family: "Times New Roman", serif;
+    color: #444;
+    border-left: 4px solid #eb1c24; /* Louisville Red Accent */
+    padding-left: 15px;
+}
+
+/* The Newspaper Side (Right) */
+.newspaper-sidebar {
+    background-color: #fffdf6 !important;
+    box-shadow: 8px 8px 0px #222 !important;
+}
+
+.news-masthead {
+    border-bottom: 1px solid #222;
+    text-align: center;
+}
+
+.news-double-line {
+    border-top: 4px double #222;
+    margin: 15px 0;
+}
+
+.news-timeline div {
+    font-family: "Times New Roman", serif;
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+}
+
+.news-timeline strong {
+    color: #eb1c24; /* Timeline Year Highlight */
+}
