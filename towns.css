@@ -1,0 +1,60 @@
+/* =========================================
+   TOWN PAGE ISOLATED STYLES
+   ========================================= */
+
+/* 1. The 3-Column Container */
+.clay-city-three-col, .louisville-grid-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 30px !important;
+    max-width: 1300px;
+    width: 95%;
+    margin: 40px auto !important;
+    align-items: stretch !important; /* Equal height boxes */
+}
+
+/* 2. The Newspaper Boxes (3-Column Style) */
+.clay-city-three-col .clay-county-news-box, 
+.louisville-grid-row .clay-county-news-box {
+    flex: 1 !important;
+    width: 31% !important; /* FORCES the 3 columns */
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: #fffdf6 !important;
+    border: 2px solid #222 !important;
+    box-shadow: 10px 10px 0px #222 !important;
+    padding: 30px;
+}
+
+/* 3. The Images (Equalized) */
+.clay-city-three-col .spotlight-image-wrap,
+.louisville-grid-row .spotlight-image-wrap {
+    height: 200px !important;
+    overflow: hidden !important;
+    border: 1px solid #222;
+    background: #fff;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.clay-city-three-col .spotlight-image-wrap img,
+.louisville-grid-row .spotlight-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important; /* Perfect crop */
+}
+
+/* 4. The Buttons (Bottom Aligned) */
+.clipping-btn {
+    margin-top: auto !important; /* Glues them to the bottom */
+    display: block;
+    text-align: center;
+    background-color: #222 !important;
+    color: #fff !important;
+    padding: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+}
