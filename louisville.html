@@ -11,13 +11,17 @@
 <body class="louisville-bg">
 
     <header class="header">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo">
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
         <nav class="nav-bar">
-            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="clay-city.html">Clay City</a></li>
-                <li><a href="https://www.ourflora.com">Flora</a></li>
+                <li><a href="https://www.ourflora.com" target="_blank">Flora</a></li>
                 <li><a href="louisville.html" class="active">Louisville</a></li>
                 <li><a href="sailor-springs.html">Sailor Springs</a></li>
                 <li><a href="xenia.html">Xenia</a></li>
@@ -41,7 +45,7 @@
                 <div class="article-container">
                     <header class="hero-section">
                         <div class="category-tag">Renewable Energy Feature</div>
-                        <h1>Harvesting the Sun</h1>
+                        <h1 class="article-title">Harvesting the Sun</h1>
                         <p class="deck">How the quiet fields of Louisville, Illinois, became a powerhouse for the state's clean energy future.</p>
                     </header>
 
@@ -66,18 +70,18 @@
                                 </div>
                             </div>
 
-                            <div class="bz-card" style="border: 1px solid #222; padding: 15px; background: rgba(255,255,255,0.6); margin-bottom: 20px;">
+                            <div class="bz-card">
                                 <h2>Local Spotlight</h2>
-                                <p style="font-size: 0.85rem;">Louisville's impact extends beyond energy to culture and music.</p>
-                                <ul class="stats-list" style="list-style: none; padding: 0;">
+                                <p>Louisville's impact extends beyond energy to culture and music.</p>
+                                <ul class="stats-list">
                                     <li><strong>Bailey Zimmerman</strong> <span>Country Star</span></li>
                                     <li><strong>Hometown</strong> <span>Louisville, IL</span></li>
                                     <li><strong>Population</strong> <span>~1,100</span></li>
                                 </ul>
                             </div>
 
-                            <div style="border: 2px solid #ffcc00; padding: 15px; font-size: 0.85rem; background: #fff;">
-                                <h4 style="margin-top:0; font-family: sans-serif; color:#222;">CLAY FC PROJECT</h4>
+                            <div class="project-callout">
+                                <h4>CLAY FC PROJECT</h4>
                                 <p>A 2.7-megawatt community solar farm featuring 7,000 panels, specifically designed to serve local Ameren customers.</p>
                             </div>
                         </aside>
@@ -91,7 +95,6 @@
             </div>
 
             <div class="louisville-col-side">
-                
                 <aside class="newspaper-sidebar">
                     <div class="news-masthead">
                         <h4>The Clay County Community</h4>
@@ -133,14 +136,17 @@
                     </div>
                 </aside>
 
-                <div class="github-sync-container" style="position: relative; overflow: hidden; width: 100%; padding-top: 100%; margin-top: 20px; border: 2px solid #222; background: #000;">
+                <div class="github-sync-container">
                     <iframe 
                         src="https://kfruti88.github.io/Clay-County-Fuel/" 
-                        style="position: absolute; top: 0; left:-6%; width: 112%; height: 100%; border: none;" 
                         allowfullscreen>
                     </iframe>
                 </div>
-            </div> </div> </div> <footer class="site-footer">
+            </div> 
+        </div> 
+    </div>
+
+    <footer class="site-footer">
         <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
         <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
     </footer>
@@ -148,7 +154,9 @@
     <script>
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
-        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+        hamburger.addEventListener('click', () => { 
+            navLinks.classList.toggle('open'); 
+        });
     </script>
 </body>
 </html>
