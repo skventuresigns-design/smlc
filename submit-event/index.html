@@ -13,9 +13,24 @@
 
     <header class="header">
         <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
+        <nav class="nav-bar">
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clay-city.html">Clay City</a></li>
+                <li><a href="https://www.ourflora.com" target="_blank">Flora</a></li>
+                <li><a href="louisville.html">Louisville</a></li>
+                <li><a href="sailor-springs.html">Sailor Springs</a></li>
+                <li><a href="xenia.html">Xenia</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="submit-event-wrapper">
+    <div class="submit-event-main-wrapper">
         <div class="index-grid-row">
             
             <div class="index-col">
@@ -76,15 +91,14 @@
                             <input name='CONTACTCF1' type='text' class='wf-field-input' required />
                         </div>
 
-                        <div style="display:flex; gap:10px;">
-                            <div class='wf-row' style="flex:1;">
-                                <label class='wf-label'>First Name</label>
-                                <input name='First Name' type='text' class='wf-field-input' required />
-                            </div>
-                            <div class='wf-row' style="flex:1;">
-                                <label class='wf-label'>Last Name</label>
-                                <input name='Last Name' type='text' class='wf-field-input' required />
-                            </div>
+                        <div class='wf-row'>
+                            <label class='wf-label'>First Name</label>
+                            <input name='First Name' type='text' class='wf-field-input' required />
+                        </div>
+
+                        <div class='wf-row'>
+                            <label class='wf-label'>Last Name</label>
+                            <input name='Last Name' type='text' class='wf-field-input' required />
                         </div>
 
                         <div class='wf-row'>
@@ -108,9 +122,18 @@
         </div>
     </div>
 
+    <footer class="site-footer">
+         <p>All Content, Photographs, Writings, Letters and Documents © 2026 - Support My Local Community</p>
+         <p>All Rights Reserved - <a href="https://www.skventuresigns.com" target="_blank" class="footer-link">S&K Ventures</a></p>
+    </footer>
+
     <script id='wf_script' src='https://bigin.zoho.com/crm/WebformScriptServlet?rid=d83ed705329baaef9755c9578b456c22b5826a7efde94cfce088b59015bda9b555263c7698b08e8ed0bd1e185dc0ecfbgidb1df27e79ff2ba9f66c8ad0da142580570ec958a42b8ff454a4e69f11249f914'></script>
 
     <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+
         function validateForm7215510000000600814() {
             var submitBtn = document.getElementById('formsubmit');
             submitBtn.value = "Sending...";
