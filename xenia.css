@@ -30,37 +30,33 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(255, 253, 246, 0.95); /* Slightly more opaque */
-    padding: 40px 60px;
-    border: 3px solid #222;
     text-align: center;
-    box-shadow: 15px 15px 0px #222;
-    min-width: 320px;
+    width: 100%;
 }
 
 /* Corrected Masthead Clipping */
 .xenia-overlay h1 {
     font-family: 'Times New Roman', serif;
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-size: clamp(3rem, 10vw, 5.5rem); /* Matches Louisville/Clay City impact */
     text-transform: uppercase;
     font-weight: 900;
-    margin: 0 0 15px 0;
-    color: #222;
-    /* The Masthead Look */
-    border-top: 5px solid #222;
-    border-bottom: 3px solid #222;
-    padding: 15px 0;
+    color: #222; /* Dark text for the light paper/fence contrast */
+    margin: 0;
     letter-spacing: 2px;
+    /* Removed all clipping borders and extra padding */
+    border: none; 
+    padding: 0;
 }
-
 .xenia-subtitle {
     font-family: 'Times New Roman', serif;
-    font-size: 1.4rem;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-size: 1.5rem;
+    color: #222;
     margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: bold;
+    display: block;
 }
-
 /* 3. THE MAIN "SINGLE PAGE" CONTAINER */
 .xenia-wp-container {
     max-width: 1300px;
