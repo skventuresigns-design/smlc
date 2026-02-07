@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="submit-event.css">
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 </head>
-<body class="home-bg">
+<body class="submit-event-page">
 
     <header class="header">
         <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
@@ -34,26 +34,52 @@
         <div class="index-grid-row">
             
             <div class="index-col">
-                <div class="clay-county-news-box submission-guidelines-large">
+                <div class="submission-guidelines-large">
                     <div class="guidelines-masthead">
                         <h2>Notice to the Public</h2>
                         <span class="sub-masthead">Official Calendar Submission Rules</span>
                     </div>
-
                     <div class="rule-section">
                         <div class="rule-item"><strong>Local Focus:</strong> Events must take place within Clay County or directly serve the residents of Flora, Louisville, Clay City, and Xenia.</div>
                         <div class="rule-item"><strong>Community Interest:</strong> We prioritize fundraisers, church dinners, school functions, and local entertainment over commercial sales ads.</div>
                         <div class="rule-item"><strong>Submission Window:</strong> Please submit at least <strong>7 days</strong> prior to the event to ensure inclusion in our Monday morning newsletter.</div>
                         <div class="rule-item"><strong>Editorial Review:</strong> All entries are reviewed for accuracy. We may reach out via email if we need to clarify dates or locations.</div>
                     </div>
-
                     <div class="editor-signature">
                         <p style="margin-bottom:5px;">Thank you for contributing to our community,</p>
                         <p style="font-weight:bold; font-size: 20px; margin:0;">The Support My Local Community Team</p>
                         <span class="sk-ventures-tag">S&K Ventures Inc</span>
                     </div>
-
                     <div class="disclaimer-box">community voice - clay county il</div>
+                </div>
+
+                <div class="clay-county-news-box next-steps-clipping">
+                    <h4 class="process-title">The Approval Process</h4>
+                    <div class="step-row">
+                        <div class="step-num">1</div>
+                        <div class="step-text"><strong>Submission:</strong> We receive your data in our secure registry.</div>
+                    </div>
+                    <div class="step-row">
+                        <div class="step-num">2</div>
+                        <div class="step-text"><strong>Review:</strong> Our team checks for location and date accuracy.</div>
+                    </div>
+                    <div class="step-row">
+                        <div class="step-num">3</div>
+                        <div class="step-text"><strong>Go Live:</strong> Your event hits the web and the newsletter!</div>
+                    </div>
+                </div>
+
+                <div class="clay-county-news-box reach-clipping">
+                    <span class="reach-tag">Why Post Here?</span>
+                    <h3 class="reach-title">Expand Your Reach</h3>
+                    <p class="reach-quote">
+                        "Every event submitted is seen by hundreds of local residents across Clay County, helping you grow your attendance and support."
+                    </p>
+                    <div class="reach-stats">
+                        <div><strong>SMLC</strong><br><small>FaceBook Page</small></div>
+                        <div><strong>Weekly</strong><br><small>Newsletter</small></div>
+                        <div><strong>100%</strong><br><small>Local</small></div>
+                    </div>
                 </div>
             </div>
 
@@ -91,14 +117,15 @@
                             <input name='CONTACTCF1' type='text' class='wf-field-input' required />
                         </div>
 
-                        <div class='wf-row'>
-                            <label class='wf-label'>First Name</label>
-                            <input name='First Name' type='text' class='wf-field-input' required />
-                        </div>
-
-                        <div class='wf-row'>
-                            <label class='wf-label'>Last Name</label>
-                            <input name='Last Name' type='text' class='wf-field-input' required />
+                        <div style="display:flex; gap:10px;">
+                            <div class='wf-row' style="flex:1;">
+                                <label class='wf-label'>First Name</label>
+                                <input name='First Name' type='text' class='wf-field-input' required />
+                            </div>
+                            <div class='wf-row' style="flex:1;">
+                                <label class='wf-label'>Last Name</label>
+                                <input name='Last Name' type='text' class='wf-field-input' required />
+                            </div>
                         </div>
 
                         <div class='wf-row'>
@@ -135,8 +162,7 @@
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
 
         function validateForm7215510000000600814() {
-            var submitBtn = document.getElementById('formsubmit');
-            submitBtn.value = "Sending...";
+            document.getElementById('formsubmit').value = "Sending...";
             return true;
         }
         document.getElementById('hidden7215510000000600814Frame').addEventListener('load', function () {
