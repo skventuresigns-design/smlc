@@ -50,7 +50,7 @@
 .xenia-overlay h1 {
     font-family: 'Times New Roman', serif;
     font-size: clamp(2rem, 6vw, 3.5rem) !important;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-weight: 700;
     color: white !important; /* Forces white text */
     margin: 0;
