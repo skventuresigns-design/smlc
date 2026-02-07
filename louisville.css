@@ -15,7 +15,7 @@
     background: linear-gradient(to bottom, #eb1c24 0%, #000000 100%) !important;/* Louisville Red */
     padding: 80px 20px;
     text-align: center;
-    border-bottom: 5px solid #222;
+    /*border-bottom: 5px solid #222;*/
     display: flex;
     justify-content: center;
     align-items: center;
