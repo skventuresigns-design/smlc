@@ -3,63 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Your Event | Support My Local Community</title>
+    <title>Submit Your Event | Clay County, IL</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="submit-event/submit-event.css">
+    <link rel="stylesheet" href="submit-event.css">
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 </head>
 <body class="home-bg">
 
     <header class="header">
         <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
-        <nav class="nav-bar">
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="clay-city.html">Clay City</a></li>
-                <li><a href="louisville.html">Louisville</a></li>
-                <li><a href="sailor-springs.html">Sailor Springs</a></li>
-                <li><a href="xenia.html">Xenia</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <div class="submit-event-main-wrapper">
+    <div class="submit-event-container">
         <div class="index-grid-row">
             
             <div class="index-col">
-                <div class="clay-county-news-box event-clipping rules-card">
+                <div class="clay-county-news-box event-clipping">
                     <div class="clipping-tag-black">Notice to the Public</div>
                     <div class="news-box-header">
                         <h3>Official Calendar Submission Rules</h3>
                     </div>
                     
-                    <div class="rule-divider"></div>
+                    <div class="content-spacing">
+                        <hr class="rule-line">
+                    </div>
 
-                    <ul class="rules-list">
+                    <ul class="guidelines-list">
                         <li>
-                            <span class="check-mark">✔</span>
+                            <span class="red-check">✔</span>
                             <span><strong>Local Focus:</strong> Events must take place within Clay County or directly serve the residents of Flora, Louisville, Clay City, and Xenia.</span>
                         </li>
                         <li>
-                            <span class="check-mark">✔</span>
+                            <span class="red-check">✔</span>
                             <span><strong>Community Interest:</strong> We prioritize fundraisers, church dinners, school functions, and local entertainment over commercial sales ads.</span>
                         </li>
                         <li>
-                            <span class="check-mark">✔</span>
+                            <span class="red-check">✔</span>
                             <span><strong>Submission Window:</strong> Please submit at least <strong>7 days</strong> prior to the event to ensure inclusion in our Monday morning newsletter.</span>
                         </li>
                     </ul>
 
-                    <div class="editorial-box">
+                    <div class="editorial-review-footer">
                         <p><strong>Editorial Review:</strong> All entries are reviewed for accuracy. We may reach out via email if we need to clarify dates or locations.</p>
                     </div>
                 </div>
             </div>
 
             <div class="index-col">
-                <div class="clay-county-news-box event-clipping" id="form-clipping-container">
-                    <div class="clipping-tag-black">Official Form</div>
+                <div class="clay-county-news-box event-clipping" id="form-parent">
+                    <div class="clipping-tag-black">Official Submission</div>
                     
                     <form id='SubmitEventForm' action='https://bigin.zoho.com/crm/WebToContactForm' method='POST' accept-charset='UTF-8' target='hidden_iframe' onSubmit="return handleEventSubmit()">
                         
@@ -69,35 +62,34 @@
 
                         <div class="wf-row">
                             <label class="wf-label">Event Name</label>
-                            <input name="First Name" type="text" class="wf-field-input" placeholder="e.g. Annual Pancake Breakfast" required />
+                            <input name="First Name" type="text" class="wf-field-input" placeholder="Event Name" required />
                         </div>
 
                         <div class="wf-row">
-                            <label class="wf-label">Organization Name</label>
-                            <input name="Last Name" type="text" class="wf-field-input" placeholder="e.g. Clay City Lions Club" required />
+                            <label class="wf-label">Organization</label>
+                            <input name="Last Name" type="text" class="wf-field-input" placeholder="Organization" required />
                         </div>
 
                         <div class="wf-row">
                             <label class="wf-label">Event Details (Date, Time, Location)</label>
-                            <textarea name="Description" class="wf-field-input event-textarea" placeholder="Tell us when and where..."></textarea>
+                            <textarea name="Description" class="wf-field-input event-details-area" placeholder="Full Event Details..."></textarea>
                         </div>
 
                         <div class="wf-row">
                             <label class="wf-label">Your Email</label>
-                            <input name="Email" type="email" class="wf-field-input" required />
+                            <input name="Email" type="email" class="wf-field-input" placeholder="Email Address" required />
                         </div>
 
                         <div class="wf-row">
                             <div class="g-recaptcha" data-sitekey="6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG" id="event_recap"></div>
                         </div>
 
-                        <button type="submit" class="clipping-btn submit-event-btn">Submit Event News</button>
+                        <button type="submit" class="clipping-btn">Submit Event News</button>
                     </form>
 
-                    <div id="event-thank-you" class="thank-you-view">
-                        <h3>Success!</h3>
-                        <div class="rule-divider"></div>
-                        <p>Thank You for submitting your event details! Our team will review the information for our next newsletter.</p>
+                    <div id="event-thank-you" class="success-box">
+                        <div class="news-box-header"><h3>Success!</h3></div>
+                        <p>Thank You for your submission. Our community review team will verify the details shortly.</p>
                     </div>
                 </div>
             </div>
@@ -106,18 +98,11 @@
 
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showEventThankYou();}"></iframe>
 
-    <footer class="site-footer">
-         <p>All Content, Photographs, Writings, Letters and Documents © 2026 - Support My Local Community</p>
-    </footer>
-
     <script>
         var submitted = false;
         function handleEventSubmit() {
             var response = grecaptcha.getResponse();
-            if(response.length == 0) {
-                alert("Please verify that you are not a robot.");
-                return false;
-            }
+            if(response.length == 0) { alert("Please complete the reCAPTCHA."); return false; }
             submitted = true;
             return true;
         }
