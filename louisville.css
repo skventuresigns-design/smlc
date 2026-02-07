@@ -60,13 +60,16 @@
     align-items: flex-start;
 }
 
-/* 4. MAGAZINE ARTICLE STYLING (The White Paper) */
 .louisville-col-main {
     flex: 0 0 68% !important;
     background-color: #fffdf6; /* Aged Paper Tint */
     border: 2px solid #222;
     padding: 40px;
     box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1); /* Light shadow for black bg */
+}
+
+.louisville-col-side {
+    flex: 0 0 28% !important;
 }
 
 .category-tag {
@@ -97,27 +100,29 @@
     margin-bottom: 30px;
 }
 
-/* --- THE INNER MAGAZINE SPLIT --- */
+/* 4. MAGAZINE ARTICLE STYLING (The White Paper) */
 .main-layout {
     display: flex !important;
     gap: 30px;
     align-items: flex-start;
+   margin-top: 30px;
 }
 
 .article-body {
-    flex: 2 !important; /* Takes up 2/3 of the space */
-    line-height: 1.8;
+   flex: 2 !important;
     font-family: "Times New Roman", serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #222;
 }
 
 .sidebar {
     flex: 1 !important; /* Takes up 1/3 of the space */
     border-left: 1px solid #ddd; /* Subtle line to separate from text */
     padding-left: 20px;
-    background-color: rgba(0,0,0,0.02); /* Very light tint for contrast */
 }
 
-/* --- STAT BOXES INSIDE THE SIDEBAR --- */
+/*  5. STAT BOXES INSIDE THE SIDEBAR --- */
 .stat-sidebar {
     margin-bottom: 25px;
     padding: 15px;
@@ -132,11 +137,24 @@
     color: #eb1c24; /* Louisville Red */
 }
 
-/* 5. NEWSPAPER SIDEBAR (The Right Column) */
+.bz-card {
+    border: 1px solid #222;
+    padding: 15px;
+    background: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+}
+
+.project-callout {
+    border: 2px solid #ffcc00;
+    padding: 15px;
+    background: #fff;
+}
+
 .louisville-col-side {
     flex: 0 0 28% !important;
 }
 
+/* 6. NEWSPAPER SIDEBAR (Far Right) */
 .newspaper-sidebar {
     background-color: #fffdf6 !important;
     border: 2px solid #222 !important;
@@ -145,7 +163,25 @@
     font-family: "Times New Roman", Times, serif;
 }
 
-/* 6. MOBILE OVERRIDES */
+/* 7. GITHUB SYNC CONTAINER */
+.github-sync-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 100%;
+    margin-top: 20px;
+    border: 2px solid #222;
+    background: #000;
+}
+
+.github-sync-container iframe {
+    position: absolute;
+    top: 0; left: -6%;
+    width: 112%; height: 100%;
+    border: none;
+}
+
+/* 7. MOBILE OVERRIDES */
 @media (max-width: 1024px) {
     .louisville-grid-row {
         flex-direction: column !important;
