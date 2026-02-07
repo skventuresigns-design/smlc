@@ -1,8 +1,8 @@
 /* =========================================
-   XENIA ISOLATED STYLES (xenia.css)
+   XENIA ISOLATED STYLES (xenia.css) - Final Surgical Fix
    ========================================= */
 
-/* 1. BACKGROUND LOGIC */
+/* 1. BACKGROUND LOGIC (The Fence) */
 .xenia_bg {
     background: url('https://github.com/skventuresigns-design/media/blob/main/fence.png?raw=true') no-repeat center center fixed !important;
     background-size: cover !important;
@@ -10,7 +10,7 @@
     padding: 0;
 }
 
-/* 2. HERO SECTION */
+/* 2. HERO SECTION (The Overlay on the fence) */
 .xenia-hero-container {
     position: relative;
     width: 100%;
@@ -30,88 +30,138 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(255, 253, 246, 0.9); /* Aged paper tint with transparency */
-    padding: 40px;
+    background: rgba(255, 253, 246, 0.95); /* Slightly more opaque */
+    padding: 40px 60px;
     border: 3px solid #222;
     text-align: center;
     box-shadow: 15px 15px 0px #222;
-    min-width: 300px;
+    min-width: 320px;
 }
 
+/* Corrected Masthead Clipping */
 .xenia-overlay h1 {
     font-family: 'Times New Roman', serif;
     font-size: clamp(2.5rem, 8vw, 4.5rem);
     text-transform: uppercase;
-    margin: 0;
+    font-weight: 900;
+    margin: 0 0 15px 0;
     color: #222;
+    /* The Masthead Look */
+    border-top: 5px solid #222;
+    border-bottom: 3px solid #222;
+    padding: 15px 0;
+    letter-spacing: 2px;
 }
 
-/* 3. CONTENT CONTAINER */
+.xenia-subtitle {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+/* 3. THE MAIN "SINGLE PAGE" CONTAINER */
 .xenia-wp-container {
-    max-width: 1200px;
+    max-width: 1300px;
+    width: 95%;
     margin: 60px auto;
-    padding: 20px;
+    /* All the paper styling is now here on the main wrapper */
+    background-color: #fffdf6 !important; 
+    border: 3px solid #222;
+    padding: 50px;
+    box-shadow: 15px 15px 0px #222;
 }
 
+/* Individual sections are now clean inside the big page */
 .xenia-wp-section {
-    background-color: #fffdf6 !important; /* Aged Paper Tint */
-    border: 2px solid #222;
-    padding: 40px;
-    margin-bottom: 40px;
-    box-shadow: 10px 10px 0px #222;
+    margin-bottom: 60px; /* Spacing between topics */
+    border-bottom: 1px dashed #ccc; /* Subtle separator */
+    padding-bottom: 40px;
+}
+
+/* Remove separator from the last section */
+.xenia-wp-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .xenia-wp-section h2 {
     font-family: 'Times New Roman', serif;
+    font-size: 2.5rem;
     text-transform: uppercase;
     border-bottom: 4px double #222;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     margin-top: 0;
+    margin-bottom: 30px;
 }
 
-/* 4. GRID & CARDS */
+.xenia-wp-section p {
+    font-family: "Times New Roman", serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* 4. GRID SYSTEMS */
 .xenia-wp-grid {
     display: flex;
-    gap: 30px;
+    gap: 40px;
     margin-top: 25px;
 }
 
 .xenia-wp-card {
     flex: 1;
     background: #fff;
-    border: 1px solid #222;
-    padding: 20px;
+    border: 2px solid #222;
+    padding: 25px;
     display: flex;
     flex-direction: column;
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
 }
 
+/* Standard Images (Middle Sections) */
 .xenia-wp-img {
     width: 100%;
     height: 250px;
     object-fit: cover;
-    border: 1px solid #222;
-    margin-bottom: 15px;
-    filter: grayscale(20%) sepia(10%);
+    border: 2px solid #222;
+    margin-bottom: 20px;
+    filter: grayscale(20%) sepia(10%) contrast(110%);
+    background: #fff;
+    padding: 5px;
+}
+
+/* --- FIX FOR BOTTOM IMAGES (Make them BIG) --- */
+/* Targets only images in the last section */
+.xenia-wp-section:last-child .xenia-wp-img {
+    height: 500px !important; /* Force them tall */
+    object-fit: cover; /* Ensures they fill the space without squishing */
+    box-shadow: 8px 8px 0px #222; /* Give them extra pop */
 }
 
 .xenia-wp-tag {
     background: #222;
     color: #fff;
     display: inline-block;
-    padding: 3px 10px;
-    font-size: 10px;
+    padding: 5px 15px;
+    font-size: 11px;
+    font-weight: bold;
     text-transform: uppercase;
     align-self: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 /* 5. MOBILE RESPONSIVE */
 @media (max-width: 768px) {
-    .xenia-wp-grid {
-        flex-direction: column;
-    }
-    .xenia-overlay {
-        width: 90%;
-        padding: 20px;
+    .xenia-hero-container { height: 300px; }
+    .xenia-wp-grid { flex-direction: column; gap: 30px; }
+    .xenia-wp-container { padding: 25px; width: 98%; margin: 30px auto; }
+    .xenia-overlay { width: 90%; padding: 30px 20px; }
+    .xenia-overlay h1 { font-size: 2.5rem; }
+    
+    /* Adjust big images for mobile so they fit screen */
+    .xenia-wp-section:last-child .xenia-wp-img {
+        height: 350px !important;
     }
 }
