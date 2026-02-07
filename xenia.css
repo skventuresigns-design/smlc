@@ -37,10 +37,10 @@
 /* Corrected Masthead Clipping */
 .xenia-overlay h1 {
     font-family: 'Times New Roman', serif;
-    font-size: clamp(3rem, 10vw, 5.5rem); /* Matches Louisville/Clay City impact */
+    font-size: clamp(2rem, 6vw, 3.5rem) !important; /* Matches Louisville/Clay City impact */
     text-transform: uppercase;
     font-weight: 900;
-    color: #222; /* Dark text for the light paper/fence contrast */
+    color: white; 
     margin: 0;
     letter-spacing: 2px;
     /* Removed all clipping borders and extra padding */
@@ -49,8 +49,8 @@
 }
 .xenia-subtitle {
     font-family: 'Times New Roman', serif;
-    font-size: 1.5rem;
-    color: #222;
+    font-size: 1.1rem;
+    color: white;
     margin-top: 10px;
     text-transform: uppercase;
     letter-spacing: 4px;
