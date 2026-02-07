@@ -1,81 +1,59 @@
-/* SUBMIT EVENT PAGE STYLES */
-.submit-event-main-wrapper {
-    width: 95%;
-    max-width: 1400px;
-    margin: 60px auto;
+.submit-event-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 50px auto;
 }
 
-.rules-card {
-    height: 100%;
-    background-color: #fcf6de !important;
-}
-
-.rule-divider {
-    border-top: 1px solid #222;
-    margin: 15px 0;
-}
-
-.rules-list {
+/* Column 1 Specifics */
+.guidelines-list {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
+    margin: 25px 0;
 }
 
-.rules-list li {
-    margin-bottom: 25px;
+.guidelines-list li {
     display: flex;
     align-items: flex-start;
+    margin-bottom: 22px;
     font-family: "Times New Roman", serif;
-    font-size: 1.1rem;
-    line-height: 1.5;
+    font-size: 17px;
+    line-height: 1.4;
 }
 
-.check-mark {
-    color: red;
+.red-check {
+    color: #cc0000;
     font-weight: bold;
-    margin-right: 15px;
-    font-size: 1.2rem;
+    margin-right: 12px;
+    font-size: 20px;
 }
 
-.editorial-box {
+.rule-line {
+    border: 0;
+    border-top: 1px solid #222;
+    margin: 5px 0;
+}
+
+.editorial-review-footer {
     border-top: 3px double #222;
-    margin-top: 30px;
-    padding-top: 20px;
-    font-family: 'Times New Roman', serif;
+    margin-top: 25px;
+    padding-top: 15px;
     font-style: italic;
-    color: #444;
+    font-family: "Times New Roman", serif;
 }
 
-/* Form Specific Tweaks */
-.event-textarea {
+/* Form Specifics */
+.event-details-area {
     height: 120px;
     resize: none;
-    border: 1px solid #222 !important;
-    background: transparent;
 }
 
-.submit-event-btn {
-    border: none !important;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 20px;
-}
-
-.thank-you-view {
+.success-box {
     display: none;
     text-align: center;
-    padding: 40px 20px;
+    padding: 30px;
 }
 
-.thank-you-view h3 {
-    text-transform: uppercase;
-    font-family: "Times New Roman", serif;
-    font-weight: 900;
-}
-
-/* Mobile Alignment */
-@media (max-width: 768px) {
-    .submit-event-main-wrapper {
-        margin: 20px auto;
-    }
+/* Desktop spacing adjustment */
+.index-col {
+    padding: 0 20px;
 }
