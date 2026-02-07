@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Your Event | Clay County, IL</title>
+    <title>Submit Your Event | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="submit-event.css">
@@ -15,103 +15,110 @@
         <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
     </header>
 
-    <div class="submit-event-container">
+    <div class="submit-event-wrapper">
         <div class="index-grid-row">
             
             <div class="index-col">
-                <div class="clay-county-news-box event-clipping">
-                    <div class="clipping-tag-black">Notice to the Public</div>
-                    <div class="news-box-header">
-                        <h3>Official Calendar Submission Rules</h3>
-                    </div>
-                    
-                    <div class="content-spacing">
-                        <hr class="rule-line">
+                <div class="clay-county-news-box submission-guidelines-large">
+                    <div class="guidelines-masthead">
+                        <h2>Notice to the Public</h2>
+                        <span class="sub-masthead">Official Calendar Submission Rules</span>
                     </div>
 
-                    <ul class="guidelines-list">
-                        <li>
-                            <span class="red-check">✔</span>
-                            <span><strong>Local Focus:</strong> Events must take place within Clay County or directly serve the residents of Flora, Louisville, Clay City, and Xenia.</span>
-                        </li>
-                        <li>
-                            <span class="red-check">✔</span>
-                            <span><strong>Community Interest:</strong> We prioritize fundraisers, church dinners, school functions, and local entertainment over commercial sales ads.</span>
-                        </li>
-                        <li>
-                            <span class="red-check">✔</span>
-                            <span><strong>Submission Window:</strong> Please submit at least <strong>7 days</strong> prior to the event to ensure inclusion in our Monday morning newsletter.</span>
-                        </li>
-                    </ul>
-
-                    <div class="editorial-review-footer">
-                        <p><strong>Editorial Review:</strong> All entries are reviewed for accuracy. We may reach out via email if we need to clarify dates or locations.</p>
+                    <div class="rule-section">
+                        <div class="rule-item"><strong>Local Focus:</strong> Events must take place within Clay County or directly serve the residents of Flora, Louisville, Clay City, and Xenia.</div>
+                        <div class="rule-item"><strong>Community Interest:</strong> We prioritize fundraisers, church dinners, school functions, and local entertainment over commercial sales ads.</div>
+                        <div class="rule-item"><strong>Submission Window:</strong> Please submit at least <strong>7 days</strong> prior to the event to ensure inclusion in our Monday morning newsletter.</div>
+                        <div class="rule-item"><strong>Editorial Review:</strong> All entries are reviewed for accuracy. We may reach out via email if we need to clarify dates or locations.</div>
                     </div>
+
+                    <div class="editor-signature">
+                        <p style="margin-bottom:5px;">Thank you for contributing to our community,</p>
+                        <p style="font-weight:bold; font-size: 20px; margin:0;">The Support My Local Community Team</p>
+                        <span class="sk-ventures-tag">S&K Ventures Inc</span>
+                    </div>
+
+                    <div class="disclaimer-box">community voice - clay county il</div>
                 </div>
             </div>
 
             <div class="index-col">
-                <div class="clay-county-news-box event-clipping" id="form-parent">
-                    <div class="clipping-tag-black">Official Submission</div>
-                    
-                    <form id='SubmitEventForm' action='https://bigin.zoho.com/crm/WebToContactForm' method='POST' accept-charset='UTF-8' target='hidden_iframe' onSubmit="return handleEventSubmit()">
-                        
-                        <input type='hidden' name='xnQsjsdp' value='23cf604eb67702899ed58bcf74b7bb35bc057f2108e11cb782c989f196ffd535'/>
-                        <input type='hidden' name='xmIwtLD' value='f03311145dd423f0e462736207bd70e2b26eeba913f9495f6f952773d1a0fc01ca5c5cd442f31f09d68db144a0f45c8a'/>
-                        <input type='hidden' name='actionType' value='Q29udGFjdHM='/>
+                <iframe id='hidden7215510000000600814Frame' name='hidden7215510000000600814Frame' style='display: none;'></iframe>
+                
+                <div class='wf-wrapper' id='EventCardInner'>
+                    <div class='wf-header'>Community Bulletin</div>
+                    <p class="form-sub-label">Clay County Event Submission</p>
 
-                        <div class="wf-row">
-                            <label class="wf-label">Event Name</label>
-                            <input name="First Name" type="text" class="wf-field-input" placeholder="Event Name" required />
+                    <form id='BiginWebToRecordForm7215510000000600814' method='POST' enctype='multipart/form-data' target='hidden7215510000000600814Frame' onSubmit='return validateForm7215510000000600814()' action='https://bigin.zoho.com/crm/WebToContactForm'>
+
+                        <input type='text' style='display:none;' name='xnQsjsdp' value='b1df27e79ff2ba9f66c8ad0da142580570ec958a42b8ff454a4e69f11249f914'/>
+                        <input type='text' style='display:none;' name='xmIwtLD' value='d83ed705329baaef9755c9578b456c22b5826a7efde94cfce088b59015bda9b555263c7698b08e8ed0bd1e185dc0ecfb'/>
+                        <input type='text' style='display:none;' name='actionType' value='Q29udGFjdHM='/>
+                        <input type='hidden' name='rmsg' id='rmsg' value='true'/>
+
+                        <div class='wf-row'>
+                            <label class='wf-label'>Event Name</label>
+                            <input name='CONTACTCF2' type='text' class='wf-field-input' required />
                         </div>
 
-                        <div class="wf-row">
-                            <label class="wf-label">Organization</label>
-                            <input name="Last Name" type="text" class="wf-field-input" placeholder="Organization" required />
+                        <div class='wf-row'>
+                            <label class='wf-label'>Event Date (MM/DD/YYYY)</label>
+                            <input name='CONTACTCF116' type='text' placeholder="MM/DD/YYYY" class='wf-field-input' required />
                         </div>
 
-                        <div class="wf-row">
-                            <label class="wf-label">Event Details (Date, Time, Location)</label>
-                            <textarea name="Description" class="wf-field-input event-details-area" placeholder="Full Event Details..."></textarea>
+                        <div class='wf-row'>
+                            <label class='wf-label'>Event Location</label>
+                            <input name='Mailing City' type='text' class='wf-field-input' required />
                         </div>
 
-                        <div class="wf-row">
-                            <label class="wf-label">Your Email</label>
-                            <input name="Email" type="email" class="wf-field-input" placeholder="Email Address" required />
+                        <div class='wf-row'>
+                            <label class='wf-label'>Time of Event</label>
+                            <input name='CONTACTCF1' type='text' class='wf-field-input' required />
                         </div>
 
-                        <div class="wf-row">
-                            <div class="g-recaptcha" data-sitekey="6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG" id="event_recap"></div>
+                        <div style="display:flex; gap:10px;">
+                            <div class='wf-row' style="flex:1;">
+                                <label class='wf-label'>First Name</label>
+                                <input name='First Name' type='text' class='wf-field-input' required />
+                            </div>
+                            <div class='wf-row' style="flex:1;">
+                                <label class='wf-label'>Last Name</label>
+                                <input name='Last Name' type='text' class='wf-field-input' required />
+                            </div>
                         </div>
 
-                        <button type="submit" class="clipping-btn">Submit Event News</button>
+                        <div class='wf-row'>
+                            <label class='wf-label'>Email</label>
+                            <input name='Email' type='email' class='wf-field-input' required />
+                        </div>
+
+                        <div class='wf-row'>
+                            <label class='wf-label'>Event Details</label>
+                            <textarea name='Description' class='wf-field-input wf-text-area-input' required></textarea>
+                        </div>
+
+                        <div class='g-recaptcha' data-sitekey='6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG' id='recap7215510000000600814'></div>
+
+                        <div class='wform-btn-wrap'>
+                            <input id='formsubmit' type='submit' class='wf-btn' value='Submit Event'/>
+                        </div>
                     </form>
-
-                    <div id="event-thank-you" class="success-box">
-                        <div class="news-box-header"><h3>Success!</h3></div>
-                        <p>Thank You for your submission. Our community review team will verify the details shortly.</p>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showEventThankYou();}"></iframe>
+    <script id='wf_script' src='https://bigin.zoho.com/crm/WebformScriptServlet?rid=d83ed705329baaef9755c9578b456c22b5826a7efde94cfce088b59015bda9b555263c7698b08e8ed0bd1e185dc0ecfbgidb1df27e79ff2ba9f66c8ad0da142580570ec958a42b8ff454a4e69f11249f914'></script>
 
     <script>
-        var submitted = false;
-        function handleEventSubmit() {
-            var response = grecaptcha.getResponse();
-            if(response.length == 0) { alert("Please complete the reCAPTCHA."); return false; }
-            submitted = true;
+        function validateForm7215510000000600814() {
+            var submitBtn = document.getElementById('formsubmit');
+            submitBtn.value = "Sending...";
             return true;
         }
-        function showEventThankYou() {
-            if(submitted) {
-                document.getElementById('SubmitEventForm').style.display = 'none';
-                document.getElementById('event-thank-you').style.display = 'block';
-            }
-        }
+        document.getElementById('hidden7215510000000600814Frame').addEventListener('load', function () {
+            document.getElementById('EventCardInner').innerHTML = "<div class='wf-header'>SUCCESS!</div><p style='text-align:center; font-family:\"Times New Roman\", serif; font-size:20px; margin-top:20px; padding:20px;'>Your event has been submitted for review. Thank you!</p>";
+        });
     </script>
 </body>
 </html>
