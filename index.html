@@ -72,7 +72,7 @@
         <div class="news-heading-bar"><h2><strong><u>Your Source For Local News</u></strong></h2></div>
         <div class="orange-grid-row">
             <div class="orange-col"><img src="https://github.com/skventuresigns-design/media/blob/main/clay-county-news.png?raw=true" alt="Clay County News" class="news-img-styled"></div>
-      <div class="orange-col">
+     <div class="orange-col">
     <div id="newsletter-form-container" class="clay-county-news-box event-clipping">
         <div class="clipping-tag-black">Official Signup</div>
         <div class="news-box-header">
@@ -80,11 +80,10 @@
             <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; font-weight: bold;">GET LOCAL UPDATES DELIVERED TO YOUR INBOX</span>
         </div>
 
-        <form id='BiginWebToRecordForm7215510000000595035' action='https://bigin.zoho.com/crm/WebToContactForm' method='POST' accept-charset='UTF-8' target='hidden7215510000000595035Frame' onSubmit='return checkMandatory7215510000000595035()'>
-            <input type='text' style='display:none;' name='xnQsjsdp' value='23cf604eb67702899ed58bcf74b7bb35bc057f2108e11cb782c989f196ffd535'/>
-            <input type='text' style='display:none;' name='xmIwtLD' value='f03311145dd423f0e462736207bd70e2b26eeba913f9495f6f952773d1a0fc01ca5c5cd442f31f09d68db144a0f45c8a'/>
-            <input type='text' style='display:none;' name='actionType' value='Q29udGFjdHM='/>
-            <input type='hidden' name='rmsg' id='rmsg' value='true'/>
+        <form id='BiginForm' action='https://bigin.zoho.com/crm/WebToContactForm' method='POST' accept-charset='UTF-8' target='hidden_iframe' onSubmit="return handleFormSubmit()">
+            <input type='hidden' name='xnQsjsdp' value='23cf604eb67702899ed58bcf74b7bb35bc057f2108e11cb782c989f196ffd535'/>
+            <input type='hidden' name='xmIwtLD' value='f03311145dd423f0e462736207bd70e2b26eeba913f9495f6f952773d1a0fc01ca5c5cd442f31f09d68db144a0f45c8a'/>
+            <input type='hidden' name='actionType' value='Q29udGFjdHM='/>
 
             <div class='wf-row'>
                 <label class='wf-label'>First Name</label>
@@ -100,11 +99,11 @@
             </div>
 
             <div class='wf-row'>
-                <div class='g-recaptcha' data-sitekey='6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG' data-callback='rccallback7215510000000595035' id='recap7215510000000595035'></div>
+                <div class='g-recaptcha' data-sitekey='6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG' id='recap_box'></div>
             </div>
 
             <div class='wform-btn-wrap' style="text-align: right; margin-top: 20px;">
-                <input id='formsubmit' type='submit' class='wf-btn' value='Subscribe'/>
+                <input type='submit' class='clipping-btn' value='Subscribe' style="border:none; cursor:pointer; width:100%;">
             </div>
         </form>
     </div>
@@ -115,11 +114,11 @@
             <h3>Thank You!</h3>
         </div>
         <p class="biz-description" style="font-size: 1.2rem; font-weight: bold;">Thank You for Signing up for the Newsletter!</p>
-        <p style="font-style: italic; margin-top: 10px;">Your subscription has been processed successfully.</p>
+        <p style="font-style: italic; margin-top: 10px;">Your details have been added to our community directory.</p>
     </div>
 
-    <iframe id='hidden7215510000000595035Frame' name='hidden7215510000000595035Frame' style='display: none;'></iframe>
-</div>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showThankYou();}"></iframe>
+</div> 
         </div>
     </div>
 
@@ -199,39 +198,42 @@
          <p>All Rights Reserved - <a href="https://www.skventuresigns.com" target="_blank" class="footer-link">S&K Ventures</a></p>
     </footer>
 
+    
+<!-- The Hamburger Navigation -->
     <script>
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
     </script>
 
-  <script id='wf_script' src='https://bigin.zoho.com/crm/WebformScriptServlet?rid=f03311145dd423f0e462736207bd70e2b26eeba913f9495f6f952773d1a0fc01ca5c5cd442f31f09d68db144a0f45c8agid23cf604eb67702899ed58bcf74b7bb35bc057f2108e11cb782c989f196ffd535'></script>
 
-<script>
-    function rccallback7215510000000595035() {
-        document.getElementById('recap7215510000000595035').setAttribute('captcha-verified', 'true');
-    }
+    
+<!-- Newsletter Form -->
+  <script>
+    var submitted = false;
 
-    function checkMandatory7215510000000595035() {
-        var recap = document.getElementById('recap7215510000000595035');
-        if (recap.getAttribute('captcha-verified') !== 'true') {
-            alert('Please complete the reCAPTCHA checkbox.');
+    function handleFormSubmit() {
+        // Check if reCAPTCHA is completed
+        var response = grecaptcha.getResponse();
+        if(response.length == 0) {
+            alert("Please check the 'I am not a robot' box.");
             return false;
         }
+        // If good, tell the iframe we are ready
+        submitted = true;
         return true;
     }
 
-    // This handles the visual swap to the Thank You clipping
-    document.getElementById('hidden7215510000000595035Frame').addEventListener('load', function () {
-        if(document.getElementById('recap7215510000000595035').getAttribute('captcha-verified') === 'true') {
+    function showThankYou() {
+        if(submitted) {
             document.getElementById('newsletter-form-container').style.display = 'none';
             document.getElementById('thank-you-clipping').style.display = 'block';
         }
-    });
+    }
 </script>
 
     
-    
+  <!--  News Feed  -->
     <script>
     (function() {
         const path = window.location.pathname;
