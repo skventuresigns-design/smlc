@@ -1,5 +1,5 @@
 /* =========================================
-   XENIA ISOLATED STYLES (xenia.css) - Final Surgical Fix
+   XENIA ISOLATED STYLES (xenia.css) - Corrected
    ========================================= */
 
 /* 1. BACKGROUND LOGIC (The Fence) */
@@ -10,7 +10,7 @@
     padding: 0;
 }
 
-/* 2. HERO SECTION (The Overlay on the fence) */
+/* 2. HERO SECTION */
 .xenia-hero-container {
     position: relative;
     width: 100%;
@@ -25,6 +25,7 @@
     object-fit: cover;
 }
 
+/* THE FIX: Added the missing closing bracket below */
 .xenia-hero-container::after {
     content: "";
     position: absolute;
@@ -32,12 +33,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* OPTION A: Light Cream (Paper style) */
-    background-color: rgba(255, 253, 246, 0.4); 
-    /* OPTION B: Dark Tint (Uncomment the line below if you prefer dark) */
-    /* background-color: rgba(0, 0, 0, 0.3); */
-    z-index: 1; /* Sits above the image */
-
+    background-color: rgba(0, 0, 0, 0.4); /* Dark tint to make white font pop */
+    z-index: 1;
+} 
 
 .xenia-overlay {
     position: absolute;
@@ -46,75 +44,44 @@
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
-    z-index: 2;
+    z-index: 2; /* Sits above the dark tint */
 }
 
-/* Corrected Masthead Clipping */
 .xenia-overlay h1 {
     font-family: 'Times New Roman', serif;
-    font-size: clamp(2rem, 6vw, 3.5rem) !important; /* Matches Louisville/Clay City impact */
+    font-size: clamp(2rem, 6vw, 3.5rem) !important;
     text-transform: uppercase;
     font-weight: 700;
-    color: white; 
+    color: white !important; /* Forces white text */
     margin: 0;
     letter-spacing: 2px;
-    /* Removed all clipping borders and extra padding */
-    border: none; 
+    border: none;
     padding: 0;
 }
+
 .xenia-subtitle {
     font-family: 'Times New Roman', serif;
     font-size: 1.1rem;
-    color: white;
+    color: white !important; /* Forces white text */
     margin-top: 10px;
     text-transform: uppercase;
     letter-spacing: 4px;
     font-weight: bold;
     display: block;
 }
+
 /* 3. THE MAIN "SINGLE PAGE" CONTAINER */
 .xenia-wp-container {
     max-width: 1300px;
     width: 95%;
     margin: 60px auto;
-    /* All the paper styling is now here on the main wrapper */
     background-color: #fffdf6 !important; 
     border: 3px solid #222;
     padding: 50px;
     box-shadow: 15px 15px 0px #222;
 }
 
-/* Individual sections are now clean inside the big page */
-.xenia-wp-section {
-    margin-bottom: 60px; /* Spacing between topics */
-    border-bottom: 1px dashed #ccc; /* Subtle separator */
-    padding-bottom: 40px;
-}
-
-/* Remove separator from the last section */
-.xenia-wp-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.xenia-wp-section h2 {
-    font-family: 'Times New Roman', serif;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    border-bottom: 4px double #222;
-    padding-bottom: 15px;
-    margin-top: 0;
-    margin-bottom: 30px;
-}
-
-.xenia-wp-section p {
-    font-family: "Times New Roman", serif;
-    font-size: 1.2rem;
-    line-height: 1.6;
-}
-
-/* 4. GRID SYSTEMS */
+/* 4. GRID SYSTEMS & IMAGES */
 .xenia-wp-grid {
     display: flex;
     gap: 40px;
@@ -131,7 +98,6 @@
     box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
 }
 
-/* Standard Images (Middle Sections) */
 .xenia-wp-img {
     width: 100%;
     height: 250px;
@@ -143,24 +109,11 @@
     padding: 5px;
 }
 
-/* --- FIX FOR BOTTOM IMAGES (Make them BIG) --- */
-/* Targets only images in the last section */
+/* BIG IMAGES FIX */
 .xenia-wp-section:last-child .xenia-wp-img {
-    height: 500px !important; /* Force them tall */
-    object-fit: cover; /* Ensures they fill the space without squishing */
-    box-shadow: 8px 8px 0px #222; /* Give them extra pop */
-}
-
-.xenia-wp-tag {
-    background: #222;
-    color: #fff;
-    display: inline-block;
-    padding: 5px 15px;
-    font-size: 11px;
-    font-weight: bold;
-    text-transform: uppercase;
-    align-self: flex-start;
-    margin-bottom: 15px;
+    height: 500px !important;
+    object-fit: cover;
+    box-shadow: 8px 8px 0px #222;
 }
 
 /* 5. MOBILE RESPONSIVE */
@@ -168,11 +121,4 @@
     .xenia-hero-container { height: 300px; }
     .xenia-wp-grid { flex-direction: column; gap: 30px; }
     .xenia-wp-container { padding: 25px; width: 98%; margin: 30px auto; }
-    .xenia-overlay { width: 90%; padding: 30px 20px; }
-    .xenia-overlay h1 { font-size: 2.5rem; }
-    
-    /* Adjust big images for mobile so they fit screen */
-    .xenia-wp-section:last-child .xenia-wp-img {
-        height: 350px !important;
-    }
 }
