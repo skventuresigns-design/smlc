@@ -2,27 +2,51 @@
    LOUISVILLE ISOLATED STYLES (louisville.css)
    ========================================= */
 
-/* 1. HERO SECTION */
+/* 1. PAGE BACKGROUND (Forces the black background) */
+.louisville-bg {
+    background-color: #000000 !important;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. THE HERO SECTION (Red Background & Centered Text) */
 .Louisville-hero-container {
-    height: 350px;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                url('https://images.squarespace-cdn.com/content/v1/56c6248d62cd944a178ec33e/1461686733240-E82QY9H3D4Z4R3Y3QY3Q/Louisville+IL+Courthouse.jpg');
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    background-color: #eb1c24 !important; /* Louisville Red */
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 5px solid #222;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: white;
+    align-items: center;
+}
+
+.Louisville-overlay {
+    text-align: center; /* Ensures everything inside is centered */
+    width: 100%;
 }
 
 .Louisville-overlay h1 {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-size: clamp(3rem, 10vw, 5.5rem); /* Big, bold impact */
     font-family: 'Times New Roman', serif;
     text-transform: uppercase;
+    font-weight: 900;
+    color: #ffffff;
     margin: 0;
+    letter-spacing: 2px;
 }
 
-/* 2. THE MAIN GRID SPLIT */
+.Louisville-subtitle {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    display: block; /* Ensures it sits on its own line for centering */
+}
+
+/* 3. THE MAIN GRID SPLIT */
 .louisville-grid-row {
     display: flex !important;
     flex-direction: row !important;
@@ -33,21 +57,17 @@
     align-items: flex-start;
 }
 
+/* 4. MAGAZINE ARTICLE STYLING (The White Paper) */
 .louisville-col-main {
-    flex: 0 0 68% !important; /* Main Article takes most space */
-    background-color: #fff;
+    flex: 0 0 68% !important;
+    background-color: #fffdf6; /* Aged Paper Tint */
     border: 2px solid #222;
     padding: 40px;
-    box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+    box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1); /* Light shadow for black bg */
 }
 
-.louisville-col-side {
-    flex: 0 0 28% !important; /* Newspaper Sidebar */
-}
-
-/* 3. MAGAZINE ARTICLE STYLING (Left) */
 .category-tag {
-    background: #222;
+    background: #eb1c24; /* Red tag for Louisville */
     color: #fff;
     display: inline-block;
     padding: 5px 15px;
@@ -60,6 +80,7 @@
 .article-container h1 {
     font-family: 'Times New Roman', serif;
     font-size: 3rem;
+    font-weight: 900;
     margin-bottom: 10px;
 }
 
@@ -67,42 +88,28 @@
     font-family: "Times New Roman", serif;
     font-size: 1.2rem;
     font-style: italic;
-    color: #555;
-    border-left: 4px solid #eb1c24; /* Red accent for Louisville */
+    color: #444;
+    border-left: 6px solid #eb1c24;
     padding-left: 20px;
     margin-bottom: 30px;
 }
 
-.main-layout { display: flex; gap: 30px; }
-.article-body { flex: 2; line-height: 1.8; font-family: serif; font-size: 1.1rem; }
-.sidebar { flex: 1; border-left: 1px solid #ddd; padding-left: 20px; }
+/* 5. NEWSPAPER SIDEBAR (The Right Column) */
+.louisville-col-side {
+    flex: 0 0 28% !important;
+}
 
-/* 4. NEWSPAPER SIDEBAR STYLING (Right) */
 .newspaper-sidebar {
     background-color: #fffdf6 !important;
     border: 2px solid #222 !important;
     padding: 25px;
-    box-shadow: 8px 8px 0px #222 !important;
+    box-shadow: 10px 10px 0px #eb1c24 !important; /* Red shadow for personality */
     font-family: "Times New Roman", Times, serif;
 }
 
-.news-masthead { text-align: center; border-bottom: 1px solid #222; padding-bottom: 10px; }
-.news-masthead h4 { margin: 0; text-transform: uppercase; }
-
-.news-double-line { border-top: 4px double #222; margin: 15px 0; }
-.news-single-line { border-top: 1px solid #222; margin: 15px 0; }
-
-.news-timeline div {
-    padding: 10px 0;
-    border-bottom: 1px dashed #ccc;
-    font-size: 0.95rem;
-}
-
-.news-timeline strong { color: #eb1c24; }
-
-/* 5. MOBILE OVERRIDES */
+/* 6. MOBILE OVERRIDES */
 @media (max-width: 1024px) {
-    .louisville-grid-row, .main-layout {
+    .louisville-grid-row {
         flex-direction: column !important;
     }
     .louisville-col-main, .louisville-col-side {
