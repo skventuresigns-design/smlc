@@ -3,240 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Event | Support My Local Community</title>
-    
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-    <style>
-        /* --- GLOBAL STYLES --- */
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: "Open Sans", Arial, sans-serif;
-            background-color: #0c70c2; /* Your Blue Background */
-            color: #333;
-        }
-
-        /* --- DIVI-STYLE HEADER --- */
-        .header-nav {
-            background-color: #ffffff;
-            padding: 0 5%;
-            height: 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e2e2e2;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .header-nav .logo {
-            font-family: "Times New Roman", serif;
-            font-weight: 900;
-            font-size: 22px;
-            color: #222;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .nav-links a {
-            margin-left: 25px;
-            text-decoration: none;
-            color: #666;
-            font-weight: 600;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: #0c70c2; }
-
-        /* --- NEWSPAPER BULLETIN CONTAINER --- */
-        .wf-parent {
-            padding: 40px 0 !important;
-            display: flex;
-            justify-content: center;
-        }
-        .wf-wrapper {
-            width: 90%;
-            max-width: 800px;
-            background-color: #fffdf5 !important; /* Your Cream Card */
-            border: 2px solid #222 !important;
-            box-shadow: 10px 10px 0px #000;
-            padding: 40px;
-            box-sizing: border-box;
-        }
-        .wf-header {
-            font-family: "Times New Roman", Times, serif !important;
-            font-size: 32px !important;
-            font-weight: 900 !important;
-            text-transform: uppercase;
-            text-align: center;
-            border-top: 4px solid #222;
-            border-bottom: 2px solid #222;
-            padding: 15px 0;
-            margin-bottom: 25px;
-            color: #222;
-            line-height: 1.1;
-        }
-
-        /* --- FORM GRID & LABELS --- */
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .full-width { grid-column: span 2; }
-        .wf-label {
-            font-family: "Times New Roman", serif;
-            font-weight: bold;
-            font-size: 13px;
-            text-transform: uppercase;
-            color: #222;
-            margin-bottom: 8px;
-            display: block;
-            border-bottom: 1px solid #ccc;
-        }
-        .wf-field-input {
-            width: 100% !important;
-            border: 1px solid #222 !important;
-            padding: 12px !important;
-            font-size: 16px !important;
-            background-color: #ffffff !important;
-            box-sizing: border-box;
-        }
-        .wf-text-area-input { height: 100px; resize: vertical; }
-
-        /* --- SUBMIT BUTTON --- */
-        #formsubmit {
-            width: 100%;
-            background-color: #999; /* Grey until unlocked */
-            color: #fff !important;
-            padding: 20px !important;
-            font-family: "Times New Roman", serif !important;
-            font-weight: bold !important;
-            text-transform: uppercase !important;
-            border: none !important;
-            cursor: not-allowed;
-            font-size: 20px !important;
-            letter-spacing: 2px;
-            margin-top: 20px;
-        }
-
-        /* --- DIVI-STYLE FOOTER --- */
-        .footer-simple {
-            background-color: #222;
-            color: #bbb;
-            padding: 40px 5%;
-            text-align: center;
-            font-size: 13px;
-        }
-        .footer-simple a { color: #fff; text-decoration: none; margin: 0 10px; }
-
-        @media (max-width: 600px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .full-width { grid-column: span 1; }
-            .header-nav { height: auto; padding: 20px; flex-direction: column; }
-            .nav-links { margin-top: 15px; }
-        }
-    </style>
+    <title>Submit Your Event | Support My Local Community</title>
+    <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="submit-event.css">
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 </head>
-<body>
+<body class="home-bg">
 
-    <header class="header-nav">
-        <a href="/" class="logo">Support My Local Community</a>
-        <nav class="nav-links">
-            <a href="/">Home</a>
-            <a href="/submit-event">Submit Event</a>
+    <header class="header">
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
+        <nav class="nav-bar">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clay-city.html">Clay City</a></li>
+                <li><a href="louisville.html">Louisville</a></li>
+                <li><a href="sailor-springs.html">Sailor Springs</a></li>
+                <li><a href="xenia.html">Xenia</a></li>
+            </ul>
         </nav>
     </header>
 
-    <div class='wf-parent'>
-        <div class='wf-wrapper' id="ContentArea">
-            <div class='wf-header'>Community Bulletin</div>
-            <p style="text-align:center; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-top: -15px; font-weight: bold; color: #222; padding-bottom:20px;">Clay County Event Submission</p>
+    <div class="submit-event-main-wrapper">
+        <div class="index-grid-row">
+            
+            <div class="index-col">
+                <div class="clay-county-news-box event-clipping rules-card">
+                    <div class="clipping-tag-black">Notice to the Public</div>
+                    <div class="news-box-header">
+                        <h3>Official Calendar Submission Rules</h3>
+                    </div>
+                    
+                    <div class="rule-divider"></div>
 
-            <iframe id='hidden7215510000000600814Frame' name='hidden7215510000000600814Frame' style='display: none;'></iframe>
+                    <ul class="rules-list">
+                        <li>
+                            <span class="check-mark">✔</span>
+                            <span><strong>Local Focus:</strong> Events must take place within Clay County or directly serve the residents of Flora, Louisville, Clay City, and Xenia.</span>
+                        </li>
+                        <li>
+                            <span class="check-mark">✔</span>
+                            <span><strong>Community Interest:</strong> We prioritize fundraisers, church dinners, school functions, and local entertainment over commercial sales ads.</span>
+                        </li>
+                        <li>
+                            <span class="check-mark">✔</span>
+                            <span><strong>Submission Window:</strong> Please submit at least <strong>7 days</strong> prior to the event to ensure inclusion in our Monday morning newsletter.</span>
+                        </li>
+                    </ul>
 
-            <form id='BiginWebToRecordForm7215510000000600814' 
-                  method='POST' 
-                  enctype='multipart/form-data' 
-                  target='hidden7215510000000600814Frame' 
-                  onSubmit='return handleHandshake()' 
-                  action='https://bigin.zoho.com/crm/WebToContactForm' 
-                  accept-charset='UTF-8'>
-
-                <input type='text' style='display:none;' name='xnQsjsdp' value='ea2be5612b0578e37985ebbb7603dd96638141092991de190ce49d18b5bb727a'/>
-                <input type='text' style='display:none;' name='xmIwtLD' value='9e5a0a2efccee87839056c70399135df6d44623a4e17c1aa35157ef3543918d0cf5b579b1a592bef1ccc045e68febb42'/>
-                <input type='text' style='display:none;' name='actionType' value='Q29udGFjdHM='/>
-                <input type='hidden' name='rmsg' id='rmsg' value='true'/>
-
-                <div class="form-grid">
-                    <div class="wf-row">
-                        <label class='wf-label'>First Name</label>
-                        <input name='First Name' type='text' class='wf-field-input' />
-                    </div>
-                    <div class="wf-row">
-                        <label class='wf-label'>Last Name</label>
-                        <input name='Last Name' type='text' class='wf-field-input' required />
-                    </div>
-                    <div class="wf-row full-width">
-                        <label class='wf-label'>Email Address</label>
-                        <input name='Email' type='email' class='wf-field-input' required />
-                    </div>
-                    <div class="wf-row full-width">
-                        <label class='wf-label'>Event Name</label>
-                        <input name='CONTACTCF2' type='text' class='wf-field-input' required />
-                    </div>
-                    <div class="wf-row">
-                        <label class='wf-label'>Event Date</label>
-                        <input name='CONTACTCF116' type='text' placeholder="MM/DD/YYYY" class='wf-field-input' required />
-                    </div>
-                    <div class="wf-row">
-                        <label class='wf-label'>Location / City</label>
-                        <input name='Mailing City' type='text' class='wf-field-input' required />
-                    </div>
-                    <div class="wf-row full-width">
-                        <label class='wf-label'>Time of Event</label>
-                        <input name='CONTACTCF1' type='text' placeholder="e.g. 6:00 PM" class='wf-field-input' required />
-                    </div>
-                    <div class="wf-row full-width">
-                        <label class='wf-label'>Event Details</label>
-                        <textarea name='Description' class='wf-field-input wf-text-area-input' required></textarea>
+                    <div class="editorial-box">
+                        <p><strong>Editorial Review:</strong> All entries are reviewed for accuracy. We may reach out via email if we need to clarify dates or locations.</p>
                     </div>
                 </div>
+            </div>
 
-                <div class="g-recaptcha" 
-                     data-sitekey="6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG" 
-                     data-callback="unlockBtn"></div>
+            <div class="index-col">
+                <div class="clay-county-news-box event-clipping" id="form-clipping-container">
+                    <div class="clipping-tag-black">Official Form</div>
+                    
+                    <form id='SubmitEventForm' action='https://bigin.zoho.com/crm/WebToContactForm' method='POST' accept-charset='UTF-8' target='hidden_iframe' onSubmit="return handleEventSubmit()">
+                        
+                        <input type='hidden' name='xnQsjsdp' value='23cf604eb67702899ed58bcf74b7bb35bc057f2108e11cb782c989f196ffd535'/>
+                        <input type='hidden' name='xmIwtLD' value='f03311145dd423f0e462736207bd70e2b26eeba913f9495f6f952773d1a0fc01ca5c5cd442f31f09d68db144a0f45c8a'/>
+                        <input type='hidden' name='actionType' value='Q29udGFjdHM='/>
 
-                <input id='formsubmit' type='submit' value='Post to Bulletin' disabled />
-            </form>
+                        <div class="wf-row">
+                            <label class="wf-label">Event Name</label>
+                            <input name="First Name" type="text" class="wf-field-input" placeholder="e.g. Annual Pancake Breakfast" required />
+                        </div>
+
+                        <div class="wf-row">
+                            <label class="wf-label">Organization Name</label>
+                            <input name="Last Name" type="text" class="wf-field-input" placeholder="e.g. Clay City Lions Club" required />
+                        </div>
+
+                        <div class="wf-row">
+                            <label class="wf-label">Event Details (Date, Time, Location)</label>
+                            <textarea name="Description" class="wf-field-input event-textarea" placeholder="Tell us when and where..."></textarea>
+                        </div>
+
+                        <div class="wf-row">
+                            <label class="wf-label">Your Email</label>
+                            <input name="Email" type="email" class="wf-field-input" required />
+                        </div>
+
+                        <div class="wf-row">
+                            <div class="g-recaptcha" data-sitekey="6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG" id="event_recap"></div>
+                        </div>
+
+                        <button type="submit" class="clipping-btn submit-event-btn">Submit Event News</button>
+                    </form>
+
+                    <div id="event-thank-you" class="thank-you-view">
+                        <h3>Success!</h3>
+                        <div class="rule-divider"></div>
+                        <p>Thank You for submitting your event details! Our team will review the information for our next newsletter.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <footer class="footer-simple">
-        <p>&copy; 2026 S&K Venture Signs. All Rights Reserved.</p>
-        <p><a href="/">Home</a> | <a href="/submit-event">Submit Event</a></p>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showEventThankYou();}"></iframe>
+
+    <footer class="site-footer">
+         <p>All Content, Photographs, Writings, Letters and Documents © 2026 - Support My Local Community</p>
     </footer>
 
-    <script type="text/javascript">
-        var isSubmitting = false;
-
-        function unlockBtn() {
-            var btn = document.getElementById("formsubmit");
-            btn.disabled = false;
-            btn.style.backgroundColor = "#222";
-            btn.style.cursor = "pointer";
-        }
-
-        function handleHandshake() {
-            isSubmitting = true;
-            document.getElementById('formsubmit').value = "Sending...";
+    <script>
+        var submitted = false;
+        function handleEventSubmit() {
+            var response = grecaptcha.getResponse();
+            if(response.length == 0) {
+                alert("Please verify that you are not a robot.");
+                return false;
+            }
+            submitted = true;
             return true;
         }
-
-        // Success message injection inside the card
-        document.getElementById('hidden7215510000000600814Frame').addEventListener('load', function () {
-            if (isSubmitting) {
-                document.getElementById('ContentArea').innerHTML = "<div class='wf-header'>SUCCESS!</div><p style='text-align:center; font-family:\"Times New Roman\", serif; font-size:20px; margin-top:20px;'>Your community event has been submitted for review.</p>";
+        function showEventThankYou() {
+            if(submitted) {
+                document.getElementById('SubmitEventForm').style.display = 'none';
+                document.getElementById('event-thank-you').style.display = 'block';
             }
-        });
+        }
     </script>
 </body>
 </html>
