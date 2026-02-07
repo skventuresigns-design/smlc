@@ -77,34 +77,45 @@
         <div class="clipping-tag-black">Official Signup</div>
         <div class="news-box-header">
             <h3>Newsletter Signup</h3>
-            <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; font-weight: bold;">Get Local Updates Delivered To Your Inbox</span>
+            <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; font-weight: bold;">GET LOCAL UPDATES DELIVERED TO YOUR INBOX</span>
         </div>
 
         <form id='BiginWebToRecordForm7215510000000595035' action='https://bigin.zoho.com/crm/WebToContactForm' method='POST' accept-charset='UTF-8' target='hidden7215510000000595035Frame' onSubmit='return checkMandatory7215510000000595035()'>
-            <input type='text' style='display:none;' name='xnQsjsdp' value='586ed563a0192bc7a86129c988539e8089cbd24d8fe22d259fad880cb92ef39b'/>
-            <input type='text' style='display:none;' name='xmIwtLD' value='54434226685838e12948e31d1fb99cc5a385fd3a0f1356cf90e6c604c58069a9e730e145cb25ee421d996267e5dabd76'/>
+            <input type='text' style='display:none;' name='xnQsjsdp' value='23cf604eb67702899ed58bcf74b7bb35bc057f2108e11cb782c989f196ffd535'/>
+            <input type='text' style='display:none;' name='xmIwtLD' value='f03311145dd423f0e462736207bd70e2b26eeba913f9495f6f952773d1a0fc01ca5c5cd442f31f09d68db144a0f45c8a'/>
             <input type='text' style='display:none;' name='actionType' value='Q29udGFjdHM='/>
             <input type='hidden' name='rmsg' id='rmsg' value='true'/>
 
-            <div class="wf-row">
-                <input name='First Name' type='text' class='wf-field-input' placeholder="First Name" required />
-                <input name='Last Name' type='text' class='wf-field-input' placeholder="Last Name" required />
-                <input name='Email' type='email' class='wf-field-input' placeholder="Email Address" required />
+            <div class='wf-row'>
+                <label class='wf-label'>First Name</label>
+                <input name='First Name' type='text' class='wf-field-input' required/>
+            </div>
+            <div class='wf-row'>
+                <label class='wf-label'>Last Name</label>
+                <input name='Last Name' type='text' class='wf-field-input' required/>
+            </div>
+            <div class='wf-row'>
+                <label class='wf-label'>Email</label>
+                <input name='Email' type='email' class='wf-field-input' required/>
             </div>
 
-            <div class='g-recaptcha' data-sitekey='6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG' data-callback='rccallback7215510000000595035' id='recap7215510000000595035'></div>
+            <div class='wf-row'>
+                <div class='g-recaptcha' data-sitekey='6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG' data-callback='rccallback7215510000000595035' id='recap7215510000000595035'></div>
+            </div>
 
-            <button id='formsubmit' type='submit' class='clipping-btn' style="border:none; margin-top:15px; width:100%; cursor:pointer;">Subscribe Now</button>
+            <div class='wform-btn-wrap' style="text-align: right; margin-top: 20px;">
+                <input id='formsubmit' type='submit' class='wf-btn' value='Subscribe'/>
+            </div>
         </form>
     </div>
 
     <div id="thank-you-clipping" class="clay-county-news-box spotlight-clipping" style="display: none; text-align: center;">
-        <div class="clipping-tag-black">News Alert</div>
+        <div class="clipping-tag-black">Success!</div>
         <div class="news-box-header">
-            <h3>Success!</h3>
+            <h3>Thank You!</h3>
         </div>
         <p class="biz-description" style="font-size: 1.2rem; font-weight: bold;">Thank You for Signing up for the Newsletter!</p>
-        <p style="font-style: italic; margin-top: 10px;">Your details have been added to our community directory.</p>
+        <p style="font-style: italic; margin-top: 10px;">Your subscription has been processed successfully.</p>
     </div>
 
     <iframe id='hidden7215510000000595035Frame' name='hidden7215510000000595035Frame' style='display: none;'></iframe>
@@ -194,10 +205,9 @@
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
     </script>
 
-    <script id='wf_script' src='https://bigin.zoho.com/crm/WebformScriptServlet?rid=7c93c3325621f3a05609cb2666620a43e31fa768036e5fee1835cc887763830655ba1dbb098603af4e8ecd6f2c833dd0gid994e9a64acc1df30d75d90d80e37f63f57f889a1642994839179d7f33e19e5e9'></script>
+  <script id='wf_script' src='https://bigin.zoho.com/crm/WebformScriptServlet?rid=f03311145dd423f0e462736207bd70e2b26eeba913f9495f6f952773d1a0fc01ca5c5cd442f31f09d68db144a0f45c8agid23cf604eb67702899ed58bcf74b7bb35bc057f2108e11cb782c989f196ffd535'></script>
 
- <script>
-    // reCAPTCHA verification
+<script>
     function rccallback7215510000000595035() {
         document.getElementById('recap7215510000000595035').setAttribute('captcha-verified', 'true');
     }
@@ -211,9 +221,8 @@
         return true;
     }
 
-    // This part performs the "Newspaper Swap"
+    // This handles the visual swap to the Thank You clipping
     document.getElementById('hidden7215510000000595035Frame').addEventListener('load', function () {
-        // Only trigger if the form was actually submitted
         if(document.getElementById('recap7215510000000595035').getAttribute('captcha-verified') === 'true') {
             document.getElementById('newsletter-form-container').style.display = 'none';
             document.getElementById('thank-you-clipping').style.display = 'block';
@@ -221,8 +230,8 @@
     });
 </script>
 
-<script id='wf_script' src='https://bigin.zoho.com/crm/WebformScriptServlet?rid=54434226685838e12948e31d1fb99cc5a385fd3a0f1356cf90e6c604c58069a9e730e145cb25ee421d996267e5dabd76gid586ed563a0192bc7a86129c988539e8089cbd24d8fe22d259fad880cb92ef39b'></script>
-
+    
+    
     <script>
     (function() {
         const path = window.location.pathname;
