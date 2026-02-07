@@ -29,7 +29,7 @@
 .Louisville-overlay h1 {
     font-size: clamp(2rem, 6vw, 3.5rem) !important; /* Big, bold impact */
     font-family: 'Times New Roman', serif;
-    text-transform: lowercase;
+    text-transform: Capitalize;
     font-weight: 700;
     color: #ffffff;
     margin: 0;
@@ -95,6 +95,41 @@
     border-left: 6px solid #eb1c24;
     padding-left: 20px;
     margin-bottom: 30px;
+}
+
+/* --- THE INNER MAGAZINE SPLIT --- */
+.main-layout {
+    display: flex !important;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.article-body {
+    flex: 2 !important; /* Takes up 2/3 of the space */
+    line-height: 1.8;
+    font-family: "Times New Roman", serif;
+}
+
+.sidebar {
+    flex: 1 !important; /* Takes up 1/3 of the space */
+    border-left: 1px solid #ddd; /* Subtle line to separate from text */
+    padding-left: 20px;
+    background-color: rgba(0,0,0,0.02); /* Very light tint for contrast */
+}
+
+/* --- STAT BOXES INSIDE THE SIDEBAR --- */
+.stat-sidebar {
+    margin-bottom: 25px;
+    padding: 15px;
+    border: 1px solid #222;
+    background: #fff;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #eb1c24; /* Louisville Red */
 }
 
 /* 5. NEWSPAPER SIDEBAR (The Right Column) */
