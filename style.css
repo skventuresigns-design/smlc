@@ -88,7 +88,7 @@ body {
    ========================================= */
 .orange-master-section { width: 100%; background-color: #ff6005; padding: 60px 0; margin: 40px 0; border-top: 3px solid #222; border-bottom: 3px solid #222; }
 .news-heading-bar { background-color: #707070; width: 85%; margin: 0 auto 40px; padding: 25px 20px; text-align: center; border-radius: 8px; }
-.news-heading-bar h2 { color: #fff; font-family: 'Times New Roman', serif; text-transform: uppercase; margin: 0; }
+.news-heading-bar h2 { color: #fff; font-family: 'Times New Roman', serif; text-transform: uppercase; font-size: 30px; margin: 0; }
 
 .orange-grid-row { width: 85%; max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; align-items: center; }
 .orange-col { flex: 1; }
