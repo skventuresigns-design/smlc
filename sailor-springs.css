@@ -50,7 +50,7 @@
 .SailorSprings-overlay h1 {
     font-family: 'Times New Roman', serif;
     font-size: clamp(2rem, 6vw, 3.5rem) !important;
-    text-transform: lowercase !important;
+    text-transform: Capitalize !important;
     font-weight: 700;
     color: white !important;
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
