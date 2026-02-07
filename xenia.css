@@ -14,7 +14,7 @@
 .xenia-hero-container {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 350px;
     overflow: hidden;
     border-bottom: 5px solid #222;
 }
@@ -25,6 +25,20 @@
     object-fit: cover;
 }
 
+.xenia-hero-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* OPTION A: Light Cream (Paper style) */
+    background-color: rgba(255, 253, 246, 0.4); 
+    /* OPTION B: Dark Tint (Uncomment the line below if you prefer dark) */
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    z-index: 1; /* Sits above the image */
+
+
 .xenia-overlay {
     position: absolute;
     top: 50%;
@@ -32,6 +46,7 @@
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
+    z-index: 2;
 }
 
 /* Corrected Masthead Clipping */
