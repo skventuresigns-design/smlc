@@ -27,7 +27,7 @@
 }
 
 .Louisville-overlay h1 {
-    font-size: clamp(3rem, 10vw, 5.5rem); /* Big, bold impact */
+    font-size: clamp(2rem, 6vw, 3.5rem) !important; /* Big, bold impact */
     font-family: 'Times New Roman', serif;
     text-transform: uppercase;
     font-weight: 900;
@@ -38,7 +38,7 @@
 
 .Louisville-subtitle {
     font-family: 'Times New Roman', serif;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: #ffffff;
     margin-top: 10px;
     text-transform: uppercase;
