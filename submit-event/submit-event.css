@@ -1,59 +1,135 @@
-.submit-event-container {
-    width: 90%;
-    max-width: 1300px;
-    margin: 50px auto;
+.submit-event-wrapper {
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
 }
 
-/* Column 1 Specifics */
-.guidelines-list {
-    list-style: none;
-    padding: 0;
-    margin: 25px 0;
+/* --- COLUMN 1: GUIDELINES BOX --- */
+.submission-guidelines-large {
+    padding: 45px;
+    border: 3px double #222;
+    background-color: #fcf6de !important; /* Your signature cream */
+    box-shadow: 10px 10px 0px #222;
 }
 
-.guidelines-list li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 22px;
-    font-family: "Times New Roman", serif;
-    font-size: 17px;
-    line-height: 1.4;
-}
-
-.red-check {
-    color: #cc0000;
-    font-weight: bold;
-    margin-right: 12px;
-    font-size: 20px;
-}
-
-.rule-line {
-    border: 0;
-    border-top: 1px solid #222;
-    margin: 5px 0;
-}
-
-.editorial-review-footer {
-    border-top: 3px double #222;
-    margin-top: 25px;
-    padding-top: 15px;
-    font-style: italic;
-    font-family: "Times New Roman", serif;
-}
-
-/* Form Specifics */
-.event-details-area {
-    height: 120px;
-    resize: none;
-}
-
-.success-box {
-    display: none;
+.guidelines-masthead {
     text-align: center;
-    padding: 30px;
+    border-bottom: 3px solid #222;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
 }
 
-/* Desktop spacing adjustment */
-.index-col {
-    padding: 0 20px;
+.guidelines-masthead h2 {
+    font-family: "Times New Roman", serif !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    font-size: 28px !important;
+    color: #d9534f !important; /* Red Header */
+}
+
+.sub-masthead {
+    font-size: 12px; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+}
+
+.rule-item {
+    margin-bottom: 20px;
+    padding-left: 25px;
+    position: relative;
+    font-family: "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.rule-item::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.editor-signature {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #222;
+    font-family: "Times New Roman", serif;
+    font-style: italic;
+}
+
+.sk-ventures-tag {
+    font-size: 11px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    color:#d9534f;
+}
+
+.disclaimer-box {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* --- COLUMN 2: FORM CARD --- */
+.wf-wrapper {
+    background-color: #fcf6de !important;
+    border: 2px solid #222 !important;
+    box-shadow: 10px 10px 0px #000;
+    padding: 40px;
+}
+
+.wf-header {
+    font-family: "Times New Roman", serif !important;
+    font-size: 32px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    text-align: center;
+    border-top: 4px solid #222;
+    border-bottom: 2px solid #222;
+    padding: 15px 0;
+}
+
+.form-sub-label {
+    text-align:center; 
+    font-size: 11px; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    margin-top: -15px; 
+    font-weight: bold; 
+    padding-bottom:10px;
+}
+
+.wf-label {
+    font-family: "Times New Roman", serif !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.wf-field-input {
+    width: 100%;
+    border: 1px solid #222 !important;
+    padding: 12px !important;
+    background-color: #ffffff !important;
+    margin-bottom: 15px;
+}
+
+.wf-text-area-input { height: 100px; resize: vertical; }
+
+.wf-btn {
+    width: 100%;
+    background-color: #222 !important;
+    color: #fff !important;
+    padding: 20px !important;
+    font-family: "Times New Roman", serif !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    font-size: 22px !important;
+    cursor: pointer;
 }
