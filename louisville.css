@@ -12,7 +12,7 @@
 /* 2. THE HERO SECTION (Red Background & Centered Text) */
 .Louisville-hero-container {
     width: 100%;
-    background-color: #eb1c24 !important; /* Louisville Red */
+    background: linear-gradient(to bottom, #eb1c24 0%, #000000 100%) !important;/* Louisville Red */
     padding: 80px 20px;
     text-align: center;
     border-bottom: 5px solid #222;
