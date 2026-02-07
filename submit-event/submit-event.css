@@ -1,0 +1,81 @@
+/* SUBMIT EVENT PAGE STYLES */
+.submit-event-main-wrapper {
+    width: 95%;
+    max-width: 1400px;
+    margin: 60px auto;
+}
+
+.rules-card {
+    height: 100%;
+    background-color: #fcf6de !important;
+}
+
+.rule-divider {
+    border-top: 1px solid #222;
+    margin: 15px 0;
+}
+
+.rules-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.rules-list li {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: flex-start;
+    font-family: "Times New Roman", serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.check-mark {
+    color: red;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+.editorial-box {
+    border-top: 3px double #222;
+    margin-top: 30px;
+    padding-top: 20px;
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+    color: #444;
+}
+
+/* Form Specific Tweaks */
+.event-textarea {
+    height: 120px;
+    resize: none;
+    border: 1px solid #222 !important;
+    background: transparent;
+}
+
+.submit-event-btn {
+    border: none !important;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.thank-you-view {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.thank-you-view h3 {
+    text-transform: uppercase;
+    font-family: "Times New Roman", serif;
+    font-weight: 900;
+}
+
+/* Mobile Alignment */
+@media (max-width: 768px) {
+    .submit-event-main-wrapper {
+        margin: 20px auto;
+    }
+}
