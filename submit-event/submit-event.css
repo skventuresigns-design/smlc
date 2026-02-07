@@ -11,20 +11,40 @@
 /* --- HEADER & NAVIGATION --- */
 .header {
     width: 100% !important;
-    background-color: #fff !important; /* White Menu BG */
+    max-width: 100% !important;
+    background-color: #fff !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%; /* Adds 5% space on sides to keep logo/menu centered */
+    box-sizing: border-box;
+    margin: 0 !important;
+
+.header-logo {
+    height: 80px;
+    width: auto;
 }
 
 .nav-bar {
     background-color: #fff !important;
-    padding: 15px 0;
     border: none;
 }
 
+/* SPREAD OUT LINKS */
+.nav-links {
+    display: flex !important;
+    list-style: none;
+    gap: 40px !important; /* Spreads links apart */
+    margin: 0;
+    padding: 0;
+}
+    
 .nav-links a {
     font-family: "Times New Roman", serif;
     color: #222 !important;
     font-weight: bold;
     text-decoration: underline;
+     font-size: 1.1rem;
 }
 
 .hamburger {
@@ -50,12 +70,26 @@
 }
 
 /* --- CLIPPING #1: GUIDELINES --- */
-.submission-guidelines-large {
+.submission-guidelines-large, .next-steps-clipping, .reach-clipping, .wf-wrapper {
     padding: 45px;
     border: 3px double #222;
     background-color: #fffcf6 !important; /* Cream Color */
     box-shadow: 10px 10px 0px #222;
     margin-bottom: 30px;
+}
+
+.submission-guidelines-large {
+    padding: 45px;
+    border: 3px double #222;
+    margin-bottom: 30px;
+}
+
+ /* REACH CLIPPING (Red dashed line removed) */
+.reach-clipping {
+    padding: 30px;
+    border: 1px solid #222 !important; 
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 .guidelines-masthead {
@@ -72,6 +106,8 @@
     font-size: 28px !important;
     color: #d9534f !important;
     margin: 0 !important;
+    border-bottom: 3px solid #222;
+    padding-bottom: 15px;
 }
 
 .sub-masthead { font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
@@ -134,7 +170,6 @@
 
 /* --- CLIPPING #3: REACH --- */
 .reach-clipping {
-    max-width: 650px;
     margin: 0 auto 30px;
     padding: 30px;
     border: 2px dashed #d9534f !important;
@@ -147,6 +182,22 @@
 .reach-title { font-family: 'Times New Roman', serif; margin: 10px 0; font-weight: bold; }
 .reach-quote { font-family: 'Times New Roman', serif; font-style: italic; font-size: 16px; margin-bottom: 20px; }
 .reach-stats { display: flex; justify-content: space-around; border-top: 1px solid #ccc; padding-top: 15px; font-family: "Times New Roman", serif; font-size: 12px; }
+.rule-item {
+    margin-bottom: 20px;
+    padding-left: 25px;
+    position: relative;
+    font-family: "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.rule-item::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #d9534f;
+    font-weight: bold;
+}
 
 /* --- COLUMN 2: BIGIN FORM --- */
 .wf-wrapper {
