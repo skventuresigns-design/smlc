@@ -2,105 +2,170 @@
    CHAPTER 1: GLOBAL BRANDING & RESET
    ========================================= */
 * { box-sizing: border-box; }
-body { margin: 0; padding: 0; color: #333; font-family: sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
 
-/* --- BACKGROUND LOGIC --- */
+body { 
+    margin: 0; padding: 0; color: #333; font-family: sans-serif; 
+    min-height: 100vh; display: flex; flex-direction: column; 
+}
+
 .home-bg { background-color: #ffffff; }
-.louisville-bg { background-color: #000000 !important; }
-.clay-city-bg { background-color: #0c2ef1 !important; }
 
 /* =========================================
    CHAPTER 2: HEADER & NAVIGATION
    ========================================= */
-.header { 
-    background-color: #fffdf6; 
-    width: 100%; 
-    border-bottom: none; /* Removes stray border squares */
-    padding: 0; 
-    margin: 0;
-}
+.header { background-color: #fffdf6; width: 100%; border: none; }
+.header-logo { width: 100%; height: auto; display: block; border: none; }
 
-.header-logo { 
-    width: 100%; 
-    height: auto; 
-    display: block; 
-    border: none; /* Ensures the image itself doesn't have a border */
-}
-
-.nav-bar { 
-    background-color: #fffdf6; 
-    padding: 15px 0; 
-    border: none; 
-}
+.nav-bar { background-color: #fffdf6; padding: 15px 0; border: none; }
 
 .nav-links { 
-    list-style: none !important; /* Forces bullets to disappear */
-    list-style-type: none !important; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
-    justify-content: center; 
-    flex-wrap: wrap; 
+    list-style: none !important; margin: 0; padding: 0; 
+    display: flex; justify-content: center; flex-wrap: wrap; 
 }
 
-.nav-links li { 
-    margin: 10px 30px; 
-    list-style: none; /* Double-check for the square bullet */
+.nav-links li { margin: 10px 30px; list-style: none; }
+.nav-links a { 
+    font-family: "Times New Roman", serif; color: #222222; 
+    text-decoration: underline; font-weight: bold; font-size: 18px; 
+    text-transform: capitalize; transition: color 0.3s;
 }
+.nav-links a.active { color: #1414fe !important; }
+.nav-links a:hover { color: #1414fe; }
 
-/* This targets stray 'empty' links or pseudo-elements */
-.nav-links li::before, 
-.nav-links li::after {
-    content: none !important;
-    display: none !important;
-}
-
-/* 1. Hide the button by default (Desktop view) */
+/* --- HAMBURGER FIX (Kills the "Ghost Box") --- */
 .hamburger {
-    display: none; 
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
+    display: none; background: none; border: none; 
+    cursor: pointer; padding: 10px;
 }
-
-/* 2. Style the three lines inside the button */
 .hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: #222; /* The color of the 3 lines */
-    margin: 5px 0;
-    transition: 0.3s;
-}
-
-/* 3. Show the button ONLY on mobile screens */
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-        flex-direction: column;
-        margin-left: auto; /* Pushes it to the right on mobile */
-    }
+    display: block; width: 25px; height: 3px; 
+    background-color: #222; margin: 5px 0;
 }
 
 /* =========================================
-   CHAPTER 3: HOME PAGE PORTAL (index.html)
+   CHAPTER 3: HERO, SLIDER & DISCOVER
    ========================================= */
 .home-hero-cta { width: 100%; background-color: #0c2ef1; padding: 35px 20px; text-align: center; }
 .home-hero-cta h1 { color: #fff !important; font-family: 'Times New Roman', serif; font-size: clamp(1.2rem, 3vw, 2rem); margin: 0; text-transform: uppercase; }
 
-.intricate-grid-container { display: flex !important; flex-direction: row !important; gap: 2.5%; width: 95%; margin: 40px auto; align-items: flex-start; }
-.intricate-col { flex: 1; display: flex; flex-direction: column; gap: 40px; }
+/* --- IMAGE SLIDER --- */
+.smlc-fullwidth-wrapper { width: 100%; overflow: hidden; background: #000; }
+.smlc-track { position: relative; width: 100%; height: 300px; background-color: #000; }
+.smlc-item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; animation: smlcSimpleFade 30s infinite; }
+.smlc-item img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
-/* Global News Box flare (For Home Page) */
-.clay-county-news-box { 
-    background-color: #fffdf6 !important; border: 2px solid #222 !important; padding: 30px; 
-    box-shadow: 10px 10px 0px #222 !important; width: 100%; margin-bottom: 40px; 
-    display: flex; flex-direction: column;
+@keyframes smlcSimpleFade { 0% { opacity: 0; } 5% { opacity: 1; } 33% { opacity: 1; } 38% { opacity: 0; } 100% { opacity: 0; }}
+.smlc-fade-1 { animation-delay: 0s; }
+.smlc-fade-2 { animation-delay: 10s; }
+.smlc-fade-3 { animation-delay: 20s; }
+
+/* --- DISCOVER SECTION --- */
+.discover-clay-county-section { width: 100%; padding: 60px 0; background-color: #ffffff; }
+.index-heading-row { text-align: center; padding-bottom: 40px; }
+.index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; color: #000; }
+
+.index-grid-row { display: flex; gap: 40px; width: 90%; max-width: 1400px; margin: 0 auto; align-items: flex-start; }
+.index-col { flex: 1; }
+
+/* --- GLOSSY BOX --- */
+.glossy-wrapper { 
+    padding: 60px 40px; border-radius: 20px; border: 2px solid #222;
+    background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000'); 
+    background-size: cover; background-position: center; 
 }
+.glossy-box { 
+    max-width: 700px; margin: 0 auto; padding: 40px; border-radius: 20px;
+    background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); 
+}
+.yellow-text { color: #ffcc00 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); }
+.mission-text.yellow-border { border-left: 5px solid #ffcc00; padding-left: 20px; margin-top: 20px; }
+
+.courthouse-heading { text-align: center; font-family: 'Times New Roman', serif; margin-bottom: 20px; }
+.courthouse-img { width: 100%; height: auto; border: 2px solid #222; box-shadow: 5px 5px 15px rgba(0,0,0,0.3); }
 
 /* =========================================
-   CHAPTER 6: FOOTER
+   CHAPTER 4: ORANGE NEWS & NEWSLETTER
    ========================================= */
+.orange-master-section { width: 100%; background-color: #ff6005; padding: 60px 0; margin: 40px 0; border-top: 3px solid #222; border-bottom: 3px solid #222; }
+.news-heading-bar { background-color: #707070; width: 85%; margin: 0 auto 40px; padding: 25px 20px; text-align: center; border-radius: 8px; }
+.news-heading-bar h2 { color: #fff; font-family: 'Times New Roman', serif; text-transform: uppercase; margin: 0; }
+
+.orange-grid-row { width: 85%; max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; align-items: center; }
+.orange-col { flex: 1; }
+.news-img-styled { width: 100%; height: auto; border: 2px solid #222; box-shadow: 10px 10px 0px rgba(0,0,0,0.2); }
+
+/* NEWSLETTER STYLES */
+.wf-parent { background-color: #ff6005 !important; padding: 20px 0 !important; }
+.wf-wrapper { 
+    max-width: 600px; margin: 0 auto; padding: 40px; background-color: #fffdf6 !important; 
+    border: 2px solid #222 !important; box-shadow: 8px 8px 0px #222 !important; 
+}
+.wf-header { 
+    font-family: "Times New Roman", serif; font-size: 32px; font-weight: 900; 
+    text-align: center; border-top: 4px solid #222; border-bottom: 2px solid #222; 
+    padding: 15px 0; margin-bottom: 30px; 
+}
+.wf-label { font-weight: bold; font-size: 14px; text-transform: uppercase; display: block; border-bottom: 1px solid #222; margin-bottom: 8px; }
+.wf-field-input { width: 100%; border: 1px solid #222; padding: 12px; margin-bottom: 20px; }
+.wf-btn { 
+    width: 100%; background-color: #222 !important; color: #fff !important; 
+    padding: 20px; font-weight: bold; text-transform: uppercase; border: none; cursor: pointer; 
+}
+.wf-btn:hover { background-color: #1414fe !important; }
+
+/* =========================================
+   CHAPTER 5: INTRICATE GRID & PORTAL BOXES
+   ========================================= */
+.intricate-grid-container { display: flex; gap: 2.5%; width: 95%; margin: 40px auto; align-items: flex-start; }
+.intricate-col { flex: 1; display: flex; flex-direction: column; gap: 40px; }
+
+.clay-county-news-box { 
+    background-color: #fffdf6 !important; border: 2px solid #222 !important; 
+    padding: 30px; box-shadow: 10px 10px 0px #222 !important; 
+    display: flex; flex-direction: column; position: relative;
+}
+
+.news-box-header { text-align: center; border-top: 5px solid #222; border-bottom: 3px solid #222; padding: 10px; margin-bottom: 20px; }
+.news-box-header h3 { font-family: "Times New Roman", serif; text-transform: uppercase; margin: 0; }
+
+.spotlight-image-wrap { width: 100%; border: 1px solid #222; padding: 5px; background: #fff; margin-bottom: 15px; }
+.spotlight-image-wrap img { width: 100%; display: block; filter: grayscale(10%) sepia(5%); }
+
+.clipping-tag-black { 
+    position: absolute; top: 0; left: 20px; transform: translateY(-50%); 
+    background: #222; color: #fff; padding: 5px 15px; font-size: 12px; font-weight: bold; 
+}
+
+.clipping-btn {
+    display: block; width: 100%; background-color: #222 !important; color: #fff !important; 
+    padding: 15px 0; text-align: center; text-transform: uppercase; font-weight: 900; 
+    text-decoration: none; box-shadow: inset 0 0 0 3px #ffffff;
+}
+.clipping-btn:hover { background-color: #1414fe !important; }
+
+/* RICHARDS SPECIAL HEADER */
+.group-header { text-align: center; border-top: 5px double #222; border-bottom: 2px solid #222; padding: 15px 10px; margin-bottom: 20px; }
+
+/* =========================================
+   CHAPTER 6: BLUE NEWS FEED, THANKFUL & FOOTER
+   ========================================= */
+.blue-news-frame { background-color: #0c2ef1; padding: 60px 0; margin: 40px 0; }
+.news-content-90 { width: 90%; max-width: 1400px; margin: 0 auto; height: 800px; background: #fff; }
+#github-news-container { width: 100%; height: 100%; overflow: hidden; }
+
+.thankful-section { width: 100%; background-color: #ffffff; padding: 60px 20px; text-align: center; }
+.thankful-content { max-width: 1000px; margin: 0 auto; font-family: "Times New Roman", serif; font-size: 1.2rem; line-height: 1.6; }
+
 .site-footer { background-color: #000 !important; color: #fff !important; text-align: center; padding: 40px 20px; margin-top: auto; }
 .site-footer a { color: #fff !important; text-decoration: underline; }
+
+/* =========================================
+   RESPONSIVE OVERRIDES
+   ========================================= */
+@media (max-width: 768px) {
+    .hamburger { display: flex; flex-direction: column; margin: 0 auto; }
+    .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; background-color: #fffdf6; }
+    .nav-links.open { display: flex; }
+    .index-grid-row, .orange-grid-row, .intricate-grid-container { flex-direction: column; align-items: center; }
+    .index-col, .orange-col, .intricate-col { width: 100%; }
+}
