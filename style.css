@@ -169,3 +169,70 @@ body {
     .index-grid-row, .orange-grid-row, .intricate-grid-container { flex-direction: column; align-items: center; }
     .index-col, .orange-col, .intricate-col { width: 100%; }
 }
+
+/* Home Page Newsletter Branding */
+#BiginWebToRecordFormParent7215510000000595035 {
+    background-color: transparent !important;
+    margin: 40px auto;
+    max-width: 700px;
+    padding: 0 15px;
+}
+
+#BiginWebToRecordFormDiv7215510000000595035 {
+    background-color: #fcf6de !important; /* Your specific background color */
+    border: 1px solid #dcd7c0;
+    border-radius: 4px;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.05);
+}
+
+.wf-header {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #222;
+    border-bottom: 2px solid #222;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.wf-header span {
+    font-size: 1rem;
+    display: block;
+    margin-top: 5px;
+    color: #555;
+    letter-spacing: 1px;
+}
+
+.wf-row {
+    margin-bottom: 15px;
+}
+
+.wf-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.wf-field-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #BDC8D3;
+    border-radius: 4px;
+    font-size: 1.5rem;
+}
+
+.wf-btn {
+    background-color: #222 !important; /* Professional Black */
+    border: 1px solid #000 !important;
+    color: #fff !important;
+    padding: 12px 30px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+}
+
+.wf-btn:hover {
+    background-color: #444 !important;
+}
