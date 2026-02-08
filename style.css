@@ -61,6 +61,13 @@ body {
 
 /* --- DISCOVER SECTION --- */
 .discover-clay-county-section { width: 100%; padding: 60px 0; background-color: #ffffff; }
+/* 1. Fix Column Alignment */
+.discover-row { display: flex; flex-wrap: wrap; /* Allows stacking on mobile */ gap: 30px; align-items: stretch; /* This makes columns even height */}
+.discover-col { flex: 1; min-width: 300px; /* Prevents them from getting too skinny */ display: flex; flex-direction: column;}
+
+/* 2. Increase Font Size for "Your Source for Local News" */
+/* Adjust the selector to match the specific class or tag you used for that text */
+.local-news-subhead { font-size: 24px !important; /* Adjust this number as needed */ font-family: "Times New Roman", serif; font-weight: bold;}
 .index-heading-row { text-align: center; padding-bottom: 40px; }
 .index-heading-row h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; color: #000; }
 
