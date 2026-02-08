@@ -30,14 +30,12 @@
             
             <div class="index-col">
                 <div class="clipping-container submission-guidelines-large">
-                    <div class="guidelines-masthead">
-                        <h2 class="newspaper-headline">Notice to the Public</h2>
-                        <span class="sub-headline">Official Calendar Submission Rules</span>
-                    </div>
-                    <div class="rule-section" style="margin-top: 20px; font-family: 'Times New Roman', serif;">
-                        <p><strong>1. Local Focus:</strong> Events must take place within Clay County.</p>
-                        <p><strong>2. Community Interest:</strong> We prioritize fundraisers, church dinners, and school functions.</p>
-                        <p><strong>3. Submission Window:</strong> Please submit at least 7 days prior to the event.</p>
+                    <h2 class="newspaper-headline">Notice to the Public</h2>
+                    <span class="sub-headline">Official Submission Rules</span>
+                    <div style="margin-top:20px; font-family: 'Times New Roman', serif; line-height: 1.6;">
+                        <p><strong>• Local Focus:</strong> Events must be in Clay County.</p>
+                        <p><strong>• Community Interest:</strong> We prioritize non-profit and local functions.</p>
+                        <p><strong>• Window:</strong> Submit at least 7 days in advance.</p>
                     </div>
                 </div>
             </div>
@@ -45,75 +43,63 @@
             <div class="index-col">
                 <div class="clipping-container form-card" id="form-container">
                     <div class="wf-header">Community Bulletin</div>
-                    <p class="form-banner" style="text-align:center; font-weight:bold; text-transform:uppercase; margin-bottom:20px;">Clay County Event Submission</p>
-                    
                     <form id="smlc-event-form">
-                        <label class="wf-label">Event Name</label>
-                        <input name="eventName" type="text" class="wf-input" required />
-
-                        <label class="wf-label">Event Date</label>
-                        <input name="eventDate" type="text" placeholder="MM/DD/YYYY" class="wf-input" required />
-
-                        <label class="wf-label">Location</label>
-                        <input name="location" type="text" class="wf-input" required />
-
-                        <label class="wf-label">Time</label>
-                        <input name="eventTime" type="text" class="wf-input" required />
-
+                        <label class="wf-label">Event Name</label><input name="eventName" type="text" class="wf-input" required>
+                        <label class="wf-label">Event Date</label><input name="eventDate" type="text" placeholder="MM/DD/YYYY" class="wf-input" required>
+                        <label class="wf-label">Location</label><input name="location" type="text" class="wf-input" required>
+                        <label class="wf-label">Time</label><input name="eventTime" type="text" class="wf-input" required>
+                        
                         <div style="display:flex; gap:10px;">
-                            <div style="flex:1;"><label class="wf-label">First Name</label><input name="firstName" type="text" class="wf-input" required /></div>
-                            <div style="flex:1;"><label class="wf-label">Last Name</label><input name="lastName" type="text" class="wf-input" required /></div>
+                            <div style="flex:1;"><label class="wf-label">First Name</label><input name="firstName" type="text" class="wf-input" required></div>
+                            <div style="flex:1;"><label class="wf-label">Last Name</label><input name="lastName" type="text" class="wf-input" required></div>
                         </div>
 
-                        <label class="wf-label">Email</label>
-                        <input name="email" type="email" class="wf-input" required />
-
-                        <label class="wf-label">Details</label>
-                        <textarea name="details" class="wf-input" style="height:100px;" required></textarea>
+                        <label class="wf-label">Email Address</label><input name="email" type="email" class="wf-input" required>
+                        <label class="wf-label">Event Details</label><textarea name="details" class="wf-input" style="height:100px;" required></textarea>
                         
-                        <div class="g-recaptcha" data-sitekey="6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG" style="margin-bottom:15px;"></div>
-                        
+                        <div class="g-recaptcha" data-sitekey="6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG" style="margin: 20px 0;"></div>
                         <button type="submit" id="submit-btn" class="wf-submit-btn">Submit Event News</button>
                     </form>
                 </div>
 
-                <div class="clipping-container success-clipping" id="thank-you-container" style="display: none;">
+                <div class="clipping-container success-clipping" id="thank-you-container" style="display: none; text-align:center;">
                     <h2 class="newspaper-headline" style="color:#d9534f;">Success!</h2>
-                    <p style="text-align:center; font-family:'Times New Roman', serif; font-size:18px; margin-top:20px;">Your event has been submitted for editorial review. A confirmation receipt has been sent to your email.</p>
-                    <button onclick="location.reload()" class="wf-submit-btn">Submit Another Event</button>
+                    <p style="font-family:'Times New Roman', serif; font-size:1.2rem; margin: 20px 0;">Your event has been submitted. Check your inbox for a receipt!</p>
+                    <button onclick="location.reload()" class="wf-submit-btn">Submit Another</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; 
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; // <--- PUT YOUR NEW DEPLOYMENT URL HERE
         const form = document.getElementById('smlc-event-form');
         const submitBtn = document.getElementById('submit-btn');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            const captcha = grecaptcha.getResponse();
-            if (!captcha) { alert("Please complete the reCAPTCHA."); return; }
+            if (!grecaptcha.getResponse()) { alert("Please complete the reCAPTCHA."); return; }
 
             submitBtn.innerHTML = "Sending...";
             submitBtn.disabled = true;
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => response.json())
-                .then(data => {
-                    if(data.result === "success") {
+                .then(response => response.text()) // Changed to text to catch simple error messages
+                .then(result => {
+                    if(result.trim() === "Success") {
                         document.getElementById('form-container').style.display = 'none';
                         document.getElementById('thank-you-container').style.display = 'block';
                         window.scrollTo(0,0);
                     } else {
-                        throw new Error(data.message);
+                        alert("Google Script Error: " + result);
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = "Submit Event News";
                     }
                 })
                 .catch(error => {
-                    alert("Submission Failed: " + error.message);
-                    submitBtn.innerHTML = "Submit Event News";
+                    alert("Network Error: Could not reach Google. Check your Web App URL.");
                     submitBtn.disabled = false;
+                    submitBtn.innerHTML = "Submit Event News";
                 });
         });
     </script>
