@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Your Event | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="submit-event.css">
-    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    
+    <link rel="stylesheet" href="../style.css"> <link rel="stylesheet" href="submit-event.css"> <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 </head>
 <body class="submit-event-page">
 
@@ -67,7 +66,7 @@
                             <div class='wf-row' style="flex:1;"><label class='wf-label'>Last Name</label><input name='lastName' type='text' class='wf-input' required /></div>
                         </div>
                         <div class='wf-row'><label class='wf-label'>Email</label><input name='email' type='email' class='wf-input' required /></div>
-                        <div class='wf-row'><label class='wf-label'>Details</label><textarea name='details' class='wf-input' style="height:100px;"></textarea></div>
+                        <div class='wf-row'><label class='wf-label'>Details</label><textarea name='details' class='wf-input' style="height:100px;" required></textarea></div>
                         
                         <div class='g-recaptcha' data-sitekey='6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG'></div>
                         <button type="submit" id="submit-btn" class="wf-submit-btn">Submit Event News</button>
@@ -86,7 +85,7 @@
     <footer class="site-footer"><p>© 2026 Support My Local Community | Clay County, Illinois</p></footer>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; 
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; // <--- PUT YOUR GOOGLE URL HERE
         const form = document.getElementById('smlc-event-form');
         const submitBtn = document.getElementById('submit-btn');
 
@@ -105,7 +104,7 @@
                     window.scrollTo(0,0);
                 })
                 .catch(error => {
-                    alert("Submission failed. Please try again.");
+                    alert("Submission failed. Please check your internet connection or the reCAPTCHA.");
                     submitBtn.innerHTML = "Submit Event News";
                     submitBtn.disabled = false;
                 });
