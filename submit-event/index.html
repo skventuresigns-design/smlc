@@ -19,6 +19,7 @@
                 <li><a href="../clay-city.html">Clay City</a></li>
                 <li><a href="https://www.ourflora.com" target="_blank">Flora</a></li>
                 <li><a href="../louisville.html">Louisville</a></li>
+                <li><a href="../sailor-springs.html">Sailor Springs</a></li>
                 <li><a href="../xenia.html">Xenia</a></li>
             </ul>
         </nav>
@@ -28,54 +29,110 @@
         <div class="index-grid-row">
             
             <div class="index-col">
-                <div class="clipping-container submission-guidelines-large">
-                    <h2 class="newspaper-headline">Notice to the Public</h2>
-                    <span class="sub-headline">Official Submission Rules</span>
-                    <div style="margin-top:20px; font-family: 'Times New Roman', serif; line-height: 1.6;">
-                        <p><strong>• Local Focus:</strong> Events must be in Clay County.</p>
-                        <p><strong>• Community Interest:</strong> We prioritize non-profit and local functions.</p>
-                        <p><strong>• Window:</strong> Submit at least 7 days in advance.</p>
+                <div class="submission-guidelines-large">
+                    <div class="guidelines-masthead">
+                        <h2>Notice to the Public</h2>
+                        <span style="font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">Official Calendar Submission Rules</span>
+                    </div>
+
+                    <div class="rule-section">
+                        <div class="rule-item">
+                            <strong>Local Focus:</strong> Events must take place within Clay County or directly serve the residents of Flora, Louisville, Clay City, and Xenia.
+                        </div>
+                        <div class="rule-item">
+                            <strong>Community Interest:</strong> We prioritize fundraisers, church dinners, school functions, and local entertainment over commercial sales ads.
+                        </div>
+                        <div class="rule-item">
+                            <strong>Submission Window:</strong> Please submit at least <strong>7 days</strong> prior to the event to ensure inclusion in our Monday morning newsletter.
+                        </div>
+                        <div class="rule-item">
+                            <strong>Editorial Review:</strong> All entries are reviewed for accuracy. We may reach out via email if we need to clarify dates or locations.
+                        </div>
+                    </div>
+
+                    <div class="editor-signature">
+                        <p style="margin-bottom:5px;">Thank you for contributing to our community,</p>
+                        <p style="font-weight:bold; font-size: 20px; margin:0;">The Support My Local Community Team</p>
+                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color:#d9534f;">S&K Ventures Inc</span>
+                    </div>
+
+                    <div class="disclaimer-box">
+                        community voice - clay county il
                     </div>
                 </div>
             </div>
 
             <div class="index-col">
-                <div class="clipping-container form-card" id="form-container">
+                <div class="wf-wrapper" id="form-container">
                     <div class="wf-header">Community Bulletin</div>
+                    <p style="text-align:center; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-top: -15px; font-weight: bold; color: #222; padding-bottom:10px;">Clay County Event Submission</p>
+                    
                     <form id="smlc-event-form">
-                        <label class="wf-label">Event Name</label><input name="eventName" type="text" class="wf-input" required>
-                        <label class="wf-label">Event Date</label><input name="eventDate" type="text" placeholder="MM/DD/YYYY" class="wf-input" required>
-                        <label class="wf-label">Location</label><input name="location" type="text" class="wf-input" required>
-                        <label class="wf-label">Time</label><input name="eventTime" type="text" class="wf-input" required>
-                        
-                        <div style="display:flex; gap:10px;">
-                            <div style="flex:1;"><label class="wf-label">First Name</label><input name="firstName" type="text" class="wf-input" required></div>
-                            <div style="flex:1;"><label class="wf-label">Last Name</label><input name="lastName" type="text" class="wf-input" required></div>
+                        <div class="wf-row">
+                            <label class="wf-label">Event Name</label>
+                            <input name="eventName" type="text" class="wf-field-input" required />
                         </div>
 
-                        <label class="wf-label">Email Address</label><input name="email" type="email" class="wf-input" required>
-                        <label class="wf-label">Event Details</label><textarea name="details" class="wf-input" style="height:100px;" required></textarea>
-                        
+                        <div class="wf-row">
+                            <label class="wf-label">Event Date (MM/DD/YYYY)</label>
+                            <input name="eventDate" type="text" placeholder="MM/DD/YYYY" class="wf-field-input" required />
+                        </div>
+
+                        <div class="wf-row">
+                            <label class="wf-label">Event Location</label>
+                            <input name="location" type="text" class="wf-field-input" required />
+                        </div>
+
+                        <div class="wf-row">
+                            <label class="wf-label">Time of Event</label>
+                            <input name="eventTime" type="text" class="wf-field-input" required />
+                        </div>
+
+                        <div class="wf-row">
+                            <label class="wf-label">First Name</label>
+                            <input name="firstName" type="text" class="wf-field-input" required />
+                        </div>
+
+                        <div class="wf-row">
+                            <label class="wf-label">Last Name</label>
+                            <input name="lastName" type="text" class="wf-field-input" required />
+                        </div>
+
+                        <div class="wf-row">
+                            <label class="wf-label">Email</label>
+                            <input name="email" type="email" class="wf-field-input" required />
+                        </div>
+
+                        <div class="wf-row">
+                            <label class="wf-label">Event Details</label>
+                            <textarea name="details" class="wf-field-input wf-text-area-input" required></textarea>
+                        </div>
+
                         <div style="display:none;">
-                            <label>Do not fill this out</label>
+                            <label>Keep this blank</label>
                             <input name="website_verify" type="text" value="">
                         </div>
-                        
-                        <button type="submit" id="submit-btn" class="wf-submit-btn">Submit Event News</button>
+
+                        <div class="wform-btn-wrap">
+                            <button type="submit" id="submit-btn" class="wf-btn">Submit Event</button>
+                        </div>
                     </form>
                 </div>
 
-                <div class="clipping-container success-clipping" id="thank-you-container" style="display: none; text-align:center;">
-                    <h2 class="newspaper-headline" style="color:#d9534f;">Success!</h2>
-                    <p style="font-family:'Times New Roman', serif; font-size:1.2rem; margin: 20px 0;">Your event has been submitted. Check your inbox for a receipt!</p>
-                    <button onclick="location.reload()" class="wf-submit-btn">Submit Another</button>
+                <div class="wf-wrapper" id="thank-you-container" style="display: none; text-align:center;">
+                    <div class="wf-header">SUCCESS!</div>
+                    <p style="font-family:'Times New Roman', serif; font-size:20px; margin-top:20px;">
+                        Your Event has been submitted, Thank you for allowing us to share you Event !!
+                    </p>
+                    <button onclick="location.reload()" class="wf-btn" style="margin-top:20px;">Submit Another</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; 
+        // Replace with your current Google Web App URL
+        const scriptURL = 'PASTE_YOUR_WEB_APP_URL_HERE'; 
         const form = document.getElementById('smlc-event-form');
         const submitBtn = document.getElementById('submit-btn');
 
@@ -94,13 +151,13 @@
                     } else {
                         alert("Error: " + result);
                         submitBtn.disabled = false;
-                        submitBtn.innerHTML = "Submit Event News";
+                        submitBtn.innerHTML = "Submit Event";
                     }
                 })
                 .catch(error => {
                     alert("Connection Failed. Check your Web App URL.");
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = "Submit Event News";
+                    submitBtn.innerHTML = "Submit Event";
                 });
         });
     </script>
