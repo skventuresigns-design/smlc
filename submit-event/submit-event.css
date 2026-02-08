@@ -1,42 +1,44 @@
-/* --- GLOBAL LAYOUT --- */
+/* --- GLOBAL --- */
 .submit-event-page {
-    background-color: #0c71c3 !important; /* Blue Background */
+    background-color: #0c71c3 !important;
     margin: 0;
     padding: 0;
     min-height: 100vh;
 }
 
-/* --- FULL-WIDTH HEADER & STACKED MENU --- */
+/* --- THE FULL WIDTH HEADER --- */
 .site-header {
-    width: 100% !important;
-    background-color: #fff !important; /* Entire header area is white */
-}
-
-.logo-area {
-    text-align: center;
-    padding: 20px 0;
     width: 100%;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
 }
 
-.header-logo {
-    max-width: 1200px; /* Limits logo width while keeping it centered */
-    width: 90%;
+.logo-full-width {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 0; /* Removes tiny gap under image */
+}
+
+.banner-img {
+    width: 100%;
     height: auto;
+    display: block;
 }
 
 .nav-bar {
-    width: 100% !important;
-    background-color: #fff !important;
-    border-top: 1px solid #eee; /* Subtle line between logo and menu */
-    padding: 10px 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    padding: 15px 0;
 }
 
-/* CENTERED & SPREAD LINKS */
 .nav-links {
-    display: flex !important;
+    display: flex;
+    justify-content: center;
     list-style: none;
-    justify-content: center; /* Centers links on the row */
-    gap: 40px !important;
+    gap: 50px;
     margin: 0;
     padding: 0;
 }
@@ -44,74 +46,56 @@
 .nav-links a {
     font-family: "Times New Roman", serif;
     color: #222 !important;
-    font-weight: bold;
+    font-weight: 900;
     text-decoration: underline;
+    text-transform: uppercase;
     font-size: 1.1rem;
+    letter-spacing: 1px;
 }
 
-.hamburger {
-    display: none; /* Hidden on Desktop */
-}
-
-/* --- MAIN CONTAINER --- */
-.submit-event-main-wrapper {
-    width: 90%;
-    max-width: 1400px;
-    margin: 40px auto;
-}
-
-.index-grid-row {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.index-col {
-    flex: 1;
-}
-
-/* --- CLIPPINGS (#fffcf6) --- */
-.submission-guidelines-large, .next-steps-clipping, .reach-clipping, .wf-wrapper {
+/* --- CLIPPING FLARE (Left Column Content) --- */
+.clipping-container {
     background-color: #fffcf6 !important;
-    box-shadow: 10px 10px 0px #222;
-    margin-bottom: 30px;
-}
-
-.submission-guidelines-large {
-    padding: 45px;
-    border: 3px double #222;
-}
-
-.next-steps-clipping {
-    padding: 25px;
+    box-shadow: 12px 12px 0px #222; /* More aggressive shadow for flare */
+    margin-bottom: 40px;
+    padding: 40px;
     border: 1px solid #222;
 }
 
-.reach-clipping {
-    padding: 30px;
-    border: 1px solid #222 !important;
-    text-align: center;
+/* MAIN RULES BOX */
+.submission-guidelines-large {
+    border: 5px double #222; /* Double border for flare */
 }
 
-/* --- TYPOGRAPHY --- */
-.guidelines-masthead h2 {
+.newspaper-headline {
     font-family: "Times New Roman", serif !important;
     font-weight: 900 !important;
-    text-transform: uppercase;
-    font-size: 28px !important;
+    font-size: 34px !important;
     color: #d9534f !important;
-    border-bottom: 3px solid #222;
-    padding-bottom: 15px;
+    text-transform: uppercase;
     text-align: center;
+    margin: 0 !important;
+    padding-bottom: 10px;
+}
+
+.sub-headline {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 13px;
+    border-bottom: 2px solid #222;
+    padding-bottom: 20px;
 }
 
 .rule-item {
-    margin-bottom: 20px;
-    padding-left: 25px;
-    position: relative;
     font-family: "Times New Roman", serif;
-    font-size: 18px;
-    line-height: 1.7;
+    font-size: 19px;
+    line-height: 1.6;
+    margin-top: 25px;
+    position: relative;
+    padding-left: 30px;
 }
 
 .rule-item::before {
@@ -122,75 +106,90 @@
     font-weight: bold;
 }
 
-/* --- FORM STYLES --- */
-.wf-wrapper {
-    border: 2px solid #222 !important;
-    padding: 40px;
+.editor-signature {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #222;
+    font-style: italic;
+    font-family: "Times New Roman", serif;
 }
 
+.signature-name {
+    margin: 5px 0;
+    font-weight: 900;
+    font-size: 22px;
+}
+
+.sk-tag { color: #d9534f; font-weight: bold; font-size: 12px; }
+
+/* REACH CLIPPING (No Red Dots) */
+.reach-clipping {
+    border: 2px solid #222 !important;
+    text-align: center;
+}
+
+.reach-header { font-family: "Times New Roman", serif; font-weight: 900; }
+.reach-body { font-family: "Times New Roman", serif; font-style: italic; font-size: 18px; color: #444; }
+
+.reach-footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+/* --- FORM CARD --- */
 .wf-header {
     font-family: "Times New Roman", serif !important;
-    font-size: 32px !important;
+    font-size: 36px !important;
     font-weight: 900 !important;
     text-transform: uppercase;
-    text-align: center;
-    border-top: 4px solid #222;
+    border-top: 6px solid #222;
     border-bottom: 2px solid #222;
-    padding: 15px 0;
+    text-align: center;
+    padding: 10px 0;
 }
 
-.wf-label {
-    font-family: "Times New Roman", serif !important;
-    font-weight: bold !important;
-    text-transform: uppercase;
-    border-bottom: 1px solid #ccc;
-    margin-top: 10px;
-    display: block;
-}
+.form-banner { text-align: center; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; }
 
-.wf-field-input {
-    width: 100% !important;
-    border: 1px solid #222 !important;
-    padding: 12px !important;
-    background-color: #ffffff !important;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-}
+.wf-label { font-family: "Times New Roman", serif; font-weight: 900; border-bottom: 1px solid #ddd; margin-top: 15px; display: block; }
+.wf-input { width: 100%; border: 1px solid #222; padding: 12px; margin-bottom: 15px; box-sizing: border-box; }
+.wf-textarea { height: 100px; resize: none; }
 
-.wf-btn {
+.wf-submit-btn {
     width: 100%;
-    background-color: #222 !important;
-    color: #fff !important;
-    padding: 20px !important;
-    font-family: "Times New Roman", serif !important;
-    font-weight: bold !important;
-    text-transform: uppercase !important;
-    font-size: 22px !important;
-    border: none !important;
+    background-color: #222;
+    color: #fff;
+    padding: 20px;
+    font-family: "Times New Roman", serif;
+    font-weight: 900;
+    font-size: 24px;
+    text-transform: uppercase;
     cursor: pointer;
+    border: none;
 }
 
 /* --- FOOTER --- */
 .site-footer {
-    background-color: #000 !important;
-    color: #fff !important;
-    text-align: center !important;
-    padding: 40px 20px;
-    width: 100%;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+    font-family: "Times New Roman", serif;
 }
 
-.site-footer a { color: #fff !important; }
+.site-footer a { color: #fff; }
 
-/* --- RESPONSIVE MOBILE --- */
+/* --- RESPONSIVE --- */
 @media (max-width: 992px) {
     .index-grid-row { flex-direction: column; align-items: center; }
-    .index-col { width: 100%; margin-bottom: 40px; }
+    .index-col { width: 100%; }
 }
 
 @media (max-width: 768px) {
-    .hamburger { display: flex; flex-direction: column; margin: 0 auto; border: none; background: none; cursor: pointer; padding: 10px; }
-    .hamburger span { display: block; width: 25px; height: 3px; background-color: #222; margin: 5px 0; }
-    .nav-links { display: none; flex-direction: column; width: 100%; text-align: center; background-color: #fff; gap: 0 !important; }
+    .nav-links { display: none; flex-direction: column; width: 100%; gap: 0; }
     .nav-links.open { display: flex; }
-    .nav-links li { padding: 15px; border-bottom: 1px solid #eee; }
+    .hamburger { display: flex; flex-direction: column; margin: 0 auto; background: none; border: none; }
+    .hamburger span { width: 30px; height: 3px; background: #222; margin: 5px 0; }
 }
