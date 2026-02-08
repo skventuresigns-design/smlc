@@ -18,6 +18,7 @@
             <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="../clay-city.html">Clay City</a></li>
+                <li><a href="https://www.ourflora.com" target="_blank">Flora</a></li>
                 <li><a href="../louisville.html">Louisville</a></li>
                 <li><a href="../xenia.html">Xenia</a></li>
             </ul>
@@ -26,36 +27,60 @@
 
     <div class="submit-event-main-wrapper">
         <div class="index-grid-row">
+            
             <div class="index-col">
                 <div class="clipping-container submission-guidelines-large">
-                    <h2 class="newspaper-headline">Notice to the Public</h2>
-                    <p style="text-align:center;">All fields are required for calendar placement.</p>
+                    <div class="guidelines-masthead">
+                        <h2 class="newspaper-headline">Notice to the Public</h2>
+                        <span class="sub-headline">Official Calendar Submission Rules</span>
+                    </div>
+                    <div class="rule-section" style="margin-top: 20px; font-family: 'Times New Roman', serif;">
+                        <p><strong>1. Local Focus:</strong> Events must take place within Clay County.</p>
+                        <p><strong>2. Community Interest:</strong> We prioritize fundraisers, church dinners, and school functions.</p>
+                        <p><strong>3. Submission Window:</strong> Please submit at least 7 days prior to the event.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="index-col">
                 <div class="clipping-container form-card" id="form-container">
-                    <h2 class="newspaper-headline">Community Bulletin</h2>
+                    <div class="wf-header">Community Bulletin</div>
+                    <p class="form-banner" style="text-align:center; font-weight:bold; text-transform:uppercase; margin-bottom:20px;">Clay County Event Submission</p>
+                    
                     <form id="smlc-event-form">
-                        <label class="wf-label">Event Name</label><input name="eventName" type="text" class="wf-input" required />
-                        <label class="wf-label">Event Date</label><input name="eventDate" type="text" placeholder="MM/DD/YYYY" class="wf-input" required />
-                        <label class="wf-label">Location</label><input name="location" type="text" class="wf-input" required />
-                        <label class="wf-label">Time</label><input name="eventTime" type="text" class="wf-input" required />
+                        <label class="wf-label">Event Name</label>
+                        <input name="eventName" type="text" class="wf-input" required />
+
+                        <label class="wf-label">Event Date</label>
+                        <input name="eventDate" type="text" placeholder="MM/DD/YYYY" class="wf-input" required />
+
+                        <label class="wf-label">Location</label>
+                        <input name="location" type="text" class="wf-input" required />
+
+                        <label class="wf-label">Time</label>
+                        <input name="eventTime" type="text" class="wf-input" required />
+
                         <div style="display:flex; gap:10px;">
                             <div style="flex:1;"><label class="wf-label">First Name</label><input name="firstName" type="text" class="wf-input" required /></div>
                             <div style="flex:1;"><label class="wf-label">Last Name</label><input name="lastName" type="text" class="wf-input" required /></div>
                         </div>
-                        <label class="wf-label">Email</label><input name="email" type="email" class="wf-input" required />
-                        <label class="wf-label">Details</label><textarea name="details" class="wf-input" style="height:100px;" required></textarea>
+
+                        <label class="wf-label">Email</label>
+                        <input name="email" type="email" class="wf-input" required />
+
+                        <label class="wf-label">Details</label>
+                        <textarea name="details" class="wf-input" style="height:100px;" required></textarea>
                         
-                        <div class='g-recaptcha' data-sitekey='6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG'></div>
+                        <div class="g-recaptcha" data-sitekey="6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG" style="margin-bottom:15px;"></div>
+                        
                         <button type="submit" id="submit-btn" class="wf-submit-btn">Submit Event News</button>
                     </form>
                 </div>
 
                 <div class="clipping-container success-clipping" id="thank-you-container" style="display: none;">
                     <h2 class="newspaper-headline" style="color:#d9534f;">Success!</h2>
-                    <p style="text-align:center; font-family:'Times New Roman', serif; font-size:18px;">Event submitted. Check your email for a receipt!</p>
+                    <p style="text-align:center; font-family:'Times New Roman', serif; font-size:18px; margin-top:20px;">Your event has been submitted for editorial review. A confirmation receipt has been sent to your email.</p>
+                    <button onclick="location.reload()" class="wf-submit-btn">Submit Another Event</button>
                 </div>
             </div>
         </div>
@@ -75,13 +100,18 @@
             submitBtn.disabled = true;
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    document.getElementById('form-container').style.display = 'none';
-                    document.getElementById('thank-you-container').style.display = 'block';
-                    window.scrollTo(0,0);
+                .then(response => response.json())
+                .then(data => {
+                    if(data.result === "success") {
+                        document.getElementById('form-container').style.display = 'none';
+                        document.getElementById('thank-you-container').style.display = 'block';
+                        window.scrollTo(0,0);
+                    } else {
+                        throw new Error(data.message);
+                    }
                 })
                 .catch(error => {
-                    alert("Submission Failed.");
+                    alert("Submission Failed: " + error.message);
                     submitBtn.innerHTML = "Submit Event News";
                     submitBtn.disabled = false;
                 });
