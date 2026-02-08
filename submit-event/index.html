@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Your Event | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
-    
-    <link rel="stylesheet" href="../style.css"> <link rel="stylesheet" href="submit-event.css"> <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="submit-event.css">
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 </head>
 <body class="submit-event-page">
 
@@ -85,7 +86,7 @@
     <footer class="site-footer"><p>© 2026 Support My Local Community | Clay County, Illinois</p></footer>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; // <--- PUT YOUR GOOGLE URL HERE
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; // <--- PUT YOUR DEPLOYED WEB APP URL HERE
         const form = document.getElementById('smlc-event-form');
         const submitBtn = document.getElementById('submit-btn');
 
@@ -97,17 +98,24 @@
             submitBtn.innerHTML = "Sending...";
             submitBtn.disabled = true;
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    document.getElementById('form-container').style.display = 'none';
-                    document.getElementById('thank-you-container').style.display = 'block';
-                    window.scrollTo(0,0);
-                })
-                .catch(error => {
-                    alert("Submission failed. Please check your internet connection or the reCAPTCHA.");
-                    submitBtn.innerHTML = "Submit Event News";
-                    submitBtn.disabled = false;
-                });
+            // Using URLSearchParams for more reliable Google Script delivery
+            const formData = new URLSearchParams(new FormData(form));
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: formData,
+                mode: 'no-cors' // Allows the request to go through even with redirect blocks
+            })
+            .then(() => {
+                document.getElementById('form-container').style.display = 'none';
+                document.getElementById('thank-you-container').style.display = 'block';
+                window.scrollTo(0,0);
+            })
+            .catch(error => {
+                alert("Submission could not reach the server. Please check your Secret Key in Google Apps Script.");
+                submitBtn.innerHTML = "Submit Event News";
+                submitBtn.disabled = false;
+            });
         });
 
         const hamburger = document.getElementById('hamburger');
