@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Your Event | Support My Local Community</title>
-    <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="submit-event.css">
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
@@ -16,13 +15,10 @@
             <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="banner-img" alt="SMLC Banner">
         </div>
         <nav class="nav-bar">
-            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-            <ul class="nav-links" id="nav-links">
+            <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="../clay-city.html">Clay City</a></li>
-                <li><a href="https://www.ourflora.com" target="_blank">Flora</a></li>
                 <li><a href="../louisville.html">Louisville</a></li>
-                <li><a href="../sailor-springs.html">Sailor Springs</a></li>
                 <li><a href="../xenia.html">Xenia</a></li>
             </ul>
         </nav>
@@ -30,44 +26,27 @@
 
     <div class="submit-event-main-wrapper">
         <div class="index-grid-row">
-            
             <div class="index-col">
                 <div class="clipping-container submission-guidelines-large">
-                    <div class="guidelines-masthead">
-                        <h2 class="newspaper-headline">Notice to the Public</h2>
-                        <span class="sub-headline">Official Calendar Submission Rules</span>
-                    </div>
-                    <div class="rule-section">
-                        <div class="rule-item"><strong>Local Focus:</strong> Events must take place within Clay County or serve Flora, Louisville, Clay City, and Xenia.</div>
-                        <div class="rule-item"><strong>Community Interest:</strong> We prioritize fundraisers, church dinners, and school functions.</div>
-                        <div class="rule-item"><strong>Submission Window:</strong> Please submit at least <strong>7 days</strong> prior to the event.</div>
-                    </div>
-                </div>
-
-                <div class="clipping-container next-steps-clipping">
-                    <h4 class="process-title">The Approval Process</h4>
-                    <div class="step-row"><div class="step-num">1</div><p class="step-text"><strong>Submission:</strong> Data enters our registry.</p></div>
-                    <div class="step-row"><div class="step-num">2</div><p class="step-text"><strong>Review:</strong> Our team checks for accuracy.</p></div>
-                    <div class="step-row"><div class="step-num">3</div><p class="step-text"><strong>Go Live:</strong> Event hits the web!</p></div>
+                    <h2 class="newspaper-headline">Notice to the Public</h2>
+                    <p style="text-align:center;">All fields are required for calendar placement.</p>
                 </div>
             </div>
 
             <div class="index-col">
-                <div class='clipping-container form-card' id="form-container">
-                    <div class='wf-header'>Community Bulletin</div>
-                    <p class="form-banner">Clay County Event Submission</p>
-                    
+                <div class="clipping-container form-card" id="form-container">
+                    <h2 class="newspaper-headline">Community Bulletin</h2>
                     <form id="smlc-event-form">
-                        <div class='wf-row'><label class='wf-label'>Event Name</label><input name='eventName' type='text' class='wf-input' required /></div>
-                        <div class='wf-row'><label class='wf-label'>Event Date</label><input name='eventDate' type='text' placeholder="MM/DD/YYYY" class='wf-input' required /></div>
-                        <div class='wf-row'><label class='wf-label'>Location</label><input name='location' type='text' class='wf-input' required /></div>
-                        <div class='wf-row'><label class='wf-label'>Time</label><input name='eventTime' type='text' class='wf-input' required /></div>
+                        <label class="wf-label">Event Name</label><input name="eventName" type="text" class="wf-input" required />
+                        <label class="wf-label">Event Date</label><input name="eventDate" type="text" placeholder="MM/DD/YYYY" class="wf-input" required />
+                        <label class="wf-label">Location</label><input name="location" type="text" class="wf-input" required />
+                        <label class="wf-label">Time</label><input name="eventTime" type="text" class="wf-input" required />
                         <div style="display:flex; gap:10px;">
-                            <div class='wf-row' style="flex:1;"><label class='wf-label'>First Name</label><input name='firstName' type='text' class='wf-input' required /></div>
-                            <div class='wf-row' style="flex:1;"><label class='wf-label'>Last Name</label><input name='lastName' type='text' class='wf-input' required /></div>
+                            <div style="flex:1;"><label class="wf-label">First Name</label><input name="firstName" type="text" class="wf-input" required /></div>
+                            <div style="flex:1;"><label class="wf-label">Last Name</label><input name="lastName" type="text" class="wf-input" required /></div>
                         </div>
-                        <div class='wf-row'><label class='wf-label'>Email</label><input name='email' type='email' class='wf-input' required /></div>
-                        <div class='wf-row'><label class='wf-label'>Details</label><textarea name='details' class='wf-input' style="height:100px;" required></textarea></div>
+                        <label class="wf-label">Email</label><input name="email" type="email" class="wf-input" required />
+                        <label class="wf-label">Details</label><textarea name="details" class="wf-input" style="height:100px;" required></textarea>
                         
                         <div class='g-recaptcha' data-sitekey='6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG'></div>
                         <button type="submit" id="submit-btn" class="wf-submit-btn">Submit Event News</button>
@@ -76,17 +55,14 @@
 
                 <div class="clipping-container success-clipping" id="thank-you-container" style="display: none;">
                     <h2 class="newspaper-headline" style="color:#d9534f;">Success!</h2>
-                    <p style="text-align:center; font-family:'Times New Roman', serif; font-size:18px; margin-top:20px;">Your event has been submitted for editorial review. A confirmation receipt has been sent to your email.</p>
-                    <button onclick="location.reload()" class="wf-submit-btn">Submit Another Event</button>
+                    <p style="text-align:center; font-family:'Times New Roman', serif; font-size:18px;">Event submitted. Check your email for a receipt!</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="site-footer"><p>© 2026 Support My Local Community | Clay County, Illinois</p></footer>
-
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; // <--- PUT YOUR DEPLOYED WEB APP URL HERE
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; 
         const form = document.getElementById('smlc-event-form');
         const submitBtn = document.getElementById('submit-btn');
 
@@ -98,29 +74,18 @@
             submitBtn.innerHTML = "Sending...";
             submitBtn.disabled = true;
 
-            // Using URLSearchParams for more reliable Google Script delivery
-            const formData = new URLSearchParams(new FormData(form));
-
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: formData,
-                mode: 'no-cors' // Allows the request to go through even with redirect blocks
-            })
-            .then(() => {
-                document.getElementById('form-container').style.display = 'none';
-                document.getElementById('thank-you-container').style.display = 'block';
-                window.scrollTo(0,0);
-            })
-            .catch(error => {
-                alert("Submission could not reach the server. Please check your Secret Key in Google Apps Script.");
-                submitBtn.innerHTML = "Submit Event News";
-                submitBtn.disabled = false;
-            });
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    document.getElementById('form-container').style.display = 'none';
+                    document.getElementById('thank-you-container').style.display = 'block';
+                    window.scrollTo(0,0);
+                })
+                .catch(error => {
+                    alert("Submission Failed.");
+                    submitBtn.innerHTML = "Submit Event News";
+                    submitBtn.disabled = false;
+                });
         });
-
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
     </script>
 </body>
 </html>
