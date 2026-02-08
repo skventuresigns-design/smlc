@@ -1,19 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMLC Test Form</title>
+    <style>
+        body { background-color: #0c71c3; font-family: "Times New Roman", serif; padding: 40px; }
+        .clipping { 
+            background: #fffcf6; border: 2px solid #222; padding: 30px; 
+            max-width: 500px; margin: auto; box-shadow: 10px 10px 0px #000; 
+        }
+        h2 { border-top: 4px solid #222; border-bottom: 2px solid #222; text-align: center; text-transform: uppercase; padding: 10px 0; }
+        label { font-weight: bold; text-transform: uppercase; display: block; margin-top: 15px; border-bottom: 1px solid #ccc; }
+        input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #222; box-sizing: border-box; }
+        button { width: 100%; background: #222; color: #fff; padding: 15px; margin-top: 20px; font-weight: bold; cursor: pointer; text-transform: uppercase; border: none; }
+        #thank-you { display: none; text-align: center; }
+    </style>
+</head>
 <body>
-    <h2>Google Sheet Form Test</h2>
-    
-    <form action="https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec" method="POST">
-        <label>Event Name:</label><br>
-        <input type="text" name="eventName" required><br><br>
-        
-        <label>Your Email:</label><br>
-        <input type="email" name="email" required><br><br>
-        
-        <label>Event Details:</label><br>
-        <textarea name="details"></textarea><br><br>
-        
-        <button type="submit">Send to Spreadsheet</button>
-    </form>
+
+    <div class="clipping" id="form-container">
+        <h2>Community Bulletin</h2>
+        <form id="smlc-test-form">
+            <label>Event Name</label><input type="text" name="eventName" required>
+            <label>Event Date</label><input type="text" name="eventDate" placeholder="MM/DD/YYYY" required>
+            <label>Location</label><input type="text" name="location" required>
+            <label>Time</label><input type="text" name="eventTime" required>
+            <div style="display:flex; gap:10px;">
+                <div style="flex:1;"><label>First Name</label><input type="text" name="firstName" required></div>
+                <div style="flex:1;"><label>Last Name</label><input type="text" name="lastName" required></div>
+            </div>
+            <label>Email</label><input type="email" name="email" required>
+            <label>Details</label><textarea name="details" rows="4"></textarea>
+            <button type="submit" id="submit-btn">Submit Event News</button>
+        </form>
+    </div>
+
+    <div class="clipping" id="thank-you">
+        <h2 style="color: #d9534f;">Success!</h2>
+        <p>Your event has been submitted. Check your inbox for a confirmation receipt!</p>
+        <button onclick="location.reload()">Submit Another</button>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; // <--- PUT URL HERE
+        const form = document.getElementById('smlc-test-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            submitBtn.innerHTML = "Sending...";
+            submitBtn.disabled = true;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    document.getElementById('form-container').style.display = 'none';
+                    document.getElementById('thank-you').style.display = 'block';
+                })
+                .catch(error => console.error('Error!', error.message));
+        });
+    </script>
 </body>
 </html>
