@@ -6,7 +6,6 @@
     <title>Submit Your Event | Support My Local Community</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="submit-event.css">
-    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 </head>
 <body class="submit-event-page">
 
@@ -57,7 +56,11 @@
                         <label class="wf-label">Email Address</label><input name="email" type="email" class="wf-input" required>
                         <label class="wf-label">Event Details</label><textarea name="details" class="wf-input" style="height:100px;" required></textarea>
                         
-                        <div class="g-recaptcha" data-sitekey="6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG" style="margin: 20px 0;"></div>
+                        <div style="display:none;">
+                            <label>Do not fill this out</label>
+                            <input name="website_verify" type="text" value="">
+                        </div>
+                        
                         <button type="submit" id="submit-btn" class="wf-submit-btn">Submit Event News</button>
                     </form>
                 </div>
@@ -72,32 +75,30 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec'; // <--- PUT YOUR NEW DEPLOYMENT URL HERE
+        const scriptURL = 'PASTE_YOUR_WEB_APP_URL_HERE'; 
         const form = document.getElementById('smlc-event-form');
         const submitBtn = document.getElementById('submit-btn');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            if (!grecaptcha.getResponse()) { alert("Please complete the reCAPTCHA."); return; }
-
             submitBtn.innerHTML = "Sending...";
             submitBtn.disabled = true;
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => response.text()) // Changed to text to catch simple error messages
+                .then(response => response.text())
                 .then(result => {
                     if(result.trim() === "Success") {
                         document.getElementById('form-container').style.display = 'none';
                         document.getElementById('thank-you-container').style.display = 'block';
                         window.scrollTo(0,0);
                     } else {
-                        alert("Google Script Error: " + result);
+                        alert("Error: " + result);
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = "Submit Event News";
                     }
                 })
                 .catch(error => {
-                    alert("Network Error: Could not reach Google. Check your Web App URL.");
+                    alert("Connection Failed. Check your Web App URL.");
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = "Submit Event News";
                 });
