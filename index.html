@@ -6,16 +6,13 @@
     <title>Support My Local Community | Clay County, IL</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     <link rel="stylesheet" href="style.css">
-    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
-</head>
+    </head>
 <body class="home-bg">
     <header class="header">
         <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
         <nav class="nav-bar">
             <button class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
@@ -69,191 +66,95 @@
     </div>
 
     <div class="orange-master-section">
-        <div class="news-heading-bar"><h2><strong><u>Your Source For Local News</u></strong></h2></div>
-        <div class="orange-grid-row">
-            <div class="orange-col"><img src="https://github.com/skventuresigns-design/media/blob/main/clay-county-news.png?raw=true" alt="Clay County News" class="news-img-styled"></div>
-     <div class="orange-col">
-    <div id="newsletter-form-container" class="clay-county-news-box event-clipping">
-        <div class="clipping-tag-black">Official Signup</div>
-        <div class="news-box-header">
-            <h3>Newsletter Signup</h3>
-            <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; font-weight: bold;">GET LOCAL UPDATES DELIVERED TO YOUR INBOX</span>
-        </div>
-
-        <form id='BiginForm' action='https://bigin.zoho.com/crm/WebToContactForm' method='POST' accept-charset='UTF-8' target='hidden_iframe' onSubmit="return handleFormSubmit()">
-            <input type='hidden' name='xnQsjsdp' value='23cf604eb67702899ed58bcf74b7bb35bc057f2108e11cb782c989f196ffd535'/>
-            <input type='hidden' name='xmIwtLD' value='f03311145dd423f0e462736207bd70e2b26eeba913f9495f6f952773d1a0fc01ca5c5cd442f31f09d68db144a0f45c8a'/>
-            <input type='hidden' name='actionType' value='Q29udGFjdHM='/>
-
-            <div class='wf-row'>
-                <label class='wf-label'>First Name</label>
-                <input name='First Name' type='text' class='wf-field-input' required/>
-            </div>
-            <div class='wf-row'>
-                <label class='wf-label'>Last Name</label>
-                <input name='Last Name' type='text' class='wf-field-input' required/>
-            </div>
-            <div class='wf-row'>
-                <label class='wf-label'>Email</label>
-                <input name='Email' type='email' class='wf-field-input' required/>
+        <div class="news-heading-bar"><h2 class="local-news-subhead"><strong><u>Your Source For Local News</u></strong></h2></div>
+        
+        <div class="discover-row">
+            <div class="orange-col">
+                <img src="https://github.com/skventuresigns-design/media/blob/main/clay-county-news.png?raw=true" alt="Clay County News" class="news-img-styled">
             </div>
 
-            <div class='wf-row'>
-                <div class='g-recaptcha' data-sitekey='6Lc0AF8sAAAAADvZYeM0AENz_9b49lrqfotnW9GG' id='recap_box'></div>
+            <div class="orange-col">
+                <div id="newsletter-form-container" class="clay-county-news-box event-clipping">
+                    <div class="clipping-tag-black">Official Signup</div>
+                    <div class="news-box-header">
+                        <h3>Newsletter Signup</h3>
+                        <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; font-weight: bold;">GET LOCAL UPDATES DELIVERED TO YOUR INBOX</span>
+                    </div>
+
+                    <form id="newsletter-form">
+                        <input type="hidden" name="formType" value="newsletter">
+                        
+                        <div class='wf-row'>
+                            <label class='wf-label'>First Name</label>
+                            <input name='firstName' type='text' class='wf-field-input' required/>
+                        </div>
+                        <div class='wf-row'>
+                            <label class='wf-label'>Last Name</label>
+                            <input name='lastName' type='text' class='wf-field-input' required/>
+                        </div>
+                        <div class='wf-row'>
+                            <label class='wf-label'>Email</label>
+                            <input name='email' type='email' class='wf-field-input' required/>
+                        </div>
+
+                        <div style="display:none;">
+                            <input name="website_verify" type="text" value="">
+                        </div>
+
+                        <div class='wform-btn-wrap' style="text-align: right; margin-top: 20px;">
+                            <button type="submit" id="nl-submit-btn" class="clipping-btn" style="border:none; cursor:pointer; width:100%;">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="thank-you-clipping" class="clay-county-news-box spotlight-clipping" style="display: none; text-align: center;">
+                    <div class="clipping-tag-black">Success!</div>
+                    <div class="news-box-header"><h3>Thank You!</h3></div>
+                    <p class="biz-description" style="font-size: 1.2rem; font-weight: bold;">Thank You for Signing up for the Newsletter!</p>
+                    <p style="font-style: italic; margin-top: 10px;">Thank you for joining the Newsletter, we will be sending some good information soon !!</p>
+                </div>
             </div>
-
-            <div class='wform-btn-wrap' style="text-align: right; margin-top: 20px;">
-                <input type='submit' class='clipping-btn' value='Subscribe' style="border:none; cursor:pointer; width:100%;">
-            </div>
-        </form>
-    </div>
-
-    <div id="thank-you-clipping" class="clay-county-news-box spotlight-clipping" style="display: none; text-align: center;">
-        <div class="clipping-tag-black">Success!</div>
-        <div class="news-box-header">
-            <h3>Thank You!</h3>
-        </div>
-        <p class="biz-description" style="font-size: 1.2rem; font-weight: bold;">Thank You for Signing up for the Newsletter!</p>
-        <p style="font-style: italic; margin-top: 10px;">Your details have been added to our community directory.</p>
-    </div>
-
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showThankYou();}"></iframe>
-</div> 
         </div>
     </div>
 
     <div class="intricate-grid-container">
-        <div class="intricate-col">
-            <div class="clay-county-sync-container">
-                <iframe src="https://kfruti88.github.io/Clay-County-Bulletin/" style="width:100%; height:800px; border:none; overflow:hidden;" scrolling="no"></iframe>
-            </div>
         </div>
-
-        <div class="intricate-col">
-            <div class="clay-county-news-box spotlight-clipping">
-                <div class="news-box-header">
-                    <h3>Business Spotlight</h3>
-                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; font-weight: bold;">Supporting Local Clay County News</span>
-                </div>
-                <div class="spotlight-image-wrap">
-                    <img src="https://github.com/skventuresigns-design/media/blob/main/localbusiness.png?raw=true" alt="Flora Family Diner">
-                </div>
-                <span style="font-size: 24px; font-weight: bold; display: block; text-align: center; margin-bottom: 5px;">Flora Family Diner</span>
-                <span style="font-size: 12px; text-transform: uppercase; color: #d9534f; font-weight: bold; display: block; text-align: center; margin-bottom: 15px; letter-spacing: 1px;">Flora, Illinois</span>
-                <p class="biz-description">Serving home-cooked favorites for over two decades, the Family Diner is a staple of our community. Known for their "Early Bird" specials and the friendliest service in Clay County.</p>
-                <a href="#" class="clipping-btn">Visit Website</a>
-            </div>
-
-            <div class="clay-county-news-box event-clipping">
-                <div class="clipping-tag-black">Community Bulletin</div>
-                <div class="news-box-header">
-                    <h3>What's Happening?</h3>
-                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; font-weight: bold;">Clay County Community Calendar</span>
-                </div>
-                <p class="biz-description" style="text-align: center; font-style: italic;">"Got a local fundraiser, school event, or church dinner coming up? Share your news with the community for free!"</p>
-                <a href="https://www.supportmylocalcommunity.com/submit-event/" class="clipping-btn">Submit Your Event</a>
-            </div>
-        </div>
-
-        <div class="intricate-col">
-            <div class="clay-county-news-box group-invitation-master">
-                <div class="spotlight-image-wrap fb-hero-image">
-                    <img src="https://supportmylocalcommunity.com/wp-content/uploads/2025/12/smlc-banner.png" alt="Support My Local Community">
-                </div>
-                <div class="news-box-header">
-                    <h3>Join the Community</h3>
-                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; font-weight: bold;">Official Support My Local Community Facebook Page</span>
-                </div>
-                <span style="font-size: 16px; font-weight: bold; display: block; text-align: center; margin-bottom: 15px; color: #222;">Support My Local Community</span>
-                <p class="biz-description" style="text-align: center;">Stay connected with neighbors. Discuss local news, share updates, and join the conversation on our official social page.</p>
-                <a href="https://www.facebook.com/SupportMyLocalCommunity" target="_blank" class="clipping-btn">Enter the Conversation</a>
-            </div>
-
-            <div class="clay-county-news-box group-clipping">
-                <div class="group-header">
-                    <h3>Richards' News and Reviews</h3>
-                    <span>Join the Group</span>
-                </div>
-                <p class="biz-description" style="text-align: center; font-style: italic;">"Get involved in the conversation! Richard's News and Reviews Facebook Group."</p>
-                <a href="https://www.facebook.com/groups/1069055660369865" target="_blank" class="clipping-btn">Visit Facebook Group</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="blue-news-frame">
-        <div class="news-content-90">
-            <div id="github-news-container"></div>
-        </div>
-    </div>
-    
-    <div class="thankful-section">
-        <div class="thankful-content">
-            <p>We are very Thankful and Blessed for our Customers who allow us to advertise their Business to the Community. We hope to be of Service, not only to the Large Corporations, but also to the Small Business’ in the area. A Large Corporation once started out as a small business, so our hope is to help those Small Business’ we serve reach the fullest potential they desire. You will never know what we are able to do for Your Business unless you ask. I hope to hear from you.</p>
-            <p class="contact-email">For questions or comments about this site please email <a href="mailto:info@supportmylocalcommunity.com">info@supportmylocalcommunity.com</a></p>
-        </div>
-    </div>
 
     <footer class="site-footer">
          <p>All Content, Photographs, Writings, Letters and Documents © 2026 - Support My Local Community</p>
          <p>All Rights Reserved - <a href="https://www.skventuresigns.com" target="_blank" class="footer-link">S&K Ventures</a></p>
     </footer>
 
-    
-<!-- The Hamburger Navigation -->
     <script>
+        const scriptURL = 'PASTE_YOUR_WEB_APP_URL_HERE'; 
+        const form = document.getElementById('newsletter-form');
+        const submitBtn = document.getElementById('nl-submit-btn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            submitBtn.innerHTML = "Joining...";
+            submitBtn.disabled = true;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => response.text())
+                .then(result => {
+                    if(result.trim() === "Success") {
+                        document.getElementById('newsletter-form-container').style.display = 'none';
+                        document.getElementById('thank-you-clipping').style.display = 'block';
+                    } else {
+                        alert("Error: " + result);
+                        submitBtn.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    alert("Connection Failed.");
+                    submitBtn.disabled = false;
+                });
+        });
+
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
-    </script>
-
-
-    
-<!-- Newsletter Form -->
-  <script>
-    var submitted = false;
-
-    function handleFormSubmit() {
-        // Check if reCAPTCHA is completed
-        var response = grecaptcha.getResponse();
-        if(response.length == 0) {
-            alert("Please check the 'I am not a robot' box.");
-            return false;
-        }
-        // If good, tell the iframe we are ready
-        submitted = true;
-        return true;
-    }
-
-    function showThankYou() {
-        if(submitted) {
-            document.getElementById('newsletter-form-container').style.display = 'none';
-            document.getElementById('thank-you-clipping').style.display = 'block';
-        }
-    }
-</script>
-
-    
-  <!--  News Feed  -->
-    <script>
-    (function() {
-        const path = window.location.pathname;
-        let slug = path.split('/').filter(s => s.length > 0).pop() || '';
-        slug = slug.replace('.html', '');
-        const baseUrl = "https://kfruti88.github.io/clay-county-news/";
-        const finalUrl = (slug === '' || slug === 'index') ? baseUrl : `${baseUrl}${slug}/`;
-        const container = document.getElementById('github-news-container');
-        if (container) {
-            container.innerHTML = ''; 
-            const iframe = document.createElement('iframe');
-            iframe.src = finalUrl;
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            iframe.style.border = "none";
-            iframe.style.background = "transparent"; 
-            iframe.setAttribute('allowtransparency', 'true');
-            container.appendChild(iframe);
-        }
-    })();
     </script>
 </body>
 </html>
