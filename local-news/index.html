@@ -14,7 +14,7 @@
         .hub-title { margin: 0; font-family: serif; text-transform: uppercase; letter-spacing: 2px; color: #333; font-size: 1.5rem; }
         .article-wrapper { width: 95%; max-width: 900px; margin: 40px auto; }
         
-        /* Base Styling for Full Story Cards */
+        /* Premium Card Look for News */
         .full-story-display { 
             background: white; 
             padding: 40px; 
@@ -25,7 +25,7 @@
             border-left: 15px solid #0c0b82; 
             transition: border-left-width 0.5s ease;
         }
-        .story-body { white-space: pre-wrap; line-height: 1.8; font-size: 1.2rem; color: #333; }
+        .story-body { line-height: 1.8; font-size: 1.15rem; color: #333; }
         .status-msg { text-align: center; color: #666; font-style: italic; margin-top: 50px; }
     </style>
 </head>
@@ -38,16 +38,15 @@
 
 <div class="article-wrapper">
     <div id="full-news-feed">
-        <p class="status-msg">Gathering local updates for Clay County...</p>
+        <p class="status-msg">Gathering latest local stories from WNOW and Clay County sources...</p>
     </div>
 </div>
 
 <script src="news-engine.js"></script>
 
 <script>
-    window.gData = { config: "production" };
-    function rotateAds() { return; } 
-
+    // Auto-Scroll Logic: If you click a "Read More" on the homepage, 
+    // it will find that exact story here and scroll to it.
     function autoScrollToStory() {
         const urlParams = new URLSearchParams(window.location.search);
         const storyId = urlParams.get('id');
@@ -66,13 +65,6 @@
         });
 
         observer.observe(targetContainer, { childList: true, subtree: true });
-        const existingEl = document.getElementById(storyId);
-        if (existingEl) {
-            existingEl.scrollIntoView({ behavior: 'smooth' });
-            existingEl.style.borderLeftWidth = "35px";
-            observer.disconnect();
-        }
-        setTimeout(() => observer.disconnect(), 5000);
     }
     autoScrollToStory();
 </script>
