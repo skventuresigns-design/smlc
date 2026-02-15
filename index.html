@@ -219,24 +219,27 @@
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
 
         // News Feed Script
-        (function() {
-            const path = window.location.pathname;
-            let slug = path.split('/').filter(s => s.length > 0).pop() || '';
-            slug = slug.replace('.html', '');
-            const baseUrl = "https://kfruti88.github.io/clay-county-news/";
-            const finalUrl = (slug === '' || slug === 'index') ? baseUrl : `${baseUrl}${slug}/`;
-            const container = document.getElementById('github-news-container');
-            if (container) {
-                container.innerHTML = ''; 
-                const iframe = document.createElement('iframe');
-                iframe.src = finalUrl;
-                iframe.style.width = "100%"; iframe.style.height = "100%";
-                iframe.style.border = "none"; iframe.style.background = "transparent"; 
-                iframe.setAttribute('allowtransparency', 'true');
-                container.appendChild(iframe);
-            }
-        })();
+        // NEW News Feed Script - Pointed to YOUR repository
+(function() {
+    const container = document.getElementById('github-news-container');
+    if (container) {
+        container.innerHTML = ''; 
+        const iframe = document.createElement('iframe');
+        
+        // This points to the new folder you just created
+        iframe.src = "https://www.supportmylocalcommunity.com/local-news/"; 
+        
+        iframe.style.width = "100%"; 
+        iframe.style.height = "600px"; // Adjusted height for better visibility
+        iframe.style.border = "none"; 
+        iframe.style.background = "transparent"; 
+        iframe.setAttribute('allowtransparency', 'true');
+        container.appendChild(iframe);
+    }
+})();
 
+
+        
         // Universal Fix: Force News Links to open in the Main Window
 window.addEventListener('message', function(event) {
     // This listens for any 'click' or 'navigation' signals from the news feed
