@@ -6,16 +6,48 @@
     <title>Clay County News Center</title>
     <link rel="stylesheet" href="../style.css"> 
     <style>
-        body { background: #fcf6de; margin: 0; padding: 0; font-family: 'Times New Roman', serif; }
-        .newspaper-masthead { border-bottom: 4px double #222; margin-bottom: 20px; text-align: center; padding: 10px 0; }
-        .news-title { font-size: 3rem; text-transform: uppercase; margin: 0; letter-spacing: -2px; }
-        .news-meta-bar { border-top: 1px solid #222; border-bottom: 1px solid #222; display: flex; justify-content: space-between; padding: 5px 15px; font-weight: bold; font-size: 0.9rem; margin-top: 10px;}
-        .story-card { background: #fff; padding: 25px; margin-bottom: 20px; border: 1px solid #ccc; box-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
-        .story-card h2 { margin: 0 0 10px 0; color: #0c0b82; font-size: 1.6rem; }
-    </style>
+    body { background: transparent; margin: 0; padding: 0; font-family: 'Times New Roman', serif; }
+    
+    .news-hub-wrapper { 
+        background: #fcf6de; 
+        min-height: 100vh; 
+        padding: 0; /* Changed to 0 so masthead hits the edges */
+        overflow: hidden; 
+    }
+    
+    .newspaper-masthead { 
+        background: #fcf6de; 
+        border-bottom: 4px double #222; 
+        text-align: center; 
+        padding: 15px 0; 
+    }
+    
+    .news-title { font-size: 3rem; text-transform: uppercase; margin: 0; letter-spacing: -2px; }
+    
+    .news-meta-bar { 
+        border-top: 1px solid #222; 
+        border-bottom: 1px solid #222; 
+        display: flex; 
+        justify-content: space-between; 
+        padding: 5px 15px; 
+        font-weight: bold; 
+        font-size: 0.9rem; 
+        margin: 10px 20px 0 20px; 
+    }
+    
+    .story-card { 
+        background: #fff; 
+        padding: 25px; 
+        margin-bottom: 20px; 
+        border: 1px solid #ccc; 
+        box-shadow: 2px 2px 0px rgba(0,0,0,0.1); 
+    }
+    
+    .story-card h2 { margin: 0 0 10px 0; color: #0c0b82; font-size: 1.6rem; }
+</style>
 </head>
 <body>
-
+   <div class="news-hub-wrapper">
     <div class="newspaper-masthead">
         <h1 class="news-title">Clay County News</h1>
         <div class="news-meta-bar">
@@ -25,11 +57,12 @@
         </div>
     </div>
 
-    <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <div style="width: 90%; max-width: 900px; margin: 20px auto;">
         <div id="full-news-feed">
             <p style="text-align:center;">Scanning local airwaves for Clay County news...</p>
         </div>
     </div>
+   </div>
 
     <script src="news-engine.js"></script>
     <script>
