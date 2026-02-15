@@ -4,77 +4,57 @@
 
 const FEED_SERVICE = "https://api.rss2json.com/v1/api.json?rss_url=";
 
-// The 3 sources you approved
+// Approved local sources
 const sources = [
     "https://www.wfiwradio.com/feed/",
     "https://southernillinoisnow.com/feed/",
     "https://patch.com/feeds/aol/illinois/flora-il"
 ];
 
-// Your specific local keywords
-const localKeywords = ["clay county", "flora", "louisville", "clay city", "xenia", "iola", "sailor springs"];
+// Strict local town filter
+const localTowns = ["flora", "clay city", "louisville", "xenia", "sailor springs", "iola", "bible grove"];
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadLocalNews();
-});
+document.addEventListener('DOMContentLoaded', () => loadLocalNews());
 
 async function loadLocalNews() {
     const container = document.getElementById('full-news-feed');
     if(!container) return;
 
     try {
-        let allArticles = [];
-
-        // 1. Fetch from all sources at once
         const fetchPromises = sources.map(url => fetch(FEED_SERVICE + encodeURIComponent(url)).then(res => res.json()));
         const results = await Promise.all(fetchPromises);
+        let allArticles = [];
+        results.forEach(data => { if (data.status === 'ok') allArticles = [...allArticles, ...data.items]; });
 
-        results.forEach(data => {
-            if (data.status === 'ok') {
-                allArticles = [...allArticles, ...data.items];
-            }
+        // STRICT FILTER: Keyword must be in the TITLE to stop national news clutter
+        const filtered = allArticles.filter(a => {
+            const title = a.title.toLowerCase();
+            return localTowns.some(town => title.includes(town)) || title.includes("clay county");
         });
 
-        // 2. FILTER: Only keep stories that mention your specific towns or county
-        const filteredNews = allArticles.filter(article => {
-            const content = (article.title + article.description + (article.content || "")).toLowerCase();
-            return localKeywords.some(keyword => content.includes(keyword));
+        if (filtered.length === 0) {
+            container.innerHTML = "<p style='text-align:center; font-style:italic;'>No new local stories for Clay County today.</p>";
+            return;
+        }
+
+        container.innerHTML = '';
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'story-card';
+            
+            // Removes external redirect text to keep info on your page
+            let cleanSnippet = item.description.split('The post')[0]; 
+            
+            card.innerHTML = `
+                <p style="font-size:0.7rem; color:#666; margin-bottom:5px;">LATEST LOCAL REPORT</p>
+                <h2>${item.title}</h2>
+                <div style="line-height:1.6; color:#333;">${cleanSnippet}</div>
+                <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+                <p style="font-size:0.8rem; color:#0c0b82; font-weight:bold;">Reported by ${item.author || "Local Source"}</p>
+            `;
+            container.appendChild(card);
         });
-
-        // 3. SORT: Newest stories first
-        filteredNews.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-        renderNews(filteredNews);
-
-    } catch (error) {
-        container.innerHTML = "<p class='status-msg'>Error connecting to local sources. Please refresh.</p>";
+    } catch (e) {
+        container.innerHTML = "<p>News temporarily unavailable.</p>";
     }
-}
-
-function renderNews(articles) {
-    const container = document.getElementById('full-news-feed');
-    if (articles.length === 0) {
-        container.innerHTML = "<p class='status-msg'>No new local stories found for Clay County today.</p>";
-        return;
-    }
-
-    container.innerHTML = ''; 
-    articles.forEach((item, index) => {
-        const card = document.createElement('div');
-        card.className = 'full-story-display';
-        card.id = `story-${index}`; 
-
-        const img = item.enclosure?.link || item.thumbnail || "";
-
-        card.innerHTML = `
-            <p style="color:#666; font-weight:bold; text-transform:uppercase; font-size:0.75rem; margin-bottom:5px;">
-                ${new Date(item.pubDate).toLocaleDateString()} | LOCAL UPDATE
-            </p>
-            <h2 style="margin-top:0; font-family:serif; font-size:1.8rem; color:#0c0b82;">${item.title}</h2>
-            ${img ? `<img src="${img}" style="width:100%; border-radius:8px; margin-bottom:15px; max-height:400px; object-fit:cover;">` : ''}
-            <div class="story-body" style="font-size:1.15rem; line-height:1.7;">${item.description}</div>
-            <a href="${item.link}" target="_blank" style="display:inline-block; margin-top:15px; color:#cc0000; font-weight:bold; text-decoration:none;">READ FULL STORY AT SOURCE →</a>
-        `;
-        container.appendChild(card);
-    });
 }
