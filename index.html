@@ -188,7 +188,7 @@
 
     <div class="blue-news-frame">
         <div class="news-content-90">
-            <div id="github-news-container"></div>
+            <div id="full-news-feed"></div>
         </div>
     </div>
     
@@ -274,26 +274,7 @@
         }
         loadDirectEvents();
 
-
-        
-        // NEW News Feed Script - Pointed to YOUR repository
-(function() {
-    const container = document.getElementById('github-news-container');
-    if (container) {
-        container.innerHTML = ''; 
-        const iframe = document.createElement('iframe');
-        
-        // This points to the new folder you just created
-        iframe.src = "https://www.supportmylocalcommunity.com/local-news/"; 
-        
-        iframe.style.width = "100%"; 
-        iframe.style.height = "600px"; // Adjusted height for better visibility
-        iframe.style.border = "none"; 
-        iframe.style.background = "transparent"; 
-        iframe.setAttribute('allowtransparency', 'true');
-        container.appendChild(iframe);
-    }
-})();
     </script>
+    <script src="news-engine.js"></script>
 </body>
 </html>
