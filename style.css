@@ -134,6 +134,12 @@ body {
     max-width: 550px;
     margin: 0 auto;
     padding: 10px 0;
+    display: block !important; /* Forces it to show */
+    min-height: 200px; /* Give it a starting height so it's not invisible */
+}
+
+#bulletin-iframe {
+    overflow: visible !important;
 }
 
 .news-box-header { text-align: center; border-top: 5px solid #222; border-bottom: 3px solid #222; padding: 10px; margin-bottom: 20px; }
