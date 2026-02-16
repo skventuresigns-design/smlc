@@ -17,7 +17,6 @@ async function loadLocalNews() {
         let allArticles = [];
         results.forEach(data => { if (data.status === 'ok') allArticles = [...allArticles, ...data.items]; });
 
-        // Sort by date
         allArticles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
         container.innerHTML = '';
@@ -25,25 +24,22 @@ async function loadLocalNews() {
             const content = (item.title + " " + (item.description || "")).toLowerCase();
             const isLocal = localTowns.some(town => content.includes(town));
             
-            // Only show Illinois/Local news
             if (isLocal || content.includes("illinois")) {
                 const card = document.createElement('div');
                 card.className = 'story-card';
                 
-                // Clean the text so it fits the card
-                let snippet = item.description.split('The post')[0];
+                // This removes the "The post ... appeared first on" text
+                let cleanText = item.description.split('The post')[0];
 
                 card.innerHTML = `
-                    <p style="font-weight:bold; font-size:0.7rem; color:${isLocal ? '#cc0000' : '#666'};">
-                        ${isLocal ? '★ LOCAL REPORT' : 'STATE NEWS'} | ${new Date(item.pubDate).toLocaleDateString()}
+                    <p style="font-weight:bold; font-size:0.7rem; color:#666; margin-bottom:5px;">
+                        ${new Date(item.pubDate).toLocaleDateString()} | LOCAL REPORT
                     </p>
                     <h2>${item.title}</h2>
-                    <div style="font-size:1rem; line-height:1.5;">${snippet}</div>
-                    <div style="margin-top:10px; border-top:1px solid #eee; padding-top:10px;">
-                        <a href="${item.link}" target="_blank" style="color:#0c0b82; font-weight:bold; text-decoration:none;">
-                           VIEW FULL REPORT →
-                        </a>
-                    </div>
+                    <div style="font-size:1.1rem; line-height:1.6; color:#333;">${cleanText}</div>
+                    <p style="margin-top:15px; font-size:0.8rem; font-style:italic; color:#0c0b82;">
+                        Report provided by local news wire.
+                    </p>
                 `;
                 container.appendChild(card);
             }
