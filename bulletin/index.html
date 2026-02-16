@@ -3,39 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clay County Community Bulletin</title>
+    <title>Community Bulletin</title>
     <style>
-        body { background: #fcf6de; margin: 0; padding: 10px; font-family: 'Times New Roman', serif; overflow: hidden; }
-        .bulletin-container { background: #fff; border: 2px solid #222; padding: 15px; box-shadow: 5px 5px 0px #0c0b82; }
-        .bulletin-header { text-align: center; border-bottom: 2px solid #222; margin-bottom: 15px; padding-bottom: 10px; }
-        .bulletin-header h2 { text-transform: uppercase; margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
-        .event-item { border-bottom: 1px dashed #ccc; padding: 10px 0; }
+        body { background: transparent; margin: 0; padding: 10px; font-family: 'Times New Roman', serif; overflow: hidden; }
+        
+        .news-clipping-wrapper {
+            background-color: #fffdf5; 
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6); 
+            border: 1px solid #222;
+            color: #222;
+            max-width: 500px;
+            margin: 10px auto;
+        }
+
+        .clipping-masthead {
+            text-align: center;
+            padding: 20px 10px 10px 10px;
+            border-bottom: 4px double #222; 
+            margin: 0 15px;
+        }
+
+        .black-tag {
+            background: #000;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 4px 12px;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .clipping-tagline {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin: 10px 0 0 0;
+            color: #444;
+        }
+
+        .event-item {
+            border-bottom: 1px dashed #777;
+            padding: 15px 0;
+        }
+
         .event-item:last-child { border-bottom: none; }
-        .event-date { font-weight: bold; color: #cc0000; text-transform: uppercase; font-size: 0.8rem; }
-        .event-title { font-size: 1.2rem; margin: 5px 0; color: #222; }
+
+        .event-date { color: #cc0000; font-weight: bold; font-size: 13px; text-transform: uppercase; }
+        .event-title { font-size: 20px; font-weight: bold; margin: 5px 0; line-height: 1.2; }
+
+        .cal-links { margin-top: 10px; font-size: 12px; }
+        .cal-text-link { color: #cc0000 !important; text-decoration: none !important; font-weight: bold; text-transform: uppercase; font-size: 11px; }
+        .cal-text-link:hover { text-decoration: underline !important; }
+
+        .clipping-footer {
+            border-top: 1px solid #222;
+            padding: 10px;
+            font-size: 10px;
+            text-align: center;
+            font-style: italic;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
-    <div class="bulletin-container" id="height-wrapper">
-        <div class="bulletin-header">
-            <h2>Community Bulletin</h2>
-            <div style="font-size: 0.8rem; font-weight: bold;">CLAY COUNTY EVENTS & UPDATES</div>
-        </div>
-
-        <div id="event-list">
-            <p style="text-align:center; font-style:italic;">Scanning for upcoming community events...</p>
+    <div id="height-wrapper">
+        <div class="news-clipping-wrapper">
+            <div class="clipping-masthead">
+                <span class="black-tag">Community Bulletin</span>
+                <p class="clipping-tagline">Clay County Events & Happenings</p>
+            </div>
+            
+            <div id="event-list" style="padding: 10px 20px;">
+                <p style="text-align:center; font-style: italic;">Loading the latest dispatches...</p>
+            </div>
+            
+            <div class="clipping-footer">Support My Local Community</div>
         </div>
     </div>
 
     <script src="bulletin-engine.js"></script>
     <script>
-        // This part talks to your main site to adjust the height
+        // Tell the main site how tall this clipping is
         function pushHeight() {
-            const height = document.getElementById('height-wrapper').offsetHeight + 40;
+            const height = document.getElementById('height-wrapper').offsetHeight + 30;
             window.parent.postMessage({ height: height }, '*');
         }
         window.onload = pushHeight;
-        setInterval(pushHeight, 1000); // Keeps the window sized correctly
+        setInterval(pushHeight, 1000); 
     </script>
 </body>
 </html>
