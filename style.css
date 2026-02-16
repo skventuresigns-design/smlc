@@ -168,7 +168,48 @@ body {
    ========================================= */
 .blue-news-frame { background-color: #0c2ef1; padding: 60px 0; margin: 40px 0; }
 .news-content-90 { width: 90%; max-width: 1400px; margin: 0 auto; height: 800px; background: #fff; }
-#github-news-container { width: 100%; height: 100%; overflow: hidden; }
+/* COMPACT COMMUNITY BULLETIN STYLING */
+#full-news-feed {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+.full-story-display {
+    background-color: #fcf6de; /* Your saved listing card color */
+    padding: 20px;
+    border: 1px solid #333;
+    box-shadow: 6px 6px 0px #222; /* Retro newspaper shadow */
+    display: flex;
+    flex-direction: column;
+}
+
+.full-story-display h1 {
+    font-size: 1.25rem !important; /* Forces the giant headlines to shrink */
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: #cc0000; /* Matching your calendar red */
+    text-align: left;
+}
+
+.story-body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #444;
+    max-height: 150px; /* Prevents long stories from taking over the screen */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.full-story-display img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    filter: sepia(20%); /* Adds a slight vintage newspaper feel */
+}
 
 .thankful-section { width: 100%; background-color: #ffffff; padding: 60px 20px; text-align: center; }
 .thankful-content { max-width: 1000px; margin: 0 auto; font-family: "Times New Roman", serif; font-size: 1.2rem; line-height: 1.6; }
@@ -256,3 +297,4 @@ body {
 .clipping-btn:hover {
     background-color: #d9534f; /* Red on hover for a little pop */
 }
+
