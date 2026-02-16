@@ -230,7 +230,52 @@
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
 
-        // News Feed Script
+       // Bulletin       
+        const BULLETIN_DATA_URL = "https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec";
+
+        async function loadDirectEvents() {
+            const list = document.getElementById('direct-event-list');
+            try {
+                const response = await fetch(BULLETIN_DATA_URL);
+                const events = await response.json();
+
+                if (events && events.length > 0) {
+                    list.innerHTML = '';
+                    events.slice(-5).reverse().forEach(item => {
+                        const eventDateObj = new Date(item.date);
+                        const friendlyDate = isNaN(eventDateObj) ? item.date : eventDateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                        const gDate = isNaN(eventDateObj) ? "" : eventDateObj.toISOString().replace(/-|:|\.\d\d\d/g, "").split("T")[0];
+                        
+                        const gCalLink = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(item.name)}&dates=${gDate}/${gDate}&details=${encodeURIComponent(item.details || '')}&location=${encodeURIComponent(item.location)}&sf=true&output=xml`;
+                        const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${item.name}\nLOCATION:${item.location}\nDTSTART:${gDate}\nDTEND:${gDate}\nEND:VEVENT\nEND:VCALENDAR`;
+                        const icsData = "data:text/calendar;charset=utf8," + encodeURIComponent(icsContent);
+
+                        const div = document.createElement('div');
+                        div.style.padding = "15px 0";
+                        div.style.borderBottom = "1px dashed #ccc";
+                        div.innerHTML = `
+                            <div style="color: #cc0000; font-weight: bold; font-size: 12px; text-transform: uppercase;">${friendlyDate}</div>
+                            <div style="font-size: 18px; font-weight: bold; margin: 5px 0; line-height: 1.2;">${item.name}</div>
+                            <div style="font-size: 13px; color:#444;">${item.location} | ${item.time}</div>
+                            <div style="margin-top: 8px;">
+                                <a href="${gCalLink}" target="_blank" style="color: #cc0000; font-weight: bold; font-size: 10px; text-transform: uppercase; text-decoration: none;">Google</a>
+                                <span style="color:#777; margin: 0 5px;">|</span>
+                                <a href="${icsData}" download="event.ics" style="color: #cc0000; font-weight: bold; font-size: 10px; text-transform: uppercase; text-decoration: none;">Apple/Outlook</a>
+                            </div>
+                        `;
+                        list.appendChild(div);
+                    });
+                } else {
+                    list.innerHTML = "<p style='text-align:center; padding: 20px;'>No events scheduled.</p>";
+                }
+            } catch (e) {
+                list.innerHTML = "<p style='text-align:center; padding: 20px;'>Connection error.</p>";
+            }
+        }
+        loadDirectEvents();
+
+
+        
         // NEW News Feed Script - Pointed to YOUR repository
 (function() {
     const container = document.getElementById('github-news-container');
@@ -250,14 +295,5 @@
     }
 })();
     </script>
-<script>
-    /* This script listens for the height 'push' from the bulletin clipping */
-    window.addEventListener('message', function(e) {
-        if (e.data.height) {
-            document.getElementById('bulletin-iframe').style.height = e.data.height + 'px';
-        }
-    }, false);
-</script>
-    
 </body>
 </html>
