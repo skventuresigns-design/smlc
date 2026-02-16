@@ -3,66 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Bulletin</title>
+    <title>Community Bulletin Master List</title>
     <style>
-        body { background: transparent; margin: 0; padding: 10px; font-family: 'Times New Roman', serif; overflow: hidden; }
+        body { background: #fffdf5; margin: 0; padding: 20px; font-family: 'Times New Roman', serif; color: #222; }
         
         .news-clipping-wrapper {
             background-color: #fffdf5; 
-            box-shadow: 6px 6px 0px rgba(0,0,0,0.6); 
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.7); 
             border: 1px solid #222;
-            color: #222;
-            max-width: 500px;
-            margin: 10px auto;
+            max-width: 600px;
+            margin: auto;
         }
 
         .clipping-masthead {
             text-align: center;
-            padding: 20px 10px 10px 10px;
+            padding: 25px 15px;
             border-bottom: 4px double #222; 
-            margin: 0 15px;
+            margin: 0 20px;
         }
 
         .black-tag {
             background: #000;
             color: #fff;
             text-transform: uppercase;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
-            padding: 4px 12px;
+            padding: 5px 15px;
             display: inline-block;
-            letter-spacing: 1px;
-        }
-
-        .clipping-tagline {
-            font-size: 11px;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin: 10px 0 0 0;
-            color: #444;
         }
 
         .event-item {
             border-bottom: 1px dashed #777;
-            padding: 15px 0;
+            padding: 20px 0;
+            margin: 0 20px;
         }
 
         .event-item:last-child { border-bottom: none; }
 
-        .event-date { color: #cc0000; font-weight: bold; font-size: 13px; text-transform: uppercase; }
-        .event-title { font-size: 20px; font-weight: bold; margin: 5px 0; line-height: 1.2; }
+        .event-date { color: #cc0000; font-weight: bold; font-size: 14px; text-transform: uppercase; }
+        .event-title { font-size: 22px; font-weight: bold; margin: 5px 0; }
 
-        .cal-links { margin-top: 10px; font-size: 12px; }
-        .cal-text-link { color: #cc0000 !important; text-decoration: none !important; font-weight: bold; text-transform: uppercase; font-size: 11px; }
+        /* Description Styling */
+        .event-details {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #333;
+            margin: 10px 0;
+            background: rgba(0,0,0,0.03);
+            padding: 10px;
+            border-left: 3px solid #cc0000;
+        }
+
+        .cal-links { margin-top: 15px; font-size: 13px; }
+        .cal-text-link { color: #cc0000 !important; text-decoration: none !important; font-weight: bold; text-transform: uppercase; }
         .cal-text-link:hover { text-decoration: underline !important; }
 
         .clipping-footer {
             border-top: 1px solid #222;
-            padding: 10px;
-            font-size: 10px;
+            padding: 15px;
             text-align: center;
             font-style: italic;
-            text-transform: uppercase;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -71,26 +72,73 @@
         <div class="news-clipping-wrapper">
             <div class="clipping-masthead">
                 <span class="black-tag">Community Bulletin</span>
-                <p class="clipping-tagline">Clay County Events & Happenings</p>
+                <p style="text-transform:uppercase; font-size:11px; font-weight:bold; margin-top:10px;">Full Event Details & Dispatches</p>
             </div>
             
-            <div id="event-list" style="padding: 10px 20px;">
-                <p style="text-align:center; font-style: italic;">Loading the latest dispatches...</p>
+            <div id="event-list">
+                <p style="text-align:center; padding: 40px;">Loading full community calendar...</p>
             </div>
             
             <div class="clipping-footer">Support My Local Community</div>
         </div>
     </div>
 
-    <script src="bulletin-engine.js"></script>
     <script>
-        // Tell the main site how tall this clipping is
+        const BULLETIN_URL = "https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec";
+
+        async function loadAllEvents() {
+            const list = document.getElementById('event-list');
+            try {
+                const response = await fetch(BULLETIN_URL);
+                const events = await response.json();
+
+                if (events && events.length > 0) {
+                    list.innerHTML = '';
+                    // Show ALL events in this master view
+                    events.reverse().forEach(item => {
+                        const eventDateObj = new Date(item.date);
+                        const friendlyDate = isNaN(eventDateObj) ? item.date : eventDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                        const gDate = isNaN(eventDateObj) ? "" : eventDateObj.toISOString().replace(/-|:|\.\d\d\d/g, "").split("T")[0];
+                        
+                        const gCalLink = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(item.name)}&dates=${gDate}/${gDate}&details=${encodeURIComponent(item.details || '')}&location=${encodeURIComponent(item.location)}&sf=true&output=xml`;
+                        const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${item.name}\nLOCATION:${item.location}\nDTSTART:${gDate}\nDTEND:${gDate}\nDESCRIPTION:${item.details || ''}\nEND:VEVENT\nEND:VCALENDAR`;
+                        const icsData = "data:text/calendar;charset=utf8," + encodeURIComponent(icsContent);
+
+                        const div = document.createElement('div');
+                        div.className = 'event-item';
+                        div.innerHTML = `
+                            <div class="event-date">${friendlyDate}</div>
+                            <div class="event-title">${item.name}</div>
+                            <div style="font-size: 14px; color:#555;"><strong>Where:</strong> ${item.location} | <strong>Time:</strong> ${item.time}</div>
+                            
+                            <div class="event-details">
+                                ${item.details ? item.details : "No additional details provided."}
+                            </div>
+
+                            <div class="cal-links">
+                                <span>Save to:</span>
+                                <a href="${gCalLink}" target="_blank" class="cal-text-link">Google</a> | 
+                                <a href="${icsData}" download="event.ics" class="cal-text-link">Apple/Outlook</a>
+                            </div>
+                        `;
+                        list.appendChild(div);
+                    });
+                } else {
+                    list.innerHTML = "<p style='text-align:center; padding: 40px;'>No current events found.</p>";
+                }
+            } catch (e) {
+                list.innerHTML = "<p style='text-align:center; padding: 40px;'>Unable to connect to the wire.</p>";
+            }
+            pushHeight();
+        }
+
         function pushHeight() {
-            const height = document.getElementById('height-wrapper').offsetHeight + 30;
+            const height = document.body.scrollHeight;
             window.parent.postMessage({ height: height }, '*');
         }
-        window.onload = pushHeight;
-        setInterval(pushHeight, 1000); 
+
+        document.addEventListener('DOMContentLoaded', loadAllEvents);
+        window.addEventListener('resize', pushHeight);
     </script>
 </body>
 </html>
