@@ -238,34 +238,6 @@
     }
 })();
 
-
-        
-        // Universal Fix: Force News Links to open in the Main Window
-window.addEventListener('message', function(event) {
-    // This listens for any 'click' or 'navigation' signals from the news feed
-    if (event.data.type === 'navigate') {
-        window.location.href = event.data.url;
-    }
-}, false);
-
-// This function "re-wires" the links after the iframe loads
-const newsIframe = document.querySelector('#github-news-container iframe');
-if (newsIframe) {
-    newsIframe.onload = function() {
-        // We tell the iframe to treat the main site as its 'Boss' (Parent)
-        const links = newsIframe.contentWindow.document.querySelectorAll('a');
-        links.forEach(link => {
-            link.setAttribute('target', '_parent');
-            
-            // If the link is just a slug (like 'wayne-county-arrests'), 
-            // we point it to your correct 'local-news' page
-            if (!link.href.includes('supportmylocalcommunity.com')) {
-                const slug = link.getAttribute('href').replace('.html', '');
-                link.href = `https://www.supportmylocalcommunity.com/local-news/?id=${slug}`;
-            }
-        });
-    };
-}
     </script>
     
 </body>
