@@ -2,31 +2,27 @@ name: Frequent News Sync
 
 on:
   schedule:
-    - cron: '22,44 * * * *' # Runs at 22 and 44 minutes past every hour
-  workflow_dispatch: # Allows you to run it manually for testing
-
-# --- PREVENTS DEPLOYMENT OVERLAP ---
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+    - cron: '22,44 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Crucial: Allows the action to save news_data.json
-      pages: write
-      id-token: write
-
+      contents: write
+    
     steps:
-      - name: Checkout repository
+      # This step MUST be first and must finish before anything else runs
+      - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # Only grab the latest version to keep it fast
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-          
+          # Cache is gone, so it won't look for requirements.txt anymore
 
       - name: Install dependencies
         run: |
@@ -34,17 +30,20 @@ jobs:
           pip install httpx beautifulsoup4
 
       - name: Run News Scraper
-        working-directory: ./local-news
-        run: python update_news.py
+        # We add a safety check to make sure the folder exists before running
+        run: |
+          if [ -d "./local-news" ]; then
+            cd local-news
+            python update_news.py
+          else
+            echo "Error: local-news directory not found!"
+            exit 1
+          fi
 
       - name: Commit and Push changes
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          
-          # Only add news_data.json to keep the commit clean
           git add local-news/news_data.json
-          
-          # Only push if there are actual new stories to report
-          git commit -m "Auto-update news data" || echo "No new stories found."
+          git commit -m "Auto-update news data" || echo "No changes to commit"
           git push
