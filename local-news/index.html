@@ -4,72 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clay County News Center</title>
-    <link rel="stylesheet" href="../style.css"> 
     <style>
-    /* Fixed: Set background to cream to match your site and remove the white box */
-    body { background: #e5e5e5; margin: 0; padding: 0; font-family: 'Times New Roman', serif; }
-    
-    .news-hub-wrapper { 
-        background: #e5e5e5; 
-        min-height: 100vh; 
-        padding: 0;
-        overflow: hidden; 
-    }
-    
-    .newspaper-masthead { 
-        background: #e5e5e5; 
-        border-bottom: 4px double #222; 
-        text-align: center; 
-        padding: 15px 0; 
-    }
-    
-    .news-title { font-size: 3rem; text-transform: uppercase; margin: 0; letter-spacing: -2px; }
-    
-    .news-meta-bar { 
-        border-top: 1px solid #222; 
-        border-bottom: 1px solid #222; 
-        display: flex; 
-        justify-content: space-between; 
-        padding: 5px 15px; 
-        font-weight: bold; 
-        font-size: 0.9rem; 
-        margin: 10px 20px 0 20px; 
-    }
-    
-    .story-card { 
-        background: #fff; 
-        padding: 25px; 
-        margin-bottom: 20px; 
-        border: 1px solid #ccc; 
-        box-shadow: 2px 2px 0px rgba(0,0,0,0.1); 
-    }
-    
-    .story-card h2 { margin: 0 0 10px 0; color: #0c0b82; font-size: 1.6rem; }
-    .local-tag { color: #cc0000; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; }
-    .state-tag { color: #666; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; }
-</style>
+        /* This locks the background to cream so the white gap disappears */
+        body, html { 
+            background: #e5e5e5; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Times New Roman', serif; 
+            height: 100%;
+            overflow-y: auto; /* This makes the news scrollable */
+        }
+        
+        .news-hub-wrapper { background: #e5e5e5; padding: 15px; }
+        .newspaper-masthead { border-bottom: 4px double #222; text-align: center; padding: 10px 0; margin-bottom: 20px; }
+        .news-title { font-size: 2.5rem; text-transform: uppercase; margin: 0; }
+        .news-meta-bar { border-top: 1px solid #222; border-bottom: 1px solid #222; display: flex; justify-content: space-between; padding: 5px; font-weight: bold; font-size: 0.8rem; }
+        
+        .story-card { background: #fff; padding: 20px; margin-bottom: 15px; border: 1px solid #ccc; }
+        .story-card h2 { margin: 0 0 10px 0; color: #0c0b82; font-size: 1.4rem; }
+    </style>
 </head>
 <body>
-   <div class="news-hub-wrapper">
-    <div class="newspaper-masthead">
-        <h1 class="news-title">Clay County News</h1>
-        <div class="news-meta-bar">
-            <span>VOL. 1 — NO. 1</span>
-            <span id="news-date-display"></span>
-            <span>CLAY COUNTY, IL</span>
+    <div class="news-hub-wrapper">
+        <div class="newspaper-masthead">
+            <h1 class="news-title">Clay County News</h1>
+            <div class="news-meta-bar">
+                <span>VOL. 1 — NO. 1</span>
+                <span id="news-date-display"></span>
+            </div>
         </div>
-    </div>
 
-    <div style="width: 90%; max-width: 900px; margin: 20px auto;">
         <div id="full-news-feed">
-            <p style="text-align:center;">Scanning Illinois and Local feeds...</p>
+            <p style="text-align:center;">Loading local stories...</p>
         </div>
     </div>
-   </div>
 
     <script src="news-engine.js"></script>
     <script>
-        document.getElementById('news-date-display').innerText = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('news-date-display').innerText = new Date().toLocaleDateString();
     </script>
 </body>
 </html>
