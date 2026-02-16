@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clay County Community Bulletin</title>
+    <style>
+        body { background: #fcf6de; margin: 0; padding: 10px; font-family: 'Times New Roman', serif; overflow: hidden; }
+        .bulletin-container { background: #fff; border: 2px solid #222; padding: 15px; box-shadow: 5px 5px 0px #0c0b82; }
+        .bulletin-header { text-align: center; border-bottom: 2px solid #222; margin-bottom: 15px; padding-bottom: 10px; }
+        .bulletin-header h2 { text-transform: uppercase; margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
+        .event-item { border-bottom: 1px dashed #ccc; padding: 10px 0; }
+        .event-item:last-child { border-bottom: none; }
+        .event-date { font-weight: bold; color: #cc0000; text-transform: uppercase; font-size: 0.8rem; }
+        .event-title { font-size: 1.2rem; margin: 5px 0; color: #222; }
+    </style>
+</head>
+<body>
+    <div class="bulletin-container" id="height-wrapper">
+        <div class="bulletin-header">
+            <h2>Community Bulletin</h2>
+            <div style="font-size: 0.8rem; font-weight: bold;">CLAY COUNTY EVENTS & UPDATES</div>
+        </div>
+
+        <div id="event-list">
+            <p style="text-align:center; font-style:italic;">Scanning for upcoming community events...</p>
+        </div>
+    </div>
+
+    <script src="bulletin-engine.js"></script>
+    <script>
+        // This part talks to your main site to adjust the height
+        function pushHeight() {
+            const height = document.getElementById('height-wrapper').offsetHeight + 40;
+            window.parent.postMessage({ height: height }, '*');
+        }
+        window.onload = pushHeight;
+        setInterval(pushHeight, 1000); // Keeps the window sized correctly
+    </script>
+</body>
+</html>
