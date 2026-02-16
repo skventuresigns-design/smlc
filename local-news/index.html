@@ -5,22 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clay County News Center</title>
     <style>
-        /* This locks the background to cream so the white gap disappears */
-        body, html { 
-            background: #e5e5e5; 
+        /* This forces the background to be cream so the white box disappears */
+        html, body { 
+            background-color: #e5e5e5 !important; 
             margin: 0; 
             padding: 0; 
             font-family: 'Times New Roman', serif; 
-            height: 100%;
-            overflow-y: auto; /* This makes the news scrollable */
+            height: 100%; 
         }
         
-        .news-hub-wrapper { background: #e5e5e5; padding: 15px; }
+        .news-hub-wrapper { 
+            background-color: #e5e5e5; 
+            padding: 15px; 
+            min-height: 100vh; 
+        }
+
         .newspaper-masthead { border-bottom: 4px double #222; text-align: center; padding: 10px 0; margin-bottom: 20px; }
         .news-title { font-size: 2.5rem; text-transform: uppercase; margin: 0; }
-        .news-meta-bar { border-top: 1px solid #222; border-bottom: 1px solid #222; display: flex; justify-content: space-between; padding: 5px; font-weight: bold; font-size: 0.8rem; }
         
-        .story-card { background: #fff; padding: 20px; margin-bottom: 15px; border: 1px solid #ccc; }
+        .story-card { background: #fff; padding: 20px; margin-bottom: 15px; border: 1px solid #ccc; box-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
         .story-card h2 { margin: 0 0 10px 0; color: #0c0b82; font-size: 1.4rem; }
     </style>
 </head>
@@ -28,20 +31,15 @@
     <div class="news-hub-wrapper">
         <div class="newspaper-masthead">
             <h1 class="news-title">Clay County News</h1>
-            <div class="news-meta-bar">
-                <span>VOL. 1 — NO. 1</span>
-                <span id="news-date-display"></span>
-            </div>
+            <p style="font-weight:bold; border-top:1px solid #222; border-bottom:1px solid #222; padding: 5px 0;">
+                VOL. 1 — NO. 1 | CLAY COUNTY, IL
+            </p>
         </div>
 
         <div id="full-news-feed">
-            <p style="text-align:center;">Loading local stories...</p>
+            <p style="text-align:center;">Scanning local reports...</p>
         </div>
     </div>
-
     <script src="news-engine.js"></script>
-    <script>
-        document.getElementById('news-date-display').innerText = new Date().toLocaleDateString();
-    </script>
 </body>
 </html>
