@@ -2,8 +2,8 @@ name: Frequent News Sync
 
 on:
   schedule:
-    - cron: '22,44 * * * *' # Runs twice an hour
-  workflow_dispatch: # Allows manual runs
+    - cron: '22,44 * * * *' # Runs at 22 and 44 minutes past every hour
+  workflow_dispatch: # Allows you to run it manually for testing
 
 # --- PREVENTS DEPLOYMENT OVERLAP ---
 concurrency:
@@ -14,9 +14,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Needed to push news_data.json
-      pages: write     # Needed for GitHub Pages
-      id-token: write  # Needed for security/OIDC
+      contents: write  # Crucial: Allows the action to save news_data.json
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout repository
@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-          cache: 'pip' # Speeds up installation
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -41,7 +41,10 @@ jobs:
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          # Only adds existing files to avoid creating extra junk
-          git add local-news/news_data.json || echo "Files not found"
-          git commit -m "Auto-update news data" || echo "No changes to commit"
+          
+          # Only add news_data.json to keep the commit clean
+          git add local-news/news_data.json
+          
+          # Only push if there are actual new stories to report
+          git commit -m "Auto-update news data" || echo "No new stories found."
           git push
