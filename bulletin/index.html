@@ -3,85 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Bulletin Master List</title>
+    <title>Community Bulletin | Support My Local Community</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/skventuresigns-design/media/main/favicon.png">
+    <link rel="stylesheet" href="../style.css"> 
     <style>
-        body { background: transparent !important; margin: 0; padding: 15px; font-family: 'Times New Roman', serif; color: #222; overflow:hidden; }
+        /* Standalone Page Styles */
+        body { background-color: #f4f1e8; margin: 0; padding: 0; font-family: 'Times New Roman', serif; color: #222; }
         
+        .bulletin-page-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
         .news-clipping-wrapper {
             background-color: #fffdf5; 
-            box-shadow: 8px 8px 0px rgba(0,0,0,0.7); 
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.8); 
             border: 2px solid #222;
-            max-width: 100%;
-            margin:0;
+            width: 100%;
+            margin-bottom: 50px;
         }
 
         .clipping-masthead {
             text-align: center;
-            padding: 25px 15px;
+            padding: 30px 15px;
             border-bottom: 4px double #222; 
-            margin: 0 20px;
+            margin: 0 25px;
         }
 
         .black-tag {
             background: #000;
             color: #fff;
             text-transform: uppercase;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
-            padding: 5px 15px;
+            padding: 6px 20px;
             display: inline-block;
+            letter-spacing: 1px;
         }
 
         .event-item {
             border-bottom: 1px dashed #777;
-            padding: 20px 0;
-            margin: 0 20px;
+            padding: 25px 0;
+            margin: 0 25px;
         }
 
         .event-item:last-child { border-bottom: none; }
 
-        .event-date { color: #cc0000; font-weight: bold; font-size: 14px; text-transform: uppercase; }
-        .event-title { font-size: 22px; font-weight: bold; margin: 5px 0; }
+        .event-date { color: #cc0000; font-weight: bold; font-size: 15px; text-transform: uppercase; }
+        .event-title { font-size: 26px; font-weight: bold; margin: 8px 0; line-height: 1.1; }
 
-        /* Description Styling */
         .event-details {
-            font-size: 15px;
-            line-height: 1.5;
+            font-size: 16px;
+            line-height: 1.6;
             color: #333;
-            margin: 10px 0;
+            margin: 15px 0;
             background: rgba(0,0,0,0.03);
-            padding: 10px;
-            border-left: 3px solid #cc0000;
+            padding: 15px;
+            border-left: 4px solid #cc0000;
         }
 
-        .cal-links { margin-top: 15px; font-size: 13px; }
+        .cal-links { margin-top: 20px; font-size: 14px; }
         .cal-text-link { color: #cc0000 !important; text-decoration: none !important; font-weight: bold; text-transform: uppercase; }
         .cal-text-link:hover { text-decoration: underline !important; }
 
         .clipping-footer {
             border-top: 1px solid #222;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             font-style: italic;
-            font-size: 12px;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .event-title { font-size: 20px; }
+            .black-tag { font-size: 18px; }
         }
     </style>
 </head>
-<body>
-    <div id="height-wrapper">
+<body class="home-bg">
+
+    <header class="header">
+        <img src="https://raw.githubusercontent.com/skventuresigns-design/media/main/smlc-web.png" class="header-logo" alt="SMLC Logo">
+        <nav class="nav-bar">
+            <button class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../clay-city.html">Clay City</a></li>
+                <li><a href="https://www.ourflora.com" target="_blank">Flora</a></li>
+                <li><a href="../louisville.html">Louisville</a></li>
+                <li><a href="../sailor-springs.html">Sailor Springs</a></li>
+                <li><a href="../xenia.html">Xenia</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="bulletin-page-container">
         <div class="news-clipping-wrapper">
             <div class="clipping-masthead">
                 <span class="black-tag">Community Bulletin</span>
-                <p style="text-transform:uppercase; font-size:11px; font-weight:bold; margin-top:10px;">Full Event Details & Dispatches</p>
+                <p style="text-transform:uppercase; font-size:12px; font-weight:bold; margin-top:10px; letter-spacing: 1px;">Full Event Details & Community Dispatches</p>
             </div>
             
             <div id="event-list">
-                <p style="text-align:center; padding: 40px;">Loading full community calendar...</p>
+                <p style="text-align:center; padding: 60px; font-style: italic;">Loading the latest local intelligence...</p>
             </div>
             
             <div class="clipping-footer">Support My Local Community</div>
         </div>
     </div>
+
+    <footer class="site-footer">
+         <p>All Content, Photographs, Writings, Letters and Documents © 2026 - Support My Local Community</p>
+         <p>All Rights Reserved - <a href="https://www.skventuresigns.com" target="_blank" class="footer-link">S&K Ventures</a></p>
+    </footer>
 
     <script>
         const BULLETIN_URL = "https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec";
@@ -94,7 +133,7 @@
 
                 if (events && events.length > 0) {
                     list.innerHTML = '';
-                    // Show ALL events in this master view
+                    // Reverse to show newest at top
                     events.reverse().forEach(item => {
                         const eventDateObj = new Date(item.date);
                         const friendlyDate = isNaN(eventDateObj) ? item.date : eventDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -109,36 +148,36 @@
                         div.innerHTML = `
                             <div class="event-date">${friendlyDate}</div>
                             <div class="event-title">${item.name}</div>
-                            <div style="font-size: 14px; color:#555;"><strong>Where:</strong> ${item.location} | <strong>Time:</strong> ${item.time}</div>
+                            <div style="font-size: 15px; color:#444;"><strong>Location:</strong> ${item.location} <br> <strong>Time:</strong> ${item.time}</div>
                             
                             <div class="event-details">
                                 ${item.details ? item.details : "No additional details provided."}
                             </div>
 
                             <div class="cal-links">
-                                <span>Save to:</span>
+                                <span>Save to Calendar:</span>
                                 <a href="${gCalLink}" target="_blank" class="cal-text-link">Google</a> | 
-                                <a href="${icsData}" download="event.ics" class="cal-text-link">Apple/Outlook</a>
+                                <a href="${icsData}" download="event.ics" class="cal-text-link">Apple / Outlook</a>
                             </div>
                         `;
                         list.appendChild(div);
                     });
                 } else {
-                    list.innerHTML = "<p style='text-align:center; padding: 40px;'>No current events found.</p>";
+                    list.innerHTML = "<p style='text-align:center; padding: 60px;'>No current events scheduled in Clay County.</p>";
                 }
             } catch (e) {
-                list.innerHTML = "<p style='text-align:center; padding: 40px;'>Unable to connect to the wire.</p>";
+                list.innerHTML = "<p style='text-align:center; padding: 60px;'>Unable to connect to the community wire.</p>";
             }
-            pushHeight();
         }
 
-        function pushHeight() {
-            const height = document.body.scrollHeight;
-            window.parent.postMessage({ height: height }, '*');
-        }
+        // Hamburger Navigation Logic
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => { 
+            navLinks.classList.toggle('open'); 
+        });
 
         document.addEventListener('DOMContentLoaded', loadAllEvents);
-        window.addEventListener('resize', pushHeight);
     </script>
 </body>
 </html>
