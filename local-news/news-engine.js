@@ -17,29 +17,21 @@ async function loadLocalNews() {
         let allArticles = [];
         results.forEach(data => { if (data.status === 'ok') allArticles = [...allArticles, ...data.items]; });
 
-        allArticles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-
         container.innerHTML = '';
-        allArticles.forEach(item => {
+        allArticles.forEach((item, index) => {
             const content = (item.title + " " + (item.description || "")).toLowerCase();
-            const isLocal = localTowns.some(town => content.includes(town));
-            
-            if (isLocal || content.includes("illinois")) {
+            if (localTowns.some(town => content.includes(town)) || content.includes("illinois")) {
                 const card = document.createElement('div');
                 card.className = 'story-card';
-                
-                // This removes the "The post ... appeared first on" text
-                let cleanText = item.description.split('The post')[0];
+                let snippet = item.description.split('The post')[0];
 
                 card.innerHTML = `
-                    <p style="font-weight:bold; font-size:0.7rem; color:#666; margin-bottom:5px;">
-                        ${new Date(item.pubDate).toLocaleDateString()} | LOCAL REPORT
-                    </p>
+                    <p style="font-weight:bold; font-size:0.7rem; color:#666;">${new Date(item.pubDate).toLocaleDateString()}</p>
                     <h2>${item.title}</h2>
-                    <div style="font-size:1.1rem; line-height:1.6; color:#333;">${cleanText}</div>
-                    <p style="margin-top:15px; font-size:0.8rem; font-style:italic; color:#0c0b82;">
-                        Report provided by local news wire.
-                    </p>
+                    <div style="font-size:1rem; line-height:1.5;">${snippet}</div>
+                    <div style="margin-top:10px; border-top:1px solid #eee; padding-top:10px;">
+                        <a href="index.html?id=story-${index}" style="color:#0c0b82; font-weight:bold; text-decoration:none;">READ FULL STORY ON THIS PAGE →</a>
+                    </div>
                 `;
                 container.appendChild(card);
             }
