@@ -132,7 +132,7 @@ body {
 .clay-county-sync-container {
     width: 100%;
     max-width: 550px;
-    margin: 0 auto;
+    margin: -15px auto 0;
     padding: 0;
     display: block !important; /* Forces it to show */
     min-height: 200px; /* Give it a starting height so it's not invisible */
