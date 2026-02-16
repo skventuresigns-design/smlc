@@ -129,6 +129,13 @@ body {
     display: flex; flex-direction: column; position: relative;
 }
 
+.clay-county-sync-container {
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
 .news-box-header { text-align: center; border-top: 5px solid #222; border-bottom: 3px solid #222; padding: 10px; margin-bottom: 20px; }
 .news-box-header h3 { font-family: "Times New Roman", serif; text-transform: uppercase; margin: 0; font-size: 36px !important; /* Made the Title significantly bigger */ margin-bottom: 10px;}
 .news-box-header span { font-size: 14px !important; /* Made the Subtitle bigger */ letter-spacing: 2px; display: block; margin-bottom: 20px;}
