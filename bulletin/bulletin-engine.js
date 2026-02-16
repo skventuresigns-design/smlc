@@ -1,5 +1,5 @@
 // Replace the URL below with YOUR Web App URL from Step 1
-const SPREADSHEET_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
+const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec";
 
 document.addEventListener('DOMContentLoaded', () => loadEvents());
 
