@@ -167,7 +167,7 @@ body {
    CHAPTER 6: BLUE NEWS FEED, THANKFUL & FOOTER
    ========================================= */
 .blue-news-frame { background-color: #0c2ef1; padding: 60px 0; margin: 40px 0; }
-.news-content-90 { width: 90%; max-width: 1400px; margin: 0 auto; height: 800px; background: #fff; }
+.news-content-90 { width: 90%; max-width: 1400px; margin: 0 auto; height: auto; background: #0C2EF1; }
 /* COMPACT COMMUNITY BULLETIN STYLING */
 #full-news-feed {
     display: grid;
