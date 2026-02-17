@@ -205,9 +205,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 fullContainer.innerHTML += `
                     <article id="${item.id}" class="full-story-display">
                         <h1>${formatMoney(item.title)}</h1>
-                        <p style="text-align:center; font-weight:bold; color:#666;">${item.date} | ${item.tags.join(' | ')}</p>
-                        ${imgHTML}
-                        <div class="story-body" style="white-space: pre-wrap;">${formatMoney(item.full_story)}</div>
+                        <p style="font-size: 0.8rem; font-weight: bold; color: #777;">${item.date}</p>
+                        ${item.image ? `<img src="${item.image}" style="width:100%; height:150px; object-fit:cover; margin-bottom:10px;">` : ''}
+                        <div class="story-body">${formatMoney(item.full_story)}</div>
+                        <button class="news-read-more-btn" onclick="openNewsModal('${item.id}')">Read Full Report</button>
                     </article>`;
             });
             // RULE: Auto-Scroll with 500ms Render Safety
