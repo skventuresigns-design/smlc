@@ -179,7 +179,7 @@ body {
 }
 
 .full-story-display {
-    background-color: #fe5e5e5; /* Your saved listing card color */
+    background-color: #e5e5e5 !important; /* Your saved listing card color */
     padding: 20px;
     border: 1px solid #333;
     box-shadow: 6px 6px 0px #222; /* Retro newspaper shadow */
