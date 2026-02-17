@@ -25,19 +25,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install httpx beautifulsoup4
 
-      - name: 4. Find and Run Scraper
+      - name: 4. Debug File Search
         run: |
-          # Find the script and get its directory
+          echo "--- Listing all files in repo ---"
+          find . -maxdepth 3 -not -path '*/.*'
+          echo "--- End of list ---"
+          
           SCRIPT_PATH=$(find . -name "update_news.py" -print -quit)
           if [ -z "$SCRIPT_PATH" ]; then
-            echo "Error: update_news.py not found!"
+            echo "ERROR: The file update_news.py is physically missing from the repo!"
             exit 1
           fi
-          SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
-          echo "Found script in: $SCRIPT_DIR"
-          
-          # Move into that folder and run
-          cd "$SCRIPT_DIR"
+          cd $(dirname "$SCRIPT_PATH")
           python update_news.py
 
       - name: 5. Save New Stories to Repo
