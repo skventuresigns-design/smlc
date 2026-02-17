@@ -27,7 +27,7 @@ jobs:
 
       - name: 4. Find and Run Scraper
         run: |
-          # This line hunts down the script wherever it is hiding
+          # Find the script and get its directory
           SCRIPT_PATH=$(find . -name "update_news.py" -print -quit)
           if [ -z "$SCRIPT_PATH" ]; then
             echo "Error: update_news.py not found!"
@@ -35,6 +35,8 @@ jobs:
           fi
           SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
           echo "Found script in: $SCRIPT_DIR"
+          
+          # Move into that folder and run
           cd "$SCRIPT_DIR"
           python update_news.py
 
@@ -42,12 +44,10 @@ jobs:
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          # Find the JSON file to make sure we're adding the right path
-          JSON_PATH=$(find . -name "news_data.json" -print -quit)
-          if [ ! -z "$JSON_PATH" ]; then
-            git add "$JSON_PATH"
-            git commit -m "Auto-update news data [skip ci]" || echo "No changes to save."
-            git push
-          else
-            echo "news_data.json not found."
-          fi
+          
+          # This tells Git to look for changes in the whole project
+          git add -A
+          
+          # Only commit if there is actually something new to say
+          git commit -m "Auto-update news data [skip ci]" || echo "No news updates found this time."
+          git push
