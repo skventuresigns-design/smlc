@@ -172,25 +172,32 @@ body {
 #full-news-feed {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    padding: 20px 0;
+    gap: 30px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box; /* Prevents container bleeding */
 }
 
 .full-story-display {
-    background-color: #fcf6de; /* Your saved listing card color */
+    background-color: #fe5e5e5; /* Your saved listing card color */
     padding: 20px;
     border: 1px solid #333;
     box-shadow: 6px 6px 0px #222; /* Retro newspaper shadow */
     display: flex;
     flex-direction: column;
+    justify-content: space-between; /* Keeps button at the bottom */
+    min-height: 400px; /* Uniform card size */
+    overflow: hidden;
 }
 
 .full-story-display h1 {
     font-size: 1.25rem !important; /* Forces the giant headlines to shrink */
     line-height: 1.2;
+    margin-top: 0;
     margin-bottom: 10px;
     color: #cc0000; /* Matching your calendar red */
     text-align: left;
+    border-bottom: 1px solid #333;
 }
 
 .story-body {
@@ -198,8 +205,12 @@ body {
     line-height: 1.5;
     color: #444;
     max-height: 150px; /* Prevents long stories from taking over the screen */
-    overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Limit text to 4 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden; /* This stops the bleeding */
+    margin: 15px 0;
 }
 
 .full-story-display img {
@@ -209,6 +220,25 @@ body {
     margin-bottom: 15px;
     border-radius: 4px;
     filter: sepia(20%); /* Adds a slight vintage newspaper feel */
+}
+
+/* --- THE "READ MORE" BUTTON --- */
+.news-read-more-btn {
+    background: #cc0000; /* Matching your calendar red */
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+
+.news-read-more-btn:hover {
+    background: #000;
 }
 
 .thankful-section { width: 100%; background-color: #ffffff; padding: 60px 20px; text-align: center; }
