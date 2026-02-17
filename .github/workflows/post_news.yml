@@ -25,15 +25,29 @@ jobs:
           python -m pip install --upgrade pip
           pip install httpx beautifulsoup4
 
-      - name: 4. Run News Scraper
+      - name: 4. Find and Run Scraper
         run: |
-          cd local-news
+          # This command searches for the script and changes to its directory automatically
+          SCRIPT_PATH=$(find . -name "update_news.py" -print -quit)
+          if [ -z "$SCRIPT_PATH" ]; then
+            echo "Error: update_news.py not found anywhere in the repo!"
+            exit 1
+          fi
+          SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+          echo "Found script in: $SCRIPT_DIR"
+          cd "$SCRIPT_DIR"
           python update_news.py
 
       - name: 5. Save New Stories to Repo
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          git add local-news/news_data.json
-          git commit -m "Auto-update news data [skip ci]" || echo "No new stories to save."
-          git push
+          # This finds the JSON file wherever it was generated and stages it
+          JSON_PATH=$(find . -name "news_data.json" -print -quit)
+          if [ ! -z "$JSON_PATH" ]; then
+            git add "$JSON_PATH"
+            git commit -m "Auto-update news data [skip ci]" || echo "No new stories to save."
+            git push
+          else
+            echo "No news_data.json found to upload."
+          fi
