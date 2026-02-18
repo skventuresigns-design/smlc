@@ -140,6 +140,9 @@ const stationConfigs = {
     "87817": { town: "louisville", display: "Louisville", logo: "caseys.png" }  
 };
 
+// This line below is the "magic" that fixes the logo kink
+const logoBaseUrl = "https://raw.githubusercontent.com/KFruti88/Clay-County-Fuel/main/images/";
+
 const urlParams = new URLSearchParams(window.location.search);
 const targetTown = urlParams.get('town')?.toLowerCase();
 
