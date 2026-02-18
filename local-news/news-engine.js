@@ -5,8 +5,8 @@ function formatMoney(text) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const summaryContainer = document.getElementById('town-summaries');
-    const fullContainer = document.getElementById('full-news-container');
+    const summaryContainer = document.getElementById('town-summaries'); // Front Index
+    const fullContainer = document.getElementById('full-news-container'); // Hub Page
 
     const jsonUrl = `https://www.supportmylocalcommunity.com/local-news/news_data.json?v=${new Date().getTime()}`;
 
@@ -17,8 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return clayKeywords.some(k => textBlob.includes(k)) && !item.title.includes("Fairfield");
         });
 
-        // --- TOWN SITE MODE (Clippings & Teasers) ---
-       // --- MODE A: FRONT PAGE (SMLC Index - Individual Clippings) ---
+        // --- FRONT PAGE MODE (Individual Clippings) ---
         if (summaryContainer) {
             summaryContainer.style.backgroundColor = "#e5e5e5";
             summaryContainer.style.padding = "20px";
@@ -40,20 +39,19 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </button>
                     </div>`;
             });
-        }
+        } 
         
-        // --- HUB PAGE MODE (Full Articles) ---
+        // --- HUB PAGE MODE (Full Articles - Left as is) ---
         if (fullContainer) {
             fullContainer.innerHTML = ''; 
             filteredData.forEach(item => {
                 const imgHTML = item.image ? `<img src="${item.image}" style="width:100%; border:1px solid #ccc; margin-bottom:20px;">` : '';
-                
                 fullContainer.innerHTML += `
-                    <article id="${item.id}" class="news-clipping" style="background: #ffffff; padding: 30px; margin-bottom: 40px; border: 1px solid #bbb; box-shadow: 6px 6px 0px rgba(0,0,0,0.1); font-family: 'Times New Roman', serif;">
-                        <h1 style="font-size:2.8rem; margin-bottom:10px; line-height: 1.1; border-bottom: 2px solid #333; padding-bottom: 10px;">${formatMoney(item.title)}</h1>
-                        <p style="font-style:italic; color:#666; margin-bottom:25px;">${item.date}</p>
+                    <article id="${item.id}" class="full-story-display" style="border-bottom: 2px solid #333; padding-bottom: 40px; margin-bottom: 40px; font-family: 'Times New Roman', serif;">
+                        <h1 style="font-size:2.8rem; margin-bottom:10px;">${formatMoney(item.title)}</h1>
+                        <p style="font-style:italic; color:#666; margin-bottom:20px;">${item.date}</p>
                         ${imgHTML}
-                        <div class="story-body" style="font-size: 1.25rem; line-height: 1.8; white-space: pre-wrap;">${formatMoney(item.full_story)}</div>
+                        <div class="story-body" style="font-size: 1.2rem; line-height: 1.8; white-space: pre-wrap;">${formatMoney(item.full_story)}</div>
                     </article>`;
             });
 
