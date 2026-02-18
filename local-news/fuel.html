@@ -187,12 +187,12 @@ async function initBillboard() {
             const slide = document.createElement('div');
             slide.className = 'gas-slide';
             slide.innerHTML = `
-                <div class="town-header">${config.display.toUpperCase()}, IL</div>
-                <img src="https://raw.githubusercontent.com/KFruti88/Clay-County-Fuel/main/images/${config.logo}" class="station-logo">
-                <div class="price-row"><span class="price-label">REGULAR</span><span class="led-red">${displayReg}</span></div>
-                <div class="price-row"><span class="price-label">DIESEL</span><span class="led-grn">${displayDsl}</span></div>
-                <div class="update-tag">UPDATED: ${displayDate}</div>
-            `;
+    <div class="town-header">${config.display.toUpperCase()}, IL</div>
+    <img src="https://raw.githubusercontent.com/KFruti88/Clay-County-Fuel/main/images/${config.logo}" class="station-logo">
+    <div class="price-row"><span class="price-label">REGULAR</span><span class="led-red">${displayReg}</span></div>
+    <div class="price-row"><span class="price-label">DIESEL</span><span class="led-grn">${displayDsl}</span></div>
+    <div class="update-tag">UPDATED: ${displayDate}</div>
+`;
             screen.appendChild(slide);
         });
 
