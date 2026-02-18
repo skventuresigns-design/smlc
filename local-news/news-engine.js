@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     fetch(jsonUrl).then(res => res.json()).then(data => {
         const filteredData = data.filter(item => {
             // STRICT FILTER: Only allow specific Clay County towns
-            const clayKeywords = ["flora", "clay city", "xenia", "louisville", "iola", "clay county", "sailor springs"];
-            const textBlob = (item.title + " " + item.tags.join(" ") + " " + item.full_story).toLowerCase();
+            const clayKeywords = ["flora", "clay city", "xenia", "louisville", "iola", "clay county", "sailor springs", "bible grove"];
+            const textBlob = (item.title + " " + (item.tags ? item.tags.join(" ") : "") + " " + item.full_story).toLowerCase();
             const hasClayContent = clayKeywords.some(k => textBlob.includes(k));
 
             // HARD BLOCK: Fairfield/Wayne County Filter
