@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <h3>${formatMoney(item.title)}</h3>
                         <p style="font-size:0.9rem; color:#555;">${item.date}</p>
                         ${imgHTML}
-                        <p>${formatMoney(item.full_story.substring(0, 180))}...</p>
+                        <p>${formatMoney(item.full_story.substring(0, 500))}...</p>
                         <button class="read-more-btn" onclick="openNewsModal('${item.id}')">Read Full Story</button>
                     </div>`;
             });
