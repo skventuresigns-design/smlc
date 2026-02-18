@@ -194,26 +194,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <p style="font-size:0.9rem; color:#555;">${item.date}</p>
                         ${imgHTML}
                         <p>${formatMoney(item.full_story.substring(0, 500))}...</p>
-                        <button class="read-more-btn" onclick="openNewsModal('${item.id}')">Read Full Story</button>
+                        <button class="read-more-btn" onclick="window.location.href='/local-news.html#${item.id}'">Read Full Story</button>
                     </div>`;
             });
         } else if (fullContainer) {
-            // RULE: Hub Site = Full Story Mode Only
-            fullContainer.innerHTML = ''; 
-            filteredData.forEach(item => {
-                const imgHTML = item.image ? `<img src="${item.image}" style="width:100%; border-radius:12px; margin-bottom:20px; object-fit: cover;">` : '';
-                fullContainer.innerHTML += `
-                    <article id="${item.id}" class="full-story-display">
-                        <h1>${formatMoney(item.title)}</h1>
-                        <p style="font-size: 0.8rem; font-weight: bold; color: #777;">${item.date}</p>
-                        ${item.image ? `<img src="${item.image}" style="width:100%; height:150px; object-fit:cover; margin-bottom:10px;">` : ''}
-                        <div class="story-body">${formatMoney(item.full_story)}</div>
-                        <button class="news-read-more-btn" onclick="openNewsModal('${item.id}')">Read Full Report</button>
-                    </article>`;
-            });
-            // RULE: Auto-Scroll with 500ms Render Safety
-            setTimeout(() => { handleScroll(); }, 500);
-        }
+    // RULE: Hub Site = Full Story Mode Only
+    fullContainer.innerHTML = ''; 
+    filteredData.forEach(item => {
+        const imgHTML = item.image ? `<img src="${item.image}" style="width:100%; border-radius:12px; margin-bottom:20px; object-fit: cover;">` : '';
+        fullContainer.innerHTML += `
+            <article id="${item.id}" class="full-story-display">
+                <h1>${formatMoney(item.title)}</h1>
+                <p style="font-size: 0.8rem; font-weight: bold; color: #777;">${item.date}</p>
+                ${imgHTML}
+                <div class="story-body">${formatMoney(item.full_story)}</div>
+                
+                <button class="news-read-more-btn" onclick="openNewsModal('${item.id}')">View as Clipped Article</button>
+            </article>`;
+    });
+    // RULE: Auto-Scroll with 500ms Render Safety
+    setTimeout(() => { handleScroll(); }, 500);
+}
     });
 
     // --- 5. UTILITY FUNCTIONS ---
