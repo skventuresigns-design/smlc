@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.documentElement.style.setProperty('--town-gradient', theme.gradient);
 
     // --- 4. DATA ENGINE (CLAY COUNTY ONLY) ---
-    const jsonUrl = `/local-news/news_data.json?v=${new Date().getTime()}`;
+    const jsonUrl = `http://www.supportmylocalcommunity.com/local-news/news_data.json?v=${new Date().getTime()}`;
 
     fetch(jsonUrl).then(res => res.json()).then(data => {
         const filteredData = data.filter(item => {
