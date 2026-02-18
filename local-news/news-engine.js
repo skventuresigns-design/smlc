@@ -48,15 +48,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const imgHTML = item.image ? `<img src="${item.image}" style="width:100%; border:1px solid #ccc; margin-bottom:20px;">` : '';
                 
                 fullContainer.innerHTML += `
-                    <article id="${item.id}" class="full-story-display" style="background: #fdfbf7; padding: 30px; border-bottom: 4px double #333; margin-bottom: 50px; font-family: 'Times New Roman', serif;">
-                        <h1 style="font-size:2.8rem; margin-bottom:10px; line-height: 1.1;">${formatMoney(item.title)}</h1>
-                        <p style="font-style:italic; color:#666; margin-bottom:25px; border-bottom: 1px solid #ddd; padding-bottom: 10px;">${item.date}</p>
+                    <article id="${item.id}" class="news-clipping" style="background: #ffffff; padding: 30px; margin-bottom: 40px; border: 1px solid #bbb; box-shadow: 6px 6px 0px rgba(0,0,0,0.1); font-family: 'Times New Roman', serif;">
+                        <h1 style="font-size:2.8rem; margin-bottom:10px; line-height: 1.1; border-bottom: 2px solid #333; padding-bottom: 10px;">${formatMoney(item.title)}</h1>
+                        <p style="font-style:italic; color:#666; margin-bottom:25px;">${item.date}</p>
                         ${imgHTML}
-                        <div class="story-body" style="font-size: 1.25rem; line-height: 1.8; white-space: pre-wrap; text-align: justify;">${formatMoney(item.full_story)}</div>
+                        <div class="story-body" style="font-size: 1.25rem; line-height: 1.8; white-space: pre-wrap;">${formatMoney(item.full_story)}</div>
                     </article>`;
             });
 
-            // Handle the "Jump" from the Town Site
             setTimeout(() => {
                 const hashId = window.location.hash.substring(1); 
                 if (hashId) {
