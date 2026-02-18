@@ -55,4 +55,4 @@ for s in all_news:
         existing.insert(0, s)
 
 with open(DATA_FILE, "w") as f:
-    json.dump(existing[:50], f, indent=4)
+    json.dump(existing[:15], f, indent=4)
