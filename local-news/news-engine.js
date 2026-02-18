@@ -174,7 +174,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         globalNewsData = filteredData;
 
-        // FRONT PAGE (SUMMARIES)
         if (summaryContainer) {
             summaryContainer.innerHTML = ''; 
             filteredData.forEach(item => {
@@ -191,7 +190,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         } 
         
-        // HUB PAGE (FULL STORIES)
         if (fullContainer) {
             fullContainer.innerHTML = ''; 
             filteredData.forEach(item => {
@@ -210,4 +208,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     function handleScroll() {
-        const hashId = window.location.hash.substring
+        const hashId = window.location.hash.substring(1); 
+        if (hashId) {
+            const el = document.getElementById(hashId);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    async function updateNewspaperHeader(t) {
+        const dEl = document.getElementById('current-date');
+        const cEl = document.getElementById('atomic-chicago-time');
+        const tEl = document.getElementById('temp-val');
+        const wEl = document.getElementById('condition-val');
+
+        const centralOptions = { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: true };
+        if (dEl) dEl.innerText = t.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Chicago' });
+        if (cEl) cEl.innerText = t.toLocaleTimeString('en-US', centralOptions);
+        
+        try {
+            const wRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=38.6672&longitude=-88.4523&current_weather=true');
+            const wData = await wRes.json();
+            const temp = Math.round(wData.current_weather.temperature * 9/5 + 32);
+            if (tEl) tEl.innerText = `${temp}°F`;
+            if (wEl) wEl.innerText = "Flora Airport";
+        } catch (e) { 
+            if (tEl) tEl.innerText = "--°F"; 
+        }
+    }
+});
+
+function openWeatherTab() { window.open("https://www.accuweather.com/en/us/flora/62839/weather-forecast/332851", "_top"); }
