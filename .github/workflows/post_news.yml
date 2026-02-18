@@ -21,7 +21,7 @@ jobs:
           python-version: '3.10'
 
       - name: 3. Install Tools
-        run: pip install httpx beautifulsoup4 lxml
+        run: pip install httpx beautifulsoup4 lxml feedparser
 
       - name: 4. Run Scraper
         run: python update_news.py
