@@ -92,7 +92,7 @@ function injectBackToTop() {
             color: white;
             cursor: pointer;
             padding: 12px 18px;
-            border-radius: 0; /* Sharp corners for newspaper look */
+            border-radius: 0;
             box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
             font-family: 'Playfair Display', serif;
             text-transform: uppercase;
@@ -124,28 +124,24 @@ function injectBackToTop() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    injectModalSystem(); // Initialize Modal
-    injectBackToTop();   // Initialize Back to Top
+    injectModalSystem();
+    injectBackToTop();
 
-    // --- 1. HARLOCK SELECTION (HARD ENFORCEMENT) ---
-    // Rule: Town sites must have id="town-summaries". Hub must have id="full-news-feed".
     const summaryContainer = document.getElementById('town-summaries');
     const fullContainer = document.getElementById('full-news-container');
     
-    // --- 2. INSTANT PLUGINS (Weather & Time) ---
     let trueTime = new Date();
-    updateNewspaperHeader(trueTime); // Immediate draw to prevent "Syncing..." hang
+    updateNewspaperHeader(trueTime);
 
     try {
         const timeRes = await fetch('https://worldtimeapi.org/api/timezone/America/Chicago');
         const timeData = await timeRes.json();
         trueTime = new Date(timeData.datetime);
-        updateNewspaperHeader(trueTime); // Re-sync to Atomic Chicago Time
+        updateNewspaperHeader(trueTime);
     } catch (e) { 
-        console.warn("Atomic sync failed - Calculating Central Time from system clock."); 
+        console.warn("Atomic sync failed."); 
     }
 
-    // --- 3. THEME LOCK ---
     const townThemes = {
         "flora": { solid: "#0c0b82", gradient: "linear-gradient(135deg, #fe4f00, #0c0b82)" },
         "louisville": { solid: "#eb1c24", gradient: "linear-gradient(135deg, #eb1c24, #101010)" },
@@ -155,6 +151,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         "sailor-springs": { solid: "#000000", gradient: "linear-gradient(135deg, #000000, #800080)" },
         "default": { solid: "#0c71c3", gradient: "linear-gradient(135deg, #e0e0e0, #0c71c3)" }
     };
+
     const currentURL = window.location.href.toLowerCase();
     let themeKey = "default";
     const slugs = ["flora", "louisville", "clay-city", "xenia", "iola", "sailor-springs"];
@@ -164,95 +161,53 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.documentElement.style.setProperty('--town-color', theme.solid);
     document.documentElement.style.setProperty('--town-gradient', theme.gradient);
 
-    // --- 4. DATA ENGINE (CLAY COUNTY ONLY) ---
     const jsonUrl = `https://www.supportmylocalcommunity.com/local-news/news_data.json?v=${new Date().getTime()}`;
 
     fetch(jsonUrl).then(res => res.json()).then(data => {
         const filteredData = data.filter(item => {
-            // STRICT FILTER: Only allow specific Clay County towns
             const clayKeywords = ["flora", "clay city", "xenia", "louisville", "iola", "clay county", "sailor springs", "bible grove"];
             const textBlob = (item.title + " " + (item.tags ? item.tags.join(" ") : "") + " " + item.full_story).toLowerCase();
             const hasClayContent = clayKeywords.some(k => textBlob.includes(k));
-
-            // HARD BLOCK: Fairfield/Wayne County Filter
             const isNotWayne = !item.title.includes("Fairfield") && !item.title.includes("Wayne County") && !item.title.includes("Cisne");
-
             return hasClayContent && isNotWayne;
         });
 
-        globalNewsData = filteredData; // Store for modal access
+        globalNewsData = filteredData;
 
-        // --- HARD RENDER LOCK ---
+        // FRONT PAGE (SUMMARIES)
         if (summaryContainer) {
-            // RULE: Town Site = Summary Mode Only
             summaryContainer.innerHTML = ''; 
             filteredData.forEach(item => {
+                const teaser = item.full_story ? item.full_story.substring(0, 500) : "Summary not available.";
                 const imgHTML = item.image ? `<img src="${item.image}" style="width:100%; border-radius:12px; margin-bottom:15px; object-fit: cover;">` : '';
                 summaryContainer.innerHTML += `
                     <div class="summary-box">
                         <h3>${formatMoney(item.title)}</h3>
                         <p style="font-size:0.9rem; color:#555;">${item.date}</p>
                         ${imgHTML}
-                        <p>${formatMoney(item.full_story.substring(0, 500))}...</p>
+                        <p>${formatMoney(teaser)}...</p>
                         <button class="read-more-btn" onclick="window.location.href='/local-news.html#${item.id}'">Read Full Story</button>
                     </div>`;
             });
-        } else if (fullContainer) {
-    // RULE: Hub Site = Full Story Mode Only
-    fullContainer.innerHTML = ''; 
-    filteredData.forEach(item => {
-        const imgHTML = item.image ? `<img src="${item.image}" style="width:100%; border-radius:12px; margin-bottom:20px; object-fit: cover;">` : '';
-        fullContainer.innerHTML += `
-            <article id="${item.id}" class="full-story-display">
-                <h1>${formatMoney(item.title)}</h1>
-                <p style="font-size: 0.8rem; font-weight: bold; color: #777;">${item.date}</p>
-                ${imgHTML}
-                <div class="story-body">${formatMoney(item.full_story)}</div>
-                
-                <button class="news-read-more-btn" onclick="openNewsModal('${item.id}')">View as Clipped Article</button>
-            </article>`;
-    });
-    // RULE: Auto-Scroll with 500ms Render Safety
-    setTimeout(() => { handleScroll(); }, 500);
-}
-    });
-
-    // --- 5. UTILITY FUNCTIONS ---
-    function handleScroll() {
-        const targetId = new URLSearchParams(window.location.search).get('id'); 
-        if (targetId) {
-            const el = document.getElementById(targetId);
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-
-    async function updateNewspaperHeader(t) {
-        const dEl = document.getElementById('current-date');
-        const cEl = document.getElementById('atomic-chicago-time');
-        const tEl = document.getElementById('temp-val');
-        const wEl = document.getElementById('condition-val');
-
-        // LOCK: Permanent Central Time Enforcement
-        const centralOptions = { 
-            timeZone: 'America/Chicago', 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            hour12: true 
-        };
-
-        if (dEl) dEl.innerText = t.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Chicago' });
-        if (cEl) cEl.innerText = t.toLocaleTimeString('en-US', centralOptions);
+        } 
         
-        try {
-            const wRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=38.6672&longitude=-88.4523&current_weather=true');
-            const wData = await wRes.json();
-            const temp = Math.round(wData.current_weather.temperature * 9/5 + 32);
-            if (tEl) tEl.innerText = `${temp}°F`;
-            if (wEl) wEl.innerText = "Flora Airport";
-        } catch (e) { 
-            if (tEl) tEl.innerText = "--°F"; 
+        // HUB PAGE (FULL STORIES)
+        if (fullContainer) {
+            fullContainer.innerHTML = ''; 
+            filteredData.forEach(item => {
+                const imgHTML = item.image ? `<img src="${item.image}" style="width:100%; border-radius:12px; margin-bottom:20px; object-fit: cover;">` : '';
+                fullContainer.innerHTML += `
+                    <article id="${item.id}" class="full-story-display" style="border-bottom: 2px solid #ccc; padding-bottom: 30px; margin-bottom: 30px;">
+                        <h1>${formatMoney(item.title)}</h1>
+                        <p style="font-size: 0.8rem; font-weight: bold; color: #777;">${item.date}</p>
+                        ${imgHTML}
+                        <div class="story-body" style="font-size: 1.1rem; line-height: 1.6;">${formatMoney(item.full_story)}</div>
+                        <button class="read-more-btn" style="width: auto; padding: 10px 30px;" onclick="openNewsModal('${item.id}')">View Clipping</button>
+                    </article>`;
+            });
+            setTimeout(() => { handleScroll(); }, 500);
         }
-    }
-});
+    });
 
-function openWeatherTab() { window.open("https://www.accuweather.com/en/us/flora/62839/weather-forecast/332851", "_top"); }
+    function handleScroll() {
+        const hashId = window.location.hash.substring
