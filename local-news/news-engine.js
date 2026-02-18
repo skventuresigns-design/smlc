@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         // --- TOWN SITE MODE (Clippings & Teasers) ---
+       // --- MODE A: FRONT PAGE (SMLC Index - Individual Clippings) ---
         if (summaryContainer) {
             summaryContainer.style.backgroundColor = "#e5e5e5";
             summaryContainer.style.padding = "20px";
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </button>
                     </div>`;
             });
-        } 
+        }
         
         // --- HUB PAGE MODE (Full Articles) ---
         if (fullContainer) {
