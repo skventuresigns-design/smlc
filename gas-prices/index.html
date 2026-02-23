@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMLC Fuel Update Billboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #fcf6de; /* Matching your listings background */
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        h2 {
+            color: #cc0000; /* Matching your red headline style */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="column">
+            <h2>Update Prices</h2>
+            <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true">Loading form...</iframe>
+        </div>
+
+        <div class="column">
+            <h2>Live Billboard</h2>
+            <iframe src="/local-news/fuel.html">Loading billboard...</iframe>
+        </div>
+    </div>
+
+</body>
+</html>
