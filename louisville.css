@@ -165,13 +165,9 @@
 
 /* 7. GITHUB SYNC CONTAINER */
 .github-sync-container {
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    justify-content: center;
     width: 100%;
-    padding-top: 100%;
-    margin-top: 20px;
-    border: 0px solid #222;
-    background: #000;
 }
 
 .github-sync-container iframe {
