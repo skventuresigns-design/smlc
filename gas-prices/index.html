@@ -4,30 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        #wp-custom-wrapper { background: transparent !important; display: flex; justify-content: center; align-items: center; width: 90% !important; margin: 0 auto; }
-        body { background: transparent; margin: 0; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; overflow: hidden; font-family: sans-serif; }
-        .billboard-frame { background: #111; border: 8px solid #2a2a2a; border-radius: 4px; padding: 10px; position: relative; width: 100%; height: 100%; max-width: 500px; aspect-ratio: 16 / 11; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
-        .brand-overlay, .brand-footer { position: absolute; width: 100%; background: #3e0100; color: #ffc929; font-weight: bold; text-align: center; font-size: 14px; padding: 8px 0; z-index: 10; letter-spacing: 1px; border-bottom: 2px solid #ffc929; }
-        .brand-overlay { top: 0; }
-        .brand-footer { bottom: 0; border-top: 2px solid #ffc929; border-bottom: none; }
-        .digital-screen { width: 95%; height: 70%; background: #000; border-radius: 5px; position: relative; overflow: hidden; border: 1px solid #333; display: flex; align-items: center; justify-content: center; }
-        .gas-slide { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 1s ease-in-out; }
-        .station-logo { max-height: 25%; max-width: 70%; margin-bottom: 10px; }
-        .price-box { width: 85%; display: flex; justify-content: center; align-items: center; margin: 2px 0; font-weight: bold; }
-        .separator { color: #ffc929; font-size: 2.2rem; margin: 0 15px; font-weight: normal; }
-        .price-label { color: #888; font-size: 10px; letter-spacing: 2px; }
-        .led-red { color: #ff3b3b; text-shadow: 0 0 10px #ff0000; font-family: monospace; font-size: 2.4rem; }
-        .led-grn { color: #39ff14; text-shadow: 0 0 10px #228b22; font-family: monospace; font-size: 2.4rem; }
-        .update-tag { color: #444; font-size: 9px; margin-top: 10px; text-transform: uppercase; }
+        #wp-custom-wrapper { 
+            background: transparent !important; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 90% !important; 
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        body { background: transparent; margin: 0; padding: 0; font-family: sans-serif; }
+
+        .billboard-frame { 
+            background: #111; 
+            border: clamp(4px, 1vw, 8px) solid #2a2a2a; 
+            border-radius: 8px; 
+            position: relative; 
+            width: 100%; 
+            min-height: 280px; /* Reduced to fit compacted layouts */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        /* FLEXIBLE HEADER/FOOTER */
+        .brand-overlay, .brand-footer { 
+            width: 100%; 
+            background: #3e0100; 
+            color: #ffc929; 
+            font-weight: bold; 
+            text-align: center; 
+            font-size: clamp(10px, 2.5vw, 14px); 
+            padding: clamp(5px, 1.5vw, 10px) 0; 
+            z-index: 10; 
+            letter-spacing: 1px;
+            flex-shrink: 0; /* Prevents bars from collapsing */
+            min-height: fit-content;
+        }
+        .brand-overlay { border-bottom: 2px solid #ffc929; }
+        .brand-footer { border-top: 2px solid #ffc929; }
+
+        .digital-screen { 
+            flex-grow: 1;
+            width: 95%; 
+            margin: 5px 0; /* Tighter margins for Our Flora page */
+            background: #000; 
+            border-radius: 5px; 
+            position: relative; 
+            overflow: hidden; 
+            border: 1px solid #333; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+
+        .gas-slide { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            opacity: 0; 
+            transition: opacity 1s ease-in-out;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .station-logo { 
+            max-height: clamp(40px, 10vh, 60px); 
+            max-width: 80%; 
+            object-fit: contain;
+            margin-bottom: 10px; 
+        }
+
+        .price-box { 
+            width: 100%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-weight: bold; 
+        }
+
+        .separator { 
+            color: #ffc929; 
+            font-size: clamp(1.2rem, 5vw, 2.2rem); 
+            margin: 0 clamp(5px, 3vw, 20px); 
+            font-weight: normal; 
+        }
+
+        .price-group { display: flex; flex-direction: column; align-items: center; }
+        .price-label { color: #888; font-size: clamp(8px, 1.5vw, 10px); letter-spacing: 1px; margin-bottom: 2px; }
+        
+        .led-red { 
+            color: #ff3b3b; 
+            text-shadow: 0 0 10px #ff0000; 
+            font-family: monospace; 
+            font-size: clamp(1.5rem, 6vw, 2.5rem); 
+            line-height: 1;
+        }
+        
+        .led-grn { 
+            color: #39ff14; 
+            text-shadow: 0 0 10px #228b22; 
+            font-family: monospace; 
+            font-size: clamp(1.5rem, 6vw, 2.5rem); 
+            line-height: 1;
+        }
+
+        .update-tag { 
+            color: #ffc929; 
+            font-size: clamp(8px, 1.5vw, 10px); 
+            margin-top: 10px; 
+            text-transform: uppercase; 
+            background: rgba(62, 1, 0, 0.5);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
 
 <div id="wp-custom-wrapper">
-    <a href="https://staging.supportmylocalcommunity.com/gas-prices/" target="_parent" style="text-decoration: none; width: 100%; height: 100%; display: flex; justify-content: center;">
+    <a href="https://staging.supportmylocalcommunity.com/gas-prices/" target="_parent" style="text-decoration: none; width: 100%;">
         <div class="billboard-frame">
             <div class="brand-overlay">S & K Ventures, Inc. • Digital Advertising</div>
-            <div id="screen" class="digital-screen"><div style="color: white;">Syncing Stations...</div></div>
+            <div id="screen" class="digital-screen">
+                <div style="color: #ffc929; font-family: monospace; font-size: 12px;">INITIALIZING FEED...</div>
+            </div>
             <div class="brand-footer">Click billboard to update prices</div>
         </div>
     </a>
@@ -37,15 +145,15 @@
 const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDrmLrRHDodVlC3wWrQvGbPBEA4K351CmsBP3iF9RVdvdMKMQ2XdQb_cDKfDKvQ_hSuC-EsFidueX6/pub?output=csv';
 const imgBase = 'https://raw.githubusercontent.com/KFruti88/Clay-County-Fuel/main/images/';
 
-const stations = {
-    "48100": { display: "Flora", logo: "caseys.png" },
-    "48101": { display: "Flora", logo: "hucks.png" },
-    "128128": { display: "Flora", logo: "caseys.png" },
-    "120226": { display: "Flora", logo: "faststop.png" },
-    "87817": { display: "Louisville", logo: "caseys.png" }, 
-    "171711": { display: "Clay City", logo: "caseys.png" },
-    "48026": { display: "Louisville", logo: "caseys.png" }
-};
+const stations = [
+    { id: "48100", display: "Flora", logo: "caseys.png" },
+    { id: "48101", display: "Flora", logo: "hucks.png" },
+    { id: "128128", display: "Flora", logo: "caseys.png" },
+    { id: "120226", display: "Flora", logo: "faststop.png" },
+    { id: "87817", display: "Louisville", logo: "caseys.png" }, 
+    { id: "171711", display: "Xenia", logo: "knapp.png" },
+    { id: "48026", display: "Clay City", logo: "caseys.png" } 
+];
 
 async function updateBillboard() {
     try {
@@ -57,10 +165,10 @@ async function updateBillboard() {
         rows.forEach((cols, i) => {
             if (i === 0) return; 
             const stationCell = (cols[2] || "").toUpperCase();
-            Object.keys(stations).forEach(id => {
-                const cityName = stations[id].display.toUpperCase();
-                if (stationCell.includes(id) || stationCell.includes(cityName)) {
-                    liveData[id] = {
+            stations.forEach(s => {
+                const cityName = s.display.toUpperCase();
+                if (stationCell.includes(s.id) || stationCell.includes(cityName)) {
+                    liveData[s.id] = {
                         reg: cols[3]?.replace(/[ "$]/g, "") || "---",
                         dsl: cols[4]?.replace(/[ "$|]/g, "") || "---",
                         time: cols[0]
@@ -72,10 +180,8 @@ async function updateBillboard() {
         const screen = document.getElementById('screen');
         screen.innerHTML = '';
 
-        Object.keys(stations).forEach(id => {
-            const config = stations[id];
-            const data = liveData[id];
-            
+        stations.forEach(s => {
+            const data = liveData[s.id];
             const slide = document.createElement('div');
             slide.className = 'gas-slide';
             
@@ -84,20 +190,20 @@ async function updateBillboard() {
             const displayTime = data ? data.time : "Jan 01, 2026";
 
             slide.innerHTML = `
-                <div style="color: #888; font-size: 11px; letter-spacing: 2px; margin-bottom: 5px;">${config.display.toUpperCase()}, IL</div>
-                <img src="${imgBase}${config.logo}" class="station-logo" onerror="this.style.opacity='0'">
+                <div style="color: #888; font-size: 10px; letter-spacing: 1px; margin-bottom: 2px;">${s.display.toUpperCase()}, IL</div>
+                <img src="${imgBase}${s.logo}" class="station-logo" onerror="this.style.display='none'">
                 <div class="price-box">
-                    <div style="display:flex; flex-direction:column; align-items:center;">
-                        <span class="price-label">REG</span>
+                    <div class="price-group">
+                        <span class="price-label">REGULAR</span>
                         <span class="led-red">${displayReg}</span>
                     </div>
                     <span class="separator">|</span>
-                    <div style="display:flex; flex-direction:column; align-items:center;">
-                        <span class="price-label">DSL</span>
+                    <div class="price-group">
+                        <span class="price-label">DIESEL</span>
                         <span class="led-grn">${displayDsl}</span>
                     </div>
                 </div>
-                <div class="update-tag">UPDATED: ${displayTime}</div>
+                <div class="update-tag">Updated: ${displayTime}</div>
             `;
             screen.appendChild(slide);
         });
@@ -113,7 +219,9 @@ async function updateBillboard() {
             if (window.rotator) clearInterval(window.rotator);
             window.rotator = setInterval(cycle, 6000);
         }
-    } catch (e) { console.error("Sync Error"); }
+    } catch (e) { 
+        console.error("Sync Error");
+    }
 }
 
 updateBillboard();
