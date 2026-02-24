@@ -170,6 +170,7 @@
     align-items: center;     /* Added: Centers vertically */
     position: relative;
    box-sizing: border-box;
+   margin-top: -15px;
     overflow: hidden;
     width: 100%;
     min-height: 450px;       /* Changed: Match your iframe height */
