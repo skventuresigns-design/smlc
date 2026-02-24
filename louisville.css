@@ -172,7 +172,7 @@
     overflow: hidden;
     width: 100%;
     min-height: 450px;       /* Changed: Match your iframe height */
-    margin-top: 20px;
+    margin-left: 10%;
     border: 0px solid #222;
     background: #000;        /* Keep the black background */
 }
