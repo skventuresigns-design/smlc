@@ -2,7 +2,7 @@ name: Frequent News Sync
 
 on:
   schedule:
-    - cron: '22,44 * * * *'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
