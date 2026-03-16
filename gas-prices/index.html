@@ -1,183 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S & K Ventures Gas Prices</title>
-    <style>
-        body { margin: 0;
-               background: transparent;
-               overflow: hidden;
-               font-family: sans-serif;
-               display: flex;
-               flex-direction: column; /* Keeps items stacked vertically */
-               justify-content: center; /* Centers vertically */
-               align-items: center;    /* Centers horizontally */
-               min-height: 100vh;      /* Ensures it takes up the full iframe height */
-               text-align: center;
-             }
-        
-        #wp-custom-wrapper { 
-            background: transparent !important; 
-            display: flex; 
-            justify-content: center; 
-            width: 90% !important; 
-            max-width: 500px;
-            margin: 10px auto;
-        }
-        .billboard-frame { 
-            background: #111; 
-            border: 4px solid #2a2a2a; 
-            border-radius: 8px; 
-            width: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            /* box-shadow: 0 10px 30px rgba(0,0,0,0.8);*/
-            overflow: hidden;
-            text-decoration: none !important;
-            transition: transform 0.2s ease;
-        }
-        .billboard-frame:hover { transform: scale(1.01); border-color: #ffc929; }
-
-        .brand-overlay, .brand-footer { 
-            background: #3e0100; 
-            color: #ffc929; 
-            font-weight: bold; 
-            text-align: center; 
-            font-size: clamp(10px, 2.5vw, 13px); 
-            padding: 8px 0;
-            letter-spacing: 1px;
-            flex: 0 1 auto;
-            text-transform: uppercase;
-        }
-        .brand-overlay { border-bottom: 2px solid #ffc929; }
-        .brand-footer { border-top: 2px solid #ffc929; cursor: pointer; }
-        
-        .digital-screen { 
-            background: #000; 
-            margin: 4px;
-            min-height: 200px;
-            flex: 1 1 auto; 
-            position: relative; 
-            overflow: hidden; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            border-radius: 4px;
-        }
-        .gas-slide { 
-            position: absolute; 
-            inset: 0;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            opacity: 0; 
-            transition: opacity 0.8s ease-in-out;
-            padding: 10px;
-        }
-        .station-logo { 
-            max-height: clamp(40px, 10vh, 65px); 
-            max-width: 85%; 
-            object-fit: contain;
-            margin-bottom: 10px; 
-        }
-        .price-box { display: flex; align-items: center; justify-content: center; width: 100%; }
-        .separator { color: #ffc929; font-size: 2rem; margin: 0 15px; }
-        .led-red { color: #ff3b3b; text-shadow: 0 0 8px #ff0000; font-family: monospace; font-size: clamp(1.6rem, 6vw, 2.5rem); line-height: 1; }
-        .led-grn { color: #39ff14; text-shadow: 0 0 8px #228b22; font-family: monospace; font-size: clamp(1.6rem, 6vw, 2.5rem); line-height: 1; }
-        .update-tag { color: #ffc929; font-size: 9px; margin-top: 12px; opacity: 0.8; background: rgba(0,0,0,0.4); padding: 2px 5px; border-radius: 2px;}
-        .loading-text { color: #ffc929; font-family: monospace; font-size: 12px; }
-    </style>
-</head>
-<body>
-
 <div id="wp-custom-wrapper">
-    <a href="https://www.supportmylocalcommunity.com/gas-prices/price-update.html" target="_parent" style="text-decoration: none !important; width: 100%;">
+    <style>
+        #wp-custom-wrapper { width: 90%; margin: 0 auto; display: flex; justify-content: center; align-items: center; background: transparent; }
+        #wp-custom-wrapper .billboard-link { text-decoration: none; cursor: pointer; width: 100%; display: flex; justify-content: center; align-items: center; }
+        #wp-custom-wrapper .billboard-frame { background: #111; border: 8px solid #2a2a2a; border-radius: 4px; padding: 10px; position: relative; width: 100%; max-width: 500px; aspect-ratio: 16 / 11; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
+        #wp-custom-wrapper .brand-overlay { position: absolute; top: 0; width: 100%; background: #3e0100; color: #ffc929; font-weight: bold; text-align: center; font-size: 14px; padding: 8px 0; border-bottom: 2px solid #ffc929; z-index: 10; letter-spacing: 1px; }
+        #wp-custom-wrapper .brand-footer { position: absolute; bottom: 0; width: 100%; background: #3e0100; color: #ffc929; font-weight: bold; text-align: center; font-size: 14px; padding: 8px 0; border-top: 2px solid #ffc929; z-index: 10; letter-spacing: 0.5px; }
+        #wp-custom-wrapper .digital-screen { width: 95%; height: 70%; background: #000; border-radius: 5px; position: relative; overflow: hidden; border: 1px solid #333; display: flex; align-items: center; justify-content: center; }
+        #wp-custom-wrapper .gas-slide { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 1s ease-in-out; }
+        
+        #wp-custom-wrapper .town-header { color: #ffc929; font-size: 12px; font-weight: bold; letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 5px rgba(255, 201, 41, 0.6); }
+        #wp-custom-wrapper .logo-container { height: 25%; width: 70%; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
+        #wp-custom-wrapper .station-logo { max-height: 100%; max-width: 100%; }
+        #wp-custom-wrapper .logo-fallback { color: #fff; font-size: 24px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; border: 2px solid #444; padding: 5px 15px; }
+
+        #wp-custom-wrapper .price-row { width: 75%; display: flex; justify-content: space-between; align-items: center; margin: 3px 0; }
+        #wp-custom-wrapper .price-label { color: #ffc929; font-size: 11px; font-weight: bold; letter-spacing: 1px; text-shadow: 0 0 5px rgba(255, 201, 41, 0.4); }
+        #wp-custom-wrapper .led-red { color: #ff3b3b; text-shadow: 0 0 10px #ff0000; font-family: monospace; font-size: 2.2rem; font-weight: bold; }
+        #wp-custom-wrapper .led-grn { color: #39ff14; text-shadow: 0 0 10px #228b22; font-family: monospace; font-size: 2.2rem; font-weight: bold; }
+        
+        /* Expanded Update Tag for Date + Time */
+        #wp-custom-wrapper .update-tag { color: #ffc929; font-size: 9px; margin-top: 8px; font-weight: 600; text-shadow: 0 0 5px rgba(255, 201, 41, 0.4); text-transform: uppercase; }
+
+        @media (max-width: 600px) {
+            #wp-custom-wrapper .billboard-frame { aspect-ratio: 1 / 1; }
+            #wp-custom-wrapper .led-red, #wp-custom-wrapper .led-grn { font-size: 1.8rem; }
+        }
+    </style>
+
+    <a href="https://supportmylocalcommunity.com/gas-prices/" target="_parent" class="billboard-link">
         <div class="billboard-frame">
-            <div class="brand-overlay">S & K Ventures, Inc.</div>
-            <div id="screen" class="digital-screen">
-                <div class="loading-text">FETCHING LATEST PRICES...</div>
+            <div class="brand-overlay">S & K Ventures, Inc. • Digital Advertising</div>
+            <div id="fuel-screen" class="digital-screen">
+                <div style="color: #ffc929; font-weight: bold;">Loading Prices...</div>
             </div>
-            <div class="brand-footer">Click Here to update Price</div>
+            <div class="brand-footer">Click billboard to update prices</div>
         </div>
     </a>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
 <script>
 (function() {
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDrmLrRHDodVlC3wWrQvGbPBEA4K351CmsBP3iF9RVdvdMKMQ2XdQb_cDKfDKvQ_hSuC-EsFidueX6/pub?output=csv';
-    const imgBase = 'https://raw.githubusercontent.com/KFruti88/Clay-County-Fuel/main/images/';
+    const firebaseConfig = {
+        apiKey: "AIzaSyBYPbGWDNPUmCSnFWDPPWtiXe2F6MPinXg",
+        authDomain: "smlc-fuel-monitor.firebaseapp.com",
+        databaseURL: "https://smlc-fuel-monitor-default-rtdb.firebaseio.com",
+        projectId: "smlc-fuel-monitor",
+        storageBucket: "smlc-fuel-monitor.firebasestorage.app",
+        messagingSenderId: "22397440085",
+        appId: "1:22397440085:web:c88e71688ed58896bc4dc"
+    };
 
-    const stations = [
-        { id: "48100", display: "Flora", logo: "flora-caseys.png", name: "Casey's" },
-        { id: "48101", display: "Flora", logo: "hucks.png", name: "Huck's" },
-        { id: "128128", display: "Flora", logo: "mach1.png", name: "Mach 1" },
-        { id: "120226", display: "Flora", logo: "faststop.png", name: "Fast Stop" },
-        { id: "87817", display: "Louisville", logo: "louisville-caseys.png", name: "Casey's" }, 
-        { id: "171711", display: "Xenia", logo: "knapp.png", name: "Knapp's" },
-        { id: "48026", display: "Clay City", logo: "clay-city-caseys.png", name: "Casey's" } 
-    ];
+    const fuelApp = firebase.initializeApp(firebaseConfig, 'SMLCFuelBillboard');
+    const db = fuelApp.database();
 
-    async function initBillboard() {
-        try {
-            const res = await fetch(sheetUrl + '&v=' + new Date().getTime());
-            const csv = await res.text();
-            const lines = csv.split(/\r?\n/).map(l => l.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
-            const dataRows = lines.slice(1).reverse(); 
+    const stationConfigs = {
+        "48100": { town: "flora", display: "Flora", name: "CASEY'S", logo: "Casey's.png" },     
+        "48101": { town: "flora", display: "Flora", name: "HUCK'S", logo: "Hucks.png" },      
+        "128128": { town: "flora", display: "Flora", name: "MACH 1", logo: "Mach 1.png" },    
+        "120226": { town: "flora", display: "Flora", name: "FAST STOP", logo: "Fast stop.png" },  
+        "48026": { town: "louisville", display: "Louisville", name: "CASEY'S", logo: "Casey's.png" }, 
+        "87817": { town: "xenia", display: "Xenia", name: "KNAPP'S", logo: "Knapps.png" },      
+        "171711": { town: "clay-city", display: "Clay City", name: "CASEY'S", logo: "Casey's.png" }  
+    };
 
-            let dataMap = {};
-            dataRows.forEach(row => {
-                if (!row[2]) return;
-                const cellText = row[2].toString().toUpperCase();
-                stations.forEach(s => {
-                    if (!dataMap[s.id] && cellText.includes(s.id)) {
-                        dataMap[s.id] = { 
-                            reg: (row[3] || "---").replace(/[ "$]/g, ""), 
-                            dsl: (row[4] || "---").replace(/[ "$|]/g, ""), 
-                            ts: row[0] 
-                        };
-                    }
-                });
-            });
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetTown = urlParams.get('town')?.toLowerCase();
+    const screen = document.getElementById('fuel-screen');
+    let currentSlide = 0;
 
-            const screen = document.getElementById('screen');
-            if(!screen) return;
-            screen.innerHTML = '';
+    function render(data) {
+        screen.innerHTML = '';
+        const ids = Object.keys(stationConfigs).filter(id => !targetTown || stationConfigs[id].town === targetTown);
+        
+        ids.forEach(id => {
+            const config = stationConfigs[id];
+            const info = data[id] || { reg: "---", dsl: "---", date: "PENDING" };
+            const safeLogo = encodeURIComponent(config.logo);
+            
+            const slide = document.createElement('div');
+            slide.className = 'gas-slide';
+            slide.innerHTML = `
+                <div class="town-header">${config.display.toUpperCase()}, IL</div>
+                <div class="logo-container">
+                    <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/gas-prices/image/${safeLogo}" 
+                         class="station-logo" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-fallback" style="display:none;">${config.name}</div>
+                </div>
+                <div class="price-row"><span class="price-label">REGULAR</span><span class="led-red">${info.reg}</span></div>
+                <div class="price-row"><span class="price-label">DIESEL</span><span class="led-grn">${info.dsl === "0" ? "---" : info.dsl}</span></div>
+                <div class="update-tag">UPDATED: ${info.date}</div>
+            `;
+            screen.appendChild(slide);
+        });
 
-            stations.forEach(s => {
-                const info = dataMap[s.id] || { reg: "---", dsl: "---", ts: "Awaiting Update" };
-                const slide = document.createElement('div');
-                slide.className = 'gas-slide';
-                slide.innerHTML = `
-                    <div style="color:#777; font-size:10px; margin-bottom:4px; letter-spacing:1px;">${s.display.toUpperCase()} - ${s.name.toUpperCase()}</div>
-                    <img src="${imgBase}${s.logo}" class="station-logo">
-                    <div class="price-box">
-                        <div style="text-align:center"><span style="color:#888; font-size:8px; display:block;">REGULAR</span><span class="led-red">${info.reg}</span></div>
-                        <span class="separator">|</span>
-                        <div style="text-align:center"><span style="color:#888; font-size:8px; display:block;">DIESEL</span><span class="led-grn">${info.dsl}</span></div>
-                    </div>
-                    <div class="update-tag">Updated: ${info.ts}</div>
-                `;
-                screen.appendChild(slide);
-            });
+        const slides = screen.querySelectorAll('.gas-slide');
+        function cycle() {
+            if(slides.length === 0) return;
+            slides.forEach((s, i) => s.style.opacity = (i === currentSlide) ? "1" : "0");
+            currentSlide = (currentSlide + 1) % slides.length;
+        }
 
-            let current = 0;
-            const slides = screen.querySelectorAll('.gas-slide');
-            const rotate = () => {
-                slides.forEach((sl, i) => sl.style.opacity = (i === current ? '1' : '0'));
-                current = (current + 1) % slides.length;
-            };
-            if (slides.length > 0) {
-                rotate();
-                setInterval(rotate, 6000);
-            }
-        } catch (e) { console.error("Update Sync Error", e); }
+        if (slides.length > 0) {
+            cycle();
+            if (window.fuelRotator) clearInterval(window.fuelRotator);
+            window.fuelRotator = setInterval(cycle, 6000);
+        }
     }
 
-    if (document.readyState === 'complete') { initBillboard(); } 
-    else { window.addEventListener('load', initBillboard); }
+    db.ref('fuel_prices').on('value', (snap) => {
+        const val = snap.val();
+        if (val) render(val);
+        else screen.innerHTML = '<div style="color: #ffc929; font-weight: bold;">No Data Found</div>';
+    });
 })();
 </script>
-</body>
-</html>
