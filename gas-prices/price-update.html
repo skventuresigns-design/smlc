@@ -1,187 +1,94 @@
 <div id="wp-custom-wrapper">
-    <div class="gas-container">
-        <div class="gas-column billboard-side">
-            <a href="https://www.supportmylocalcommunity.com/gas-prices/" target="_parent" style="text-decoration: none !important; width: 100%;">
-                <div class="billboard-frame">
-                    <div class="brand-overlay">S & K Ventures, Inc.</div>
-                    <div id="screen" class="digital-screen">
-                        <div class="loading-text">SYNCING LATEST DATA...</div>
-                    </div>
-                    <div class="brand-footer">Today's Local Prices</div>
-                </div>
-            </a>
-        </div>
+    <style>
+        #wp-custom-wrapper { width: 90%; margin: 20px auto; font-family: sans-serif; }
+        #wp-custom-wrapper .admin-card { background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; border-left: 6px solid #3e0100; position: relative; }
+        #wp-custom-wrapper h2 { color: #3e0100; text-align: center; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        #wp-custom-wrapper label { display: block; font-size: 11px; color: #777; font-weight: bold; margin-top: 12px; text-transform: uppercase; }
+        #wp-custom-wrapper input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; box-sizing: border-box; }
+        #wp-custom-wrapper .update-btn { background: #ffc929; border: none; padding: 14px; width: 100%; margin-top: 20px; border-radius: 4px; font-weight: bold; color: #3e0100; cursor: pointer; transition: 0.3s; font-size: 14px; }
+        #wp-custom-wrapper .update-btn:hover { background: #e0b124; }
+        #wp-custom-wrapper .status-area { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; font-size: 12px; }
+        #wp-custom-wrapper .dot { height: 8px; width: 8px; background: #bbb; border-radius: 50%; margin-right: 8px; display: inline-block; }
+        #wp-custom-wrapper .synced .dot { background: #39ff14; box-shadow: 0 0 8px #39ff14; }
+    </style>
 
-        <div class="gas-column form-side">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScwPZW27UST8NdOohuUlsBgbue9QKzB4QqDH5-9gpwUy15bnw/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-        </div>
-    </div>
+    <h2>Community Fuel Price Updates</h2>
+    <div id="community-container"></div>
 </div>
 
-<style>
-    /* Responsive Wrapper */
-    #wp-custom-wrapper {
-        width: 90% !important;
-        margin: 20px auto;
-        background: transparent !important;
-        color-scheme: only light;
-    }
-
-    .gas-container {
-        display: flex;
-        flex-wrap: wrap; /* Allows stacking on mobile */
-        gap: 20px;
-        align-items: flex-start;
-        justify-content: center;
-    }
-
-    /* Column Control */
-    .gas-column {
-        flex: 1 1 400px; /* Grow to fill, but base at 400px */
-        max-width: 100%;
-    }
-
-    /* Billboard Styling */
-    .billboard-frame {
-        background: #111;
-        border: 4px solid #2a2a2a;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        overflow: hidden;
-    }
-
-    .brand-overlay, .brand-footer {
-        background: #3e0100;
-        color: #ffc929;
-        font-weight: bold;
-        text-align: center;
-        font-size: clamp(10px, 2.5vw, 13px);
-        padding: 8px 0;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        border-bottom: 2px solid #ffc929;
-    }
-    .brand-footer { border-bottom: none; border-top: 2px solid #ffc929; }
-
-    .digital-screen {
-        background: #000;
-        margin: 4px;
-        min-height: 220px;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-    }
-
-    .gas-slide {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.8s ease-in-out;
-        padding: 10px;
-    }
-
-    .station-logo {
-        max-height: 60px;
-        max-width: 80%;
-        object-fit: contain;
-        margin-bottom: 10px;
-    }
-
-    .price-box { display: flex; align-items: center; justify-content: center; width: 100%; }
-    .separator { color: #ffc929; font-size: 2rem; margin: 0 15px; }
-    .led-red { color: #ff3b3b; text-shadow: 0 0 8px #ff0000; font-family: monospace; font-size: 2.5rem; line-height: 1; }
-    .led-grn { color: #39ff14; text-shadow: 0 0 8px #228b22; font-family: monospace; font-size: 2.5rem; line-height: 1; }
-    .update-tag { color: #ffc929; font-size: 9px; margin-top: 10px; opacity: 0.8; }
-    .loading-text { color: #ffc929; font-family: monospace; }
-
-    /* Mobile Height Adjustments */
-    @media (max-width: 600px) {
-        .form-side iframe { height: 600px; }
-        .digital-screen { min-height: 180px; }
-    }
-</style>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
 <script>
 (function() {
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDrmLrRHDodVlC3wWrQvGbPBEA4K351CmsBP3iF9RVdvdMKMQ2XdQb_cDKfDKvQ_hSuC-EsFidueX6/pub?output=csv';
-    const imgBase = 'https://raw.githubusercontent.com/KFruti88/Clay-County-Fuel/main/images/';
+    const firebaseConfig = {
+        apiKey: "AIzaSyBYPbGWDNPUmCSnFWDPPWtiXe2F6MPinXg",
+        authDomain: "smlc-fuel-monitor.firebaseapp.com",
+        databaseURL: "https://smlc-fuel-monitor-default-rtdb.firebaseio.com",
+        projectId: "smlc-fuel-monitor",
+        storageBucket: "smlc-fuel-monitor.firebasestorage.app",
+        messagingSenderId: "22397440085",
+        appId: "1:22397440085:web:c88e71688ed58896bc4dc"
+    };
+
+    const communityApp = firebase.initializeApp(firebaseConfig, 'SMLCCommunityApp');
+    const db = communityApp.database();
 
     const stations = [
-        { id: "48100", display: "Flora", logo: "flora-caseys.png", name: "Casey's" },
-        { id: "48101", display: "Flora", logo: "hucks.png", name: "Huck's" },
-        { id: "128128", display: "Flora", logo: "mach1.png", name: "Mach 1" },
-        { id: "120226", display: "Flora", logo: "faststop.png", name: "Fast Stop" },
-        { id: "87817", display: "Louisville", logo: "louisville-caseys.png", name: "Casey's" },
-        { id: "171711", display: "Xenia", logo: "knapp.png", name: "Knapp's" },
-        { id: "48026", display: "Clay City", logo: "clay-city-caseys.png", name: "Casey's" }
+        { id: "48100", name: "Flora - Casey's" },
+        { id: "48101", name: "Flora - Huck's" },
+        { id: "128128", name: "Flora - Mach 1" },
+        { id: "120226", name: "Flora - Fast Stop" },
+        { id: "48026", name: "Louisville - Casey's" },
+        { id: "87817", name: "Xenia - Knapp's" },
+        { id: "171711", name: "Clay City - Casey's" }
     ];
 
-    async function updateBillboard() {
-        try {
-            const res = await fetch(sheetUrl + '&v=' + new Date().getTime());
-            const csv = await res.text();
-            const lines = csv.split(/\r?\n/).map(l => l.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
-            const dataRows = lines.slice(1).reverse(); // Get latest timestamps first
+    const container = document.getElementById('community-container');
 
-            let dataMap = {};
-            dataRows.forEach(row => {
-                if (!row[2]) return;
-                const cellText = row[2].toString().toUpperCase();
-                stations.forEach(s => {
-                    if (!dataMap[s.id] && cellText.includes(s.id)) {
-                        dataMap[s.id] = { 
-                            reg: (row[3] || "---").replace(/[ "$]/g, ""), 
-                            dsl: (row[4] || "---").replace(/[ "$|]/g, ""), 
-                            ts: row[0] 
-                        };
-                    }
-                });
-            });
+    stations.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'admin-card';
+        card.innerHTML = `
+            <strong>${s.name}</strong>
+            <label>Regular Price</label><input type="text" id="reg-${s.id}">
+            <label>Diesel Price</label><input type="text" id="dsl-${s.id}">
+            <label>Last Known Update</label><input type="text" id="date-${s.id}" readonly style="background:#eee">
+            <div class="status-area" id="area-${s.id}"><span class="dot"></span> <span id="msg-${s.id}">Ready</span></div>
+            <button class="update-btn" id="btn-${s.id}">Submit Price Update</button>
+        `;
+        container.appendChild(card);
 
-            const screen = document.getElementById('screen');
-            if(!screen) return;
-            screen.innerHTML = '';
-
-            stations.forEach(s => {
-                const info = dataMap[s.id] || { reg: "---", dsl: "---", ts: "Awaiting Update" };
-                const slide = document.createElement('div');
-                slide.className = 'gas-slide';
-                slide.innerHTML = `
-                    <div style="color:#777; font-size:10px; margin-bottom:4px;">${s.display.toUpperCase()} - ${s.name.toUpperCase()}</div>
-                    <img src="${imgBase}${s.logo}" class="station-logo" onerror="this.style.opacity='0'">
-                    <div class="price-box">
-                        <div style="text-align:center"><span style="color:#888; font-size:8px; display:block;">REGULAR</span><span class="led-red">${info.reg}</span></div>
-                        <span class="separator">|</span>
-                        <div style="text-align:center"><span style="color:#888; font-size:8px; display:block;">DIESEL</span><span class="led-grn">${info.dsl}</span></div>
-                    </div>
-                    <div class="update-tag">Updated: ${info.ts}</div>
-                `;
-                screen.appendChild(slide);
-            });
-
-            let current = 0;
-            const slides = screen.querySelectorAll('.gas-slide');
-            if (slides.length > 0) {
-                const rotate = () => {
-                    slides.forEach((sl, i) => sl.style.opacity = (i === current ? '1' : '0'));
-                    current = (current + 1) % slides.length;
-                };
-                rotate();
-                setInterval(rotate, 6000);
+        // This pulls the existing data from Firebase (including the time)
+        db.ref('fuel_prices/' + s.id).on('value', snap => {
+            const data = snap.val();
+            if(data) {
+                document.getElementById(`reg-${s.id}`).value = data.reg;
+                document.getElementById(`dsl-${s.id}`).value = data.dsl;
+                document.getElementById(`date-${s.id}`).value = data.date;
+                document.getElementById(`area-${s.id}`).classList.add('synced');
             }
-        } catch (e) { console.error("Sync Error", e); }
-    }
+        });
 
-    if (document.readyState === 'complete') { updateBillboard(); } 
-    else { window.addEventListener('load', updateBillboard); }
+        // This creates and sends the Date + Time when you hit the button
+        document.getElementById(`btn-${s.id}`).onclick = function() {
+            const reg = document.getElementById(`reg-${s.id}`).value;
+            const dsl = document.getElementById(`dsl-${s.id}`).value;
+            const msg = document.getElementById(`msg-${s.id}`);
+
+            // GENERATE TIME HERE
+            const now = new Date();
+            const timestamp = now.toLocaleDateString() + " @ " + 
+                              now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " CST";
+
+            msg.innerText = "Sending Update...";
+
+            db.ref('fuel_prices/' + s.id).update({ reg, dsl, date: timestamp })
+                .then(() => { 
+                    msg.innerText = "Accepted: " + timestamp; 
+                })
+                .catch(err => { msg.innerText = "Error!"; console.error(err); });
+        };
+    });
 })();
 </script>
