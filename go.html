@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>S&K Venture Signs - Redirecting...</title>
+    <script>
+        async function getCountyAndRedirect() {
+            try {
+                // 1. Fetch location data based on IP (Free, no-key API)
+                const response = await fetch('http://ip-api.com/json/');
+                const data = await response.json();
+                
+                // 2. Identify the County (default to 'general' if unknown)
+                let county = data.regionName || "unknown";
+                let campaign = "universal_trailer";
+
+                // 3. Map the location to your UTM campaigns
+                if (county.includes("Effingham")) campaign = "effingham_co_skv_trailer";
+                else if (county.includes("Clay")) campaign = "clay_co_skv_trailer";
+                else if (county.includes("Marion")) campaign = "marion_co_skv_trailer";
+                
+                // 4. Send them to the homepage with the tags
+                const finalUrl = `https://skventuresigns.com/?utm_source=ad_trailer&utm_medium=qr&utm_campaign=${campaign}`;
+                window.location.href = finalUrl;
+
+            } catch (error) {
+                // If the location check fails, just send them to the main site anyway
+                window.location.href = "https://skventuresigns.com/?utm_source=ad_trailer&utm_medium=qr&utm_campaign=fallback_trailer";
+            }
+        }
+        window.onload = getCountyAndRedirect;
+    </script>
+</head>
+<body>
+    <p>Loading the best local deals for your area...</p>
+</body>
+</html>
