@@ -42,8 +42,8 @@
                 url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             background-attachment: fixed;
             overflow-x: hidden;
-            /* Added padding-top to prevent content from jumping under fixed header */
-            padding-top: 240px; 
+            /* Increased padding-top to ensure the first row isn't trapped under the header */
+            padding-top: 320px; 
         }
 
         /* Fixed Header Logic to stop the stuttering/jumping */
@@ -173,7 +173,7 @@
 
         .toast {
             background: #000;
-            border-left: 5px solid var(--brand-gold);
+            border-left: 4px solid var(--brand-gold);
             color: var(--brand-gold);
             padding: 15px 25px;
             margin-bottom: 12px;
@@ -199,7 +199,7 @@
         }
 
         @media (max-width: 768px) {
-            body { padding-top: 260px; } /* Adjust for mobile logo height */
+            body { padding-top: 340px; } /* Increased for mobile space */
             header.scrolled .logo-container img { max-width: 160px; }
             .phone-display { font-size: 22px !important; }
         }
@@ -262,7 +262,7 @@
             <!-- Stephy's -->
             <div class="billboard-card">
                 <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=38.518945,-88.649892" target="_blank" class="map-overlay-btn">
+                    <a href="https://maps.app.goo.gl/Eu4EnWtmKnCRfKCw9" target="_blank" class="map-overlay-btn">
                         Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
                     </a>
                     <div class="scale-label-tag">6ft x 14ft P6.35</div>
@@ -387,7 +387,6 @@
         }
 
         // Optimized Scroll Handler for stability
-        let scrollTimeout;
         window.addEventListener('scroll', () => {
             const header = document.getElementById('main-header');
             const threshold = 60;
