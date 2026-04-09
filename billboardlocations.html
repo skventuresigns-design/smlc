@@ -42,11 +42,11 @@
                 url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             background-attachment: fixed;
             overflow-x: hidden;
-            /* Increased padding-top to ensure the first row isn't trapped under the header */
+            /* Space for fixed header */
             padding-top: 320px; 
         }
 
-        /* Fixed Header Logic to stop the stuttering/jumping */
+        /* Fixed Header Logic */
         header {
             position: fixed;
             top: 0;
@@ -82,7 +82,6 @@
             max-width: 220px;
         }
 
-        /* Smoothly hide description and contact button on scroll */
         .scroll-reveal {
             max-height: 200px;
             opacity: 1;
@@ -109,6 +108,7 @@
             border-radius: 1rem;
             overflow: hidden;
             margin-bottom: var(--divi-row-height);
+            position: relative;
         }
         
         .billboard-card:hover {
@@ -128,6 +128,8 @@
             width: 100%;
             height: 100%;
             border: 0;
+            /* Interaction enabled */
+            pointer-events: auto; 
         }
 
         .map-overlay-btn {
@@ -140,7 +142,7 @@
             border-radius: 6px;
             font-size: 12px;
             font-weight: 700;
-            z-index: 10;
+            z-index: 20;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -173,7 +175,7 @@
 
         .toast {
             background: #000;
-            border-left: 4px solid var(--brand-gold);
+            border-left: 5px solid var(--brand-gold);
             color: var(--brand-gold);
             padding: 15px 25px;
             margin-bottom: 12px;
@@ -199,7 +201,7 @@
         }
 
         @media (max-width: 768px) {
-            body { padding-top: 340px; } /* Increased for mobile space */
+            body { padding-top: 340px; } 
             header.scrolled .logo-container img { max-width: 160px; }
             .phone-display { font-size: 22px !important; }
         }
@@ -242,9 +244,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             <!-- Clay City -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=38.677111,-88.391528" target="_blank" class="map-overlay-btn">
+            <div class="billboard-card cursor-pointer" onclick="window.open('https://skventuresigns.com/wp-content/uploads/2025/06/Clay_City_Data_Sheet.pdf', '_blank')">
+                <div class="location-map-container" onclick="event.stopPropagation()">
+                    <a href="https://www.google.com/maps/search/?api=1&query=38.677111,-88.391528" target="_blank" class="map-overlay-btn" onclick="event.stopPropagation()">
                         Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
                     </a>
                     <div class="scale-label-tag">8ft x 16ft P10</div>
@@ -252,21 +254,21 @@
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-3">
-                        <h2>Clay City Billboard</h2>
+                        <h2 class="hover:underline decoration-1 underline-offset-4">Clay City Billboard</h2>
                         <span class="price-text">$200/mo</span>
                     </div>
-                    <p class="opacity-80 text-sm">3219 Greenbrier Lane. High-traffic corridor reaching travelers heading East to Indiana or West to St. Louis.</p>
+                    <p class="opacity-80 text-sm">3219 Greenbrier Lane. High-traffic corridor reaching travelers heading East to Indiana or West to St. Louis. Click for data sheet.</p>
                 </div>
             </div>
 
             <!-- Stephy's -->
             <div class="billboard-card">
                 <div class="location-map-container">
-                    <a href="https://maps.app.goo.gl/Eu4EnWtmKnCRfKCw9" target="_blank" class="map-overlay-btn">
+                    <a href="https://www.google.com/maps/search/?api=1&query=38.518940,-88.649501" target="_blank" class="map-overlay-btn">
                         Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
                     </a>
                     <div class="scale-label-tag">6ft x 14ft P6.35</div>
-                    <iframe src="https://www.google.com/maps?q=38.518945,-88.649892&z=18&t=k&output=embed" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps?q=38.518940,-88.649501&z=18&t=k&output=embed" loading="lazy"></iframe>
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-3">
@@ -277,10 +279,10 @@
                 </div>
             </div>
 
-            <!-- DeSoto -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=37.802700,-89.226297" target="_blank" class="map-overlay-btn">
+            <!-- DeSoto (Clickable Card for PDF, interactive map) -->
+            <div class="billboard-card cursor-pointer" onclick="window.open('https://skventuresigns.com/desoto_data_sheet/', '_blank')">
+                <div class="location-map-container" onclick="event.stopPropagation()">
+                    <a href="https://www.google.com/maps/search/?api=1&query=37.802700,-89.226297" target="_blank" class="map-overlay-btn" onclick="event.stopPropagation()">
                         Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
                     </a>
                     <div class="scale-label-tag">6ft x 12ft P10</div>
@@ -288,10 +290,10 @@
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-3">
-                        <h2>DeSoto Billboard</h2>
+                        <h2 class="hover:underline decoration-1 underline-offset-4">DeSoto Billboard</h2>
                         <span class="price-text">$100/mo</span>
                     </div>
-                    <p class="opacity-80 text-sm">14705 N US-51. Reaches over 11,000 daily travelers and students near SIU Carbondale.</p>
+                    <p class="opacity-80 text-sm">14705 N US-51. Reaches over 11,000 daily travelers near SIU Carbondale. Click for data sheet.</p>
                 </div>
             </div>
 
@@ -313,10 +315,10 @@
                 </div>
             </div>
 
-            <!-- Effingham -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=39.058249,-88.737673" target="_blank" class="map-overlay-btn">
+            <!-- Effingham (Clickable Card for PDF, interactive map) -->
+            <div class="billboard-card cursor-pointer" onclick="window.open('https://skventuresigns.com/wp-content/uploads/2025/08/Effingham_Fairgrounds_Data_Sheet.pdf', '_blank')">
+                <div class="location-map-container" onclick="event.stopPropagation()">
+                    <a href="https://www.google.com/maps/search/?api=1&query=39.058249,-88.737673" target="_blank" class="map-overlay-btn" onclick="event.stopPropagation()">
                         Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
                     </a>
                     <div class="scale-label-tag">5ft x 10ft P10</div>
@@ -324,17 +326,17 @@
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-3">
-                        <h2>Effingham Fairgrounds</h2>
+                        <h2 class="hover:underline decoration-1 underline-offset-4">Effingham Fairgrounds</h2>
                         <span class="price-text">$75/mo</span>
                     </div>
-                    <p class="opacity-80 text-sm">Altamont, IL. Captures year-round event traffic and massive fair crowds.</p>
+                    <p class="opacity-80 text-sm">Altamont, IL. Captures year-round event traffic and massive fair crowds. Click for data sheet.</p>
                 </div>
             </div>
 
-            <!-- Oliver -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=39.490628,-87.682004" target="_blank" class="map-overlay-btn">
+            <!-- Oliver (Clickable Card for PDF, interactive map) -->
+            <div class="billboard-card cursor-pointer" onclick="window.open('https://skventuresigns.com/oliver_data_sheet/', '_blank')">
+                <div class="location-map-container" onclick="event.stopPropagation()">
+                    <a href="https://www.google.com/maps/search/?api=1&query=39.490628,-87.682004" target="_blank" class="map-overlay-btn" onclick="event.stopPropagation()">
                         Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
                     </a>
                     <div class="scale-label-tag">5ft x 10ft P10</div>
@@ -342,10 +344,10 @@
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-3">
-                        <h2>Oliver Billboard</h2>
+                        <h2 class="hover:underline decoration-1 underline-offset-4">Oliver Billboard</h2>
                         <span class="price-text">$75/mo</span>
                     </div>
-                    <p class="opacity-80 text-sm">961 Hwy 1 Marshall, IL. Regional corridor capturing city-to-city transit traffic.</p>
+                    <p class="opacity-80 text-sm">961 Hwy 1 Marshall, IL. Regional corridor capturing city-to-city transit traffic. Click for data sheet.</p>
                 </div>
             </div>
 
@@ -372,7 +374,6 @@
     </footer>
 
     <script>
-        // UI Helpers
         function showToast(msg) {
             const center = document.getElementById('notification-center');
             const toast = document.createElement('div');
@@ -386,23 +387,15 @@
             }, 3500);
         }
 
-        // Optimized Scroll Handler for stability
         window.addEventListener('scroll', () => {
             const header = document.getElementById('main-header');
-            const threshold = 60;
-            
-            if (window.scrollY > threshold) {
-                if (!header.classList.contains('scrolled')) {
-                    header.classList.add('scrolled');
-                }
+            if (window.scrollY > 60) {
+                header.classList.add('scrolled');
             } else {
-                if (header.classList.contains('scrolled')) {
-                    header.classList.remove('scrolled');
-                }
+                header.classList.remove('scrolled');
             }
         }, { passive: true });
 
-        // Notifications Logic
         async function requestNotifications() {
             if ("Notification" in window) {
                 if (Notification.permission === "default") {
@@ -427,13 +420,10 @@
         window.onload = () => {
             showToast("S&K Venture Portal Online");
             requestNotifications();
-            
-            // Offline Detection
             window.addEventListener('online', () => showToast("Network Restored"));
             window.addEventListener('offline', () => showToast("Offline Mode Active"));
         };
 
-        // Simple Service Worker Registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGV2ZW50ID0+IHsgfSk7').catch(() => {});
         }
