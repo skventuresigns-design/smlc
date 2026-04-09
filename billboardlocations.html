@@ -42,40 +42,60 @@
                 url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             background-attachment: fixed;
             overflow-x: hidden;
+            /* Added padding-top to prevent content from jumping under fixed header */
+            padding-top: 240px; 
         }
 
-        /* Sticky Header Logic */
+        /* Fixed Header Logic to stop the stuttering/jumping */
         header {
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             background: var(--brand-bg);
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 20px 1.5rem;
+            padding: 30px 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         header.scrolled {
             padding: 10px 1.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-bottom-color: var(--brand-gold);
-            background: rgba(62, 1, 0, 0.95);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            border-bottom: 2px solid var(--brand-gold);
+            background: rgba(62, 1, 0, 0.96);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
         }
 
         .logo-container img {
-            transition: all 0.3s ease;
-            max-width: 600px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 650px;
             width: 100%;
             height: auto;
         }
 
         header.scrolled .logo-container img {
-            max-width: 250px;
+            max-width: 220px;
         }
 
-        header.scrolled .hide-on-scroll {
-            display: none;
+        /* Smoothly hide description and contact button on scroll */
+        .scroll-reveal {
+            max-height: 200px;
+            opacity: 1;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        header.scrolled .scroll-reveal {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+            pointer-events: none;
         }
 
         /* Typography */
@@ -85,15 +105,16 @@
         .billboard-card {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 198, 39, 0.2);
-            transition: transform 0.2s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
             border-radius: 1rem;
             overflow: hidden;
             margin-bottom: var(--divi-row-height);
         }
         
         .billboard-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--brand-gold);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
         .location-map-container {
@@ -115,15 +136,16 @@
             left: 15px;
             background: #ffffff;
             color: #1a73e8;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 6px 14px;
+            border-radius: 6px;
             font-size: 12px;
             font-weight: 700;
             z-index: 10;
             display: flex;
             align-items: center;
-            gap: 5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            text-decoration: none;
         }
 
         .scale-label-tag {
@@ -132,17 +154,18 @@
             right: 15px;
             background: rgba(0,0,0,0.85);
             color: var(--brand-gold);
-            padding: 4px 10px;
-            border-radius: 4px;
+            padding: 5px 12px;
+            border-radius: 6px;
             font-size: 11px;
             font-weight: 900;
             z-index: 10;
             border: 1px solid var(--brand-gold);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
         #notification-center {
             position: fixed;
-            top: 80px;
+            top: 100px;
             right: 20px;
             z-index: 9999;
             pointer-events: none;
@@ -150,16 +173,17 @@
 
         .toast {
             background: #000;
-            border-left: 4px solid var(--brand-gold);
+            border-left: 5px solid var(--brand-gold);
             color: var(--brand-gold);
-            padding: 12px 20px;
-            margin-bottom: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,1);
+            padding: 15px 25px;
+            margin-bottom: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,1);
             font-size: 12px;
-            font-weight: 800;
+            font-weight: 900;
             text-transform: uppercase;
-            transform: translateX(150%);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 1px;
+            transform: translateX(180%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: auto;
         }
 
@@ -168,14 +192,16 @@
         nav a {
             color: var(--brand-gold);
             text-transform: uppercase;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 14px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            transition: opacity 0.2s;
         }
 
-        @media (max-width: 640px) {
-            header.scrolled .logo-container img { max-width: 180px; }
-            .phone-display { font-size: 20px !important; }
+        @media (max-width: 768px) {
+            body { padding-top: 260px; } /* Adjust for mobile logo height */
+            header.scrolled .logo-container img { max-width: 160px; }
+            .phone-display { font-size: 22px !important; }
         }
     </style>
 </head>
@@ -184,33 +210,35 @@
     <div id="notification-center"></div>
 
     <header id="main-header">
-        <div class="flex flex-col items-center">
-            <div class="logo-container mb-4">
-                <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/c2bfac650f1e9df5206190fbf33a3cffb0776a8f/S%26Ksigns/Venture-Signs.png" alt="S&K Venture Signs">
-            </div>
-            
-            <p class="hide-on-scroll max-w-xl mx-auto mb-6 opacity-80 text-center italic text-sm">
+        <div class="logo-container mb-4">
+            <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/c2bfac650f1e9df5206190fbf33a3cffb0776a8f/S%26Ksigns/Venture-Signs.png" alt="S&K Venture Signs">
+        </div>
+        
+        <div class="scroll-reveal text-center">
+            <p class="max-w-xl mx-auto mb-6 opacity-80 italic text-sm">
                 Premium Digital Billboard Locations across Illinois.
             </p>
+        </div>
 
-            <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 w-full">
-                <nav>
-                    <a href="https://skventuresigns.com" class="hover:opacity-70">Home</a>
-                </nav>
+        <div class="flex flex-wrap items-center justify-center gap-6 md:gap-16 w-full">
+            <nav>
+                <a href="https://skventuresigns.com" class="hover:opacity-70">Home</a>
+            </nav>
 
-                <button onclick="downloadVCard()" class="hide-on-scroll px-6 py-3 font-bold rounded-xl shadow-lg flex items-center gap-2 uppercase text-[11px]" style="background-color: var(--brand-gold); color: #3E0100;">
+            <div class="scroll-reveal">
+                <button onclick="downloadVCard()" class="px-6 py-3 font-bold rounded-xl shadow-lg flex items-center gap-2 uppercase text-[11px]" style="background-color: var(--brand-gold); color: #3E0100;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     Save Contact
                 </button>
-
-                <a href="tel:8449074450" class="phone-display font-black tracking-tighter transition hover:opacity-70" style="color: var(--brand-gold); font-size: 28px;">
-                    844-907-4450
-                </a>
             </div>
+
+            <a href="tel:8449074450" class="phone-display font-black tracking-tighter transition hover:opacity-70" style="color: var(--brand-gold); font-size: 30px;">
+                844-907-4450
+            </a>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 mt-10">
+    <main class="max-w-7xl mx-auto px-4 mt-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             <!-- Clay City -->
@@ -324,23 +352,23 @@
         </div>
     </main>
 
-    <footer class="mt-20 py-16 px-6 bg-black/20 border-t border-white/5 text-center">
-        <h2 class="mb-6 uppercase">Ready to Elevate Your Brand?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left max-w-4xl mx-auto">
-            <div class="p-6 bg-black/30 rounded-xl border border-white/5">
-                <h3 class="text-[#FFC627] font-black uppercase text-[14px] mb-2">Visit Office</h3>
-                <p class="text-[13px] opacity-90 text-white">607 W Clark Ave<br/>Effingham, IL 62401</p>
+    <footer class="mt-20 py-20 px-6 bg-black/40 border-t border-white/5 text-center">
+        <h2 class="mb-10 uppercase tracking-widest" style="font-size: 24px;">Faith • Family • Community</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left max-w-5xl mx-auto">
+            <div class="p-8 bg-black/30 rounded-2xl border border-white/5 shadow-xl">
+                <h3 class="text-[#FFC627] font-black uppercase text-[12px] tracking-[0.2em] mb-4 opacity-50">Main Office</h3>
+                <p class="text-[14px] leading-relaxed text-white">607 W Clark Ave<br/>Effingham, IL 62401</p>
             </div>
-            <div class="p-6 bg-black/30 rounded-xl border border-white/5">
-                <h3 class="text-[#FFC627] font-black uppercase text-[14px] mb-2">Call Us</h3>
-                <p class="text-[13px] opacity-90 text-white">Scott Robinson<br/>844-907-4450</p>
+            <div class="p-8 bg-black/30 rounded-2xl border border-white/5 shadow-xl">
+                <h3 class="text-[#FFC627] font-black uppercase text-[12px] tracking-[0.2em] mb-4 opacity-50">Direct Line</h3>
+                <p class="text-[14px] leading-relaxed text-white">Scott Robinson<br/>844-907-4450</p>
             </div>
-            <div class="p-6 bg-black/30 rounded-xl border border-white/5">
-                <h3 class="text-[#FFC627] font-black uppercase text-[14px] mb-2">Email</h3>
-                <p class="text-[13px] opacity-90 text-white">Scott.Robinson@skventuresigns.com</p>
+            <div class="p-8 bg-black/30 rounded-2xl border border-white/5 shadow-xl">
+                <h3 class="text-[#FFC627] font-black uppercase text-[12px] tracking-[0.2em] mb-4 opacity-50">Electronic</h3>
+                <p class="text-[14px] leading-relaxed text-white">Scott.Robinson@<br/>skventuresigns.com</p>
             </div>
         </div>
-        <p class="mt-12 text-white/30 text-[10px] uppercase tracking-[0.3em]">© 2026 S&K Venture Signs</p>
+        <p class="mt-20 text-white/20 text-[10px] uppercase tracking-[0.4em]">© 2026 S&K Venture Signs — Established 2019</p>
     </footer>
 
     <script>
@@ -355,24 +383,32 @@
             setTimeout(() => {
                 toast.classList.remove('show');
                 setTimeout(() => toast.remove(), 500);
-            }, 4000);
+            }, 3500);
         }
 
-        // Scroll Handling
+        // Optimized Scroll Handler for stability
+        let scrollTimeout;
         window.addEventListener('scroll', () => {
             const header = document.getElementById('main-header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
+            const threshold = 60;
+            
+            if (window.scrollY > threshold) {
+                if (!header.classList.contains('scrolled')) {
+                    header.classList.add('scrolled');
+                }
             } else {
-                header.classList.remove('scrolled');
+                if (header.classList.contains('scrolled')) {
+                    header.classList.remove('scrolled');
+                }
             }
-        });
+        }, { passive: true });
 
         // Notifications Logic
         async function requestNotifications() {
             if ("Notification" in window) {
-                const permission = await Notification.requestPermission();
-                if (permission === "granted") showToast("Notifications Active");
+                if (Notification.permission === "default") {
+                    await Notification.requestPermission();
+                }
             }
         }
 
@@ -383,20 +419,22 @@
             const a = document.createElement('a');
             a.href = url;
             a.download = 'Scott_Robinson.vcf';
+            document.body.appendChild(a);
             a.click();
-            showToast("Contact Saved");
+            document.body.removeChild(a);
+            showToast("VCard Download Started");
         }
 
         window.onload = () => {
-            showToast("Venture Portal Ready");
+            showToast("S&K Venture Portal Online");
             requestNotifications();
             
             // Offline Detection
-            window.addEventListener('online', () => showToast("Back Online"));
-            window.addEventListener('offline', () => showToast("Offline Mode"));
+            window.addEventListener('online', () => showToast("Network Restored"));
+            window.addEventListener('offline', () => showToast("Offline Mode Active"));
         };
 
-        // Offline Service Worker Mock
+        // Simple Service Worker Registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGV2ZW50ID0+IHsgfSk7').catch(() => {});
         }
