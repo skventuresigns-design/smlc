@@ -1,406 +1,276 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>S&K Venture Signs - Billboard Opportunities</title>
+import React, { useState, useEffect, useRef } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from 'firebase/auth';
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+
+// Firebase configuration provided by environment
+const firebaseConfig = JSON.parse(__firebase_config);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'sk-venture-portal';
+
+export default function App() {
+  const [user, setUser] = useState(null);
+  const [billboards, setBillboards] = useState([]);
+  const [toasts, setToasts] = useState([]);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [scrolled, setScrolled] = useState(false);
+  
+  // Ref to track previous state for comparison to trigger specific notifications
+  const prevBillboards = useRef([]);
+
+  // 1. Setup Notifications, Auth, and Connectivity Listeners
+  useEffect(() => {
+    const initAuth = async () => {
+      if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+        await signInWithCustomToken(auth, __initial_auth_token);
+      } else {
+        await signInAnonymously(auth);
+      }
+    };
+    initAuth();
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (u) => {
+      setUser(u);
+      if (u) showToast("Venture Portal Synchronized");
+    });
+
+    const handleOnline = () => { setIsOnline(true); showToast("Back Online"); };
+    const handleOffline = () => { setIsOnline(false); showToast("Working Offline - Viewing Cached Data"); };
     
-    <!-- iOS / PWA Specific Meta Tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="S&K Signs">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#3E0100">
+    // Sticky Header Scroll Listener
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('scroll', handleScroll);
+
+    // Prompt for permission immediately on load
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+
+    return () => {
+      unsubscribeAuth();
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // 2. Real-time Data Listener with Smart Notifications
+  useEffect(() => {
+    if (!user) return;
+
+    const locationsRef = collection(db, 'artifacts', appId, 'public', 'data', 'locations');
     
-    <!-- App Icon for iPhone -->
-    <link rel="apple-touch-icon" href="https://static-cdn.jtvnw.net/jtv_user_pictures/1a4efdb4-023e-4802-b07c-82c09a45c4c8-profile_image-70x70.png">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            /* Global Divi Mobile Settings per User Instructions */
-            --divi-section-height: 50px;
-            --divi-row-height: 30px;
-            --divi-body-size: 14px;
-            --divi-header-size: 30px;
-
-            /* S&K Official Colors */
-            --brand-bg: #3E0100;
-            --brand-gold: #FFC627;
-            --money-green: #2ecc71;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--brand-bg);
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            font-size: var(--divi-body-size);
-            -webkit-tap-highlight-color: transparent;
-            background-image: 
-                linear-gradient(rgba(62, 1, 0, 0.95), rgba(62, 1, 0, 0.98)),
-                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            background-attachment: fixed;
-        }
-
-        /* Typography - Golden Headers */
-        h1 { font-size: var(--divi-header-size); color: var(--brand-gold) !important; font-weight: 800; text-transform: uppercase; font-style: italic; }
-        h2 { font-size: 20px; color: var(--brand-gold) !important; font-weight: 800; text-transform: uppercase; font-style: italic; margin: 0; }
-        h3 { font-size: 18px; color: var(--brand-gold) !important; font-weight: 700; text-transform: uppercase; }
-
-        header {
-            padding: var(--divi-section-height) 1.5rem;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .billboard-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 198, 39, 0.2);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border-radius: 1rem;
-            overflow: hidden;
-            margin-bottom: var(--divi-row-height);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .billboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-            border-color: var(--brand-gold);
-        }
-
-        /* Map Embed Container */
-        .location-map-container {
-            width: 100%;
-            height: 280px;
-            background: #1a0000;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .location-map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Overlay Button Styles */
-        .map-overlay-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #ffffff;
-            color: #1a73e8;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            z-index: 10;
-            text-decoration: none;
-        }
-
-        /* Billboard Size Tag - Top Right Corner */
-        .scale-label-tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.8);
-            color: var(--brand-gold);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            z-index: 10;
-            border: 1px solid var(--brand-gold);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        .price-text {
-            color: var(--money-green) !important;
-            font-weight: 800;
-            font-size: 1.25rem;
-        }
-
-        .card-content {
-            padding: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .card-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 0.75rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Notification Toast Styling */
-        #notification-center {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            pointer-events: none;
-        }
-        .toast {
-            background: #000;
-            border-left: 6px solid var(--brand-gold);
-            color: var(--brand-gold);
-            padding: 15px 25px;
-            border-radius: 2px;
-            box-shadow: 0 10px 40px rgba(0,0,0,1);
-            font-size: 12px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transform: translateX(150%);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: auto;
-        }
-        .toast.show { transform: translateX(0); }
-
-        @media (max-width: 768px) {
-            body { font-size: var(--divi-body-size); }
-            .phone-display { font-size: 24px !important; }
-            .logo-img { max-width: 95%; }
-        }
-    </style>
-</head>
-<body class="min-h-screen pb-20">
-
-    <div id="notification-center"></div>
-
-    <!-- Navigation / Header -->
-    <header>
-        <div class="flex justify-center mb-6">
-            <!-- Official GitHub Logo -->
-            <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/c2bfac650f1e9df5206190fbf33a3cffb0776a8f/S%26Ksigns/Venture-Signs.png" alt="S&K Venture Signs Logo" class="logo-img max-w-full md:max-w-[750px] h-auto" onerror="this.onerror=null; this.src='https://via.placeholder.com/750x150/3E0100/FFC627?text=S%26K+VENTURE+SIGNS'">
-        </div>
-        <p class="max-w-2xl mx-auto mb-10 opacity-90 text-center">
-            Premium Digital Billboard Locations across Illinois. High-resolution displays to elevate your brand.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 max-w-3xl mx-auto">
-            <button onclick="downloadVCard()" class="w-full sm:w-auto px-8 py-4 font-bold rounded-xl transition shadow-lg flex items-center justify-center gap-2" style="background-color: var(--brand-gold); color: #3E0100;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Save Contact Info
-            </button>
-            <a href="tel:8449074450" class="phone-display font-black transition tracking-tight hover:opacity-80" style="color: var(--brand-gold); font-size: 2rem;">
-                844-907-4450
-            </a>
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-4 mt-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="billboard-grid">
-            
-            <!-- Clay City Billboard -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=38.677111,-88.391528" target="_blank" class="map-overlay-btn">
-                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                    </a>
-                    <div class="scale-label-tag">8ft x 16ft P10</div>
-                    <iframe src="https://www.google.com/maps?q=38.677111,-88.391528&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-row">
-                        <h2>Clay City Billboard</h2>
-                        <span class="price-text">$200/mo</span>
-                    </div>
-                    <p class="opacity-80">3219 Greenbrier Lane, Clay City, IL. High-traffic corridor reaching travelers heading East to Indiana or West to St. Louis.</p>
-                </div>
-            </div>
-
-            <!-- Stephy's Bar & Grill -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://maps.app.goo.gl/Eu4EnWtmKnCRfKCw9" target="_blank" class="map-overlay-btn">
-                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                    </a>
-                    <div class="scale-label-tag">6ft x 14ft P6.35</div>
-                    <iframe src="https://www.google.com/maps?q=38.518945,-88.649892&z=18&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-row">
-                        <h2>Stephy's Bar & Grill</h2>
-                        <span class="price-text">$125/mo</span>
-                    </div>
-                    <p class="opacity-80">Intersection 161 & Xenia Road, Orchardville, IL. Ultra-res display at the heart of town meeting spot.</p>
-                </div>
-            </div>
-
-            <!-- DeSoto Billboard -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=37.802700,-89.226297" target="_blank" class="map-overlay-btn">
-                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                    </a>
-                    <div class="scale-label-tag">6ft x 12ft P10</div>
-                    <iframe src="https://www.google.com/maps?q=37.802700,-89.226297&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-row">
-                        <h2>DeSoto Billboard</h2>
-                        <span class="price-text">$100/mo</span>
-                    </div>
-                    <p class="opacity-80">14705 N US-51. Reaches over 11,000 daily travelers and students near SIU Carbondale.</p>
-                </div>
-            </div>
-
-            <!-- Marshall Billboard -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=39.383599,-87.721152" target="_blank" class="map-overlay-btn">
-                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                    </a>
-                    <div class="scale-label-tag">5ft x 10ft P10</div>
-                    <iframe src="https://www.google.com/maps?q=39.383599,-87.721152&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-row">
-                        <h2>Marshall Billboard</h2>
-                        <span class="price-text">$80/mo</span>
-                    </div>
-                    <p class="opacity-80">West side of Marshall on Rt 40. Prime spot for local commuters entering town.</p>
-                </div>
-            </div>
-
-            <!-- Effingham Fairgrounds -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=39.058249,-88.737673" target="_blank" class="map-overlay-btn">
-                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                    </a>
-                    <div class="scale-label-tag">5ft x 10ft P10</div>
-                    <iframe src="https://www.google.com/maps?q=39.058249,-88.737673&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-row">
-                        <h2>Effingham Fairgrounds</h2>
-                        <span class="price-text">$75/mo</span>
-                    </div>
-                    <p class="opacity-80">Altamont, IL. Captures year-round event traffic and massive fair crowds.</p>
-                </div>
-            </div>
-
-            <!-- Oliver Billboard -->
-            <div class="billboard-card">
-                <div class="location-map-container">
-                    <a href="https://www.google.com/maps/search/?api=1&query=39.490628,-87.682004" target="_blank" class="map-overlay-btn">
-                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                    </a>
-                    <div class="scale-label-tag">5ft x 10ft P10</div>
-                    <iframe src="https://www.google.com/maps?q=39.490628,-87.682004&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-row">
-                        <h2>Oliver Billboard</h2>
-                        <span class="price-text">$75/mo</span>
-                    </div>
-                    <p class="opacity-80">961 Hwy 1 Marshall, IL. Regional corridor capturing city-to-city transit traffic.</p>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <footer class="mt-20 py-16 px-6 bg-black/20 border-t border-white/5">
-        <div class="max-w-4xl mx-auto text-center text-white">
-            <h2 class="mb-6 italic uppercase" style="font-size: 24px; color: var(--brand-gold) !important;">Ready to Elevate Your Brand?</h2>
-            <p class="opacity-80 mb-8 italic">"Faith, Family, and Community since 2019."</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <div class="p-6 bg-black/30 rounded-xl border border-white/5">
-                    <h3 class="mb-2 uppercase">Visit Office</h3>
-                    <p class="text-sm">607 W Clark Ave<br>Effingham, IL 62401</p>
-                </div>
-                <div class="p-6 bg-black/30 rounded-xl border border-white/5">
-                    <h3 class="mb-2 uppercase">Call Us</h3>
-                    <p class="text-sm">Scott Robinson<br>844-907-4450</p>
-                </div>
-                <div class="p-6 bg-black/30 rounded-xl border border-white/5">
-                    <h3 class="mb-2 uppercase">Email</h3>
-                    <p class="text-sm">Scott.Robinson@<br>skventuresigns.com</p>
-                </div>
-            </div>
-            
-            <p class="mt-12 text-white/30 text-xs uppercase tracking-widest">
-                © 2026 S&K Venture Signs
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        function showToast(msg) {
-            const center = document.getElementById('notification-center');
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = msg;
-            center.appendChild(toast);
-            setTimeout(() => toast.classList.add('show'), 100);
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => toast.remove(), 400);
-            }, 3000);
-        }
-
-        async function requestNotificationPermission() {
-            if (!("Notification" in window)) return;
-            if (Notification.permission !== "granted" && Notification.permission !== "denied") {
-                const permission = await Notification.requestPermission();
-                if (permission === "granted") showToast("System Notifications Active");
+    const unsubscribe = onSnapshot(locationsRef, (snapshot) => {
+      const newData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      
+      // Determine what changed for the notification message
+      if (prevBillboards.current.length > 0) {
+        if (newData.length > prevBillboards.current.length) {
+          const added = newData.find(n => !prevBillboards.current.some(p => p.id === n.id));
+          triggerNotification("New Billboard Added", `Check out the new location: ${added?.title || 'New Sign'}`);
+        } else {
+          // Check for price or description updates
+          newData.forEach(item => {
+            const oldItem = prevBillboards.current.find(p => p.id === item.id);
+            if (oldItem && (oldItem.price !== item.price)) {
+              triggerNotification("Price Update", `${item.title} price is now ${item.price}`);
+            } else if (oldItem && (oldItem.desc !== item.desc)) {
+              triggerNotification("Inventory Updated", `${item.title} details have been refreshed.`);
             }
+          });
         }
+      }
+      
+      setBillboards(newData);
+      prevBillboards.current = newData;
+    }, (error) => {
+      console.error("Firestore Sync Error:", error);
+    });
 
-        function downloadVCard() {
-            if (navigator.vibrate) navigator.vibrate(50);
-            const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Scott Robinson\nORG:S&K Venture Signs\nTITLE:Owner\nTEL;TYPE=WORK,VOICE:18449074450\nEMAIL:Scott.Robinson@skventuresigns.com\nADR;TYPE=WORK:;;607 W Clark Ave;Effingham;IL;62401;USA\nURL:https://skventuresigns.com\nEND:VCARD`;
-            const blob = new Blob([vCardData], { type: 'text/vcard' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = 'Scott_Robinson_SK_Venture.vcf';
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-            showToast("Contact Card Downloaded");
-        }
+    return () => unsubscribe();
+  }, [user]);
 
-        window.onload = () => {
-            requestNotificationPermission();
-            showToast("Venture Portal Ready");
-            
-            // Check online status
-            window.addEventListener('online', () => showToast("Back Online"));
-            window.addEventListener('offline', () => showToast("Working Offline"));
-        };
-        
-        // Simple Service Worker for Offline Sync
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGZ1bmN0aW9uKGV2ZW50KSB7IH0pOw==')
-                .catch(err => console.log('SW reg failed: ', err));
-            });
+  const triggerNotification = (title, body) => {
+    showToast(`${title}: ${body}`);
+    if (Notification.permission === "granted") {
+      new Notification("S&K Venture Signs", {
+        body: body,
+        icon: "https://static-cdn.jtvnw.net/jtv_user_pictures/1a4efdb4-023e-4802-b07c-82c09a45c4c8-profile_image-70x70.png",
+        badge: "https://static-cdn.jtvnw.net/jtv_user_pictures/1a4efdb4-023e-4802-b07c-82c09a45c4c8-profile_image-70x70.png"
+      });
+    }
+  };
+
+  const showToast = (msg) => {
+    const id = Date.now();
+    setToasts(prev => [...prev, { id, msg }]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, 4000);
+  };
+
+  const downloadVCard = () => {
+    const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Scott Robinson\nORG:S&K Venture Signs\nTITLE:Owner\nTEL;TYPE=WORK,VOICE:18449074450\nEMAIL:Scott.Robinson@skventuresigns.com\nADR;TYPE=WORK:;;607 W Clark Ave;Effingham;IL;62401;USA\nURL:https://skventuresigns.com\nEND:VCARD`;
+    const blob = new Blob([vCardData], { type: 'text/vcard' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Scott_Robinson_SK_Venture.vcf';
+    a.click();
+    showToast("Contact Info Saved to Device");
+  };
+
+  // Fallback data if cloud is empty
+  const displayData = billboards.length > 0 ? billboards : [
+    { id: '1', title: 'Clay City Billboard', price: '$200/mo', lat: 38.677111, lng: -88.391528, size: '8ft x 16ft P10', desc: '3219 Greenbrier Lane. High-traffic corridor reaching travelers heading East or West.' },
+    { id: '2', title: "Stephy's Bar & Grill", price: '$125/mo', lat: 38.518945, lng: -88.649892, size: '6ft x 14ft P6.35', desc: 'Intersection 161 & Xenia Road. Ultra-res display at the heart of town.' },
+    { id: '3', title: 'DeSoto Billboard', price: '$100/mo', lat: 37.8027, lng: -89.2263, size: '6ft x 12ft P10', desc: '14705 N US-51. Reaches over 11,000 daily travelers and students near Carbondale.' },
+    { id: '4', title: 'Marshall Billboard', price: '$80/mo', lat: 39.3836, lng: -87.7212, size: '5ft x 10ft P10', desc: 'West side of Marshall on Rt 40. Prime spot for local commuters.' },
+    { id: '5', title: 'Effingham Fairgrounds', price: '$75/mo', lat: 39.0582, lng: -88.7377, size: '5ft x 10ft P10', desc: 'Altamont, IL. Captures year-round event traffic and massive crowds.' },
+    { id: '6', title: 'Oliver Billboard', price: '$75/mo', lat: 39.4906, lng: -87.682, size: '5ft x 10ft P10', desc: '961 Hwy 1 Marshall. Regional corridor capturing city-to-city transit traffic.' }
+  ];
+
+  return (
+    <div className="min-h-screen pb-20 text-white" style={{ 
+      backgroundColor: '#3E0100',
+      backgroundImage: 'linear-gradient(rgba(62, 1, 0, 0.95), rgba(62, 1, 0, 0.98)), url("https://www.transparenttextures.com/patterns/carbon-fibre.png")',
+      backgroundAttachment: 'fixed'
+    }}>
+      
+      {/* Real-time Toasts */}
+      <div className="fixed top-5 right-5 z-[9999] flex flex-col gap-2 pointer-events-none w-full max-w-[320px]">
+        {toasts.map(t => (
+          <div key={t.id} className="bg-black border-l-4 border-[#FFC627] text-[#FFC627] px-6 py-4 rounded shadow-2xl text-[12px] font-black uppercase tracking-wider animate-bounce-in pointer-events-auto">
+            {t.msg}
+          </div>
+        ))}
+      </div>
+
+      {/* STICKY HEADER - Always stuck to top, transitions on scroll */}
+      <header className={`sticky top-0 z-[100] transition-all duration-300 text-center border-b ${scrolled ? 'bg-[#3E0100]/90 backdrop-blur-md py-4 shadow-2xl border-[#FFC627]/30' : 'bg-transparent py-12 border-white/10'}`} style={{ 
+        paddingTop: scrolled ? '15px' : '50px', 
+        paddingBottom: scrolled ? '15px' : '50px' 
+      }}>
+        <div className="flex justify-center mb-4 px-4 transition-all duration-300">
+          <img 
+            src="https://raw.githubusercontent.com/skventuresigns-design/smlc/c2bfac650f1e9df5206190fbf33a3cffb0776a8f/S%26Ksigns/Venture-Signs.png" 
+            alt="S&K Venture Signs" 
+            className={`transition-all duration-300 h-auto ${scrolled ? 'max-w-[220px]' : 'max-w-full md:max-w-[750px]'}`}
+          />
+        </div>
+
+        {/* Hide text when scrolled to save space, but keep phone accessible */}
+        {!scrolled && (
+          <p className="max-w-2xl mx-auto mb-6 opacity-90 text-[14px]">
+            Live Billboard Opportunities. Real-time updates on pricing and availability.
+          </p>
+        )}
+
+        {/* Main Navigation Row */}
+        <div className={`flex flex-wrap items-center justify-center transition-all duration-300 ${scrolled ? 'gap-6' : 'gap-10'} max-w-4xl mx-auto px-6`}>
+          
+          {/* Home Link */}
+          <a 
+            href="https://skventuresigns.com" 
+            className={`font-black uppercase tracking-[0.1em] hover:opacity-70 transition-all duration-300 ${scrolled ? 'text-[14px]' : 'text-[16px]'}`}
+            style={{ color: '#FFC627' }}
+          >
+            Home
+          </a>
+
+          {!scrolled && (
+            <button 
+              onClick={downloadVCard}
+              className="w-full sm:w-auto px-6 py-3 font-bold rounded-xl transition shadow-lg flex items-center justify-center gap-2 uppercase text-[11px]"
+              style={{ backgroundColor: '#FFC627', color: '#3E0100' }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Save Contact
+            </button>
+          )}
+
+          <a href="tel:8449074450" className={`font-black hover:opacity-80 transition-all duration-300 tracking-tight ${scrolled ? 'text-[22px]' : 'text-[30px]'}`} style={{ color: '#FFC627' }}>
+            844-907-4450
+          </a>
+        </div>
+      </header>
+
+      {/* Main Grid - Row Height 30 */}
+      <main className="max-w-7xl mx-auto px-4 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {displayData.map((loc) => (
+            <div key={loc.id} className="bg-black/40 border border-[#FFC627]/20 rounded-2xl overflow-hidden transition-all hover:-translate-y-1 hover:border-[#FFC627] hover:shadow-2xl flex flex-col" style={{ marginBottom: '30px' }}>
+              
+              {/* Map View */}
+              <div className="relative h-[280px] w-full bg-black">
+                <a href={`https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`} target="_blank" className="absolute top-4 left-4 bg-white text-[#1a73e8] px-3 py-1.5 rounded text-[13px] font-bold shadow-lg z-10 flex items-center gap-2">
+                  Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                </a>
+                <div className="absolute top-4 right-4 bg-black/80 border border-[#FFC627] text-[#FFC627] px-2.5 py-1 rounded text-[11px] font-black uppercase z-10 shadow-xl">
+                  {loc.size}
+                </div>
+                <iframe 
+                  src={`https://www.google.com/maps?q=${loc.lat},${loc.lng}&z=17&t=k&output=embed`}
+                  className="w-full h-full border-0"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Card Body - Body Text Size 14 */}
+              <div className="p-6 flex flex-col flex-grow gap-2">
+                <div className="flex justify-between items-center border-b border-white/10 pb-3 mb-1">
+                  <h2 className="text-[#FFC627] text-[20px] font-black italic uppercase m-0 leading-tight">
+                    {loc.title}
+                  </h2>
+                  <span className="text-[#2ecc71] font-black text-[1.25rem]">
+                    {loc.price}
+                  </span>
+                </div>
+                <p className="text-white/80 text-[14px] leading-relaxed">
+                  {loc.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      <footer className="mt-20 py-16 px-6 bg-black/20 border-t border-white/5 text-center">
+        <h2 className="text-[#FFC627] font-black italic uppercase text-[24px] mb-6">Ready to Elevate Your Brand?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left max-w-4xl mx-auto">
+          {['Visit Office', 'Call Us', 'Email'].map((label, i) => (
+            <div key={label} className="p-6 bg-black/30 rounded-xl border border-white/5">
+              <h3 className="text-[#FFC627] font-black uppercase text-[14px] mb-2">{label}</h3>
+              <p className="text-[13px] opacity-90">
+                {i === 0 && <>607 W Clark Ave<br/>Effingham, IL 62401</>}
+                {i === 1 && <>Scott Robinson<br/>844-907-4450</>}
+                {i === 2 && <>Scott.Robinson@<br/>skventuresigns.com</>}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-12 text-white/30 text-[10px] uppercase tracking-[0.3em]">© 2026 S&K Venture Signs</p>
+      </footer>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes bounce-in {
+          0% { transform: translateX(120%); }
+          100% { transform: translateX(0); }
         }
-    </script>
-</body>
-</html>
+        .animate-bounce-in { animation: bounce-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+      `}} />
+    </div>
+  );
+}
