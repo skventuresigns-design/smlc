@@ -2,247 +2,376 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>S&K Venture Signs - Billboard Opportunities</title>
+    
+    <!-- iOS / PWA Specific Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="S&K Signs">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#3E0100">
+    
+    <!-- App Icon for iPhone -->
+    <link rel="apple-touch-icon" href="https://static-cdn.jtvnw.net/jtv_user_pictures/1a4efdb4-023e-4802-b07c-82c09a45c4c8-profile_image-70x70.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
-        .billboard-card {
-            background: #1e293b;
-            border: 1px solid #334155;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .billboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            border-color: #f97316;
-        }
-        .scale-box {
-            background: #020617;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 4px solid #475569;
-            margin-bottom: 1.5rem;
-        }
-        .scale-label {
-            position: absolute;
-            bottom: 5px;
-            right: 8px;
-            font-size: 0.7rem;
-            color: #64748b;
-        }
-        .price-tag {
-            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+        :root {
+            /* Global Divi Mobile Settings per User Instructions */
+            --divi-section-height: 50px;
+            --divi-row-height: 30px;
+            --divi-body-size: 14px;
+            --divi-header-size: 30px;
+
+            /* S&K Official Colors */
+            --brand-bg: #3E0100;
+            --brand-gold: #FFC627;
+            --money-green: #2ecc71;
         }
 
-        /* Mobile Adjustments based on global preferences */
-        @media (max-width: 640px) {
-            header, footer { 
-                padding-top: 50px !important; 
-                padding-bottom: 50px !important; 
-            }
-            main {
-                padding-top: 30px !important;
-            }
-            .grid > div {
-                margin-bottom: 30px !important;
-            }
-            h1 { font-size: 30px !important; }
-            h2 { font-size: 24px !important; }
-            p, span, div, .text-sm { font-size: 14px !important; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--brand-bg);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-size: var(--divi-body-size);
+            -webkit-tap-highlight-color: transparent;
+            background-image: 
+                linear-gradient(rgba(62, 1, 0, 0.95), rgba(62, 1, 0, 0.98)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            background-attachment: fixed;
+        }
+
+        /* Typography - Golden Headers */
+        h1 { font-size: var(--divi-header-size); color: var(--brand-gold) !important; font-weight: 800; text-transform: uppercase; font-style: italic; }
+        h2 { font-size: 20px; color: var(--brand-gold) !important; font-weight: 800; text-transform: uppercase; font-style: italic; margin: 0; }
+        h3 { font-size: 18px; color: var(--brand-gold) !important; font-weight: 700; text-transform: uppercase; }
+
+        header {
+            padding: var(--divi-section-height) 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .billboard-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 198, 39, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: var(--divi-row-height);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .billboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            border-color: var(--brand-gold);
+        }
+
+        /* Map Embed Container */
+        .location-map-container {
+            width: 100%;
+            height: 280px;
+            background: #1a0000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .location-map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Overlay Button Styles */
+        .map-overlay-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ffffff;
+            color: #1a73e8;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            z-index: 10;
+            text-decoration: none;
+        }
+
+        /* Billboard Size Tag - Top Right Corner */
+        .scale-label-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.8);
+            color: var(--brand-gold);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            z-index: 10;
+            border: 1px solid var(--brand-gold);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .price-text {
+            color: var(--money-green) !important;
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .card-content {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .card-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Notification Toast Styling */
+        #notification-center {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+        .toast {
+            background: #000;
+            border-left: 6px solid var(--brand-gold);
+            color: var(--brand-gold);
+            padding: 15px 25px;
+            border-radius: 2px;
+            box-shadow: 0 10px 40px rgba(0,0,0,1);
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transform: translateX(150%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: auto;
+        }
+        .toast.show { transform: translateX(0); }
+
+        @media (max-width: 768px) {
+            body { font-size: var(--divi-body-size); }
             .phone-display { font-size: 24px !important; }
+            .logo-img { max-width: 95%; }
         }
     </style>
 </head>
 <body class="min-h-screen pb-20">
 
+    <div id="notification-center"></div>
+
     <!-- Navigation / Header -->
-    <header class="py-12 px-6 text-center bg-slate-900 border-b border-slate-800">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
-            S&K <span class="text-orange-500">Venture Signs</span>
-        </h1>
-        <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
+    <header>
+        <div class="flex justify-center mb-6">
+            <!-- Official GitHub Logo -->
+            <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/c2bfac650f1e9df5206190fbf33a3cffb0776a8f/S%26Ksigns/Venture-Signs.png" alt="S&K Venture Signs Logo" class="logo-img max-w-full md:max-w-[750px] h-auto" onerror="this.onerror=null; this.src='https://via.placeholder.com/750x150/3E0100/FFC627?text=S%26K+VENTURE+SIGNS'">
+        </div>
+        <p class="max-w-2xl mx-auto mb-10 opacity-90 text-center">
             Premium Digital Billboard Locations across Illinois. High-resolution displays to elevate your brand.
         </p>
         
-        <!-- Contact Action Center -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-8 max-w-3xl mx-auto">
-            <button onclick="downloadVCard()" class="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+            <button onclick="downloadVCard()" class="w-full sm:w-auto px-8 py-4 font-bold rounded-xl transition shadow-lg flex items-center justify-center gap-2" style="background-color: var(--brand-gold); color: #3E0100;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 Save Contact Info
             </button>
-            <a href="tel:8449074450" class="phone-display text-3xl md:text-4xl font-black text-orange-500 hover:text-orange-400 transition tracking-tight">
+            <a href="tel:8449074450" class="phone-display font-black transition tracking-tight hover:opacity-80" style="color: var(--brand-gold); font-size: 2rem;">
                 844-907-4450
             </a>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 mt-16">
+    <main class="max-w-7xl mx-auto px-4 mt-10">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="billboard-grid">
             
-            <!-- Clay City -->
-            <div class="billboard-card p-6 rounded-2xl flex flex-col">
-                <div class="scale-box h-48 rounded-lg" style="aspect-ratio: 16/8;">
-                    <span class="text-slate-700 font-bold text-2xl">8ft x 16ft</span>
-                    <div class="scale-label">P10 Resolution</div>
+            <!-- Clay City Billboard -->
+            <div class="billboard-card">
+                <div class="location-map-container">
+                    <a href="https://www.google.com/maps/search/?api=1&query=38.677111,-88.391528" target="_blank" class="map-overlay-btn">
+                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
+                    <div class="scale-label-tag">8ft x 16ft P10</div>
+                    <iframe src="https://www.google.com/maps?q=38.677111,-88.391528&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <div class="flex justify-between items-start mb-4">
-                    <h2 class="text-2xl font-bold">Clay City, IL</h2>
-                    <span class="price-tag px-3 py-1 rounded-full text-sm font-bold">$200/mo</span>
-                </div>
-                <p class="text-slate-400 text-sm mb-6 flex-grow">
-                    Located between Clay City and Flora on the south side of Hwy 50. Our largest sign available, reaching travelers heading to Indiana or St. Louis.
-                </p>
-                <div class="border-t border-slate-700 pt-4 text-xs uppercase tracking-widest text-slate-500 font-semibold">
-                    Specs: P10 Double-Sided
-                </div>
-            </div>
-
-            <!-- Orchardville -->
-            <div class="billboard-card p-6 rounded-2xl flex flex-col">
-                <div class="scale-box h-48 rounded-lg" style="aspect-ratio: 14/6;">
-                    <span class="text-slate-700 font-bold text-2xl text-center">6ft x 14ft</span>
-                    <div class="scale-label">P6.35 Ultra-Res</div>
-                </div>
-                <div class="flex justify-between items-start mb-4">
-                    <h2 class="text-2xl font-bold">Orchardville, IL</h2>
-                    <span class="price-tag px-3 py-1 rounded-full text-sm font-bold">$125/mo</span>
-                </div>
-                <p class="text-slate-400 text-sm mb-2 font-semibold text-orange-400">Stephy's Bar and Grill</p>
-                <p class="text-slate-400 text-sm mb-6 flex-grow">
-                    Located on the SE corner of the 161 / Xenia intersection. High resolution P6.35 display for crisp visuals.
-                </p>
-                <div class="border-t border-slate-700 pt-4 text-xs uppercase tracking-widest text-slate-500 font-semibold">
-                    Specs: P6.35 Double-Sided
+                <div class="card-content">
+                    <div class="card-header-row">
+                        <h2>Clay City Billboard</h2>
+                        <span class="price-text">$200/mo</span>
+                    </div>
+                    <p class="opacity-80">3219 Greenbrier Lane, Clay City, IL. High-traffic corridor reaching travelers heading East to Indiana or West to St. Louis.</p>
                 </div>
             </div>
 
-            <!-- DeSoto -->
-            <div class="billboard-card p-6 rounded-2xl flex flex-col">
-                <div class="scale-box h-48 rounded-lg" style="aspect-ratio: 12/6;">
-                    <span class="text-slate-700 font-bold text-2xl">6ft x 12ft</span>
-                    <div class="scale-label">P10 Resolution</div>
+            <!-- Stephy's Bar & Grill -->
+            <div class="billboard-card">
+                <div class="location-map-container">
+                    <a href="https://maps.app.goo.gl/Eu4EnWtmKnCRfKCw9" target="_blank" class="map-overlay-btn">
+                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
+                    <div class="scale-label-tag">6ft x 14ft P6.35</div>
+                    <iframe src="https://www.google.com/maps?q=38.518945,-88.649892&z=18&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <div class="flex justify-between items-start mb-4">
-                    <h2 class="text-2xl font-bold">DeSoto, IL</h2>
-                    <span class="price-tag px-3 py-1 rounded-full text-sm font-bold">$100/mo</span>
-                </div>
-                <p class="text-slate-400 text-sm mb-6 flex-grow">
-                    Located on the west side of Hwy 51, approximately 1 mile south of the DeSoto 4-way. Reaches over 11,000 students near Carbondale.
-                </p>
-                <div class="border-t border-slate-700 pt-4 text-xs uppercase tracking-widest text-slate-500 font-semibold">
-                    Specs: P10 Double-Sided
-                </div>
-            </div>
-
-            <!-- Marshall -->
-            <div class="billboard-card p-6 rounded-2xl flex flex-col">
-                <div class="scale-box h-48 rounded-lg" style="aspect-ratio: 10/5;">
-                    <span class="text-slate-700 font-bold text-2xl">5ft x 10ft</span>
-                    <div class="scale-label">P10 Resolution</div>
-                </div>
-                <div class="flex justify-between items-start mb-4">
-                    <h2 class="text-2xl font-bold">Marshall, IL</h2>
-                    <span class="price-tag px-3 py-1 rounded-full text-sm font-bold">$80/mo</span>
-                </div>
-                <p class="text-slate-400 text-sm mb-6 flex-grow">
-                    Located on the south side of Rt 40 on the west side of Marshall. Prime spot for local commuters entering town.
-                </p>
-                <div class="border-t border-slate-700 pt-4 text-xs uppercase tracking-widest text-slate-500 font-semibold">
-                    Specs: P10 Double-Sided
+                <div class="card-content">
+                    <div class="card-header-row">
+                        <h2>Stephy's Bar & Grill</h2>
+                        <span class="price-text">$125/mo</span>
+                    </div>
+                    <p class="opacity-80">Intersection 161 & Xenia Road, Orchardville, IL. Ultra-res display at the heart of town meeting spot.</p>
                 </div>
             </div>
 
-            <!-- Effingham -->
-            <div class="billboard-card p-6 rounded-2xl flex flex-col border-orange-500/30 bg-slate-800/50">
-                <div class="scale-box h-48 rounded-lg border-orange-500/50" style="aspect-ratio: 10/5;">
-                    <span class="text-slate-700 font-bold text-2xl">5ft x 10ft</span>
-                    <div class="scale-label">P10 Resolution</div>
+            <!-- DeSoto Billboard -->
+            <div class="billboard-card">
+                <div class="location-map-container">
+                    <a href="https://www.google.com/maps/search/?api=1&query=37.802700,-89.226297" target="_blank" class="map-overlay-btn">
+                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
+                    <div class="scale-label-tag">6ft x 12ft P10</div>
+                    <iframe src="https://www.google.com/maps?q=37.802700,-89.226297&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <div class="flex justify-between items-start mb-4">
-                    <h2 class="text-2xl font-bold">Effingham, IL</h2>
-                    <span class="price-tag px-3 py-1 rounded-full text-sm font-bold">$75/mo</span>
-                </div>
-                <p class="text-slate-400 text-sm mb-2 font-semibold text-orange-400">Fairgrounds Special</p>
-                <p class="text-slate-400 text-sm mb-6 flex-grow">
-                    At the Effingham County Fairgrounds in Altamont, IL. Be seen by the events happening at the Fairgrounds all year!
-                </p>
-                <div class="border-t border-slate-700 pt-4 text-xs uppercase tracking-widest text-slate-500 font-semibold">
-                    Specs: P10 Double-Sided
+                <div class="card-content">
+                    <div class="card-header-row">
+                        <h2>DeSoto Billboard</h2>
+                        <span class="price-text">$100/mo</span>
+                    </div>
+                    <p class="opacity-80">14705 N US-51. Reaches over 11,000 daily travelers and students near SIU Carbondale.</p>
                 </div>
             </div>
 
-            <!-- Oliver -->
-            <div class="billboard-card p-6 rounded-2xl flex flex-col">
-                <div class="scale-box h-48 rounded-lg" style="aspect-ratio: 10/5;">
-                    <span class="text-slate-700 font-bold text-2xl">5ft x 10ft</span>
-                    <div class="scale-label">P10 Resolution</div>
+            <!-- Marshall Billboard -->
+            <div class="billboard-card">
+                <div class="location-map-container">
+                    <a href="https://www.google.com/maps/search/?api=1&query=39.383599,-87.721152" target="_blank" class="map-overlay-btn">
+                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
+                    <div class="scale-label-tag">5ft x 10ft P10</div>
+                    <iframe src="https://www.google.com/maps?q=39.383599,-87.721152&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <div class="flex justify-between items-start mb-4">
-                    <h2 class="text-2xl font-bold">Oliver, IL</h2>
-                    <span class="price-tag px-3 py-1 rounded-full text-sm font-bold">$75/mo</span>
+                <div class="card-content">
+                    <div class="card-header-row">
+                        <h2>Marshall Billboard</h2>
+                        <span class="price-text">$80/mo</span>
+                    </div>
+                    <p class="opacity-80">West side of Marshall on Rt 40. Prime spot for local commuters entering town.</p>
                 </div>
-                <p class="text-slate-400 text-sm mb-6 flex-grow">
-                    Located between Paris and Marshall on the west side of Hwy Rt 1. Captures regional traffic between the two cities.
-                </p>
-                <div class="border-t border-slate-700 pt-4 text-xs uppercase tracking-widest text-slate-500 font-semibold">
-                    Specs: P10 Double-Sided
+            </div>
+
+            <!-- Effingham Fairgrounds -->
+            <div class="billboard-card">
+                <div class="location-map-container">
+                    <a href="https://www.google.com/maps/search/?api=1&query=39.058249,-88.737673" target="_blank" class="map-overlay-btn">
+                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
+                    <div class="scale-label-tag">5ft x 10ft P10</div>
+                    <iframe src="https://www.google.com/maps?q=39.058249,-88.737673&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-header-row">
+                        <h2>Effingham Fairgrounds</h2>
+                        <span class="price-text">$75/mo</span>
+                    </div>
+                    <p class="opacity-80">Altamont, IL. Captures year-round event traffic and massive fair crowds.</p>
+                </div>
+            </div>
+
+            <!-- Oliver Billboard -->
+            <div class="billboard-card">
+                <div class="location-map-container">
+                    <a href="https://www.google.com/maps/search/?api=1&query=39.490628,-87.682004" target="_blank" class="map-overlay-btn">
+                        Open in Maps <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
+                    <div class="scale-label-tag">5ft x 10ft P10</div>
+                    <iframe src="https://www.google.com/maps?q=39.490628,-87.682004&z=17&t=k&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-header-row">
+                        <h2>Oliver Billboard</h2>
+                        <span class="price-text">$75/mo</span>
+                    </div>
+                    <p class="opacity-80">961 Hwy 1 Marshall, IL. Regional corridor capturing city-to-city transit traffic.</p>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-24 bg-slate-900 border-t border-slate-800 py-16 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
-            <p class="text-slate-400 mb-8 italic">
-                "Since opening in May of 2019, S&K Venture Signs has been rooted in three strong values: Faith, Family, and Community."
-            </p>
+    <footer class="mt-20 py-16 px-6 bg-black/20 border-t border-white/5">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <h2 class="mb-6 italic uppercase" style="font-size: 24px; color: var(--brand-gold) !important;">Ready to Elevate Your Brand?</h2>
+            <p class="opacity-80 mb-8 italic">"Faith, Family, and Community since 2019."</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <div class="p-6 bg-slate-800 rounded-xl">
-                    <h3 class="text-orange-500 font-bold mb-2">Visit Our Office</h3>
+                <div class="p-6 bg-black/30 rounded-xl border border-white/5">
+                    <h3 class="mb-2 uppercase">Visit Office</h3>
                     <p class="text-sm">607 W Clark Ave<br>Effingham, IL 62401</p>
                 </div>
-                <div class="p-6 bg-slate-800 rounded-xl">
-                    <h3 class="text-orange-500 font-bold mb-2">Direct Contact</h3>
+                <div class="p-6 bg-black/30 rounded-xl border border-white/5">
+                    <h3 class="mb-2 uppercase">Call Us</h3>
                     <p class="text-sm">Scott Robinson<br>844-907-4450</p>
                 </div>
-                <div class="p-6 bg-slate-800 rounded-xl">
-                    <h3 class="text-orange-500 font-bold mb-2">Email Us</h3>
+                <div class="p-6 bg-black/30 rounded-xl border border-white/5">
+                    <h3 class="mb-2 uppercase">Email</h3>
                     <p class="text-sm">Scott.Robinson@<br>skventuresigns.com</p>
                 </div>
             </div>
             
-            <p class="mt-12 text-slate-500 text-xs uppercase tracking-widest">
-                © 2026 S&K Venture Signs - Proudly Serving Central Illinois
+            <p class="mt-12 text-white/30 text-xs uppercase tracking-widest">
+                © 2026 S&K Venture Signs
             </p>
         </div>
     </footer>
 
     <script>
-        function downloadVCard() {
-            const vCardData = `BEGIN:VCARD
-VERSION:3.0
-FN:Scott Robinson
-ORG:S&K Venture Signs
-TITLE:Owner
-TEL;TYPE=WORK,VOICE:18449074450
-EMAIL:Scott.Robinson@skventuresigns.com
-ADR;TYPE=WORK:;;607 W Clark Ave;Effingham;IL;62401;USA
-URL:https://skventuresigns.com
-END:VCARD`;
+        function showToast(msg) {
+            const center = document.getElementById('notification-center');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            center.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
 
+        async function requestNotificationPermission() {
+            if (!("Notification" in window)) return;
+            if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+                const permission = await Notification.requestPermission();
+                if (permission === "granted") showToast("System Notifications Active");
+            }
+        }
+
+        function downloadVCard() {
+            if (navigator.vibrate) navigator.vibrate(50);
+            const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Scott Robinson\nORG:S&K Venture Signs\nTITLE:Owner\nTEL;TYPE=WORK,VOICE:18449074450\nEMAIL:Scott.Robinson@skventuresigns.com\nADR;TYPE=WORK:;;607 W Clark Ave;Effingham;IL;62401;USA\nURL:https://skventuresigns.com\nEND:VCARD`;
             const blob = new Blob([vCardData], { type: 'text/vcard' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -253,8 +382,25 @@ END:VCARD`;
             a.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
+            showToast("Contact Card Downloaded");
+        }
+
+        window.onload = () => {
+            requestNotificationPermission();
+            showToast("Venture Portal Ready");
+            
+            // Check online status
+            window.addEventListener('online', () => showToast("Back Online"));
+            window.addEventListener('offline', () => showToast("Working Offline"));
+        };
+        
+        // Simple Service Worker for Offline Sync
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGZ1bmN0aW9uKGV2ZW50KSB7IH0pOw==')
+                .catch(err => console.log('SW reg failed: ', err));
+            });
         }
     </script>
-
 </body>
 </html>
