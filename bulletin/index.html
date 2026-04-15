@@ -7,8 +7,14 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/skventuresigns-design/media/main/favicon.png">
     <link rel="stylesheet" href="../style.css"> 
     <style>
-        /* Standalone Page Styles */
-        body { background-color: #0C70C2 !important; margin: 0; padding: 0; font-family: 'Times New Roman', serif; color: #222; }
+        /* --- STANDALONE BULLETIN STYLES --- */
+        body { 
+            background-color: #0C70C2 !important; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Times New Roman', serif; 
+            color: #222; 
+        }
         
         .bulletin-page-container {
             max-width: 800px;
@@ -76,10 +82,34 @@
             text-transform: uppercase;
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            .event-title { font-size: 20px; }
-            .black-tag { font-size: 18px; }
+        /* --- GLOBAL DIVI MOBILE SETTINGS (USER PREFERENCE) --- */
+        @media (max-width: 768px) {
+            .bulletin-page-container {
+                margin: 50px auto !important; /* Section Height: 50 */
+                padding: 0 10px;
+            }
+
+            .news-clipping-wrapper {
+                margin-top: 30px !important; /* Row Height: 30 */
+            }
+
+            body, p, .event-details, .cal-links {
+                font-size: 14px !important; /* Body Text Size: 14 */
+            }
+
+            .event-title, h1, h2, .black-tag {
+                font-size: 30px !important; /* Header Text Size: 30 */
+            }
+
+            .clipping-masthead {
+                padding: 20px 10px;
+                margin: 0 10px;
+            }
+
+            .event-item {
+                margin: 0 15px;
+                padding: 20px 0;
+            }
         }
     </style>
 </head>
@@ -118,7 +148,7 @@
     </div>
 
     <footer class="site-footer">
-         <p>All Content, Photographs, Writings, Letters and Documents © 2026 - Support My Local Community</p>
+         <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
          <p>All Rights Reserved - <a href="https://www.skventuresigns.com" target="_blank" class="footer-link">S&K Ventures</a></p>
     </footer>
 
@@ -127,41 +157,61 @@
 
         async function loadAllEvents() {
             const list = document.getElementById('event-list');
+            
+            // Get Current Date (at Midnight) for comparison
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
             try {
                 const response = await fetch(BULLETIN_URL);
                 const events = await response.json();
 
                 if (events && events.length > 0) {
-                    list.innerHTML = '';
-                    // Reverse to show newest at top
-                    events.reverse().forEach(item => {
-                        const eventDateObj = new Date(item.date);
-                        const friendlyDate = isNaN(eventDateObj) ? item.date : eventDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                        const gDate = isNaN(eventDateObj) ? "" : eventDateObj.toISOString().replace(/-|:|\.\d\d\d/g, "").split("T")[0];
-                        
-                        const gCalLink = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(item.name)}&dates=${gDate}/${gDate}&details=${encodeURIComponent(item.details || '')}&location=${encodeURIComponent(item.location)}&sf=true&output=xml`;
-                        const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${item.name}\nLOCATION:${item.location}\nDTSTART:${gDate}\nDTEND:${gDate}\nDESCRIPTION:${item.details || ''}\nEND:VEVENT\nEND:VCALENDAR`;
-                        const icsData = "data:text/calendar;charset=utf8," + encodeURIComponent(icsContent);
-
-                        const div = document.createElement('div');
-                        div.className = 'event-item';
-                        div.innerHTML = `
-                            <div class="event-date">${friendlyDate}</div>
-                            <div class="event-title">${item.name}</div>
-                            <div style="font-size: 15px; color:#444;"><strong>Location:</strong> ${item.location} <br> <strong>Time:</strong> ${item.time}</div>
-                            
-                            <div class="event-details">
-                                ${item.details ? item.details : "No additional details provided."}
-                            </div>
-
-                            <div class="cal-links">
-                                <span>Save to Calendar:</span>
-                                <a href="${gCalLink}" target="_blank" class="cal-text-link">Google</a> | 
-                                <a href="${icsData}" download="event.ics" class="cal-text-link">Apple / Outlook</a>
-                            </div>
-                        `;
-                        list.appendChild(div);
+                    // Filter out past events
+                    const futureEvents = events.filter(item => {
+                        const eventDate = new Date(item.date);
+                        // If the date is invalid, we show it just in case, 
+                        // otherwise only show if it's today or in the future
+                        return isNaN(eventDate) ? true : eventDate >= today;
                     });
+
+                    if (futureEvents.length > 0) {
+                        list.innerHTML = '';
+                        
+                        // Sort events by date (closest first)
+                        futureEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                        futureEvents.forEach(item => {
+                            const eventDateObj = new Date(item.date);
+                            const friendlyDate = isNaN(eventDateObj) ? item.date : eventDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                            const gDate = isNaN(eventDateObj) ? "" : eventDateObj.toISOString().replace(/-|:|\.\d\d\d/g, "").split("T")[0];
+                            
+                            const gCalLink = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(item.name)}&dates=${gDate}/${gDate}&details=${encodeURIComponent(item.details || '')}&location=${encodeURIComponent(item.location)}&sf=true&output=xml`;
+                            const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${item.name}\nLOCATION:${item.location}\nDTSTART:${gDate}\nDTEND:${gDate}\nDESCRIPTION:${item.details || ''}\nEND:VEVENT\nEND:VCALENDAR`;
+                            const icsData = "data:text/calendar;charset=utf8," + encodeURIComponent(icsContent);
+
+                            const div = document.createElement('div');
+                            div.className = 'event-item';
+                            div.innerHTML = `
+                                <div class="event-date">${friendlyDate}</div>
+                                <div class="event-title">${item.name}</div>
+                                <div style="font-size: 15px; color:#444;"><strong>Location:</strong> ${item.location} <br> <strong>Time:</strong> ${item.time}</div>
+                                
+                                <div class="event-details">
+                                    ${item.details ? item.details : "No additional details provided."}
+                                </div>
+
+                                <div class="cal-links">
+                                    <span>Save to Calendar:</span>
+                                    <a href="${gCalLink}" target="_blank" class="cal-text-link">Google</a> | 
+                                    <a href="${icsData}" download="event.ics" class="cal-text-link">Apple / Outlook</a>
+                                </div>
+                            `;
+                            list.appendChild(div);
+                        });
+                    } else {
+                        list.innerHTML = "<p style='text-align:center; padding: 60px;'>All scheduled events have concluded. Check back soon for new dispatches!</p>";
+                    }
                 } else {
                     list.innerHTML = "<p style='text-align:center; padding: 60px;'>No current events scheduled in Clay County.</p>";
                 }
