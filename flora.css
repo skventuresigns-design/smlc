@@ -1,0 +1,224 @@
+/* --- CSS VARIABLES & BRANDING --- */
+:root {
+    --brand-red: #cc0000;
+    --dark-gray: #333;
+    --light-bg: #f4f4f4;
+    --white: #ffffff;
+    --divi-section: 50px;
+    --divi-row: 30px;
+    --divi-body: 14px;
+    --divi-header: 30px;
+}
+
+/* --- GENERAL RESET --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-gray);
+    background-color: var(--light-bg);
+}
+
+/* --- NEWS TICKER --- */
+#news-ticker-container {
+    background: var(--brand-red);
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
+    font-size: 1rem;
+    display: none; /* Shown via JS if content exists */
+    position: relative;
+    z-index: 1001;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.ticker-wrapper {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 60s linear infinite;
+}
+
+#news-ticker-container:hover .ticker-wrapper {
+    animation-play-state: paused;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 60px;
+}
+
+.ticker-item a, .ticker-item span {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.ticker-item a:hover {
+    text-decoration: underline;
+}
+
+.game-alert {
+    color: #ffeb3b !important; /* Yellow for high visibility */
+    text-transform: uppercase;
+}
+
+@keyframes ticker {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* --- SCORESTREAM --- */
+.sports-ticker-wrap {
+    background: #000;
+    width: 100%;
+    min-height: 50px;
+}
+
+/* --- HEADER & NAVIGATION --- */
+.header {
+    background: var(--white);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-logo {
+    height: 50px;
+    width: auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--brand-red);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+}
+
+/* --- MAIN CONTENT & LAYOUT --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--divi-section) 20px;
+}
+
+.card {
+    background: var(--white);
+    padding: var(--divi-row);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: var(--brand-red);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.card p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* --- FOOTER --- */
+.site-footer {
+    background: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.9rem;
+    margin-top: 50px;
+}
+
+.site-footer a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* --- RESPONSIVE / DIVI MOBILE SETTINGS --- */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none; /* Toggled by JS class .open */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--white);
+        width: 220px;
+        padding: 20px;
+        box-shadow: -2px 5px 10px rgba(0,0,0,0.1);
+        border-radius: 0 0 0 8px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    /* User Customization: Section Height 50 / Row Height 30 */
+    .container {
+        padding: 50px 20px !important;
+    }
+
+    .card {
+        padding: 30px 20px !important;
+    }
+
+    /* User Customization: Body Text 14 */
+    body, p, .card p, .nav-links a, .ticker-item {
+        font-size: var(--divi-body) !important;
+    }
+
+    /* User Customization: Header Text 30 */
+    h1, h2, h3, .card h3 {
+        font-size: var(--divi-header) !important;
+        line-height: 1.2;
+    }
+}
