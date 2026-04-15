@@ -3,30 +3,42 @@
 <div class="elfsight-app-d65d99f2-6e18-41a9-8b77-2639002c8d36" data-elfsight-app-lazy></div>
 
 <style>
-    /* Sticky Wrapper - Forced to top for Divi compatibility */
+    /* Sticky Wrapper - Maximum priority to stay on top of Divi/WordPress headers */
     .sticky-top-wrap {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 9999999 !important; 
-        box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        /* Extra high z-index to stay above Divi's fixed menu and WordPress Admin Bar */
+        z-index: 99999999 !important; 
+        box-shadow: 0 2px 15px rgba(0,0,0,0.3);
         background: #ffffff;
+        display: block !important;
+        visibility: visible !important;
+    }
+
+    /* Adjust for WordPress Admin Bar (Desktop) */
+    body.admin-bar .sticky-top-wrap {
+        top: 32px;
+    }
+    @media screen and (max-width: 782px) {
+        body.admin-bar .sticky-top-wrap {
+            top: 46px;
+        }
     }
 
     /* News Ticker Bar - Slim Red background, White text */
     #news-ticker-container {
-        background: #cc0000; 
-        color: #ffffff; 
+        background: #cc0000 !important; 
+        color: #ffffff !important; 
         overflow: hidden;
         white-space: nowrap;
-        padding: 4px 0; /* Slim bar setting */
+        padding: 6px 0; /* Slim wrap */
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 18px; /* Desktop font size */
+        font-size: 14px !important; /* Locked at 14 for Website & Mobile */
         display: block !important; 
         border-bottom: 1px solid rgba(255,255,255,0.2);
-        min-height: auto;
-        line-height: 1.2;
+        line-height: 1.4;
     }
 
     .ticker-wrapper {
@@ -43,12 +55,12 @@
     .ticker-item {
         display: inline-block;
         padding: 0 60px;
-        font-size: 18px; 
+        font-size: 14px !important; 
         vertical-align: middle;
     }
 
     .ticker-item a {
-        color: #ffffff;
+        color: #ffffff !important;
         text-decoration: none;
         font-weight: bold;
     }
@@ -71,18 +83,18 @@
 
     /* ScoreStream Area - Clean White background */
     .sports-ticker-wrap {
-        background: #ffffff; 
+        background: #ffffff !important; 
         width: 100%;
         min-height: 40px;
         border-bottom: 1px solid #eeeeee;
         overflow: hidden;
     }
 
-    /* Mobile Adjustments (Divi 14px Preference) */
+    /* Mobile Adjustments (Ensuring 14px stays consistent) */
     @media (max-width: 768px) {
         #news-ticker-container {
             font-size: 14px !important; 
-            padding: 4px 0;
+            padding: 6px 0;
         }
         .ticker-wrapper {
             animation: ticker-scroll 45s linear infinite;
@@ -97,7 +109,7 @@
     <!-- News Ticker Area -->
     <div id="news-ticker-container">
         <div class="ticker-wrapper" id="ticker-content">
-            <span class="ticker-item">Loading Flora updates...</span>
+            <span class="ticker-item">Checking for Flora Updates...</span>
         </div>
     </div>
 
@@ -138,10 +150,12 @@
         if (liveStatus) {
             gameHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">${liveStatus}</a></span>`;
         } else {
+            // Local Time Logic for Wolves
             const now = new Date();
             const local = new Date(now.toLocaleString("en-US", {timeZone: "America/Chicago"}));
             const hours = local.getHours();
             const mins = local.getMinutes();
+            
             if (hours < 17 || (hours === 17 && mins < 30)) {
                 gameHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">🚨 TONIGHT: Wolves Game at 5:30 PM!</a></span>`;
             } else {
@@ -168,31 +182,42 @@
                 }
             }
 
+            // Alternating logic: Interleave game info between each news headline
             let interleavedHtml = '';
             if (newsItems.length > 0) {
-                newsItems.forEach(news => interleavedHtml += gameHtml + news);
+                newsItems.forEach(news => {
+                    interleavedHtml += gameHtml + news;
+                });
             } else {
+                // Repeat game alert to keep the bar full if no news
                 interleavedHtml = gameHtml + gameHtml + gameHtml;
             }
 
             content.innerHTML = interleavedHtml + interleavedHtml;
             
+            // Adjust Divi Layout spacing
             const adjustLayout = () => {
                 const height = barWrapper.offsetHeight;
                 if (height > 0) {
                     document.body.style.transition = "padding-top 0.4s ease";
                     document.body.style.paddingTop = height + "px";
+                    
+                    // Force Divi's fixed menu to sit below the ticker
+                    const diviHeader = document.querySelector('#main-header');
+                    if (diviHeader && window.getComputedStyle(diviHeader).position === 'fixed') {
+                        diviHeader.style.top = height + "px";
+                    }
                 }
             };
 
             adjustLayout();
             window.addEventListener('resize', adjustLayout);
-            setTimeout(adjustLayout, 1500);
-            setTimeout(adjustLayout, 4000);
+            setTimeout(adjustLayout, 1000);
+            setTimeout(adjustLayout, 3000);
 
         } catch (error) {
             content.innerHTML = gameHtml + gameHtml + gameHtml;
-            document.body.style.paddingTop = "100px";
+            document.body.style.paddingTop = "110px";
         }
     }
 
