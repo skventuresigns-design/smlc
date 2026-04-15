@@ -85,15 +85,21 @@
                             <p>While the Little Wabash River once powered the town's early industry, it is now the Illinois sky that provides the next great resource, proving that small towns can lead the charge in a global energy revolution. The synergy between heritage and high-tech is defining the new Louisville.</p>
                         </article>
 
-                        <aside class="article-sidebar">
+                        <aside class="sidebar">
                             <div class="stat-sidebar">
-                                <div><span class="stat-label">Generation Capacity</span><span class="stat-number">250 MW</span></div>
-                                <div style="margin-top:20px;"><span class="stat-label">Homes Powered</span><span class="stat-number">60,000+</span></div>
+                                <div style="margin-bottom: 20px;">
+                                    <span class="stat-label">Generation Capacity</span>
+                                    <span class="stat-number">250 MW</span>
+                                </div>
+                                <div>
+                                    <span class="stat-label">Homes Powered</span>
+                                    <span class="stat-number">60,000+</span>
+                                </div>
                             </div>
 
                             <div class="bz-card">
                                 <h2>Local Spotlight</h2>
-                                <p style="font-size: 0.85rem; margin-bottom: 10px;">Louisville's impact extends beyond energy to culture and music.</p>
+                                <p>Louisville's impact extends beyond energy to culture and music.</p>
                                 <ul class="stats-list">
                                     <li><strong>Bailey Zimmerman</strong> <span>Country Star</span></li>
                                     <li><strong>Hometown</strong> <span>Louisville, IL</span></li>
@@ -108,7 +114,7 @@
                         </aside>
                     </div>
 
-                    <div class="article-footer" style="margin-top:40px; border-top:1px solid #eee; padding-top:20px; font-size:0.8rem; color:#999; display:flex; justify-content:space-between;">
+                    <div class="article-footer">
                         <span>Louisville Monthly | Jan 2026</span>
                         <span>Issue No. 42 | Page 14</span>
                     </div>
@@ -146,15 +152,15 @@
                     </div>
                 </aside>
 
-                <!-- THE LIVE GAS BILLBOARD (NOW IN THE EMPTY BLACK SPACE BELOW) -->
+                <!-- THE LIVE GAS BILLBOARD (Positioned in the black space below the box) -->
                 <div id="sidebar-fuel-monitor">
                     <a href="https://supportmylocalcommunity.com/gas-prices/" target="_parent" class="billboard-link">
                         <div class="billboard-frame-sidebar">
-                            <div class="brand-overlay-bill">S & K Ventures • Digital Ads</div>
+                            <div class="brand-overlay-bill">S & K Ventures • Fuel Monitor</div>
                             <div id="fuel-screen" class="digital-screen-sidebar">
                                 <div style="color: #ffc929; font-weight: bold; font-size: 13px;">SYNCING...</div>
                             </div>
-                            <div class="brand-footer-bill">Casey's Louisville • Click to View More</div>
+                            <div class="brand-footer-bill">Casey's Louisville • Click to Update</div>
                         </div>
                     </a>
                 </div>
@@ -167,7 +173,7 @@
         <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
     </footer>
 
-    <!-- Firebase SDKs for Fuel Monitor Logic -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
@@ -189,15 +195,14 @@
                 appId: "1:22397440085:web:c88e71688ed58896bc4dc"
             };
 
-            const fuelApp = firebase.initializeApp(firebaseConfig, 'LVille_Sidebar_' + Math.random().toString(36).substr(2, 9));
+            const fuelApp = firebase.initializeApp(firebaseConfig, 'LVille_Sidebar_Widget_' + Math.random().toString(36).substr(2, 9));
             const db = fuelApp.database();
-            const stationId = "48026"; // Louisville Casey's
+            const stationId = "48026"; // Louisville Casey's ID
             const screen = document.getElementById('fuel-screen');
 
             function render(data) {
                 screen.innerHTML = '';
                 const info = data[stationId] || { reg: "---", dsl: "---", date: "PENDING" };
-                
                 const slide = document.createElement('div');
                 slide.className = 'gas-slide-sidebar';
                 slide.innerHTML = `
@@ -210,17 +215,15 @@
                 `;
                 screen.appendChild(slide);
             }
-
             db.ref('fuel_prices').on('value', (snap) => {
                 const val = snap.val();
                 if (val) render(val);
             });
         })();
 
-        // RSS Ticker Logic
+        // RSS News Ticker Logic
         const RSS_URL = 'https://www.google.com/alerts/feeds/16385066500020016213/12587969293010780741';
         const PROXY_URL = 'https://api.allorigins.win/get?url=';
-
         async function fetchNews() {
             const tickerContainer = document.getElementById('news-ticker-container');
             const tickerContent = document.getElementById('ticker-content');
@@ -231,24 +234,21 @@
                 const xmlDoc = new DOMParser().parseFromString(data.contents, "text/xml");
                 const entries = xmlDoc.getElementsByTagName("entry");
                 let tickerHtml = '';
-                let itemsFound = 0;
+                let found = 0;
                 for (let i = 0; i < entries.length; i++) {
                     const updatedNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
-                    if (updatedNode) {
-                        const entryDate = updatedNode.textContent.split('T')[0];
-                        if (entryDate === today) {
-                            const title = entries[i].getElementsByTagName("title")[0].textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
-                            const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
-                            tickerHtml += `<span class="ticker-item"><a href="${link}" target="_blank">LOUISVILLE NEWS: ${title}</a></span>`;
-                            itemsFound++;
-                        }
+                    if (updatedNode && updatedNode.textContent.split('T')[0] === today) {
+                        const title = entries[i].getElementsByTagName("title")[0].textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
+                        const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
+                        tickerHtml += `<span class="ticker-item"><a href="${link}" target="_blank">LOUISVILLE NEWS: ${title}</a></span>`;
+                        found++;
                     }
                 }
-                if (itemsFound > 0) {
+                if (found > 0) {
                     tickerContent.innerHTML = tickerHtml + tickerHtml;
                     tickerContainer.style.display = 'block';
                 }
-            } catch (e) { console.error("RSS Error:", e); }
+            } catch (e) { console.error("Ticker failed", e); }
         }
         window.addEventListener('DOMContentLoaded', fetchNews);
     </script>
