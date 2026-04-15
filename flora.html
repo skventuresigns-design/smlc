@@ -67,7 +67,7 @@
         </div>
     </section>
 
-    <!-- AD SLOT 1: LEFT EDGE -->
+    <!-- AD SLOT 1: BOUNCING POSITION -->
     <div class="scatter-ad-container ad-slot" id="slot-1"></div>
 
     <!-- GREY VIBRANT BAR & CAROUSEL -->
@@ -77,11 +77,10 @@
             <p class="discover-text">Experience the warmth of our community and make unforgettable memories.</p>
             <p class="thank-you-msg">Thank you for reading this post, don't forget to subscribe!</p>
         </div>
-        <!-- DYNAMIC CAROUSEL -->
         <div class="flora-slideshow-container" id="flora-carousel"></div>
     </section>
 
-    <!-- AD SLOT 2: RIGHT EDGE -->
+    <!-- AD SLOT 2: BOUNCING POSITION -->
     <div class="scatter-ad-container ad-slot" id="slot-2"></div>
 
     <!-- RICH HERITAGE SECTION -->
@@ -93,7 +92,6 @@
             </div>
             <div class="library-side">
                 <div class="library-main-label">FLORA LIBRARY</div>
-                <!-- SIDE BY SIDE LIBRARIES -->
                 <div class="library-photo-row">
                     <div class="lib-item">
                         <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Old-Flora-Library.jpg" alt="1903">
@@ -108,7 +106,7 @@
         </div>
     </section>
 
-    <!-- AD SLOT 3: LEFT EDGE -->
+    <!-- AD SLOT 3: BOUNCING POSITION -->
     <div class="scatter-ad-container ad-slot" id="slot-3"></div>
 
     <!-- HISTORICAL TIMELINE -->
@@ -122,7 +120,7 @@
         </div>
     </section>
 
-    <!-- AD SLOT 4: RIGHT EDGE -->
+    <!-- AD SLOT 4: BOUNCING POSITION -->
     <div class="scatter-ad-container ad-slot" id="slot-4"></div>
 
     <!-- BOTTOM THREE-COLUMN CONTENT -->
@@ -132,7 +130,6 @@
             <!-- COLUMN 1: UPCOMING EVENTS & CALENDAR -->
             <div class="bottom-col">
                 <div class="col-header">Upcoming Events in Flora</div>
-                
                 <div class="news-clipping-wrapper">
                     <div class="clipping-masthead"><span class="black-tag">Community Bulletin</span></div>
                     <div id="divi-event-list" style="padding: 10px 20px;">
@@ -142,14 +139,11 @@
                         <a href="https://www.supportmylocalcommunity.com/bulletin/" target="_blank">View Full Community Calendar</a>
                     </div>
                 </div>
-
                 <div class="event-clipping">
                     <div class="event-clipping-header"><h3>What's Happening?</h3></div>
                     <p class="event-clipping-text">"Got a local fundraiser or school event coming up? Share your news for free!"</p>
                     <a href="https://www.supportmylocalcommunity.com/submit-event" class="event-clipping-btn">Submit Your Event</a>
                 </div>
-
-                <!-- GOOGLE CALENDAR IFRAME -->
                 <div class="calendar-clipping">
                     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&showTabs=0&showTz=0&showCalendars=0&showNav=0&showDate=0&src=MDk5MDdmYzZmZmYyMTRiOWRhZDk2MTcyZWYxM2U3YjgwZDYyZWE4MGNmMjJiNTA0ZDA5NmE0N2YyNzdhOWQyYkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23795548" frameborder="0" scrolling="no"></iframe>
                 </div>
@@ -167,7 +161,6 @@
                         <a href="#" class="spotlight-btn">Visit Website</a>
                     </div>
                 </div>
-                <!-- SCOTT'S GAS WIDGET -->
                 <div class="billboard-frame-inline">
                     <div class="brand-overlay-bill">S & K Ventures, Inc. • Digital Advertising</div>
                     <div id="fuel-screen" class="digital-screen"><div style="color:#ffc929; font-weight:bold;">SYNCING...</div></div>
@@ -194,7 +187,7 @@
         </div>
     </section>
 
-    <!-- AD SLOT 5: LEFT EDGE -->
+    <!-- AD SLOT 5: BOUNCING POSITION -->
     <div class="scatter-ad-container ad-slot" id="slot-5"></div>
 
     <!-- FOOTER BRANDING STRIP -->
@@ -207,7 +200,7 @@
         </div>
     </section>
 
-    <!-- AD SLOT 6: RIGHT EDGE -->
+    <!-- AD SLOT 6: BOUNCING POSITION -->
     <div class="scatter-ad-container ad-slot" id="slot-6"></div>
 
     <footer class="site-footer">
@@ -265,11 +258,10 @@
                 messagingSenderId: "22397440085",
                 appId: "1:22397440085:web:c88e71688ed58896bc4dc"
             };
-            const fuelApp = firebase.initializeApp(firebaseConfig, 'Flora_Edge_Layout_' + Math.random().toString(36).substr(2, 9));
+            const fuelApp = firebase.initializeApp(firebaseConfig, 'Flora_Universal_Build_' + Math.random().toString(36).substr(2, 9));
             const db = fuelApp.database();
             const floraStations = ["48100", "48101", "128128", "120226"];
             let idx = 0;
-
             function render(data) {
                 const screen = document.getElementById('fuel-screen');
                 const update = () => {
@@ -279,8 +271,8 @@
                     screen.innerHTML = `
                         <div style="text-align:center;">
                             <div style="color:#ffc929; font-weight:bold; margin-bottom:5px; font-size:14px;">${names[id]}</div>
-                            <div style="display:flex; justify-content:space-between; width:180px; margin:0 auto;"><span style="color:#ffc929; font-weight:bold; font-size:11px;">REG</span><span class="led-red">${info.reg}</span></div>
-                            <div style="display:flex; justify-content:space-between; width:180px; margin:0 auto;"><span style="color:#ffc929; font-weight:bold; font-size:11px;">DSL</span><span class="led-grn">${info.dsl === "0" || !info.dsl ? "---" : info.dsl}</span></div>
+                            <div style="display:flex; justify-content:space-between; width:180px; margin:0 auto;"><span style="color:#ffc929; font-weight:bold; font-size:11px;">REG</span><span class="led-red" style="color: #ff3b3b; font-family: 'Courier New', monospace; font-size: 2.2rem; font-weight: bold; text-shadow: 0 0 15px #ff0000;">${info.reg}</span></div>
+                            <div style="display:flex; justify-content:space-between; width:180px; margin:0 auto;"><span style="color:#ffc929; font-weight:bold; font-size:11px;">DSL</span><span class="led-grn" style="color: #39ff14; font-family: 'Courier New', monospace; font-size: 2.2rem; font-weight: bold; text-shadow: 0 0 15px #228b22;">${info.dsl === "0" || !info.dsl ? "---" : info.dsl}</span></div>
                         </div>`;
                     idx = (idx + 1) % floraStations.length;
                 };
@@ -291,9 +283,10 @@
             db.ref('fuel_prices').on('value', snap => { if(snap.val()) render(snap.val()); });
         })();
 
-        // --- CONTENT LOADER (SCATTERED ADS & FILTERED EVENTS) ---
+        // --- CONTENT LOADER ---
         async function initPage() {
             try {
+                // 1. Bulletins (Hide Past)
                 const res = await fetch(BULLETIN_URL);
                 const events = await res.json();
                 const list = document.getElementById('divi-event-list');
@@ -319,6 +312,7 @@
                     }
                 }
                 
+                // 2. Randomly Offset Ads on Edge
                 const adRes = await fetch(AD_FILE_URL);
                 const ads = await adRes.json();
                 const shuffled = ads.sort(() => 0.5 - Math.random());
@@ -326,12 +320,15 @@
                 
                 shuffled.forEach((ad, i) => { 
                     if(slots[i]) { 
+                        // Coin Flip for Edge Position
+                        const alignClass = Math.random() > 0.5 ? 'align-left' : 'align-right';
+                        slots[i].className = `scatter-ad-container ad-slot active ${alignClass}`;
+                        
                         slots[i].innerHTML = `
                             <a href="${ad.link}" target="_blank" class="ad-link-wrapper">
                                 <img src="${ad.img}" alt="${ad.label}">
                                 <span>${ad.label}</span>
                             </a>`; 
-                        slots[i].classList.add('active'); 
                     }
                 });
                 
@@ -349,14 +346,15 @@
             try {
                 const response = await fetch(`${PROXY}${encodeURIComponent(RSS_FEED)}`);
                 const data = await response.json();
-                const entries = new DOMParser().parseFromString(data.contents, "text/xml").getElementsByTagName("entry");
+                const xml = new DOMParser().parseFromString(data.contents, "text/xml");
+                const entries = xml.getElementsByTagName("entry");
                 let html = '';
                 for (let i = 0; i < entries.length; i++) {
                     const dateNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
                     if (dateNode && dateNode.textContent.split('T')[0] === today) {
                         const title = entries[i].getElementsByTagName("title")[0].textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
                         const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
-                        html += `<span class="ticker-item"><a href="${link}" target="_blank" style="color:#fff;">NEWS: ${title}</a></span>`;
+                        html += `<span class="ticker-item"><a href="${link}" target="_blank" style="color:#fff; font-weight:bold; text-decoration:none;">NEWS: ${title}</a></span>`;
                     }
                 }
                 if (html) {
