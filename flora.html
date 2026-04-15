@@ -18,171 +18,338 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flora, IL | Support My Local Community</title>
+    <title>OurFlora | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     
-    <!-- External Stylesheets -->
+    <!-- Link to separated CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ourflora.css">
 </head>
-<body>
+<body class="flora-site-bg">
 
-    <!-- News Ticker (Flora Specific Feed) -->
     <div id="news-ticker-container">
-        <div class="ticker-wrapper" id="ticker-content">
-            <!-- News items and Game Alerts injected here -->
-        </div>
+        <div class="ticker-wrapper" id="ticker-content"></div>
     </div>
 
-    <!-- ScoreStream Scoreboard (Flora Wolves ID: 68602) -->
+    <header class="header">
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
+        <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <nav class="orange-nav">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="clay-city.html">Clay City</a></li>
+            <li><a href="ourflora.html" class="active">Flora</a></li>
+            <li><a href="louisville.html">Louisville</a></li>
+            <li><a href="sailor-springs.html">Sailor Springs</a></li>
+            <li><a href="xenia.html">Xenia</a></li>
+            <li><a href="https://amzn.to/4sznw7i" target="_blank">Today's Deals</a></li>
+            <li><a href="#" target="_blank">Movies Everywhere</a></li>
+        </ul>
+    </nav>
+
     <div class="sports-ticker-wrap">
         <div class="scorestream-widget-container" data-ss_widget_type="horzScoreboard" data-user-widget-id="68602"></div>
         <script async="async" type="text/javascript" src="https://scorestream.com/apiJsCdn/widgets/embed.js"></script>
     </div>
 
-    <header class="header">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" 
-             alt="Support My Local Community Banner" 
-             class="header-logo">
-        
-        <nav class="nav-bar">
-            <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
-                <span></span><span></span><span></span>
-            </button>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="clay-city.html">Clay City</a></li>
-                <li><a href="flora.html" class="active">Flora</a></li>
-                <li><a href="louisville.html">Louisville</a></li>
-                <li><a href="sailor-springs.html">Sailor Springs</a></li>
-                <li><a href="xenia.html">Xenia</a></li>
-                <li><a href="https://amzn.to/4sznw7i" target="_blank">Amazon</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="container">
-        <section class="card">
-            <h3>Welcome to Flora</h3>
-            <p>Discover local businesses, upcoming events, and community news specifically for the Flora area.</p>
-        </section>
-
-        <div class="card">
-            <h3>Local Flora Directory</h3>
-            <p>Business listings for Flora are currently being updated. Check back soon!</p>
+    <!-- MAIN IMPACT HERO -->
+    <section class="flora-impact-hero">
+        <div class="impact-content">
+            <h1 class="blue-title-heavy">SUPPORT MY LOCAL COMMUNITY</h1>
+            <h2 class="black-subtitle-heavy">CLAY COUNTY ILLINOIS #1 DESTINATION FOR</h2>
+            <h2 class="orange-accent-heavy">LOCAL COUPONS AND DISCOUNTS</h2>
+            <div class="btn-wrap">
+                <a href="https://clay-county-business-directory.supportmylocalcommunity.com/" class="pill-btn-blue">Clay County Business Directory</a>
+            </div>
         </div>
-    </main>
+    </section>
+
+    <!-- GREY VIBRANT BAR -->
+    <section class="grey-vibrant-bar">
+        <div class="grey-inner">
+            <h3 class="discover-title">Discover Flora's Vibrant Community</h3>
+            <p class="discover-text">Experience the warmth of our community and make unforgettable memories.</p>
+            <p class="thank-you-msg">Thank you for reading this post, don't forget to subscribe!</p>
+        </div>
+        <!-- DYNAMIC FLORA CAROUSEL -->
+        <div class="flora-slideshow-container" id="flora-carousel"></div>
+    </section>
+
+    <!-- AD SLOT 1: SCATTERED -->
+    <div class="scatter-ad-container ad-slot" id="slot-1"></div>
+
+    <!-- RICH HERITAGE SECTION -->
+    <section class="rich-heritage-section">
+        <h2>Flora Illinois Rich Heritage</h2>
+        <div class="heritage-grid">
+            <div class="heritage-text">
+                Flora, IL was established in 1854 by Samuel White, who donated land to the City of Flora for several buildings and the city park. The City Park, at that time called the Public Square, is present day Library Park where Flora Public Library is located.
+            </div>
+            <div class="library-side">
+                <div class="library-main-label">FLORA LIBRARY</div>
+                <!-- SIDE BY SIDE LIBRARIES -->
+                <div class="library-photo-row">
+                    <div class="lib-item">
+                        <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Old-Flora-Library.jpg" alt="1903">
+                        <div class="lib-caption">Flora Library in 1903</div>
+                    </div>
+                    <div class="lib-item">
+                        <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/New-Flora-Libray.jpg" alt="1933">
+                        <div class="lib-caption">Flora Library in 1933</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AD SLOT 2: SCATTERED -->
+    <div class="scatter-ad-container ad-slot" id="slot-2"></div>
+
+    <!-- HISTORICAL TIMELINE -->
+    <section class="timeline-section">
+        <h2>Flora's Historical Timeline</h2>
+        <div class="timeline-grid">
+            <div class="timeline-card"><h3>1854</h3><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Flora-railroad.png" class="timeline-img"></div>
+            <div class="timeline-card"><h3>1900</h3><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/shoe-factory.jpg" class="timeline-img"></div>
+            <div class="timeline-card"><h3>1950</h3><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Flora-Centenial.png" class="timeline-img"></div>
+            <div class="timeline-card"><h3>2000</h3><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/CCH-Hospital.jpg" class="timeline-img"></div>
+        </div>
+    </section>
+
+    <!-- AD SLOT 3: SCATTERED -->
+    <div class="scatter-ad-container ad-slot" id="slot-3"></div>
+
+    <!-- BOTTOM THREE-COLUMN CONTENT -->
+    <section class="flora-bottom-columns">
+        <div class="bottom-three-grid">
+            
+            <!-- COLUMN 1: UPCOMING EVENTS & CALENDAR -->
+            <div class="bottom-col">
+                <div class="col-header">Upcoming Events in Flora</div>
+                
+                <div class="news-clipping-wrapper">
+                    <div class="clipping-masthead"><span class="black-tag">Community Bulletin</span></div>
+                    <div id="divi-event-list" style="padding: 10px 20px;">
+                        <p style="text-align:center; font-style: italic;">Syncing dispatches...</p>
+                    </div>
+                    <div class="clipping-footer">
+                        <a href="https://www.supportmylocalcommunity.com/bulletin/" target="_blank">View Full Community Calendar</a>
+                    </div>
+                </div>
+
+                <div class="event-clipping">
+                    <div class="event-clipping-header"><h3>What's Happening?</h3></div>
+                    <p class="event-clipping-text">"Got a local fundraiser or school event coming up? Share your news for free!"</p>
+                    <a href="https://www.supportmylocalcommunity.com/submit-event" class="event-clipping-btn">Submit Your Event</a>
+                </div>
+
+                <!-- GOOGLE CALENDAR IFRAME -->
+                <div class="calendar-clipping">
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&showPrint=0&mode=AGENDA&showTabs=0&showTz=0&showCalendars=0&showNav=0&showDate=0&src=MDk5MDdmYzZmZmYyMTRiOWRhZDk2MTcyZWYxM2U3YjgwZDYyZWE4MGNmMjJiNTA0ZDA5NmE0N2YyNzdhOWQyYkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23795548" frameborder="0" scrolling="no"></iframe>
+                </div>
+            </div>
+
+            <!-- COLUMN 2: SPOTLIGHT & GAS -->
+            <div class="bottom-col">
+                <div style="text-align:center; margin-bottom:20px;"><img src="https://ourflora.com/wp-content/uploads/2023/08/Ourflora.png" style="width:250px;"></div>
+                <div class="spotlight-clipping">
+                    <div class="news-box-header"><h3>Business Spotlight</h3></div>
+                    <div style="padding:0 20px 20px 20px; text-align:center;">
+                        <img src="https://github.com/KFruti88/images/blob/main/localbusiness.jpeg?raw=true" style="width:100%; border:1px solid #222; margin-bottom:15px; border-radius:4px;">
+                        <span style="font-weight:bold; font-size:22px; display:block;">Flora Family Diner</span>
+                        <p class="biz-description">Serving home-cooked favorites for over two decades. Friendly service and Clay County spirit.</p>
+                        <a href="#" class="spotlight-btn">Visit Website</a>
+                    </div>
+                </div>
+                <!-- SCOTT'S GAS WIDGET -->
+                <div class="billboard-frame-inline">
+                    <div class="brand-overlay-bill">S & K Ventures, Inc. • Digital Advertising</div>
+                    <div id="fuel-screen" class="digital-screen"><div style="color:#ffc929; font-weight:bold;">SYNCING...</div></div>
+                    <div class="brand-footer-bill">Click billboard to update prices</div>
+                </div>
+            </div>
+
+            <!-- COLUMN 3: CONNECTION -->
+            <div class="bottom-col">
+                <div class="col-header">OurFlora Connection</div>
+                <div class="connection-box">
+                    <div class="score-blue-header"><img src="https://github.com/skventuresigns-design/media/blob/main/scorestream-logo-white.png?raw=true" alt="ScoreStream" style="width:180px;"></div>
+                    <div class="scorestream-widget-container" data-ss_widget_type="vertScoreboard" style="height:600px;" data-user-widget-id="67533"></div>
+                    <a href="https://ourflora.com/Clay-Co-Sports/" target="_blank" class="sports-link">Click for more Clay County Sports</a>
+                </div>
+                <div class="group-invitation-master">
+                    <div class="notice-tag-red">Local Conversation</div>
+                    <div class="polaroid-wrap"><img src="https://ourflora.com/wp-content/uploads/2023/08/Ourflora.png" alt="Facebook"></div>
+                    <div class="invitation-header-main"><h3>Join the Community</h3></div>
+                    <p class="invitation-body-text">"Stay connected with your neighbors. Discuss local news and community updates."</p>
+                    <a href="https://www.facebook.com/OurFloraIL" target="_blank" class="fb-action-btn">Enter the Conversation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER BRANDING STRIP -->
+    <section class="flora-footer-branding">
+        <div class="branding-flex">
+            <div class="brand-logo-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/R.jpg" alt="Map"></div>
+            <div class="brand-logo-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Charlie-Brown-Park.jpg" alt="Park"></div>
+            <div class="brand-logo-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/City-our-flora-sign.jpg" alt="Sign"></div>
+            <div class="brand-logo-item" style="max-width:250px;"><a href="https://skventuresigns.com" target="_blank" style="display:block; transition:transform 0.3s;"><img src="https://i0.wp.com/skventuresigns.com/wp-content/uploads/2025/03/SK-Sign-White.png?w=3240&ssl=1" alt="Advertise" style="width:100%;"></a></div>
+        </div>
+    </section>
 
     <footer class="site-footer">
-        <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
-        <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
+        All Content, Photographs, Writings, Letters and Documents — Copyright — 2019-2026 — Our Flora<br>
+        All Rights Reserved — <a href="https://skventuresigns.com" target="_blank" style="color:inherit; text-decoration:none;">S&K Ventures</a>
     </footer>
 
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <script>
-        // Responsive Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-        });
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
 
-        // Ticker logic variables
-        const RSS_URL = 'https://www.google.com/alerts/feeds/16385066500020016213/3177914264312887151';
-        const TEAM_URL = 'https://scorestream.com/team/flora-high-school-wolves-5114/games';
-        const PROXY_URL = 'https://api.allorigins.win/get?url=';
+        const AD_FILE_URL = 'https://raw.githubusercontent.com/skventuresigns-design/smlc/main/slideshow/ads.json';
+        const CAROUSEL_URL = 'https://raw.githubusercontent.com/skventuresigns-design/smlc/main/slideshow/flora-carousel.json';
+        const BULLETIN_URL = "https://script.google.com/macros/s/AKfycbyMQKX6USKUL8cxo4mSR9aXfiwHR4kqsElU4DH8rAi63W7KRuILDeayiEAv_uG_85qd0A/exec";
 
-        async function fetchGameData() {
+        // --- FLORA CAROUSEL ---
+        async function loadFloraCarousel() {
+            const container = document.getElementById('flora-carousel');
             try {
-                const response = await fetch(`${PROXY_URL}${encodeURIComponent(TEAM_URL)}`);
-                if (!response.ok) return null;
-                const data = await response.json();
-                
-                const html = data.contents;
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const bodyText = doc.body.innerText;
-                
-                if (bodyText.includes("Flora") && (bodyText.includes("Live") || bodyText.includes("Qtr"))) {
-                    return "🔥 LIVE: Wolves Game in Progress! Click for updates";
+                const response = await fetch(CAROUSEL_URL);
+                const images = await response.json();
+                images.forEach(imgUrl => {
+                    const slide = document.createElement('div');
+                    slide.className = 'flora-slide';
+                    slide.innerHTML = `<img src="${imgUrl}">`;
+                    container.appendChild(slide);
+                });
+                let idx = 0;
+                function showSlides() {
+                    const slides = document.getElementsByClassName("flora-slide");
+                    for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+                    idx++;
+                    if (idx > slides.length) {idx = 1}
+                    if(slides[idx-1]) slides[idx-1].style.display = "block";
+                    setTimeout(showSlides, 5000);
                 }
-                
-                return null;
-            } catch (e) {
-                console.error("Game fetch error:", e);
-                return null;
-            }
+                showSlides();
+            } catch(e) {}
         }
 
-        async function fetchNews() {
-            const tickerContainer = document.getElementById('news-ticker-container');
-            const tickerContent = document.getElementById('ticker-content');
-            
-            let gameStatusHtml = '';
-            const liveInfo = await fetchGameData();
-            
-            if (liveInfo) {
-                gameStatusHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">${liveInfo}</a></span>`;
-            } else {
-                const now = new Date();
-                const localDate = new Date(now.toLocaleString("en-US", {timeZone: "America/Chicago"}));
-                const hours = localDate.getHours();
-                const minutes = localDate.getMinutes();
-                
-                if (hours < 17 || (hours === 17 && minutes < 30)) {
-                    gameStatusHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">🚨 TONIGHT'S WOLVES GAME: Kickoff at 5:30 PM!</a></span>`;
-                } else {
-                    gameStatusHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">🔥 LIVE: Wolves Game in Progress! Click for updates</a></span>`;
-                }
+        // --- FUEL MONITOR ---
+        (function() {
+            const firebaseConfig = {
+                apiKey: "AIzaSyBYPbGWDNPUmCSnFWDPPWtiXe2F6MPinXg",
+                authDomain: "smlc-fuel-monitor.firebaseapp.com",
+                databaseURL: "https://smlc-fuel-monitor-default-rtdb.firebaseio.com",
+                projectId: "smlc-fuel-monitor",
+                storageBucket: "smlc-fuel-monitor.firebasestorage.app",
+                messagingSenderId: "22397440085",
+                appId: "1:22397440085:web:c88e71688ed58896bc4dc"
+            };
+            const fuelApp = firebase.initializeApp(firebaseConfig, 'Flora_Split_Final_' + Math.random().toString(36).substr(2, 9));
+            const db = fuelApp.database();
+            const floraStations = ["48100", "48101", "128128", "120226"];
+            let idx = 0;
+
+            function render(data) {
+                const screen = document.getElementById('fuel-screen');
+                const update = () => {
+                    const id = floraStations[idx];
+                    const info = data[id] || { reg: "---", dsl: "---" };
+                    const names = {"48100": "CASEY'S", "48101": "HUCK'S", "128128": "MACH 1", "120226": "FAST STOP"};
+                    screen.innerHTML = `
+                        <div style="text-align:center;">
+                            <div style="color:#ffc929; font-weight:bold; margin-bottom:5px; font-size:14px;">${names[id]}</div>
+                            <div style="display:flex; justify-content:space-between; width:180px; margin:0 auto;"><span style="color:#ffc929; font-weight:bold; font-size:11px;">REG</span><span class="led-red">${info.reg}</span></div>
+                            <div style="display:flex; justify-content:space-between; width:180px; margin:0 auto;"><span style="color:#ffc929; font-weight:bold; font-size:11px;">DSL</span><span class="led-grn">${info.dsl === "0" || !info.dsl ? "---" : info.dsl}</span></div>
+                        </div>`;
+                    idx = (idx + 1) % floraStations.length;
+                };
+                update(); setInterval(update, 6000);
             }
+            db.ref('fuel_prices').on('value', snap => { if(snap.val()) render(snap.val()); });
+        })();
 
-            const today = new Date().toISOString().split('T')[0];
-
+        // --- CONTENT LOADER (WITH PAST EVENT FILTER) ---
+        async function initPage() {
             try {
-                const response = await fetch(`${PROXY_URL}${encodeURIComponent(RSS_URL)}`);
-                if (!response.ok) throw new Error('Network response was not ok');
-                
-                const data = await response.json();
-                const xmlParser = new DOMParser();
-                const xmlDoc = xmlParser.parseFromString(data.contents, "text/xml");
-                const entries = xmlDoc.getElementsByTagName("entry");
+                const res = await fetch(BULLETIN_URL);
+                const events = await res.json();
+                const list = document.getElementById('divi-event-list');
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
 
-                let tickerHtml = gameStatusHtml; 
-                let totalItemsFound = 1; 
-
-                for (let i = 0; i < entries.length; i++) {
-                    const titleNode = entries[i].getElementsByTagName("title")[0];
-                    const linkNode = entries[i].getElementsByTagName("link")[0];
-                    const dateNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
-                    
-                    if (titleNode && linkNode && dateNode) {
-                        const entryDate = dateNode.textContent.split('T')[0];
-                        
-                        if (entryDate === today) {
-                            const title = titleNode.textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
-                            const link = linkNode.getAttribute("href");
-                            tickerHtml += `<span class="ticker-item"><a href="${link}" target="_blank">NEWS: ${title}</a></span>`;
-                            totalItemsFound++;
-                        }
+                if(events && events.length > 0) {
+                    const upcoming = events.filter(item => {
+                        const eventDate = new Date(item.date);
+                        return isNaN(eventDate) ? true : eventDate >= today;
+                    });
+                    if (upcoming.length > 0) {
+                        list.innerHTML = '';
+                        upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
+                        upcoming.slice(0, 3).forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'divi-event-item';
+                            div.innerHTML = `<div style="color:#cc0000; font-weight:bold; font-size:12px;">${item.date}</div><div style="font-weight:bold; font-size:16px;">${item.name}</div>`;
+                            list.appendChild(div);
+                        });
+                    } else {
+                        list.innerHTML = '<p style="text-align:center; padding: 20px; font-style:italic;">No upcoming events.</p>';
                     }
                 }
+                
+                const adRes = await fetch(AD_FILE_URL);
+                const ads = await adRes.json();
+                const shuffled = ads.sort(() => 0.5 - Math.random());
+                const slots = document.querySelectorAll('.ad-slot');
+                shuffled.forEach((ad, i) => { if(slots[i]) { slots[i].innerHTML = `<a href="${ad.link}" target="_blank" class="ad-link-wrapper"><img src="${ad.img}"><span>${ad.label}</span></a>`; slots[i].classList.add('active'); }});
+                
+                loadFloraCarousel();
 
-                tickerContent.innerHTML = tickerHtml + tickerHtml;
-                tickerContainer.style.display = 'block';
-            } catch (error) {
-                console.error('Error fetching RSS:', error);
-                tickerContent.innerHTML = gameStatusHtml + gameStatusHtml;
-                tickerContainer.style.display = 'block';
-            }
+            } catch(e) {}
         }
+        window.addEventListener('DOMContentLoaded', initPage);
 
-        window.addEventListener('DOMContentLoaded', fetchNews);
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                const navLinks = document.getElementById('nav-links');
-                navLinks.classList.remove('open');
-            });
-        });
+        // RSS Ticker
+        const RSS_FEED = 'https://www.google.com/alerts/feeds/16385066500020016213/3177914264312887151';
+        const PROXY = 'https://api.allorigins.win/get?url=';
+        async function fetchTicker() {
+            const today = new Date().toISOString().split('T')[0];
+            try {
+                const response = await fetch(`${PROXY}${encodeURIComponent(RSS_FEED)}`);
+                const data = await response.json();
+                const entries = new DOMParser().parseFromString(data.contents, "text/xml").getElementsByTagName("entry");
+                let html = '';
+                for (let i = 0; i < entries.length; i++) {
+                    const dateNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
+                    if (dateNode && dateNode.textContent.split('T')[0] === today) {
+                        const title = entries[i].getElementsByTagName("title")[0].textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
+                        const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
+                        html += `<span class="ticker-item"><a href="${link}" target="_blank" style="color:#fff;">NEWS: ${title}</a></span>`;
+                    }
+                }
+                if (html) {
+                    const container = document.getElementById('news-ticker-container');
+                    document.getElementById('ticker-content').innerHTML = html + html;
+                    container.style.display = 'block';
+                }
+            } catch (e) {}
+        }
+        fetchTicker();
     </script>
+    <script async="async" type="text/javascript" src="https://scorestream.com/apiJsCdn/widgets/embed.js"></script>
+    <!-- Elfsight Chat -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-d65d99f2-6e18-41a9-8b77-2639002c8d36" data-elfsight-app-lazy></div>
 </body>
 </html>
