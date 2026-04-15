@@ -116,7 +116,7 @@
     padding: 4px;
 }
 
-/* --- LANDMARK FIX: Side-by-Side on Desktop & Full Image Visibility --- */
+/* --- LANDMARK FIX: Side-by-Side & Full Image Visibility --- */
 .landmark-row {
     display: flex;
     gap: 20px;
@@ -139,7 +139,6 @@
     width: 100%;
     height: auto !important; /* Forces the full image to show without cropping */
     display: block;
-    object-fit: contain; /* Ensures the whole image fits in the box */
 }
 
 .xenia-wp-tag {
