@@ -2,51 +2,48 @@
    LOUISVILLE ISOLATED STYLES (louisville.css)
    ========================================= */
 
-/* 1. PAGE BACKGROUND (Forces the black background) */
+/* 1. PAGE BACKGROUND */
 .louisville-bg {
     background-color: #000000 !important;
     margin: 0;
     padding: 0;
 }
 
-/* 2. THE HERO SECTION (Red Background & Centered Text) */
+/* 2. THE HERO SECTION */
 .Louisville-hero-container {
     width: 100%;
-    background: linear-gradient(to bottom, #eb1c24 0%, #000000 100%) !important;/* Louisville Red */
+    background: linear-gradient(to bottom, #eb1c24 0%, #000000 100%) !important;
     padding: 80px 20px;
     text-align: center;
-    /*border-bottom: 5px solid #222;*/
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .Louisville-overlay {
-    text-align: center; /* Ensures everything inside is centered */
+    text-align: center;
     width: 100%;
 }
 
 .Louisville-overlay h1 {
-    font-size: clamp(2rem, 6vw, 3.5rem) !important; /* Big, bold impact */
+    font-size: clamp(2.5rem, 8vw, 4rem) !important;
     font-family: 'Times New Roman', serif;
-    text-transform: Capitalize;
+    text-transform: capitalize;
     font-weight: 700;
     color: #ffffff;
     margin: 0;
     letter-spacing: 2px;
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5); 
-    border: none;
-    padding: 0;
 }
 
 .Louisville-subtitle {
     font-family: 'Times New Roman', serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #ffffff;
     margin-top: 10px;
     text-transform: uppercase;
     letter-spacing: 4px;
-    display: block; /* Ensures it sits on its own line for centering */
+    display: block;
 }
 
 /* 3. THE MAIN GRID SPLIT */
@@ -62,10 +59,10 @@
 
 .louisville-col-main {
     flex: 0 0 68% !important;
-    background-color: #fffdf6; /* Aged Paper Tint */
+    background-color: #fffdf6; 
     border: 2px solid #222;
     padding: 40px;
-    box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1); /* Light shadow for black bg */
+    box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);
 }
 
 .louisville-col-side {
@@ -73,7 +70,7 @@
 }
 
 .category-tag {
-    background: #eb1c24; /* Red tag for Louisville */
+    background: #eb1c24;
     color: #fff;
     display: inline-block;
     padding: 5px 15px;
@@ -83,6 +80,7 @@
     margin-bottom: 15px;
 }
 
+/* 4. MAGAZINE ARTICLE STYLING */
 .article-container h1 {
     font-family: 'Times New Roman', serif;
     font-size: 3rem;
@@ -100,16 +98,15 @@
     margin-bottom: 30px;
 }
 
-/* 4. MAGAZINE ARTICLE STYLING (The White Paper) */
 .main-layout {
     display: flex !important;
     gap: 30px;
     align-items: flex-start;
-   margin-top: 30px;
+    margin-top: 30px;
 }
 
 .article-body {
-   flex: 2 !important;
+    flex: 2 !important;
     font-family: "Times New Roman", serif;
     font-size: 1.15rem;
     line-height: 1.8;
@@ -117,81 +114,95 @@
 }
 
 .sidebar {
-    flex: 1 !important; /* Takes up 1/3 of the space */
-    border-left: 1px solid #ddd; /* Subtle line to separate from text */
+    flex: 1 !important;
+    border-left: 1px solid #ddd;
     padding-left: 20px;
 }
 
-/*  5. STAT BOXES INSIDE THE SIDEBAR --- */
-.stat-sidebar {
-    margin-bottom: 25px;
-    padding: 15px;
-    border: 1px solid #222;
-    background: #fff;
-}
-
-.stat-number {
-    display: block;
-    font-size: 2rem;
-    font-weight: 900;
-    color: #eb1c24; /* Louisville Red */
-}
-
-.bz-card {
-    border: 1px solid #222;
-    padding: 15px;
-    background: rgba(255,255,255,0.6);
-    margin-bottom: 20px;
-}
-
-.project-callout {
-    border: 2px solid #ffcc00;
-    padding: 15px;
-    background: #fff;
-}
-
-.louisville-col-side {
-    flex: 0 0 28% !important;
-}
-
-/* 6. NEWSPAPER SIDEBAR (Far Right) */
+/* 5. NEWSPAPER SIDEBAR (Far Right) */
 .newspaper-sidebar {
     background-color: #fffdf6 !important;
     border: 2px solid #222 !important;
     padding: 25px;
-    box-shadow: 10px 10px 0px #eb1c24 !important; /* Red shadow for personality */
+    box-shadow: 10px 10px 0px #eb1c24 !important;
     font-family: "Times New Roman", Times, serif;
 }
 
-/* 7. GITHUB SYNC CONTAINER */
-.github-sync-container {
-   display: flex;           /* Added: Enables Flexbox */
-    justify-content: center; /* Added: Centers horizontally */
-    align-items: center;     /* Added: Centers vertically */
-    position: relative;
-   box-sizing: border-box;
-   margin-top: -25px;
-    overflow: hidden;
+/* 6. FUEL MONITOR SIDEBAR STYLES (Matches Sidebar Width) */
+#fuel-monitor-container {
     width: 100%;
-    min-height: 450px;       /* Changed: Match your iframe height */
-    border: 0px solid #222;
-    background: #000;        /* Keep the black background */
 }
 
-.github-sync-container iframe {
+.billboard-frame-sidebar {
+    background: #111;
+    border: 4px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 40px 15px; /* Matches widget spacing */
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.brand-overlay-bill {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    border: none;
+    top: 0; left: 0; right: 0;
+    background: #3e0100; color: #ffc929;
+    font-weight: bold; text-align: center; font-size: 11px;
+    padding: 8px 5px; border-bottom: 1px solid #ffc929;
 }
 
-/* 7. MOBILE OVERRIDES */
+.brand-footer-bill {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: #3e0100; color: #ffc929;
+    font-weight: bold; text-align: center; font-size: 10px;
+    padding: 8px 5px; border-top: 1px solid #ffc929;
+}
+
+.digital-screen-sidebar {
+    width: 100%; height: 100%;
+    background: #000; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.gas-slide-sidebar {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 100%;
+}
+
+.logo-container-bill { height: 45px; margin-bottom: 10px; display: flex; justify-content: center; }
+.price-row-bill { width: 95%; display: flex; justify-content: space-between; align-items: center; margin: 2px 0; }
+.price-label-bill { color: #ffc929; font-size: 11px; font-weight: bold; }
+.led-red-bill { color: #ff3b3b; font-family: 'Courier New', monospace; font-size: 2.4rem; font-weight: bold; text-shadow: 0 0 10px #ff0000; }
+.led-grn-bill { color: #39ff14; font-family: 'Courier New', monospace; font-size: 2.4rem; font-weight: bold; text-shadow: 0 0 10px #228b22; }
+.update-tag-bill { color: #ffc929; font-size: 8px; opacity: 0.7; text-transform: uppercase; margin-top: 4px; }
+
+/* 7. MOBILE OVERRIDES (Divi Settings: 14px Body, 30px Header, 50 Section, 30 Row) */
 @media (max-width: 1024px) {
     .louisville-grid-row {
         flex-direction: column !important;
+        margin: 30px auto !important; /* Row Height 30 */
     }
     .louisville-col-main, .louisville-col-side {
         width: 100% !important;
         flex: none !important;
+    }
+    .Louisville-hero-container {
+        padding: 50px 20px !important; /* Section Height 50 */
+    }
+    body, p, .article-body {
+        font-size: 14px !important; /* Body Text Size 14 */
+    }
+    h1, .article-title, .Louisville-overlay h1 {
+        font-size: 30px !important; /* Header Text Size 30 */
+    }
+    .billboard-frame-sidebar {
+        aspect-ratio: 1 / 1.1;
+        padding: 45px 10px;
     }
 }
