@@ -22,32 +22,22 @@
             --led-green: #39ff14;
             --bg-dark: #111;
             --border-gray: #2a2a2a;
-            /* Applying your Divi preferences */
-            --header-size: 30px;
-            --body-size: 14px;
+            /* Divi Mobile Preference Alignment */
+            --divi-header-max: 30px;
+            --divi-body: 14px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        /* Reset for embed safety */
+        #fuel-monitor-container {
+            width: 100%;
+            margin: 0 auto;
+            display: block;
+            background: transparent;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        body {
-            background-color: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 10px;
-        }
-
-        #wp-custom-wrapper {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
+        #fuel-monitor-container * {
+            box-sizing: border-box;
         }
 
         .billboard-link {
@@ -61,16 +51,18 @@
             background: var(--bg-dark);
             border: 8px solid var(--border-gray);
             border-radius: 12px;
-            padding: 45px 15px; /* Padding for header/footer */
+            padding: 45px 15px; /* Space for brand header/footer */
             position: relative;
             width: 100%;
+            /* This ensures it scales proportionally to width */
             aspect-ratio: 16 / 11;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             overflow: hidden;
+            margin: 0 auto;
         }
 
         .brand-overlay {
@@ -82,11 +74,14 @@
             color: var(--brand-gold);
             font-weight: bold;
             text-align: center;
-            font-size: var(--body-size);
-            padding: 10px 0;
+            font-size: var(--divi-body);
+            padding: 10px 5px;
             border-bottom: 2px solid var(--brand-gold);
             z-index: 10;
             letter-spacing: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .brand-footer {
@@ -98,7 +93,7 @@
             color: var(--brand-gold);
             font-weight: bold;
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
             padding: 8px 0;
             border-top: 2px solid var(--brand-gold);
             z-index: 10;
@@ -109,7 +104,7 @@
             width: 100%;
             height: 100%;
             background: #000;
-            border-radius: 8px;
+            border-radius: 6px;
             position: relative;
             overflow: hidden;
             border: 1px solid #333;
@@ -127,7 +122,7 @@
             justify-content: center;
             opacity: 0;
             transition: opacity 0.8s ease-in-out;
-            padding: 15px;
+            padding: 10px;
         }
 
         .gas-slide.active {
@@ -136,128 +131,125 @@
 
         .town-header {
             color: var(--brand-gold);
-            font-size: 18px;
+            /* Scaling header text */
+            font-size: clamp(14px, 4vw, 22px);
             font-weight: bold;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             margin-bottom: 8px;
             text-shadow: 0 0 8px rgba(255, 201, 41, 0.6);
             text-align: center;
         }
 
         .logo-container {
-            height: 60px; /* Uniform height for all logo containers */
+            height: clamp(40px, 12vw, 65px);
             width: 100%;
-            max-width: 220px;
-            margin-bottom: 12px;
+            max-width: 200px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
 
         .station-logo {
             max-height: 100%;
             max-width: 100%;
-            object-fit: contain; /* Ensures logo fits within the 60px height without distortion */
+            object-fit: contain;
             border-radius: 4px;
         }
 
-        /* White background specifically for logos that need it */
         .logo-bg-white {
             background-color: white;
-            padding: 6px 12px;
+            padding: 5px 12px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-            height: 100%; /* Force it to fill the container height */
         }
 
         .logo-fallback {
             color: #fff;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            border: 2px solid #444;
-            padding: 8px 20px;
+            border: 1px solid #444;
+            padding: 5px 15px;
         }
 
         .price-row {
-            width: 85%;
+            width: 90%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 3px 0;
+            margin: 2px 0;
         }
 
         .price-label {
             color: var(--brand-gold);
-            font-size: var(--body-size);
+            font-size: var(--divi-body);
             font-weight: bold;
             letter-spacing: 1px;
             text-shadow: 0 0 5px rgba(255, 201, 41, 0.4);
+        }
+
+        .led-red, .led-grn {
+            font-family: 'Courier New', Courier, monospace;
+            /* Use clamp to ensure it fits in smaller Divi boxes */
+            font-size: clamp(1.8rem, 8vw, 2.8rem);
+            font-weight: bold;
         }
 
         .led-red {
             color: var(--led-red);
             text-shadow: 0 0 15px #ff0000;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 2.8rem;
-            font-weight: bold;
         }
 
         .led-grn {
             color: var(--led-green);
             text-shadow: 0 0 15px #228b22;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 2.8rem;
-            font-weight: bold;
         }
 
         .update-tag {
             color: var(--brand-gold);
-            font-size: 10px;
-            margin-top: 10px;
+            font-size: 9px;
+            margin-top: 8px;
             font-weight: 600;
             text-shadow: 0 0 5px rgba(255, 201, 41, 0.4);
             text-transform: uppercase;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
-        /* --- SILENT NOTIFICATION SYSTEM --- */
+        /* --- NOTIFICATION SYSTEM --- */
         #notification-toast {
             position: absolute;
-            top: 55px; /* Just below brand header */
+            top: 50px;
             left: 50%;
-            transform: translateX(-50%) translateY(-20px);
-            background: rgba(57, 255, 20, 0.15);
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(57, 255, 20, 0.2);
             border: 1px solid var(--led-green);
             color: var(--led-green);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 10px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
             z-index: 100;
             pointer-events: none;
             opacity: 0;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
             backdrop-filter: blur(4px);
             white-space: nowrap;
         }
 
         #notification-toast.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(5px);
         }
 
         .live-indicator {
             display: inline-block;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background-color: var(--led-green);
             border-radius: 50%;
-            margin-right: 5px;
-            box-shadow: 0 0 5px var(--led-green);
+            margin-right: 4px;
             animation: pulse 2s infinite;
         }
 
@@ -267,60 +259,40 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Mobile specific adjustments */
+        /* Responsive Breakpoints for Divi Containers */
         @media (max-width: 480px) {
             .billboard-frame {
-                aspect-ratio: 1 / 1.1;
-                border-width: 6px;
+                aspect-ratio: 1 / 1.1; /* Taller on small phones */
+                border-width: 5px;
+                padding: 40px 10px;
             }
-            .led-red, .led-grn {
-                font-size: 2.2rem;
-            }
-            .town-header {
-                font-size: 16px;
-            }
-            .brand-overlay {
-                font-size: 12px;
-            }
-            .logo-container {
-                height: 50px;
-            }
-        }
-
-        /* PWA App adjustments for full screen */
-        @media (display-mode: standalone) {
-            body {
-                background-color: #000;
-            }
-            #wp-custom-wrapper {
-                max-width: 100%;
-                height: 100vh;
-                display: flex;
-                align-items: center;
-            }
+            .brand-overlay { font-size: 12px; }
         }
     </style>
 </head>
-<body>
+<body style="margin:0; background:transparent;">
 
-<div id="wp-custom-wrapper">
-    <!-- Notification Pop-up -->
-    <div id="notification-toast">
-        <span class="live-indicator"></span> Price Update Received
-    </div>
-
-    <a href="https://supportmylocalcommunity.com/gas-prices/" target="_parent" class="billboard-link">
-        <div class="billboard-frame">
-            <div class="brand-overlay">S & K Ventures, Inc. • Digital Advertising</div>
-            <div id="fuel-screen" class="digital-screen">
-                <div style="color: #ffc929; font-weight: bold; font-size: 14px; text-align: center;">
-                    <div class="spinner" style="margin-bottom: 10px; animation: pulse 1s infinite;">⚡</div>
-                    SYNCING LIVE DATA...
-                </div>
-            </div>
-            <div class="brand-footer">Click billboard to update prices</div>
+<div id="fuel-monitor-container">
+    <div id="wp-custom-wrapper" style="position: relative; width: 100%; max-width: 600px; margin: 0 auto;">
+        
+        <!-- Notification Pop-up -->
+        <div id="notification-toast">
+            <span class="live-indicator"></span> Live Update
         </div>
-    </a>
+
+        <a href="https://supportmylocalcommunity.com/gas-prices/" target="_parent" class="billboard-link">
+            <div class="billboard-frame">
+                <div class="brand-overlay">S & K Ventures, Inc. • Digital Advertising</div>
+                <div id="fuel-screen" class="digital-screen">
+                    <div style="color: #ffc929; font-weight: bold; font-size: 13px; text-align: center;">
+                        <div style="margin-bottom: 5px; animation: pulse 1s infinite;">⚡</div>
+                        SYNCING...
+                    </div>
+                </div>
+                <div class="brand-footer">Click to update prices</div>
+            </div>
+        </a>
+    </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -357,10 +329,9 @@
     const toast = document.getElementById('notification-toast');
     
     let currentSlideIndex = 0;
-    let lastDataHash = null; // Used to track actual changes
+    let lastDataHash = null;
     let isInitialLoad = true;
 
-    // Helper to check if prices actually changed
     function hasDataChanged(newData) {
         const currentHash = JSON.stringify(newData);
         if (lastDataHash && lastDataHash !== currentHash) {
@@ -377,16 +348,10 @@
             return;
         }
         toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 4000);
+        setTimeout(() => toast.classList.remove('show'), 3500);
         
-        // Log event to GA if gtag is present
         if (typeof gtag === 'function') {
-          gtag('event', 'price_update', {
-            'event_category': 'fuel_monitor',
-            'event_label': 'Live Update Received'
-          });
+          gtag('event', 'price_update', { 'event_category': 'fuel_monitor' });
         }
     }
 
@@ -395,7 +360,7 @@
         const ids = Object.keys(stationConfigs).filter(id => !targetTown || stationConfigs[id].town === targetTown);
         
         if (ids.length === 0) {
-            screen.innerHTML = '<div style="color: #ffc929; font-weight: bold;">No stations for this area.</div>';
+            screen.innerHTML = '<div style="color: #ffc929; font-weight: bold; font-size:12px;">No local data.</div>';
             return;
         }
 
@@ -404,7 +369,7 @@
             const info = data[id] || { reg: "---", dsl: "---", date: "PENDING" };
             const safeLogo = encodeURIComponent(config.logo);
             
-            // Logic to add white background to Mach 1 logo (ID 128128)
+            // Apply white background for Mach 1
             const logoClass = (id === "128128") ? "station-logo logo-bg-white" : "station-logo";
             
             const slide = document.createElement('div');
@@ -451,15 +416,11 @@
     db.ref('fuel_prices').on('value', (snap) => {
         const val = snap.val();
         if (val) {
-            if (hasDataChanged(val)) {
-                showNotification();
-            }
+            if (hasDataChanged(val)) showNotification();
             render(val);
         } else {
-            screen.innerHTML = '<div style="color: #ffc929; font-weight: bold;">Service Temporarily Offline</div>';
+            screen.innerHTML = '<div style="color: #ffc929; font-weight: bold; font-size:12px;">Offline</div>';
         }
-    }, (error) => {
-        screen.innerHTML = '<div style="color: #ffc929; font-weight: bold;">Connection Error</div>';
     });
 })();
 </script>
