@@ -1,16 +1,9 @@
-<!-- Elfsight All-in-One Chat | Untitled All-in-One Chat -->
+<!-- Elfsight All-in-One Chat -->
 <script src="https://elfsightcdn.com/platform.js" async></script>
 <div class="elfsight-app-d65d99f2-6e18-41a9-8b77-2639002c8d36" data-elfsight-app-lazy></div>
 
-<!-- 
-  INSTRUCTIONS FOR DIVI/GITHUB: 
-  1. Paste this entire code block into a Divi "Code Module".
-  2. If hosting on GitHub, ensure you use the "Raw" file link 
-     through a CDN like raw.githack.com for external script calls.
--->
-
 <style>
-    /* Sticky Wrapper - Forced to top with maximum z-index for Divi compatibility */
+    /* Sticky Wrapper - Forced to top for Divi compatibility */
     .sticky-top-wrap {
         position: fixed;
         top: 0;
@@ -21,18 +14,18 @@
         background: #ffffff;
     }
 
-    /* News Ticker Bar - Red background, White text */
+    /* News Ticker Bar - Slim Red background, White text */
     #news-ticker-container {
-        background: #cc0000; /* Brand Red */
+        background: #cc0000; 
         color: #ffffff; 
         overflow: hidden;
         white-space: nowrap;
-        padding: 4px 0; /* Reduced padding to make the bar slimmer */
+        padding: 4px 0; /* Slim bar setting */
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 18px; 
+        font-size: 18px; /* Desktop font size */
         display: block !important; 
         border-bottom: 1px solid rgba(255,255,255,0.2);
-        min-height: auto; /* Removed fixed min-height to hug the text */
+        min-height: auto;
         line-height: 1.2;
     }
 
@@ -43,7 +36,6 @@
         will-change: transform;
     }
 
-    /* Pause on hover for easier reading/clicking */
     #news-ticker-container:hover .ticker-wrapper {
         animation-play-state: paused;
     }
@@ -65,7 +57,7 @@
         text-decoration: underline;
     }
 
-    /* Game Alerts - Yellow text */
+    /* Game Alerts - Yellow high-contrast text */
     .game-alert {
         color: #ffeb3b !important; 
         text-transform: uppercase;
@@ -77,7 +69,7 @@
         100% { transform: translate3d(-100%, 0, 0); }
     }
 
-    /* ScoreStream Area - White background */
+    /* ScoreStream Area - Clean White background */
     .sports-ticker-wrap {
         background: #ffffff; 
         width: 100%;
@@ -86,18 +78,17 @@
         overflow: hidden;
     }
 
-    /* Mobile Adjustments for User Preferences */
+    /* Mobile Adjustments (Divi 14px Preference) */
     @media (max-width: 768px) {
         #news-ticker-container {
-            font-size: 14px !important; /* Mobile Body Preference: 14 */
-            padding: 4px 0; /* Slimmer bar on mobile as well */
-            min-height: auto;
+            font-size: 14px !important; 
+            padding: 4px 0;
         }
         .ticker-wrapper {
             animation: ticker-scroll 45s linear infinite;
         }
         .ticker-item, .ticker-item a, .game-alert {
-            font-size: 14px !important; /* Mobile Body Preference: 14 */
+            font-size: 14px !important; 
         }
     }
 </style>
@@ -106,7 +97,7 @@
     <!-- News Ticker Area -->
     <div id="news-ticker-container">
         <div class="ticker-wrapper" id="ticker-content">
-            <span class="ticker-item">Loading local Flora updates...</span>
+            <span class="ticker-item">Loading Flora updates...</span>
         </div>
     </div>
 
@@ -141,7 +132,6 @@
         const content = document.getElementById('ticker-content');
         const barWrapper = document.getElementById('flora-sticky-bar');
         
-        // 1. Game Status
         let gameHtml = '';
         const liveStatus = await fetchGameStatus();
         
@@ -159,7 +149,6 @@
             }
         }
 
-        // 2. News Feed
         const chicagoDate = new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Chicago'}).format(new Date());
 
         try {
@@ -171,34 +160,23 @@
             const newsItems = [];
 
             for (let i = 0; i < entries.length; i++) {
-                const updatedNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
-                if (updatedNode) {
-                    const entryDate = updatedNode.textContent.split('T')[0];
-                    if (entryDate === chicagoDate) {
-                        const titleNode = entries[i].getElementsByTagName("title")[0];
-                        const linkNode = entries[i].getElementsByTagName("link")[0];
-                        if (titleNode && linkNode) {
-                            const title = titleNode.textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
-                            const link = linkNode.getAttribute("href");
-                            newsItems.push(`<span class="ticker-item"><a href="${link}" target="_blank">NEWS: ${title}</a></span>`);
-                        }
-                    }
+                const dateNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
+                if (dateNode && dateNode.textContent.split('T')[0] === chicagoDate) {
+                    const title = entries[i].getElementsByTagName("title")[0].textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
+                    const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
+                    newsItems.push(`<span class="ticker-item"><a href="${link}" target="_blank">NEWS: ${title}</a></span>`);
                 }
             }
 
-            // 3. Interleave
             let interleavedHtml = '';
             if (newsItems.length > 0) {
-                newsItems.forEach(newsHtml => {
-                    interleavedHtml += gameHtml + newsHtml;
-                });
+                newsItems.forEach(news => interleavedHtml += gameHtml + news);
             } else {
                 interleavedHtml = gameHtml + gameHtml + gameHtml;
             }
 
             content.innerHTML = interleavedHtml + interleavedHtml;
             
-            // 4. Adjust Layout for Divi
             const adjustLayout = () => {
                 const height = barWrapper.offsetHeight;
                 if (height > 0) {
