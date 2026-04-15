@@ -18,170 +18,575 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flora, IL | Support My Local Community</title>
+    <title>OurFlora | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     
-    <!-- External Stylesheets -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <style>
+        /* =========================================
+           GLOBAL THEME & LAYOUT (98% Wide / 100% Banner)
+           ========================================= */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <!-- News Ticker (Flora Specific Feed) -->
-    <div id="news-ticker-container">
-        <div class="ticker-wrapper" id="ticker-content">
-            <!-- News items and Game Alerts injected here -->
-        </div>
-    </div>
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.6; 
+            background-color: #FFFFDA !important; 
+            color: #222;
+            width: 100%;
+            overflow-x: hidden;
+        }
 
-    <!-- ScoreStream Scoreboard (Flora Wolves ID: 68602) -->
-    <div class="sports-ticker-wrap">
-        <div class="scorestream-widget-container" data-ss_widget_type="horzScoreboard" data-user-widget-id="68602"></div>
-        <script async="async" type="text/javascript" src="https://scorestream.com/apiJsCdn/widgets/embed.js"></script>
-    </div>
+        .flora-site-bg { background-color: #FFFFDA !important; }
 
-    <header class="header">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" 
-             alt="Support My Local Community Banner" 
-             class="header-logo">
+        /* HEADER - 100% Full Stretch Banner */
+        .header {
+            background: #ffffff;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .header-logo { width: 100%; height: auto; display: block; }
+
+        /* NAVIGATION */
+        .orange-nav {
+            background-color: #ff6600 !important;
+            padding: 12px 0;
+            text-align: center;
+            width: 100%;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .nav-links { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .nav-links a { color: #ffffff !important; text-decoration: none; font-weight: 800; font-size: 14px; text-transform: capitalize; }
+        .nav-links a:hover { text-decoration: underline; }
+
+        .hamburger { display: none; position: absolute; right: 20px; top: 15px; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
+        .hamburger span { width: 25px; height: 3px; background: #fff; border-radius: 2px; }
+
+        /* TICKERS - Under Nav, Not Sticky */
+        .ticker-stack { width: 100%; position: relative; z-index: 10; }
+        #news-ticker-container { background: #cc0000; color: #fff; padding: 10px 0; display: none; white-space: nowrap; overflow: hidden; width: 100%; }
+        .ticker-wrapper { display: inline-block; padding-left: 100%; animation: ticker-scroll 60s linear infinite; }
+        .ticker-item { display: inline-block; padding: 0 60px; font-weight: bold; }
+        @keyframes ticker-scroll { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+        .sports-ticker-wrap {
+            background: #FFFFDA; 
+            width: 100%;
+            min-height: 1px;
+            overflow: hidden;
+        }
+
+        /* IMPACT HERO */
+        .flora-impact-hero {
+            background-color: #FFFFDA !important;
+            padding: 60px 0;
+            text-align: center;
+            width: 100%;
+        }
+        .impact-content { width: 100%; margin: 0 auto; }
+        .blue-title-heavy { color: #0026ca !important; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1; margin-bottom: 10px; }
+        .black-subtitle-heavy { color: #000; font-size: clamp(1.4rem, 4vw, 2.5rem); font-weight: 800; }
+        .orange-accent-heavy { color: #ff6600; font-size: clamp(1.4rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 35px; }
+
+        /* AD BARS - Navy with text labels */
+        .blue-ad-strip-container { background-color: #001a4d !important; padding: 45px 1%; width: 100%; margin: 25px 0; }
+        .blue-ad-row { width: 98%; margin: 0 auto; display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: nowrap; overflow-x: auto; min-height: 180px; }
+        .ad-card-item { display: flex; flex-direction: column; align-items: center; width: 250px; flex-shrink: 0; text-align: center; }
+        .ad-image-wrap { display: block; background: #fff; padding: 5px; border: 1px solid #222; margin-bottom: 15px; width: 100%; cursor: zoom-in; }
+        .ad-image-wrap img { width: 100%; height: 120px; object-fit: contain; display: block; }
+        .ad-label-link { color: #ffffff !important; font-size: 15px; font-weight: 800; line-height: 1.3; text-transform: capitalize; text-decoration: none; }
+        .ad-label-link:hover { text-decoration: underline; }
+
+        /* LIGHTBOX */
+        #ad-lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        #ad-lightbox img { max-width: 95%; max-height: 90vh; border: 5px solid white; background: white; }
+        #ad-lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; font-weight: bold; }
+
+        /* CAROUSEL */
+        .grey-vibrant-bar { background-color: #666666 !important; color: #ffffff !important; padding: 70px 1% 0 1%; text-align: center; width: 100%; }
+        .discover-title { font-size: 3rem; font-family: 'Times New Roman', serif; text-decoration: underline; font-weight: 500; margin-bottom: 25px; }
+        .discover-text { font-size: 20px; line-height: 1.8; margin-bottom: 25px; width: 98%; margin: 0 auto; }
+        .flora-slideshow-container { width: 98%; margin: 40px auto 0; position: relative; overflow: hidden; height: 450px; background: #222; }
+        .flora-slide { display: none; width: 100%; height: 100%; animation: fadeEffect 1s; }
+        .flora-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        @keyframes fadeEffect { from {opacity: 0.4} to {opacity: 1} }
+
+        /* RICH HERITAGE */
+        .rich-heritage-section, .timeline-section { background-color: #FFFFDA !important; padding: 80px 1%; text-align: center; width: 100%; }
+        .rich-heritage-section h2, .timeline-section h2 { font-family: 'Times New Roman', serif; font-size: 3.2rem; margin-bottom: 50px; color: #000; }
+        .heritage-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; width: 98%; margin: 0 auto; text-align: left; align-items: flex-start; }
+        .heritage-text { font-size: 20px; font-weight: 700; line-height: 1.6; color: #000; }
+        .library-photo-row { display: flex; gap: 20px; margin-bottom: 20px; }
+        .lib-item { flex: 1; text-align: center; }
+        .lib-item img { width: 100%; border: 1px solid #222; background: #fff; padding: 5px; border-radius: 4px; }
+
+        /* TIMELINE */
+        .timeline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; width: 98%; margin: 0 auto; text-align: left; }
+        .timeline-card { background: #fff; border: 1px solid #eee; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        .timeline-year { color: #0C70C2; font-family: 'Times New Roman', serif; font-size: 2.2rem; font-weight: bold; margin-bottom: 10px; }
+        .timeline-title { font-family: 'Times New Roman', serif; font-size: 1.4rem; font-weight: bold; color: #333; margin-bottom: 15px; }
+        .timeline-desc { font-size: 15px; color: #555; line-height: 1.5; margin-bottom: 20px; flex-grow: 1; }
+        .timeline-img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; }
+
+        /* BOTTOM LAYOUT */
+        .flora-bottom-columns { background-color: #FFFFDA !important; padding: 80px 1%; border-top: 5px solid #222; width: 100%; }
+        .bottom-three-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; width: 98%; margin: 0 auto; align-items: start; }
+        .col-header { background: #8b4513; color: #fff; text-align: center; padding: 10px; border-radius: 20px 20px 0 0; font-weight: bold; margin-bottom: 20px; }
         
-        <nav class="nav-bar">
-            <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
-                <span></span><span></span><span></span>
-            </button>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="clay-city.html">Clay City</a></li>
-                <li><a href="flora.html" class="active">Flora</a></li>
-                <li><a href="louisville.html">Louisville</a></li>
-                <li><a href="sailor-springs.html">Sailor Springs</a></li>
-                <li><a href="xenia.html">Xenia</a></li>
-                <li><a href="https://amzn.to/4sznw7i" target="_blank">Amazon</a></li>
-            </ul>
-        </nav>
+        /* NEWSPAPER BULLETIN STYLING */
+        .news-clipping-wrapper { background-color: #fffdf5; box-shadow: 6px 6px 0px rgba(0,0,0,0.6); border: 1px solid #222; font-family: 'Times New Roman', Times, serif; color: #222; width: 100%; margin-bottom: 30px; }
+        .clipping-masthead { text-align: center; padding: 20px 10px 10px 10px; border-bottom: 4px double #222; margin: 0 15px; }
+        .black-tag { background: #000; color: #fff; text-transform: uppercase; font-size: 20px; font-weight: bold; padding: 4px 12px; display: inline-block; letter-spacing: 1px; }
+        .clipping-tagline { font-size: 11px; text-transform: uppercase; font-weight: bold; margin: 10px 0 0 0; letter-spacing: 1px; color: #444; }
+        .divi-event-item { border-bottom: 1px dashed #777; padding: 15px 0; }
+        .divi-event-date { color: #cc0000; font-weight: bold; font-size: 13px; text-transform: uppercase; }
+        .divi-event-title { font-size: 20px; font-weight: bold; margin: 5px 0; line-height: 1.2; }
+        .cal-links { margin-top: 10px; font-size: 12px; }
+        .cal-text-link { color: #cc0000 !important; text-decoration: none !important; font-weight: bold; text-transform: uppercase; font-size: 11px; }
+        .clipping-footer { border-top: 1px solid #222; padding: 15px; text-align: center; font-style: italic; text-transform: uppercase; font-size: 10px; }
+
+        /* SUBMIT EVENT BOX */
+        .clay-county-news-box.event-clipping {
+            box-sizing: border-box; width: 100%; margin-top: 30px; padding: 25px; border: 2px solid #222;
+            background-color: #fffdf5; box-shadow: 6px 6px 0px #222; font-family: "Times New Roman", Times, serif; position: relative;
+        }
+        .clipping-tag-small { position: absolute; top: -12px; left: 15px; background: #222; color: #fff; font-size: 10px; padding: 3px 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; z-index: 10; }
+        .event-clipping-header { text-align: center; border-top: 4px double #222; border-bottom: 2px solid #222; padding: 15px 0; margin-bottom: 20px; margin-top: 5px; }
+        .event-clipping-header h3 { font-family: "Times New Roman", Times, serif !important; font-weight: 900 !important; text-transform: uppercase; letter-spacing: 1px; margin: 0 !important; color: #d9534f !important; font-size: 26px !important; line-height: 1.1 !important; }
+        .event-clipping-text { font-size: 16px; line-height: 1.5; color: #222; text-align: center; margin-bottom: 20px; font-style: italic; }
+        .event-clipping-btn { display: block; text-align: center; background-color: #222; color: #fff !important; padding: 14px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; text-decoration: none; font-size: 14px; border: 1px solid #222; transition: all 0.3s; }
+
+        /* GAS BILLBOARD */
+        .billboard-frame-inline { background: #111; border: 8px solid #2a2a2a; border-radius: 12px; padding: 40px 15px; position: relative; width: 100%; aspect-ratio: 16 / 11; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .brand-overlay-bill { position: absolute; top: 0; left: 0; right: 0; background: #3e0100; color: #ffc929; font-weight: bold; text-align: center; font-size: 14px; padding: 10px 5px; border-bottom: 2px solid #ffc929; }
+        .digital-screen { width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+        /* FOOTER BRANDING */
+        .flora-footer-branding { background-color: #000000; padding: 60px 1%; border-top: 1px solid #333; width: 100%; }
+        .branding-flex { display: flex; justify-content: center; align-items: center; gap: 40px; width: 98%; margin: 0 auto; flex-wrap: nowrap; }
+        .brand-logo-item { flex: 0 1 auto; max-width: 150px; }
+        .brand-logo-item img { width: 100%; height: auto; display: block; }
+        .brand-logo-item.sk-ventures { max-width: 250px; }
+
+        .site-footer { background: #000; color: #ffeb3b; text-align: center; padding: 25px; font-size: 13px; font-weight: bold; border-top: 4px solid #ff6600; width: 100%; }
+
+        @media (max-width: 1024px) {
+            .heritage-grid, .timeline-grid, .bottom-three-grid { grid-template-columns: 1fr; gap: 30px; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; background: #fff; width: 220px; padding: 20px; box-shadow: -5px 10px 20px rgba(0,0,0,0.2); z-index: 1002; }
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            .branding-flex { flex-wrap: wrap; justify-content: center; }
+            .blue-ad-row { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-bottom: 15px; gap: 20px; }
+            .ad-card-item { width: 180px; }
+            .ad-image-wrap img { height: 90px; }
+            .library-photo-row { flex-direction: column; }
+            .flora-slideshow-container { height: 250px; }
+            .billboard-frame-inline { aspect-ratio: 1 / 1.1; }
+        }
+    </style>
+</head>
+<body class="flora-site-bg">
+
+    <!-- Lightbox UI -->
+    <div id="ad-lightbox">
+        <span id="ad-lightbox-close">&times;</span>
+        <img id="ad-lightbox-img" src="" alt="Enlarged Advertisement">
+    </div>
+
+    <!-- Full Banner -->
+    <header class="header">
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="Support My Local Community">
     </header>
 
-    <main class="container">
-        <section class="card">
-            <h3>Welcome to Flora</h3>
-            <p>Discover local businesses, upcoming events, and community news specifically for the Flora area.</p>
-        </section>
+    <!-- Navigation -->
+    <nav class="orange-nav">
+        <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="clay-city.html">Clay City</a></li>
+            <li><a href="ourflora.html" class="active">Flora</a></li>
+            <li><a href="louisville.html">Louisville</a></li>
+            <li><a href="sailor-springs.html">Sailor Springs</a></li>
+            <li><a href="xenia.html">Xenia</a></li>
+            <li><a href="https://amzn.to/3OIJ97c" target="_blank">Affiliated</a></li>
+        </ul>
+    </nav>
 
-        <div class="card">
-            <h3>Local Flora Directory</h3>
-            <p>Business listings for Flora are currently being updated. Check back soon!</p>
+    <!-- Tickers -->
+    <div class="ticker-stack">
+        <div id="news-ticker-container">
+            <div class="ticker-wrapper" id="ticker-content"></div>
         </div>
-    </main>
+        <div class="sports-ticker-wrap">
+            <div class="scorestream-widget-container" data-ss_widget_type="horzScoreboard" data-user-widget-id="68602"></div>
+            <script async="async" type="text/javascript" src="https://scorestream.com/apiJsCdn/widgets/embed.js"></script>
+        </div>
+    </div>
+
+    <!-- IMPACT HERO -->
+    <section class="flora-impact-hero">
+        <div class="impact-content">
+            <h1 class="blue-title-heavy">SUPPORT MY LOCAL COMMUNITY</h1>
+            <h2 class="black-subtitle-heavy">CLAY COUNTY ILLINOIS #1 DESTINATION FOR</h2>
+            <h2 class="orange-accent-heavy">LOCAL COUPONS AND DISCOUNTS</h2>
+            <div class="btn-wrap">
+                <a href="https://clay-county-business-directory.supportmylocalcommunity.com/" class="pill-btn-blue">Clay County Business Directory</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAROUSEL -->
+    <section class="grey-vibrant-bar">
+        <div class="grey-inner">
+            <h3 class="discover-title">Discover Flora's Vibrant Community</h3>
+            <p class="discover-text">Experience the warmth of our community and make unforgettable memories.</p>
+            <p class="thank-you-msg">Thank you for reading this post, don't forget to subscribe!</p>
+        </div>
+        <div class="flora-slideshow-container" id="flora-carousel"></div>
+    </section>
+
+    <!-- RICH HERITAGE -->
+    <section class="rich-heritage-section">
+        <h2>Flora Illinois Rich Heritage</h2>
+        <div class="heritage-grid">
+            <div class="heritage-text">
+                <p>Flora, IL was established in 1854 by Samuel White, who donated land to the City of Flora for several buildings and the city park. The City Park, at that time called the Public Square, is present day Library Park where Flora Public Library is located.</p>
+                <br>
+                <p>This donation served as the anchor for the town's early growth. Mr. White's vision allowed for the construction of the original library, which remains a landmark of education and culture. Over the years, the park has evolved from a simple square into a hub of community events, historical reflection, and local gathering.</p>
+            </div>
+            <div class="library-side">
+                <div class="library-main-label" style="font-family:'Times New Roman', serif; font-size:1.8rem; border-bottom:1px solid #000; margin-bottom:30px; display:inline-block; letter-spacing:2px;">FLORA LIBRARY</div>
+                <div class="library-photo-row">
+                    <div class="lib-item">
+                        <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Old-Flora-Library.jpg" alt="1903">
+                        <div class="lib-caption" style="font-size:11px; font-weight:bold; margin-top:5px; text-transform:uppercase;">Flora Library in 1903</div>
+                    </div>
+                    <div class="lib-item">
+                        <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/New-Flora-Libray.jpg" alt="1933">
+                        <div class="lib-caption" style="font-size:11px; font-weight:bold; margin-top:5px; text-transform:uppercase;">Flora Library in 1933</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="timeline-section">
+        <h2 class="timeline-header-main">Flora's Historical Timeline</h2>
+        <div class="timeline-grid">
+            <div class="timeline-card">
+                <span class="timeline-year">1854</span>
+                <h4 class="timeline-title">Founding of Flora</h4>
+                <p class="timeline-desc">Flora was established as a key stop along the railroad, setting the stage for future growth and development.</p>
+                <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Flora-railroad.png" class="timeline-img">
+            </div>
+            <div class="timeline-card">
+                <span class="timeline-year">1900</span>
+                <h4 class="timeline-title">Industrial Expansion</h4>
+                <p class="timeline-desc">The turn of the century brought industrial growth, with new businesses and factories contributing to the town’s prosperity.</p>
+                <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/shoe-factory.jpg" class="timeline-img">
+            </div>
+            <div class="timeline-card">
+                <span class="timeline-year">1950</span>
+                <h4 class="timeline-title">Cultural Renaissance</h4>
+                <p class="timeline-desc">Post-war Flora saw a cultural boom, with new schools, theaters, and community centers. In 1954 the Centennial Birthday was celebrated.</p>
+                <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Flora-Centenial.png" class="timeline-img">
+            </div>
+            <div class="timeline-card">
+                <span class="timeline-year">2000</span>
+                <h4 class="timeline-title">Modern Revitalization</h4>
+                <p class="timeline-desc">Flora embraced modernization while preserving its historical charm, leading to a revitalized downtown area and renewed community spirit.</p>
+                <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/CCH-Hospital.jpg" class="timeline-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- AD BAR 1 -->
+    <section class="blue-ad-strip-container">
+        <div class="blue-ad-row" id="slot-2"></div>
+    </section>
+
+    <!-- THREE COLUMN BOTTOM GRID -->
+    <section class="flora-bottom-columns">
+        <div class="bottom-three-grid">
+            
+            <div class="bottom-col">
+                <div class="col-header">Upcoming Events in Flora</div>
+                
+                <!-- COMMUNITY BULLETIN BOX -->
+                <div class="news-clipping-wrapper">
+                    <div class="clipping-masthead">
+                        <span class="black-tag">Community Bulletin</span>
+                        <p class="clipping-tagline">Clay County Events & Happenings</p>
+                    </div>
+                    <div id="divi-event-list" style="padding: 10px 20px;">
+                        <p style="text-align:center; font-style: italic;">Syncing events...</p>
+                    </div>
+                    <div class="clipping-footer">
+                        <a href="https://www.supportmylocalcommunity.com/bulletin/" target="_blank" class="footer-master-link">View Full Community Calendar & Details</a>
+                        <br><br>Support My Local Community
+                    </div>
+                </div>
+
+                <!-- SUBMIT EVENT BOX -->
+                <div class="clay-county-news-box event-clipping">
+                    <div class="clipping-tag-small">Community Bulletin</div>
+                    <div class="event-clipping-header">
+                        <h3>What's Happening?</h3>
+                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #222; font-weight: bold;">Clay County Community Calendar</span>
+                    </div>
+                    <p class="event-clipping-text">"Got a local fundraiser, school event, or church dinner coming up? Share your news with the community for free!"</p>
+                    <a href="https://www.supportmylocalcommunity.com/submit-event" class="event-clipping-btn">Submit Your Event</a>
+                </div>
+            </div>
+
+            <div class="bottom-col">
+                <div style="text-align:center; margin-bottom:20px;"><img src="https://ourflora.com/wp-content/uploads/2023/08/Ourflora.png" style="width:250px;"></div>
+                <div class="spotlight-clipping" style="background:#fff; border:2px solid #222; box-shadow:10px 10px 0px #222; padding:20px; margin-bottom:30px;">
+                    <div class="news-box-header" style="text-align:center; border-bottom: 2px solid #222; padding-bottom:10px; margin-bottom:15px;"><h3>Business Spotlight</h3></div>
+                    <div style="text-align:center;">
+                        <img src="https://github.com/KFruti88/images/blob/main/localbusiness.jpeg?raw=true" style="width:100%; border:1px solid #222; margin-bottom:15px; border-radius:4px;">
+                        <span style="font-weight:bold; font-size:22px; display:block;">Flora Family Diner</span>
+                        <p style="font-size:14px; margin:10px 0;">Serving home-cooked favorites for over two decades. Friendly service and Clay County spirit.</p>
+                        <a href="#" class="spotlight-btn" style="display:block; text-align:center; background:#222; color:#fff; padding:12px; text-decoration:none; font-weight:bold; text-transform:uppercase; margin-top:15px;">Visit Website</a>
+                    </div>
+                </div>
+                <div class="billboard-frame-inline">
+                    <div class="brand-overlay-bill">S & K Ventures, Inc. • Digital Advertising</div>
+                    <div id="fuel-screen" class="digital-screen"><div style="color:#ffc929; font-weight:bold;">CONNECTING...</div></div>
+                </div>
+            </div>
+
+            <div class="bottom-col">
+                <div class="col-header">OurFlora Connection</div>
+                <div class="connection-box">
+                    <div class="score-blue-header" style="background:#0033cc; padding:20px; text-align:center;"><img src="https://github.com/skventuresigns-design/media/blob/main/scorestream-logo-white.png?raw=true" alt="ScoreStream" style="width:180px;"></div>
+                    <div class="scorestream-widget-container" data-ss_widget_type="vertScoreboard" style="height:600px;" data-user-widget-id="67533"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AD BAR 2 -->
+    <section class="blue-ad-strip-container">
+        <div class="blue-ad-row" id="slot-3"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="flora-footer-branding">
+        <div class="branding-flex">
+            <div class="brand-logo-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/R.jpg" alt="Map"></div>
+            <div class="brand-logo-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Charlie-Brown-Park.jpg" alt="Park"></div>
+            <div class="brand-logo-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/City-our-flora-sign.jpg" alt="Sign"></div>
+            <div class="brand-logo-item sk-ventures"><a href="https://skventuresigns.com" target="_blank"><img src="https://i0.wp.com/skventuresigns.com/wp-content/uploads/2025/03/SK-Sign-White.png?w=3240&ssl=1" alt="S&K"></a></div>
+        </div>
+    </section>
 
     <footer class="site-footer">
-        <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
-        <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
+        All Content, Photographs, Writings, Letters and Documents — Copyright — 2019-2026 — Our Flora<br>
+        All Rights Reserved — <a href="https://skventuresigns.com" target="_blank" style="color:inherit; text-decoration:none;">S&K Ventures</a>
     </footer>
 
-    <script>
-        // Responsive Menu Toggle
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-        });
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
+        import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js';
 
-        // Ticker logic variables
-        const RSS_URL = 'https://www.google.com/alerts/feeds/16385066500020016213/3177914264312887151';
-        const TEAM_URL = 'https://scorestream.com/team/flora-high-school-wolves-5114/games';
-        const PROXY_URL = 'https://api.allorigins.win/get?url=';
+        // Initialize Firebase with provided config
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const rtdb = getDatabase(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'flora-main-123';
 
-        async function fetchGameData() {
-            try {
-                const response = await fetch(`${PROXY_URL}${encodeURIComponent(TEAM_URL)}`);
-                if (!response.ok) return null;
-                const data = await response.json();
-                
-                const html = data.contents;
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const bodyText = doc.body.innerText;
-                
-                if (bodyText.includes("Flora") && (bodyText.includes("Live") || bodyText.includes("Qtr"))) {
-                    return "🔥 LIVE: Wolves Game in Progress! Click for updates";
-                }
-                
-                return null;
-            } catch (e) {
-                console.error("Game fetch error:", e);
-                return null;
-            }
+        // UI Helpers
+        const lightbox = document.getElementById('ad-lightbox');
+        const lbImg = document.getElementById('ad-lightbox-img');
+        const lbClose = document.getElementById('ad-lightbox-close');
+        lbClose.onclick = () => lightbox.style.display = 'none';
+        lightbox.onclick = (e) => { if(e.target === lightbox) lightbox.style.display = 'none'; };
+
+        function openLightbox(src) {
+            lbImg.src = src;
+            lightbox.style.display = 'flex';
         }
 
-        async function fetchNews() {
-            const tickerContainer = document.getElementById('news-ticker-container');
-            const tickerContent = document.getElementById('ticker-content');
-            
-            let gameStatusHtml = '';
-            const liveInfo = await fetchGameData();
-            
-            if (liveInfo) {
-                gameStatusHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">${liveInfo}</a></span>`;
-            } else {
-                const now = new Date();
-                const localDate = new Date(now.toLocaleString("en-US", {timeZone: "America/Chicago"}));
-                const hours = localDate.getHours();
-                const minutes = localDate.getMinutes();
-                
-                if (hours < 17 || (hours === 17 && minutes < 30)) {
-                    gameStatusHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">🚨 TONIGHT'S WOLVES GAME: Kickoff at 5:30 PM!</a></span>`;
-                } else {
-                    gameStatusHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">🔥 LIVE: Wolves Game in Progress! Click for updates</a></span>`;
-                }
-            }
-
-            const today = new Date().toISOString().split('T')[0];
-
+        // Ad Tracking Logic (writes to Cloud Firestore RULE 1)
+        async function trackStat(adLabel, type) {
+            if (!auth.currentUser) return;
+            const today = new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Chicago'}).format(new Date());
+            const docId = `${adLabel.replace(/\s+/g, '_')}_${today}`;
+            const statRef = doc(db, 'artifacts', appId, 'public', 'data', 'ad_stats', docId);
             try {
-                const response = await fetch(`${PROXY_URL}${encodeURIComponent(RSS_URL)}`);
-                if (!response.ok) throw new Error('Network response was not ok');
-                
-                const data = await response.json();
-                const xmlParser = new DOMParser();
-                const xmlDoc = xmlParser.parseFromString(data.contents, "text/xml");
-                const entries = xmlDoc.getElementsByTagName("entry");
+                const snap = await getDoc(statRef);
+                if (!snap.exists()) {
+                    await setDoc(statRef, { adLabel, date: today, clicks: type === 'click' ? 1 : 0, displays: type === 'view' ? 1 : 0 });
+                } else {
+                    await updateDoc(statRef, { [type === 'click' ? 'clicks' : 'displays']: increment(1) });
+                }
+            } catch (e) { }
+        }
 
-                let tickerHtml = gameStatusHtml; 
-                let totalItemsFound = 1; 
+        // Fuel Monitor (WebSocket via RTDB)
+        function initFuel() {
+            const floraStations = ["48100", "48101", "128128", "120226"];
+            const names = {"48100": "CASEY'S", "48101": "HUCK'S", "128128": "MACH 1", "120226": "FAST STOP"};
+            let idx = 0;
+            const screen = document.getElementById('fuel-screen');
+            onValue(ref(rtdb, 'fuel_prices'), (snap) => {
+                const data = snap.val();
+                if (!data) return;
+                const refresh = () => {
+                    const id = floraStations[idx];
+                    const info = data[id] || { reg: "---", dsl: "---" };
+                    screen.innerHTML = `
+                        <div style="text-align:center;">
+                            <div style="color:#ffc929; font-weight:bold; margin-bottom:5px; font-size:14px;">${names[id]}</div>
+                            <div style="display:flex; justify-content:space-between; width:180px; margin:0 auto;"><span style="color:#ffc929; font-weight:bold; font-size:11px;">REG</span><span style="color:#ff3b3b; font-family:'Courier New', monospace; font-size:2.2rem; font-weight:bold; text-shadow:0 0 15px #ff0000;">${info.reg}</span></div>
+                            <div style="display:flex; justify-content:space-between; width:180px; margin:0 auto;"><span style="color:#ffc929; font-weight:bold; font-size:11px;">DSL</span><span style="color:#39ff14; font-family:'Courier New', monospace; font-size:2.2rem; font-weight:bold; text-shadow:0 0 15px #228b22;">${info.dsl === "0" || !info.dsl ? "---" : info.dsl}</span></div>
+                        </div>`;
+                    idx = (idx + 1) % floraStations.length;
+                };
+                refresh();
+                setInterval(refresh, 6000);
+            });
+        }
 
-                for (let i = 0; i < entries.length; i++) {
-                    const titleNode = entries[i].getElementsByTagName("title")[0];
-                    const linkNode = entries[i].getElementsByTagName("link")[0];
-                    const dateNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
+        const AD_URL = 'https://raw.githubusercontent.com/skventuresigns-design/smlc/main/slideshow/ads.json';
+        const CAR_URL = 'https://raw.githubusercontent.com/skventuresigns-design/smlc/main/slideshow/flora-carousel.json';
+        const BUL_URL = "https://script.google.com/macros/s/AKfycbyMQKX6USKUL8cxo4mSR9aXfiwHR4kqsElU4DH8rAi63W7KRuILDeayiEAv_uG_85qd0A/exec";
+
+        // Logic for fetching JSON data immediately
+        async function loadContent() {
+            // AUTH FIRST
+            await signInAnonymously(auth);
+
+            // 1. Carousel
+            fetch(CAR_URL).then(r => r.json()).then(imgs => {
+                const carDiv = document.getElementById('flora-carousel');
+                carDiv.innerHTML = '';
+                imgs.forEach(src => {
+                    const d = document.createElement('div');
+                    d.className = 'flora-slide';
+                    d.innerHTML = `<img src="${src}">`;
+                    carDiv.appendChild(d);
+                });
+                let cIdx = 0;
+                const cycle = () => {
+                    const s = document.querySelectorAll('.flora-slide');
+                    if(!s.length) return;
+                    s.forEach(x => x.style.display = 'none');
+                    cIdx = (cIdx + 1) % s.length;
+                    s[cIdx].style.display = 'block';
+                    setTimeout(cycle, 5000);
+                };
+                cycle();
+            });
+
+            // 2. Ads (Distinct sets for the two bars)
+            fetch(AD_URL).then(r => r.json()).then(ads => {
+                const shuffled = ads.sort(() => 0.5 - Math.random());
+                const renderRow = (id, list) => {
+                    const container = document.getElementById(id);
+                    if (!container) return;
+                    container.innerHTML = '';
+                    list.forEach(ad => {
+                        const item = document.createElement('div');
+                        item.className = 'ad-card-item';
+                        item.innerHTML = `
+                            <div class="ad-image-wrap"><img src="${ad.img}" alt="${ad.label}"></div>
+                            <a href="${ad.link}" target="_blank" class="ad-label-link">${ad.label}</a>
+                        `;
+                        item.querySelector('.ad-image-wrap').onclick = () => {
+                            openLightbox(ad.img);
+                            trackStat(ad.label, 'view');
+                        };
+                        item.querySelector('.ad-label-link').onclick = () => trackStat(ad.label, 'click');
+                        container.appendChild(item);
+                        trackStat(ad.label, 'view');
+                    });
+                };
+                renderRow('slot-2', shuffled.slice(0, 4));
+                renderRow('slot-3', shuffled.length >= 8 ? shuffled.slice(4, 8) : shuffled.slice().reverse().slice(0, 4));
+            });
+
+            // 3. Bulletin
+            fetch(BUL_URL).then(r => r.json()).then(events => {
+                const eventDiv = document.getElementById('divi-event-list');
+                const chicagoDate = new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Chicago'}).format(new Date());
+                if(events && events.length > 0) {
+                    eventDiv.innerHTML = '';
+                    const upcoming = events.filter(e => new Date(e.date).toISOString().split('T')[0] >= chicagoDate);
+                    const displayEvents = upcoming.length > 0 ? upcoming.slice(0, 5) : events.slice(-5).reverse();
                     
-                    if (titleNode && linkNode && dateNode) {
-                        const entryDate = dateNode.textContent.split('T')[0];
-                        
-                        if (entryDate === today) {
-                            const title = titleNode.textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
-                            const link = linkNode.getAttribute("href");
-                            tickerHtml += `<span class="ticker-item"><a href="${link}" target="_blank">NEWS: ${title}</a></span>`;
-                            totalItemsFound++;
-                        }
+                    displayEvents.forEach(e => {
+                        const eventDateObj = new Date(e.date);
+                        const friendlyDate = isNaN(eventDateObj) ? e.date : eventDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                        const gDate = isNaN(eventDateObj) ? "" : eventDateObj.toISOString().replace(/-|:|\.\d\d\d/g, "").split("T")[0];
+                        const gCal = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(e.name)}&dates=${gDate}/${gDate}&details=${encodeURIComponent(e.details || '')}&location=${encodeURIComponent(e.location)}&sf=true&output=xml`;
+                        const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${e.name}\nLOCATION:${e.location}\nDTSTART:${gDate}\nDTEND:${gDate}\nEND:VEVENT\nEND:VCALENDAR`;
+                        const icsData = "data:text/calendar;charset=utf8," + encodeURIComponent(icsContent);
+                        const snippet = e.details ? (e.details.length > 80 ? e.details.substring(0, 80) + "..." : e.details) : "";
+
+                        const item = document.createElement('div');
+                        item.className = 'divi-event-item';
+                        item.innerHTML = `
+                            <div class="divi-event-date">${friendlyDate}</div>
+                            <div class="divi-event-title">${e.name}</div>
+                            <div style="font-size:14px; line-height: 1.4; color:#333;"><strong>Where:</strong> ${e.location}<br><strong>Time:</strong> ${e.time}</div>
+                            ${snippet ? `<div class="event-snippet">"${snippet}"</div>` : ''}
+                            <div class="cal-links"><a href="${gCal}" target="_blank" class="cal-text-link">Google</a> | <a href="${icsData}" download="event.ics" class="cal-text-link">Apple / Outlook</a></div>
+                        `;
+                        eventDiv.appendChild(item);
+                    });
+                }
+            });
+
+            initFuel();
+        }
+
+        // Ticker Logic
+        const RSS = 'https://www.google.com/alerts/feeds/16385066500020016213/3177914264312887151';
+        const PROXY = 'https://api.allorigins.win/get?url=';
+        async function fetchTicker() {
+            const today = new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Chicago'}).format(new Date());
+            try {
+                const res = await fetch(`${PROXY}${encodeURIComponent(RSS)}`);
+                const data = await res.json();
+                const entries = new DOMParser().parseFromString(data.contents, "text/xml").getElementsByTagName("entry");
+                let html = '';
+                for (let i = 0; i < entries.length; i++) {
+                    const dateNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
+                    if (dateNode && dateNode.textContent.split('T')[0] === today) {
+                        const title = entries[i].getElementsByTagName("title")[0].textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
+                        const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
+                        html += `<span class="ticker-item"><a href="${link}" target="_blank" style="color:#fff; font-weight:bold; text-decoration:none;">NEWS: ${title}</a></span>`;
                     }
                 }
-
-                tickerContent.innerHTML = tickerHtml + tickerHtml;
-                tickerContainer.style.display = 'block';
-            } catch (error) {
-                console.error('Error fetching RSS:', error);
-                tickerContent.innerHTML = gameStatusHtml + gameStatusHtml;
-                tickerContainer.style.display = 'block';
-            }
+                if (html) {
+                    document.getElementById('news-ticker-container').style.display = 'block';
+                    document.getElementById('ticker-content').innerHTML = html + html;
+                }
+            } catch (e) {}
         }
 
-        window.addEventListener('DOMContentLoaded', fetchNews);
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                const navLinks = document.getElementById('nav-links');
-                navLinks.classList.remove('open');
-            });
+        // Launch
+        window.addEventListener('DOMContentLoaded', () => {
+            loadContent();
+            fetchTicker();
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('nav-links');
+            hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
         });
     </script>
 </body>
