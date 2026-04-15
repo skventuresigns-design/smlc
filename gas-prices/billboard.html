@@ -1,37 +1,322 @@
-<div id="wp-custom-wrapper">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-530038574"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-530038574');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S & K Ventures Fuel Monitor</title>
     <style>
-        #wp-custom-wrapper { width: 90%; margin: 0 auto; display: flex; justify-content: center; align-items: center; background: transparent; }
-        #wp-custom-wrapper .billboard-link { text-decoration: none; cursor: pointer; width: 100%; display: flex; justify-content: center; align-items: center; }
-        #wp-custom-wrapper .billboard-frame { background: #111; border: 8px solid #2a2a2a; border-radius: 4px; padding: 10px; position: relative; width: 100%; max-width: 500px; aspect-ratio: 16 / 11; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
-        #wp-custom-wrapper .brand-overlay { position: absolute; top: 0; width: 100%; background: #3e0100; color: #ffc929; font-weight: bold; text-align: center; font-size: 14px; padding: 8px 0; border-bottom: 2px solid #ffc929; z-index: 10; letter-spacing: 1px; }
-        #wp-custom-wrapper .brand-footer { position: absolute; bottom: 0; width: 100%; background: #3e0100; color: #ffc929; font-weight: bold; text-align: center; font-size: 14px; padding: 8px 0; border-top: 2px solid #ffc929; z-index: 10; letter-spacing: 0.5px; }
-        #wp-custom-wrapper .digital-screen { width: 95%; height: 70%; background: #000; border-radius: 5px; position: relative; overflow: hidden; border: 1px solid #333; display: flex; align-items: center; justify-content: center; }
-        #wp-custom-wrapper .gas-slide { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 1s ease-in-out; }
-        
-        #wp-custom-wrapper .town-header { color: #ffc929; font-size: 12px; font-weight: bold; letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 5px rgba(255, 201, 41, 0.6); }
-        #wp-custom-wrapper .logo-container { height: 25%; width: 70%; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
-        #wp-custom-wrapper .station-logo { max-height: 100%; max-width: 100%; }
-        #wp-custom-wrapper .logo-fallback { color: #fff; font-size: 24px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; border: 2px solid #444; padding: 5px 15px; }
+        :root {
+            --brand-red: #3e0100;
+            --brand-gold: #ffc929;
+            --led-red: #ff3b3b;
+            --led-green: #39ff14;
+            --bg-dark: #111;
+            --border-gray: #2a2a2a;
+            /* Applying your Divi preferences */
+            --header-size: 30px;
+            --body-size: 14px;
+        }
 
-        #wp-custom-wrapper .price-row { width: 75%; display: flex; justify-content: space-between; align-items: center; margin: 3px 0; }
-        #wp-custom-wrapper .price-label { color: #ffc929; font-size: 11px; font-weight: bold; letter-spacing: 1px; text-shadow: 0 0 5px rgba(255, 201, 41, 0.4); }
-        #wp-custom-wrapper .led-red { color: #ff3b3b; text-shadow: 0 0 10px #ff0000; font-family: monospace; font-size: 2.2rem; font-weight: bold; }
-        #wp-custom-wrapper .led-grn { color: #39ff14; text-shadow: 0 0 10px #228b22; font-family: monospace; font-size: 2.2rem; font-weight: bold; }
-        
-        /* Expanded Update Tag for Date + Time */
-        #wp-custom-wrapper .update-tag { color: #ffc929; font-size: 9px; margin-top: 8px; font-weight: 600; text-shadow: 0 0 5px rgba(255, 201, 41, 0.4); text-transform: uppercase; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-        @media (max-width: 600px) {
-            #wp-custom-wrapper .billboard-frame { aspect-ratio: 1 / 1; }
-            #wp-custom-wrapper .led-red, #wp-custom-wrapper .led-grn { font-size: 1.8rem; }
+        body {
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        #wp-custom-wrapper {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .billboard-link {
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        .billboard-frame {
+            background: var(--bg-dark);
+            border: 8px solid var(--border-gray);
+            border-radius: 12px;
+            padding: 45px 15px; /* Padding for header/footer */
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 11;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        .brand-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--brand-red);
+            color: var(--brand-gold);
+            font-weight: bold;
+            text-align: center;
+            font-size: var(--body-size);
+            padding: 10px 0;
+            border-bottom: 2px solid var(--brand-gold);
+            z-index: 10;
+            letter-spacing: 1px;
+        }
+
+        .brand-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--brand-red);
+            color: var(--brand-gold);
+            font-weight: bold;
+            text-align: center;
+            font-size: 12px;
+            padding: 8px 0;
+            border-top: 2px solid var(--brand-gold);
+            z-index: 10;
+            letter-spacing: 0.5px;
+        }
+
+        .digital-screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gas-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            padding: 15px;
+        }
+
+        .gas-slide.active {
+            opacity: 1;
+        }
+
+        .town-header {
+            color: var(--brand-gold);
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 8px rgba(255, 201, 41, 0.6);
+            text-align: center;
+        }
+
+        .logo-container {
+            height: 60px; /* Uniform height for all logo containers */
+            width: 100%;
+            max-width: 220px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .station-logo {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain; /* Ensures logo fits within the 60px height without distortion */
+            border-radius: 4px;
+        }
+
+        /* White background specifically for logos that need it */
+        .logo-bg-white {
+            background-color: white;
+            padding: 6px 12px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            height: 100%; /* Force it to fill the container height */
+        }
+
+        .logo-fallback {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 2px solid #444;
+            padding: 8px 20px;
+        }
+
+        .price-row {
+            width: 85%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3px 0;
+        }
+
+        .price-label {
+            color: var(--brand-gold);
+            font-size: var(--body-size);
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(255, 201, 41, 0.4);
+        }
+
+        .led-red {
+            color: var(--led-red);
+            text-shadow: 0 0 15px #ff0000;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2.8rem;
+            font-weight: bold;
+        }
+
+        .led-grn {
+            color: var(--led-green);
+            text-shadow: 0 0 15px #228b22;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2.8rem;
+            font-weight: bold;
+        }
+
+        .update-tag {
+            color: var(--brand-gold);
+            font-size: 10px;
+            margin-top: 10px;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(255, 201, 41, 0.4);
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* --- SILENT NOTIFICATION SYSTEM --- */
+        #notification-toast {
+            position: absolute;
+            top: 55px; /* Just below brand header */
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: rgba(57, 255, 20, 0.15);
+            border: 1px solid var(--led-green);
+            color: var(--led-green);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+        }
+
+        #notification-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--led-green);
+            border-radius: 50%;
+            margin-right: 5px;
+            box-shadow: 0 0 5px var(--led-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 480px) {
+            .billboard-frame {
+                aspect-ratio: 1 / 1.1;
+                border-width: 6px;
+            }
+            .led-red, .led-grn {
+                font-size: 2.2rem;
+            }
+            .town-header {
+                font-size: 16px;
+            }
+            .brand-overlay {
+                font-size: 12px;
+            }
+            .logo-container {
+                height: 50px;
+            }
+        }
+
+        /* PWA App adjustments for full screen */
+        @media (display-mode: standalone) {
+            body {
+                background-color: #000;
+            }
+            #wp-custom-wrapper {
+                max-width: 100%;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+            }
         }
     </style>
+</head>
+<body>
+
+<div id="wp-custom-wrapper">
+    <!-- Notification Pop-up -->
+    <div id="notification-toast">
+        <span class="live-indicator"></span> Price Update Received
+    </div>
 
     <a href="https://supportmylocalcommunity.com/gas-prices/" target="_parent" class="billboard-link">
         <div class="billboard-frame">
             <div class="brand-overlay">S & K Ventures, Inc. • Digital Advertising</div>
             <div id="fuel-screen" class="digital-screen">
-                <div style="color: #ffc929; font-weight: bold;">Loading Prices...</div>
+                <div style="color: #ffc929; font-weight: bold; font-size: 14px; text-align: center;">
+                    <div class="spinner" style="margin-bottom: 10px; animation: pulse 1s infinite;">⚡</div>
+                    SYNCING LIVE DATA...
+                </div>
             </div>
             <div class="brand-footer">Click billboard to update prices</div>
         </div>
@@ -53,7 +338,7 @@
         appId: "1:22397440085:web:c88e71688ed58896bc4dc"
     };
 
-    const fuelApp = firebase.initializeApp(firebaseConfig, 'SMLCFuelBillboard');
+    const fuelApp = firebase.initializeApp(firebaseConfig, 'SMLCFuelBillboard_' + Math.random().toString(36).substr(2, 9));
     const db = fuelApp.database();
 
     const stationConfigs = {
@@ -69,16 +354,58 @@
     const urlParams = new URLSearchParams(window.location.search);
     const targetTown = urlParams.get('town')?.toLowerCase();
     const screen = document.getElementById('fuel-screen');
-    let currentSlide = 0;
+    const toast = document.getElementById('notification-toast');
+    
+    let currentSlideIndex = 0;
+    let lastDataHash = null; // Used to track actual changes
+    let isInitialLoad = true;
+
+    // Helper to check if prices actually changed
+    function hasDataChanged(newData) {
+        const currentHash = JSON.stringify(newData);
+        if (lastDataHash && lastDataHash !== currentHash) {
+            lastDataHash = currentHash;
+            return true;
+        }
+        lastDataHash = currentHash;
+        return false;
+    }
+
+    function showNotification() {
+        if (isInitialLoad) {
+            isInitialLoad = false;
+            return;
+        }
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 4000);
+        
+        // Log event to GA if gtag is present
+        if (typeof gtag === 'function') {
+          gtag('event', 'price_update', {
+            'event_category': 'fuel_monitor',
+            'event_label': 'Live Update Received'
+          });
+        }
+    }
 
     function render(data) {
         screen.innerHTML = '';
         const ids = Object.keys(stationConfigs).filter(id => !targetTown || stationConfigs[id].town === targetTown);
         
+        if (ids.length === 0) {
+            screen.innerHTML = '<div style="color: #ffc929; font-weight: bold;">No stations for this area.</div>';
+            return;
+        }
+
         ids.forEach(id => {
             const config = stationConfigs[id];
             const info = data[id] || { reg: "---", dsl: "---", date: "PENDING" };
             const safeLogo = encodeURIComponent(config.logo);
+            
+            // Logic to add white background to Mach 1 logo (ID 128128)
+            const logoClass = (id === "128128") ? "station-logo logo-bg-white" : "station-logo";
             
             const slide = document.createElement('div');
             slide.className = 'gas-slide';
@@ -86,25 +413,35 @@
                 <div class="town-header">${config.display.toUpperCase()}, IL</div>
                 <div class="logo-container">
                     <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/gas-prices/image/${safeLogo}" 
-                         class="station-logo" 
+                         class="${logoClass}" 
+                         loading="lazy"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <div class="logo-fallback" style="display:none;">${config.name}</div>
                 </div>
-                <div class="price-row"><span class="price-label">REGULAR</span><span class="led-red">${info.reg}</span></div>
-                <div class="price-row"><span class="price-label">DIESEL</span><span class="led-grn">${info.dsl === "0" ? "---" : info.dsl}</span></div>
-                <div class="update-tag">UPDATED: ${info.date}</div>
+                <div class="price-row">
+                    <span class="price-label">REGULAR</span>
+                    <span class="led-red">${info.reg}</span>
+                </div>
+                <div class="price-row">
+                    <span class="price-label">DIESEL</span>
+                    <span class="led-grn">${(info.dsl === "0" || !info.dsl) ? "---" : info.dsl}</span>
+                </div>
+                <div class="update-tag">Updated: ${info.date}</div>
             `;
             screen.appendChild(slide);
         });
 
         const slides = screen.querySelectorAll('.gas-slide');
+        
         function cycle() {
             if(slides.length === 0) return;
-            slides.forEach((s, i) => s.style.opacity = (i === currentSlide) ? "1" : "0");
-            currentSlide = (currentSlide + 1) % slides.length;
+            slides.forEach(s => s.classList.remove('active'));
+            slides[currentSlideIndex].classList.add('active');
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
         }
 
         if (slides.length > 0) {
+            currentSlideIndex = 0;
             cycle();
             if (window.fuelRotator) clearInterval(window.fuelRotator);
             window.fuelRotator = setInterval(cycle, 6000);
@@ -113,8 +450,18 @@
 
     db.ref('fuel_prices').on('value', (snap) => {
         const val = snap.val();
-        if (val) render(val);
-        else screen.innerHTML = '<div style="color: #ffc929; font-weight: bold;">No Data Found</div>';
+        if (val) {
+            if (hasDataChanged(val)) {
+                showNotification();
+            }
+            render(val);
+        } else {
+            screen.innerHTML = '<div style="color: #ffc929; font-weight: bold;">Service Temporarily Offline</div>';
+        }
+    }, (error) => {
+        screen.innerHTML = '<div style="color: #ffc929; font-weight: bold;">Connection Error</div>';
     });
 })();
 </script>
+</body>
+</html>
