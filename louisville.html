@@ -21,177 +21,11 @@
     <title>Louisville, IL | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     
-    <style>
-        :root {
-            --brand-red: #cc0000;
-            --dark-gray: #333;
-            --light-bg: #f4f4f4;
-            --newspaper-border: #ddd;
-            --brand-gold: #ffc929;
-        }
-
-        /* General Styles & Resets */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: var(--light-bg);
-        }
-
-        /* News Ticker Styles (Red Bar) */
-        #news-ticker-container {
-            background: var(--brand-red);
-            color: white;
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 10px 0;
-            font-size: 1rem;
-            display: none; 
-            position: relative;
-            z-index: 1001;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .ticker-wrapper {
-            display: inline-block;
-            padding-left: 100%;
-            animation: ticker 60s linear infinite;
-        }
-
-        #news-ticker-container:hover .ticker-wrapper { animation-play-state: paused; }
-
-        .ticker-item { display: inline-block; padding: 0 60px; }
-        .ticker-item a { color: white; text-decoration: none; font-weight: bold; }
-        .ticker-item a:hover { text-decoration: underline; }
-
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
-
-        /* ScoreStream Container */
-        .sports-ticker-wrap { background: #000; width: 100%; min-height: 50px; }
-
-        /* Header & Nav */
-        .header {
-            background: #fff;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-logo { height: 50px; width: auto; }
-        .nav-links { list-style: none; display: flex; gap: 20px; }
-        .nav-links a { text-decoration: none; color: #444; font-weight: 600; transition: color 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--brand-red); }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-        .hamburger span { width: 25px; height: 3px; background: #333; border-radius: 2px; }
-
-        /* Hero Section */
-        .Louisville-hero-container {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1500382017468-9049fee74a62?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-        .Louisville-overlay h1 { font-size: 4rem; margin-bottom: 0.5rem; }
-        .Louisville-subtitle { font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; }
-
-        .louisville-content-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 50px 20px; /* Section Height: 50 */
-        }
-
-        .louisville-grid-row { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
-
-        /* Article Styles */
-        .article-container { background: white; padding: 40px; box-shadow: 0 5px 25px rgba(0,0,0,0.05); }
-        
-        .category-tag { 
-            color: var(--brand-red); 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            font-size: 0.8rem; 
-            margin-bottom: 10px; 
-            background: transparent; /* Ensuring background is transparent */
-            display: inline-block;
-            padding: 0;
-        }
-
-        .article-title { font-size: 2.5rem; margin-bottom: 15px; line-height: 1.1; }
-        .deck { font-size: 1.2rem; color: #666; font-style: italic; margin-bottom: 30px; border-left: 4px solid var(--brand-red); padding-left: 20px; }
-        
-        .main-layout { display: flex; gap: 30px; }
-        .article-body { flex: 2; }
-        .article-body p { margin-bottom: 20px; color: #444; }
-        
-        .article-sidebar { flex: 1; border-left: 1px solid #eee; padding-left: 30px; }
-
-        .stat-sidebar { background: #f9f9f9; padding: 20px; margin-bottom: 20px; border-radius: 4px; }
-        .stat-label { display: block; font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px; }
-        .stat-number { display: block; font-size: 1.8rem; font-weight: bold; color: var(--brand-red); }
-
-        .bz-card { background: #222; color: white; padding: 20px; margin-bottom: 20px; border-radius: 4px; }
-        .bz-card h2 { font-size: 1.2rem; margin-bottom: 15px; color: var(--brand-gold); }
-        .stats-list { list-style: none; font-size: 0.9rem; }
-        .stats-list li { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; }
-
-        .project-callout { background: #fff3f3; border: 1px dashed var(--brand-red); padding: 15px; margin-top: 20px; }
-        .project-callout h4 { color: var(--brand-red); font-size: 0.9rem; margin-bottom: 5px; }
-        .project-callout p { font-size: 0.85rem; margin: 0; }
-
-        /* Newspaper Column Sidebar */
-        .newspaper-sidebar { background: #fff; padding: 25px; border: 1px solid var(--newspaper-border); margin-bottom: 30px; }
-        .news-masthead { text-align: center; margin-bottom: 15px; }
-        .news-double-line { border-top: 3px double #333; margin: 10px 0; }
-        .news-single-line { border-top: 1px solid #333; margin: 15px 0; }
-        .news-headline-section h2 { font-family: serif; font-size: 1.8rem; line-height: 1.2; margin-bottom: 5px; }
-        .news-dek { font-size: 0.9rem; font-style: italic; color: #555; }
-        .news-content-block p { font-size: 0.9rem; margin-bottom: 15px; }
-        .news-timeline { font-size: 0.85rem; line-height: 1.4; }
-        .news-timeline div { margin-bottom: 10px; }
-        .news-footer { display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: bold; margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; }
-
-        .site-footer { background: #222; color: #ccc; text-align: center; padding: 40px 20px; font-size: 0.9rem; }
-        .site-footer a { color: #fff; text-decoration: none; }
-
-        /* Divi Mobile Settings Override */
-        @media (max-width: 768px) {
-            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; background: white; width: 200px; padding: 20px; box-shadow: -2px 5px 10px rgba(0,0,0,0.1); }
-            .nav-links.open { display: flex; }
-            .hamburger { display: flex; }
-            .louisville-grid-row { grid-template-columns: 1fr; }
-            .main-layout { flex-direction: column; }
-            .article-sidebar { border-left: none; padding-left: 0; padding-top: 30px; border-top: 1px solid #eee; }
-
-            .louisville-content-wrapper { padding: 30px 20px; } /* Row Height: 30 */
-            body, p, .article-body p, .news-content-block p { font-size: 14px; } /* Body Text Size: 14 */
-            h1, .article-title, .Louisville-overlay h1, .newspaper-sidebar h2 { font-size: 30px !important; } /* Header Text Size: 30 */
-            .Louisville-hero-container { height: 250px; }
-            .Louisville-overlay h1 { font-size: 30px !important; }
-        }
-    </style>
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="louisville.css">
 </head>
-<body>
+<body class="louisville-bg">
 
     <!-- News Ticker (Louisville Feed) -->
     <div id="news-ticker-container">
@@ -222,6 +56,7 @@
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <div class="Louisville-hero-container">
         <div class="Louisville-overlay">
             <h1>Louisville, Illinois</h1>
@@ -280,13 +115,15 @@
                 </div>
             </div>
 
-            <!-- Newspaper Style Sidebar -->
+            <!-- Sidebar Column -->
             <div class="louisville-col-side">
+                <!-- White Newspaper Sidebar -->
                 <aside class="newspaper-sidebar">
                     <div class="news-masthead">
                         <h4>The Clay County Community</h4>
                         <small>Louisville, Illinois • Vol. CLXXXIV</small>
                     </div>
+                    
                     <div class="news-double-line"></div>
                     <div class="news-headline-section">
                         <h2>A Legacy on the Wabash</h2>
@@ -308,6 +145,19 @@
                         <span>LATE EDITION</span>
                     </div>
                 </aside>
+
+                <!-- THE LIVE GAS BILLBOARD (NOW IN THE EMPTY BLACK SPACE BELOW) -->
+                <div id="sidebar-fuel-monitor">
+                    <a href="https://supportmylocalcommunity.com/gas-prices/" target="_parent" class="billboard-link">
+                        <div class="billboard-frame-sidebar">
+                            <div class="brand-overlay-bill">S & K Ventures • Digital Ads</div>
+                            <div id="fuel-screen" class="digital-screen-sidebar">
+                                <div style="color: #ffc929; font-weight: bold; font-size: 13px;">SYNCING...</div>
+                            </div>
+                            <div class="brand-footer-bill">Casey's Louisville • Click to View More</div>
+                        </div>
+                    </a>
+                </div>
             </div> 
         </div> 
     </div>
@@ -317,11 +167,55 @@
         <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
     </footer>
 
+    <!-- Firebase SDKs for Fuel Monitor Logic -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <script>
-        // Nav Menu
+        // Nav Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+
+        // --- FUEL MONITOR LOGIC (Louisville Casey's) ---
+        (function() {
+            const firebaseConfig = {
+                apiKey: "AIzaSyBYPbGWDNPUmCSnFWDPPWtiXe2F6MPinXg",
+                authDomain: "smlc-fuel-monitor.firebaseapp.com",
+                databaseURL: "https://smlc-fuel-monitor-default-rtdb.firebaseio.com",
+                projectId: "smlc-fuel-monitor",
+                storageBucket: "smlc-fuel-monitor.firebasestorage.app",
+                messagingSenderId: "22397440085",
+                appId: "1:22397440085:web:c88e71688ed58896bc4dc"
+            };
+
+            const fuelApp = firebase.initializeApp(firebaseConfig, 'LVille_Sidebar_' + Math.random().toString(36).substr(2, 9));
+            const db = fuelApp.database();
+            const stationId = "48026"; // Louisville Casey's
+            const screen = document.getElementById('fuel-screen');
+
+            function render(data) {
+                screen.innerHTML = '';
+                const info = data[stationId] || { reg: "---", dsl: "---", date: "PENDING" };
+                
+                const slide = document.createElement('div');
+                slide.className = 'gas-slide-sidebar';
+                slide.innerHTML = `
+                    <div class="logo-container-bill">
+                        <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/gas-prices/image/Casey's.png" style="max-height:100%; object-fit:contain;">
+                    </div>
+                    <div class="price-row-bill"><span class="price-label-bill">REGULAR</span><span class="led-red-bill">${info.reg}</span></div>
+                    <div class="price-row-bill"><span class="price-label-bill">DIESEL</span><span class="led-grn-bill">${(info.dsl === "0" || !info.dsl) ? "---" : info.dsl}</span></div>
+                    <div class="update-tag-bill">Updated: ${info.date}</div>
+                `;
+                screen.appendChild(slide);
+            }
+
+            db.ref('fuel_prices').on('value', (snap) => {
+                const val = snap.val();
+                if (val) render(val);
+            });
+        })();
 
         // RSS Ticker Logic
         const RSS_URL = 'https://www.google.com/alerts/feeds/16385066500020016213/12587969293010780741';
