@@ -1,19 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-518297235"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-518297235');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clay City, IL | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="clay-city.css">
+    <style>
+        /* General Styles & Resets */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* News Ticker Styles */
+        #news-ticker-container {
+            background: #cc0000;
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 10px 0;
+            font-size: 1rem; /* Slightly larger for readability */
+            display: none; 
+            position: relative;
+            z-index: 1001;
+        }
+
+        .ticker-wrapper {
+            display: inline-block;
+            padding-left: 100%;
+            /* Slowed down from 30s to 60s for better readability */
+            animation: ticker 60s linear infinite;
+        }
+
+        /* Pause ticker on hover so elders can click easily */
+        #news-ticker-container:hover .ticker-wrapper {
+            animation-play-state: paused;
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 60px;
+        }
+
+        .ticker-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .ticker-item a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        /* Header & Nav */
+        .header {
+            background: #fff;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-bar {
+            position: relative;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #cc0000;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .clay-city-hero-row {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fee74a62?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .clay-city-hero-row h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Content Wrappers */
+        .clay-city-content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .clay-city-three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .clay-city-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .clay-city-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .clay-city-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .clay-city-card h3 {
+            margin-bottom: 15px;
+            color: #cc0000;
+        }
+
+        .text-card {
+            text-align: left;
+        }
+
+        .text-card strong {
+            display: block;
+            margin-top: 15px;
+            color: #222;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+        }
+
+        .site-footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Mobile Layout Adjustments (Divi-inspired) */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: white;
+                width: 200px;
+                padding: 20px;
+                box-shadow: -2px 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .clay-city-three-col {
+                grid-template-columns: 1fr;
+            }
+
+            /* Divi Mobile Customizations */
+            .clay-city-hero-row {
+                padding: 50px 20px; /* Section Height: 50 */
+            }
+
+            .clay-city-content-wrapper {
+                padding: 30px 20px; /* Row Height: 30 */
+            }
+
+            body, p, .text-card p, .clay-city-card p {
+                font-size: 14px; /* Body Text Size: 14 */
+            }
+
+            h1, h2, h3, .clay-city-hero-row h1, .clay-city-card h3 {
+                font-size: 30px !important; /* Header Text Size: 30 */
+            }
+        }
+    </style>
 </head>
-<body class="clay-city-bg" id="clay-city-page-wrapper">
+<body class="clay-city-bg">
+
+    <!-- News Ticker -->
+    <div id="news-ticker-container">
+        <div class="ticker-wrapper" id="ticker-content">
+            <!-- News items injected here -->
+        </div>
+    </div>
 
     <header class="header">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo">
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
         <nav class="nav-bar">
-            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="clay-city.html" class="active">Clay City</a></li>
@@ -32,52 +285,52 @@
 
     <div class="clay-city-content-wrapper">
         <div class="clay-city-three-col">
-        <div class="clay-city-card">
-            <img src="https://github.com/skventuresigns-design/media/blob/main/clay-city-wolf.png?raw=true" alt="The Wolf">
-            <h3>Home of the Wolves</h3>
-            <p>The Wolf represents the strength and unity of our local community and school spirit.</p>
+            <div class="clay-city-card">
+                <img src="https://github.com/skventuresigns-design/media/blob/main/clay-city-wolf.png?raw=true" alt="The Wolf">
+                <h3>Home of the Wolves</h3>
+                <p>The Wolf represents the strength and unity of our local community and school spirit.</p>
+            </div>
+            <div class="clay-city-card">
+                <img src="https://github.com/skventuresigns-design/media/blob/main/clay-city-map.png?raw=true" alt="The Map">
+                <h3>Our Location</h3>
+                <p>Nestled in the heart of Clay County, Clay City is a vital link on the prairie.</p>
+            </div>
+            <div class="clay-city-card">
+                <img src="https://github.com/skventuresigns-design/media/blob/main/clay-city-school.png?raw=true" alt="The School">
+                <h3>Clay City Schools</h3>
+                <p>Fostering excellence in education and athletics for the village's future.</p>
+            </div>
         </div>
-        <div class="clay-city-card">
-            <img src="https://github.com/skventuresigns-design/media/blob/main/clay-city-map.png?raw=true" alt="The Map">
-            <h3>Our Location</h3>
-            <p>Nestled in the heart of Clay County, Clay City is a vital link on the prairie.</p>
-        </div>
-        <div class="clay-city-card">
-            <img src="https://github.com/skventuresigns-design/media/blob/main/clay-city-school.png?raw=true" alt="The School">
-            <h3>Clay City Schools</h3>
-            <p>Fostering excellence in education and athletics for the village's future.</p>
-        </div>
-    </div>
     </div>
 
     <div class="clay-city-content-wrapper" style="padding-top: 0;">
-      <div class="clay-city-three-col">
-    <div class="clay-city-card text-card">
-        <h3>Local Attractions</h3>
-        <strong>Big Buck Hunting</strong>
-        <p>Nationally recognized for world-class whitetail deer hunting.</p>
-        <strong>Wabash Park</strong>
-        <p>A peaceful community retreat for camping, fishing, and family gatherings.</p>
-        <strong>Clay City Schools</strong>
-        <p>A supportive "Pride" environment focused on individual student success.</p>
-    </div>
+        <div class="clay-city-three-col">
+            <div class="clay-city-card text-card">
+                <h3>Local Attractions</h3>
+                <strong>Big Buck Hunting</strong>
+                <p>Nationally recognized for world-class whitetail deer hunting.</p>
+                <strong>Wabash Park</strong>
+                <p>A peaceful community retreat for camping, fishing, and family gatherings.</p>
+                <strong>Clay City Schools</strong>
+                <p>A supportive "Pride" environment focused on individual student success.</p>
+            </div>
 
-    <div class="clay-city-card text-card">
-        <h3>Historical Heritage</h3>
-        <strong>The Pottery Legacy</strong>
-        <p>Local blue-white clay fueled a massive 19th-century pottery industry.</p>
-        <strong>Railroad Hub</strong>
-        <p>Founded in 1855, the town served as a vital strategic stop for the Ohio & Mississippi line.</p>
-    </div>
+            <div class="clay-city-card text-card">
+                <h3>Historical Heritage</h3>
+                <strong>The Pottery Legacy</strong>
+                <p>Local blue-white clay fueled a massive 19th-century pottery industry.</p>
+                <strong>Railroad Hub</strong>
+                <p>Founded in 1855, the town served as a vital strategic stop for the Ohio & Mississippi line.</p>
+            </div>
 
-    <div class="clay-city-card text-card">
-        <h3>Community & Growth</h3>
-        <strong>Annual Traditions</strong>
-        <p>Seasonal festivals and sports create a deep, lifelong sense of belonging.</p>
-        <strong>Regional Access</strong>
-        <p>Quick access to healthcare and shopping in nearby Flora and Olney.</p>
-    </div>
-</div>
+            <div class="clay-city-card text-card">
+                <h3>Community & Growth</h3>
+                <strong>Annual Traditions</strong>
+                <p>Seasonal festivals and sports create a deep, lifelong sense of belonging.</p>
+                <strong>Regional Access</strong>
+                <p>Quick access to healthcare and shopping in nearby Flora and Olney.</p>
+            </div>
+        </div>
     </div>
 
     <footer class="site-footer">
@@ -86,9 +339,72 @@
     </footer>
 
     <script>
+        // Hamburger Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
-        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+        hamburger.addEventListener('click', () => { 
+            navLinks.classList.toggle('open'); 
+        });
+
+        // RSS Ticker Logic
+        const RSS_URL = 'https://www.google.com/alerts/feeds/16385066500020016213/4596103908500674724';
+        const PROXY_URL = 'https://api.allorigins.win/get?url=';
+
+        async function fetchNews() {
+            const tickerContainer = document.getElementById('news-ticker-container');
+            const tickerContent = document.getElementById('ticker-content');
+            
+            // Get current date in YYYY-MM-DD format for filtering
+            const today = new Date().toISOString().split('T')[0];
+
+            try {
+                const response = await fetch(`${PROXY_URL}${encodeURIComponent(RSS_URL)}`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+                const entries = xmlDoc.getElementsByTagName("entry");
+
+                if (entries.length > 0) {
+                    let tickerHtml = '';
+                    let todayItemsFound = 0;
+
+                    for (let i = 0; i < entries.length; i++) {
+                        const titleNode = entries[i].getElementsByTagName("title")[0];
+                        const linkNode = entries[i].getElementsByTagName("link")[0];
+                        const dateNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
+                        
+                        if (titleNode && linkNode && dateNode) {
+                            const entryDate = dateNode.textContent.split('T')[0];
+                            
+                            // Only include items from the present day
+                            if (entryDate === today) {
+                                const title = titleNode.textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
+                                const link = linkNode.getAttribute("href");
+                                tickerHtml += `<span class="ticker-item"><a href="${link}" target="_blank">TODAY'S NEWS: ${title}</a></span>`;
+                                todayItemsFound++;
+                            }
+                        }
+                    }
+
+                    if (todayItemsFound > 0) {
+                        // Duplicate for seamless loop if content exists
+                        tickerContent.innerHTML = tickerHtml + tickerHtml;
+                        tickerContainer.style.display = 'block';
+                    } else {
+                        tickerContainer.style.display = 'none';
+                    }
+                } else {
+                    tickerContainer.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error fetching RSS:', error);
+                tickerContainer.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', fetchNews);
     </script>
 </body>
 </html>
