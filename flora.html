@@ -21,8 +21,7 @@
     <title>OurFlora | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     
-    <!-- Link to separated CSS -->
-    <link rel="stylesheet" href="style.css">
+    <!-- External Stylesheet -->
     <link rel="stylesheet" href="ourflora.css">
 </head>
 <body class="flora-site-bg">
@@ -46,7 +45,7 @@
             <li><a href="louisville.html">Louisville</a></li>
             <li><a href="sailor-springs.html">Sailor Springs</a></li>
             <li><a href="xenia.html">Xenia</a></li>
-            <li><a href="https://amzn.to/4sznw7i" target="_blank">Today's Deals</a></li>
+            <li><a href="https://amzn.to/3OIJ97c" target="_blank">Affiliated</a></li>
             <li><a href="#" target="_blank">Movies Everywhere</a></li>
         </ul>
     </nav>
@@ -68,19 +67,22 @@
         </div>
     </section>
 
-    <!-- GREY VIBRANT BAR -->
+    <!-- AD SLOT 1: LEFT EDGE -->
+    <div class="scatter-ad-container ad-slot" id="slot-1"></div>
+
+    <!-- GREY VIBRANT BAR & CAROUSEL -->
     <section class="grey-vibrant-bar">
         <div class="grey-inner">
             <h3 class="discover-title">Discover Flora's Vibrant Community</h3>
             <p class="discover-text">Experience the warmth of our community and make unforgettable memories.</p>
             <p class="thank-you-msg">Thank you for reading this post, don't forget to subscribe!</p>
         </div>
-        <!-- DYNAMIC FLORA CAROUSEL -->
+        <!-- DYNAMIC CAROUSEL -->
         <div class="flora-slideshow-container" id="flora-carousel"></div>
     </section>
 
-    <!-- AD SLOT 1: SCATTERED -->
-    <div class="scatter-ad-container ad-slot" id="slot-1"></div>
+    <!-- AD SLOT 2: RIGHT EDGE -->
+    <div class="scatter-ad-container ad-slot" id="slot-2"></div>
 
     <!-- RICH HERITAGE SECTION -->
     <section class="rich-heritage-section">
@@ -106,8 +108,8 @@
         </div>
     </section>
 
-    <!-- AD SLOT 2: SCATTERED -->
-    <div class="scatter-ad-container ad-slot" id="slot-2"></div>
+    <!-- AD SLOT 3: LEFT EDGE -->
+    <div class="scatter-ad-container ad-slot" id="slot-3"></div>
 
     <!-- HISTORICAL TIMELINE -->
     <section class="timeline-section">
@@ -120,8 +122,8 @@
         </div>
     </section>
 
-    <!-- AD SLOT 3: SCATTERED -->
-    <div class="scatter-ad-container ad-slot" id="slot-3"></div>
+    <!-- AD SLOT 4: RIGHT EDGE -->
+    <div class="scatter-ad-container ad-slot" id="slot-4"></div>
 
     <!-- BOTTOM THREE-COLUMN CONTENT -->
     <section class="flora-bottom-columns">
@@ -192,6 +194,9 @@
         </div>
     </section>
 
+    <!-- AD SLOT 5: LEFT EDGE -->
+    <div class="scatter-ad-container ad-slot" id="slot-5"></div>
+
     <!-- FOOTER BRANDING STRIP -->
     <section class="flora-footer-branding">
         <div class="branding-flex">
@@ -201,6 +206,9 @@
             <div class="brand-logo-item" style="max-width:250px;"><a href="https://skventuresigns.com" target="_blank" style="display:block; transition:transform 0.3s;"><img src="https://i0.wp.com/skventuresigns.com/wp-content/uploads/2025/03/SK-Sign-White.png?w=3240&ssl=1" alt="Advertise" style="width:100%;"></a></div>
         </div>
     </section>
+
+    <!-- AD SLOT 6: RIGHT EDGE -->
+    <div class="scatter-ad-container ad-slot" id="slot-6"></div>
 
     <footer class="site-footer">
         All Content, Photographs, Writings, Letters and Documents — Copyright — 2019-2026 — Our Flora<br>
@@ -235,6 +243,7 @@
                 let idx = 0;
                 function showSlides() {
                     const slides = document.getElementsByClassName("flora-slide");
+                    if (slides.length === 0) return;
                     for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
                     idx++;
                     if (idx > slides.length) {idx = 1}
@@ -256,7 +265,7 @@
                 messagingSenderId: "22397440085",
                 appId: "1:22397440085:web:c88e71688ed58896bc4dc"
             };
-            const fuelApp = firebase.initializeApp(firebaseConfig, 'Flora_Split_Final_' + Math.random().toString(36).substr(2, 9));
+            const fuelApp = firebase.initializeApp(firebaseConfig, 'Flora_Edge_Layout_' + Math.random().toString(36).substr(2, 9));
             const db = fuelApp.database();
             const floraStations = ["48100", "48101", "128128", "120226"];
             let idx = 0;
@@ -275,12 +284,14 @@
                         </div>`;
                     idx = (idx + 1) % floraStations.length;
                 };
-                update(); setInterval(update, 6000);
+                update(); 
+                if (window.gasInterval) clearInterval(window.gasInterval);
+                window.gasInterval = setInterval(update, 6000);
             }
             db.ref('fuel_prices').on('value', snap => { if(snap.val()) render(snap.val()); });
         })();
 
-        // --- CONTENT LOADER (WITH PAST EVENT FILTER) ---
+        // --- CONTENT LOADER (SCATTERED ADS & FILTERED EVENTS) ---
         async function initPage() {
             try {
                 const res = await fetch(BULLETIN_URL);
@@ -299,7 +310,7 @@
                         upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
                         upcoming.slice(0, 3).forEach(item => {
                             const div = document.createElement('div');
-                            div.className = 'divi-event-item';
+                            div.style.borderBottom="1px dashed #777"; div.style.padding="10px 0";
                             div.innerHTML = `<div style="color:#cc0000; font-weight:bold; font-size:12px;">${item.date}</div><div style="font-weight:bold; font-size:16px;">${item.name}</div>`;
                             list.appendChild(div);
                         });
@@ -312,7 +323,17 @@
                 const ads = await adRes.json();
                 const shuffled = ads.sort(() => 0.5 - Math.random());
                 const slots = document.querySelectorAll('.ad-slot');
-                shuffled.forEach((ad, i) => { if(slots[i]) { slots[i].innerHTML = `<a href="${ad.link}" target="_blank" class="ad-link-wrapper"><img src="${ad.img}"><span>${ad.label}</span></a>`; slots[i].classList.add('active'); }});
+                
+                shuffled.forEach((ad, i) => { 
+                    if(slots[i]) { 
+                        slots[i].innerHTML = `
+                            <a href="${ad.link}" target="_blank" class="ad-link-wrapper">
+                                <img src="${ad.img}" alt="${ad.label}">
+                                <span>${ad.label}</span>
+                            </a>`; 
+                        slots[i].classList.add('active'); 
+                    }
+                });
                 
                 loadFloraCarousel();
 
@@ -320,7 +341,7 @@
         }
         window.addEventListener('DOMContentLoaded', initPage);
 
-        // RSS Ticker
+        // RSS Ticker Logic
         const RSS_FEED = 'https://www.google.com/alerts/feeds/16385066500020016213/3177914264312887151';
         const PROXY = 'https://api.allorigins.win/get?url=';
         async function fetchTicker() {
