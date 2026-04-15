@@ -1,5 +1,6 @@
 /* =========================================
-   XENIA ISOLATED STYLES (xenia.css) - Corrected
+   XENIA ISOLATED STYLES (xenia.css)
+   Clean Responsive Version - Non-Divi
    ========================================= */
 
 /* 1. BACKGROUND LOGIC (The Fence) */
@@ -25,7 +26,7 @@
     object-fit: cover;
 }
 
-/* THE FIX: Added the missing closing bracket below */
+/* Dark tint for white font readability */
 .xenia-hero-container::after {
     content: "";
     position: absolute;
@@ -33,7 +34,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Dark tint to make white font pop */
+    background-color: rgba(0, 0, 0, 0.4); 
     z-index: 1;
 } 
 
@@ -43,82 +44,135 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    width: 100%;
-    z-index: 2; /* Sits above the dark tint */
+    width: 90%;
+    z-index: 2;
 }
 
 .xenia-overlay h1 {
     font-family: 'Times New Roman', serif;
-    font-size: clamp(2rem, 6vw, 3.5rem) !important;
-    text-transform: Capitalize;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    text-transform: capitalize;
     font-weight: 700;
-    color: white !important; /* Forces white text */
+    color: white !important;
     margin: 0;
     letter-spacing: 2px;
-    border: none;
-    padding: 0;
 }
 
 .xenia-subtitle {
     font-family: 'Times New Roman', serif;
-    font-size: 1.1rem;
-    color: white !important; /* Forces white text */
+    font-size: 1.2rem;
+    color: white !important;
     margin-top: 10px;
     text-transform: uppercase;
     letter-spacing: 4px;
     font-weight: bold;
-    display: block;
 }
 
-/* 3. THE MAIN "SINGLE PAGE" CONTAINER */
+/* 3. THE MAIN CONTAINER */
 .xenia-wp-container {
-    max-width: 1300px;
-    width: 95%;
-    margin: 60px auto;
+    max-width: 1200px;
+    width: 92%;
+    margin: 40px auto;
     background-color: #fffdf6 !important; 
     border: 3px solid #222;
-    padding: 50px;
-    box-shadow: 15px 15px 0px #222;
+    padding: 40px;
+    box-shadow: 10px 10px 0px #222;
+    position: relative;
 }
 
-/* 4. GRID SYSTEMS & IMAGES */
+/* 4. GRID SYSTEMS & CARDS */
 .xenia-wp-grid {
     display: flex;
-    gap: 40px;
+    gap: 30px;
     margin-top: 25px;
+    flex-wrap: wrap;
 }
 
 .xenia-wp-card {
     flex: 1;
+    min-width: 300px;
     background: #fff;
-    border: 2px solid #222;
+    border: 1px solid #222;
     padding: 25px;
     display: flex;
     flex-direction: column;
-    box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+}
+
+.xenia-wp-card h3 {
+    color: #cc0000;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
 }
 
 .xenia-wp-img {
     width: 100%;
-    height: 250px;
+    height: 280px;
     object-fit: cover;
     border: 2px solid #222;
     margin-bottom: 20px;
-    filter: grayscale(20%) sepia(10%) contrast(110%);
+    filter: grayscale(10%) contrast(105%);
     background: #fff;
-    padding: 5px;
+    padding: 4px;
 }
 
-/* BIG IMAGES FIX */
+/* --- LANDMARK FIX: Ensures full visibility of the Water Tower --- */
 .xenia-wp-section:last-child .xenia-wp-img {
     height: 500px !important;
     object-fit: cover;
-    box-shadow: 8px 8px 0px #222;
+    box-shadow: 6px 6px 0px #222;
 }
 
-/* 5. MOBILE RESPONSIVE */
+.xenia-wp-tag {
+    display: inline-block;
+    background: #cc0000;
+    color: white;
+    padding: 4px 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+
+/* 5. INLINE BILLBOARD STYLES (Fuel Monitor) */
+#fuel-monitor-container { width: 100%; background: #000; }
+.billboard-link { text-decoration: none; display: block; }
+.billboard-inner-frame { padding: 40px 15px; position: relative; aspect-ratio: 16 / 11; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.brand-overlay-bill { position: absolute; top: 0; left: 0; right: 0; background: #3e0100; color: #ffc929; font-weight: bold; text-align: center; font-size: 14px; padding: 10px 5px; border-bottom: 2px solid #ffc929; }
+.brand-footer-bill { position: absolute; bottom: 0; left: 0; right: 0; background: #3e0100; color: #ffc929; font-weight: bold; text-align: center; font-size: 11px; padding: 8px 0; border-top: 2px solid #ffc929; }
+.digital-screen { width: 100%; height: 100%; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.town-header-bill { color: #ffc929; font-size: 1.2rem; font-weight: bold; margin-bottom: 8px; }
+.logo-container-bill { height: 60px; margin-bottom: 10px; display: flex; justify-content: center; }
+.price-row-bill { width: 90%; display: flex; justify-content: space-between; align-items: center; }
+.price-label-bill { color: #ffc929; font-size: 14px; font-weight: bold; }
+.led-red-bill { color: #ff3b3b; font-family: 'Courier New', monospace; font-size: 2.2rem; font-weight: bold; text-shadow: 0 0 15px #ff0000; }
+.led-grn-bill { color: #39ff14; font-family: 'Courier New', monospace; font-size: 2.2rem; font-weight: bold; text-shadow: 0 0 15px #228b22; }
+.update-tag-bill { color: #ffc929; font-size: 9px; opacity: 0.7; text-transform: uppercase; margin-top: 5px; }
+
+/* 6. RESPONSIVE ADJUSTMENTS */
 @media (max-width: 768px) {
-    .xenia-hero-container { height: 300px; }
-    .xenia-wp-grid { flex-direction: column; gap: 30px; }
-    .xenia-wp-container { padding: 25px; width: 98%; margin: 30px auto; }
+    .xenia-hero-container { height: 280px; }
+    
+    .xenia-wp-container { 
+        padding: 20px; 
+        width: 95%; 
+        margin: 20px auto; 
+    }
+
+    .xenia-overlay h1 { font-size: 2.2rem; }
+    .xenia-subtitle { font-size: 1rem; letter-spacing: 2px; }
+
+    .xenia-wp-card {
+        min-width: 100%;
+        padding: 20px;
+    }
+
+    .billboard-inner-frame { 
+        aspect-ratio: 1 / 1.1; 
+        padding: 40px 10px; 
+    }
+
+    .xenia-wp-section:last-child .xenia-wp-img {
+        height: 380px !important; 
+    }
 }
