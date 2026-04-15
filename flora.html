@@ -36,166 +36,158 @@
             --divi-header: 30px;
         }
 
-        /* Hide Scrollbars Globally */
+        /* Hide Scrollbars */
         html, body {
-            scrollbar-width: none; 
-            -ms-overflow-style: none;
-            overflow-x: hidden;
-            width: 100%;
+            scrollbar-width: none !important; 
+            -ms-overflow-style: none !important;
+            overflow-x: hidden !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
-        ::-webkit-scrollbar { display: none; }
+        ::-webkit-scrollbar { display: none !important; }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; }
 
         body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            line-height: 1.6; 
-            background-color: var(--flora-site-bg); 
-            color: #222;
-            font-size: var(--divi-body);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important; 
+            line-height: 1.6 !important; 
+            background-color: var(--flora-site-bg) !important; 
+            color: #222 !important;
+            font-size: var(--divi-body) !important;
         }
 
-        /* 100% FULL STRETCH BANNER */
+        /* 100% EDGE-TO-EDGE BANNER - Forced breakout for WordPress/GitHub */
         .header-full {
-            width: 100%;
-            background: #fff;
-            display: block;
-            margin: 0;
-            padding: 0;
+            width: 100vw !important;
+            position: relative !important;
+            left: 50% !important;
+            right: 50% !important;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            background: #fff !important;
+            display: block !important;
+            line-height: 0 !important;
         }
-        .header-logo { width: 100%; height: auto; display: block; }
+        .header-logo { 
+            width: 100% !important; 
+            height: auto !important; 
+            display: block !important; 
+            border: none !important;
+            margin: 0 !important;
+        }
 
         /* NAVIGATION */
         .orange-nav {
             background-color: var(--flora-orange) !important;
-            padding: 12px 0;
-            text-align: center;
-            width: 100%;
-            position: relative;
-            z-index: 1000;
+            padding: 12px 0 !important;
+            text-align: center !important;
+            width: 100% !important;
+            position: relative !important;
+            z-index: 1000 !important;
         }
-        .nav-links { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-        .nav-links a { color: #ffffff !important; text-decoration: none; font-weight: 800; font-size: 14px; text-transform: capitalize; }
-        .nav-links a:hover { text-decoration: underline; }
+        .nav-links { list-style: none !important; display: flex !important; justify-content: center !important; gap: 30px !important; flex-wrap: wrap !important; margin: 0 !important; padding: 0 !important; }
+        .nav-links a { color: #ffffff !important; text-decoration: none !important; font-weight: 800 !important; font-size: 14px !important; text-transform: capitalize !important; }
+        .nav-links a:hover { text-decoration: underline !important; }
 
-        .hamburger { display: none; position: absolute; right: 20px; top: 10px; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
-        .hamburger span { width: 25px; height: 3px; background: #fff; border-radius: 2px; }
-
-        /* NEWS TICKER - Slowed to 60s for older readers */
+        /* NEWS TICKER - 60s Slow Speed */
         #news-ticker-container { 
-            background: #cc0000; color: #fff; padding: 10px 0; 
-            display: none; white-space: nowrap; overflow: hidden; width: 100%; 
+            background: #cc0000 !important; color: #fff !important; padding: 10px 0 !important; 
+            display: none; white-space: nowrap !important; overflow: hidden !important; width: 100% !important; 
         }
-        .ticker-wrapper { display: inline-block; padding-left: 100%; animation: ticker-scroll 60s linear infinite; }
-        .ticker-item { display: inline-block; padding: 0 60px; font-weight: bold; font-size: 16px; }
+        .ticker-wrapper { display: inline-block !important; padding-left: 100% !important; animation: ticker-scroll 60s linear infinite !important; }
+        .ticker-item { display: inline-block !important; padding: 0 60px !important; font-weight: bold !important; font-size: 16px !important; }
         @keyframes ticker-scroll { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
         /* HERO SECTION */
-        .flora-impact-hero { padding: var(--divi-section) 20px; text-align: center; background: #fff; border-bottom: 5px solid var(--flora-orange); }
-        .blue-title-heavy { color: var(--flora-blue) !important; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; line-height: 0.95; margin-bottom: 10px; letter-spacing: -2px; }
-        .black-subtitle-heavy { color: #000; font-size: clamp(1.4rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: 1px; }
-        .orange-accent-heavy { color: var(--flora-orange); font-size: clamp(1.4rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 35px; }
-        .pill-btn-blue { display: inline-block; background: #0121ad; color: #fff; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
+        .flora-impact-hero { padding: var(--divi-section) 20px !important; text-align: center !important; background: #fff !important; border-bottom: 5px solid var(--flora-orange) !important; }
+        .blue-title-heavy { color: var(--flora-blue) !important; font-size: clamp(2.5rem, 8vw, 5.5rem) !important; font-weight: 900 !important; line-height: 0.95 !important; margin-bottom: 10px !important; letter-spacing: -2px !important; }
+        .black-subtitle-heavy { color: #000 !important; font-size: clamp(1.4rem, 4vw, 2.5rem) !important; font-weight: 800 !important; letter-spacing: 1px !important; }
+        .orange-accent-heavy { color: var(--flora-orange) !important; font-size: clamp(1.4rem, 4vw, 2.5rem) !important; font-weight: 800 !important; margin-bottom: 35px !important; }
+        .pill-btn-blue { display: inline-block !important; background: #0121ad !important; color: #fff !important; padding: 12px 30px !important; border-radius: 50px !important; text-decoration: none !important; font-weight: bold !important; box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important; transition: transform 0.2s !important; }
 
         /* CAROUSEL BAR */
-        .grey-vibrant-bar { background: #666 !important; color: #fff; padding: var(--divi-section) 20px; text-align: center; }
-        .discover-title { font-size: var(--divi-header); font-family: 'Times New Roman', serif; text-decoration: underline; margin-bottom: 15px; }
-        .flora-slideshow-container { width: 100%; max-width: 1300px; height: 450px; margin: 0 auto; overflow: hidden; background: #000; position: relative; }
-        .flora-slide { display: none; width: 100%; height: 100%; animation: fadeEffect 1s; }
-        .flora-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .grey-vibrant-bar { background: #666 !important; color: #fff !important; padding: var(--divi-section) 20px !important; text-align: center !important; }
+        .discover-title { font-size: var(--divi-header) !important; font-family: 'Times New Roman', serif !important; text-decoration: underline !important; margin-bottom: 15px !important; }
+        .flora-slideshow-container { width: 100% !important; max-width: 1300px !important; height: 450px !important; margin: 0 auto !important; overflow: hidden !important; background: #000 !important; position: relative !important; border: 1px solid #444 !important; }
+        .flora-slide { display: none; width: 100% !important; height: 100% !important; animation: fadeEffect 1s !important; }
+        .flora-slide img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
         @keyframes fadeEffect { from {opacity: 0.4} to {opacity: 1} }
 
         /* HERITAGE & TIMELINE */
-        .white-section-wrapper { background: #fff; padding: var(--divi-section) 20px; }
-        .rich-heritage-section h2, .timeline-section h2 { font-family: 'Times New Roman', serif; font-size: var(--divi-header); margin-bottom: 40px; text-align: center; }
-        .heritage-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--divi-row); max-width: 1200px; margin: 0 auto; align-items: start; }
-        .heritage-text { font-size: 18px; font-weight: 700; color: #000; }
-        .lib-item img { width: 100%; border: 1px solid #ddd; padding: 5px; }
+        .white-section-wrapper { background: #fff !important; padding: var(--divi-section) 20px !important; }
+        .rich-heritage-section h2, .timeline-section h2 { font-family: 'Times New Roman', serif !important; font-size: var(--divi-header) !important; margin-bottom: 40px !important; text-align: center !important; }
+        .heritage-grid { display: grid !important; grid-template-columns: 1fr 1.2fr !important; gap: var(--divi-row) !important; max-width: 1200px !important; margin: 0 auto !important; align-items: start !important; text-align: left !important; }
+        .heritage-text { font-size: 18px !important; font-weight: 700 !important; color: #000 !important; }
+        .lib-item img { width: 100% !important; border: 1px solid #ddd !important; padding: 5px !important; background: #fff !important; }
         
-        .timeline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--divi-row); max-width: 1300px; margin: 0 auto; text-align: left; }
-        .timeline-card { background: #fff; display: flex; flex-direction: column; }
-        .timeline-card h3 { color: #0C70C2; font-size: 2.2rem; margin-bottom: 10px; font-family: 'Times New Roman', serif; }
-        .timeline-card h4 { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
-        .timeline-card p { font-size: 14px; margin-bottom: 15px; flex-grow: 1; }
-        .timeline-img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; border: 1px solid #eee; }
+        .timeline-grid { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: var(--divi-row) !important; max-width: 1300px !important; margin: 0 auto !important; text-align: left !important; }
+        .timeline-card { background: #fff !important; display: flex !important; flex-direction: column !important; }
+        .timeline-card h3 { color: #0C70C2 !important; font-size: 2.2rem !important; margin-bottom: 10px !important; font-family: 'Times New Roman', serif !important; font-weight: bold !important; }
+        .timeline-card h4 { font-size: 1.2rem !important; font-weight: bold !important; margin-bottom: 10px !important; color: #333 !important; }
+        .timeline-img { width: 100% !important; height: 180px !important; object-fit: cover !important; border-radius: 4px !important; border: 1px solid #eee !important; }
 
-        /* AD STRIPS (5 in a row, Uniform Sizing) */
-        .blue-ad-strip-container { background: var(--flora-navy); padding: 40px 0; margin: 30px 0; }
-        .blue-ad-row { display: flex; justify-content: center; gap: 20px; max-width: 1400px; margin: 0 auto; padding: 0 20px; overflow-x: auto; }
-        .ad-card-item { flex: 0 0 220px; text-align: center; }
-        .ad-image-wrap { 
-            background: #fff; padding: 10px; border: 1px solid #000; cursor: pointer; 
-            height: 120px; width: 100%; /* Uniform dimensions */
-            display: flex; align-items: center; justify-content: center; margin-bottom: 10px; 
+        /* AD STRIPS (Universal 5-in-a-row) */
+        .blue-ad-strip-container { background: var(--flora-navy) !important; padding: 40px 0 !important; margin: 30px 0 !important; width: 100% !important; }
+        .blue-ad-row { 
+            display: grid !important; 
+            grid-template-columns: repeat(5, 1fr) !important; 
+            gap: 20px !important; 
+            max-width: 1300px !important; 
+            margin: 0 auto !important; 
+            padding: 0 20px !important; 
         }
-        .ad-image-wrap img { width: 100%; height: 100%; object-fit: contain; }
-        .ad-label-link { color: #fff; font-size: 12px; font-weight: bold; text-decoration: none; text-transform: uppercase; display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .ad-image-wrap { 
+            background: #fff !important; padding: 10px !important; border: 1px solid #000 !important; cursor: pointer !important; 
+            height: 115px !important; width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; margin-bottom: 10px !important; 
+        }
+        .ad-image-wrap img { max-width: 100% !important; max-height: 100% !important; object-fit: contain !important; }
+        .ad-label-link { color: #fff !important; font-size: 11px !important; font-weight: bold !important; text-decoration: none !important; text-transform: uppercase !important; display: block !important; overflow: hidden !important; white-space: nowrap !important; text-overflow: ellipsis !important; }
 
         /* MAIN CONTENT COLUMNS */
-        .flora-bottom-columns { padding: var(--divi-section) 20px; background: var(--flora-site-bg); border-top: 5px solid #222; }
-        .bottom-three-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--divi-row); max-width: 1400px; margin: 0 auto; align-items: start; }
-        .col-header { background: #8b4513; color: #fff; text-align: center; padding: 12px; border-radius: 25px 25px 0 0; font-weight: bold; margin-bottom: 25px; }
+        .flora-bottom-columns { padding: var(--divi-section) 20px !important; background: var(--flora-site-bg) !important; border-top: 5px solid #222 !important; }
+        .bottom-three-grid { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: var(--divi-row) !important; max-width: 1400px !important; margin: 0 auto !important; align-items: start !important; }
+        .col-header { background: #8b4513 !important; color: #fff !important; text-align: center !important; padding: 12px !important; border-radius: 25px 25px 0 0 !important; font-weight: bold !important; margin-bottom: 25px !important; }
 
         /* Newspaper Clippings */
-        .news-clipping-wrapper, .spotlight-clipping, .fb-clipping { background: #fffdf5; border: 1px solid #222; box-shadow: 6px 6px 0px #222; padding-bottom: 20px; margin-bottom: 30px; font-family: 'Times New Roman', serif; }
-        .clipping-masthead { text-align: center; padding: 15px; border-bottom: 4px double #222; margin: 0 15px 15px 15px; }
-        .black-tag { background: #000; color: #fff; padding: 4px 12px; font-weight: bold; font-size: 1.1rem; display: inline-block; }
-        .divi-event-item { border-bottom: 1px dashed #999; padding: 15px 20px; }
-        .divi-event-date { color: #cc0000; font-weight: bold; }
+        .news-clipping-wrapper, .spotlight-clipping, .fb-clipping { background: #fffdf5 !important; border: 1px solid #222 !important; box-shadow: 6px 6px 0px #222 !important; padding-bottom: 20px !important; margin-bottom: 30px !important; font-family: 'Times New Roman', serif !important; }
+        .clipping-masthead { text-align: center !important; padding: 15px !important; border-bottom: 4px double #222 !important; margin: 0 15px 15px 15px !important; }
+        .black-tag { background: #000 !important; color: #fff !important; padding: 4px 12px !important; font-weight: bold !important; font-size: 1.1rem !important; display: inline-block !important; letter-spacing: 1px !important; }
 
         /* GAS BILLBOARD */
-        .billboard-frame { background: #111; border: 8px solid #2a2a2a; border-radius: 12px; padding: 45px 15px; position: relative; width: 100%; aspect-ratio: 16/11; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; }
-        .brand-overlay-bill { position: absolute; top: 0; left: 0; right: 0; background: var(--brand-red); color: var(--brand-gold); font-weight: bold; text-align: center; font-size: 13px; padding: 10px 0; border-bottom: 2px solid var(--brand-gold); z-index: 5; }
-        .digital-screen { width: 100%; height: 100%; background: #000; border-radius: 6px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; }
-        .led-red { color: var(--led-red); font-family: 'Courier New', monospace; font-size: 2.2rem; font-weight: bold; text-shadow: 0 0 15px #ff0000; }
-        .led-grn { color: var(--led-green); font-family: 'Courier New', monospace; font-size: 2.2rem; font-weight: bold; text-shadow: 0 0 15px #228b22; }
-        #notification-toast { position: absolute; top: 55px; left: 50%; transform: translateX(-50%); background: rgba(57,255,20,0.2); border: 1px solid var(--led-green); color: var(--led-green); padding: 4px 10px; border-radius: 15px; font-size: 10px; opacity: 0; transition: opacity 0.4s; z-index: 100; }
-        #notification-toast.show { opacity: 1; }
-        .logo-bg-white { background: #fff; padding: 5px; border-radius: 4px; }
+        .billboard-frame { background: #111 !important; border: 8px solid #2a2a2a !important; border-radius: 12px !important; padding: 45px 15px !important; position: relative !important; width: 100% !important; aspect-ratio: 16/11 !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important; overflow: hidden !important; margin-top: 20px !important; }
+        .brand-overlay-bill { position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; background: var(--brand-red) !important; color: var(--brand-gold) !important; font-weight: bold !important; text-align: center !important; font-size: 13px !important; padding: 10px 0 !important; border-bottom: 2px solid var(--brand-gold) !important; z-index: 5 !important; }
+        .digital-screen { width: 100% !important; height: 100% !important; background: #000 !important; border-radius: 6px !important; border: 1px solid #333 !important; display: flex !important; align-items: center !important; justify-content: center !important; position: relative !important; }
+        .led-red { color: var(--led-red) !important; font-family: 'Courier New', monospace !important; font-size: 2.4rem !important; font-weight: bold !important; text-shadow: 0 0 15px #ff0000 !important; }
+        .led-grn { color: var(--led-green) !important; font-family: 'Courier New', monospace !important; font-size: 2.4rem !important; font-weight: bold !important; text-shadow: 0 0 15px #228b22 !important; }
+        #notification-toast { position: absolute !important; top: 55px !important; left: 50% !important; transform: translateX(-50%) !important; background: rgba(57,255,20,0.2) !important; border: 1px solid var(--led-green) !important; color: var(--led-green) !important; padding: 4px 10px !important; border-radius: 15px !important; font-size: 10px !important; opacity: 0 !important; transition: opacity 0.4s !important; z-index: 100 !important; }
+        #notification-toast.show { opacity: 1 !important; }
 
-        /* FOOTER BRANDING STRIP (RESTORED SIDE-BY-SIDE) */
+        /* FOOTER BRANDING */
         .flora-footer-branding { 
-            background: #000; 
-            padding: var(--divi-section) 20px; 
-            display: flex; 
-            flex-direction: row; 
-            justify-content: center; 
-            gap: 40px; 
-            flex-wrap: nowrap; 
-            align-items: center; 
-            border-top: 1px solid #333; 
-            width: 100%;
+            background: #000 !important; padding: var(--divi-section) 20px !important; 
+            display: flex !important; flex-direction: row !important; justify-content: center !important; gap: 40px !important; 
+            flex-wrap: nowrap !important; align-items: center !important; border-top: 1px solid #333 !important; width: 100% !important;
         }
-        .brand-logo-item { flex: 0 1 auto; text-align: center; }
-        .brand-logo-item img { max-width: 150px; height: auto; display: block; }
-        .brand-logo-item.sk-ventures img { max-width: 260px; }
-
-        .site-footer { background: #000; color: #ffeb3b; text-align: center; padding: 30px; font-size: 12px; font-weight: bold; border-top: 4px solid var(--flora-orange); }
-
-        /* LIGHTBOX */
-        #ad-lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        #ad-lightbox img { max-width: 95%; max-height: 85vh; border: 10px solid white; background: white; }
-        #close-lb { position: absolute; top: 20px; right: 40px; color: white; font-size: 50px; cursor: pointer; }
+        .brand-logo-item img { max-width: 140px !important; height: auto !important; display: block !important; }
+        .site-footer { background: #000 !important; color: #ffeb3b !important; text-align: center !important; padding: 30px !important; font-size: 12px !important; font-weight: bold !important; border-top: 4px solid var(--flora-orange) !important; }
 
         @media (max-width: 1024px) {
-            .heritage-grid, .timeline-grid, .bottom-three-grid { grid-template-columns: 1fr; }
-            .flora-footer-branding { flex-wrap: wrap; gap: 20px; }
-            .nav-links { display: none; flex-direction: column; background: #fff; width: 100%; left: 0; position: absolute; top: 100%; padding: 20px; }
-            .nav-links.open { display: flex; }
-            .nav-links a { color: #222 !important; }
-            .hamburger { display: flex; }
-            .billboard-frame { aspect-ratio: 1/1.1; }
+            .bottom-three-grid, .heritage-grid, .timeline-grid { grid-template-columns: 1fr !important; }
+            .blue-ad-row { grid-template-columns: repeat(2, 1fr) !important; }
+            .flora-footer-branding { flex-wrap: wrap !important; gap: 20px !important; }
+            .header-full { width: 100% !important; left: 0 !important; margin-left: 0 !important; }
         }
     </style>
 </head>
 <body>
 
-    <div id="ad-lightbox">
-        <span id="close-lb">&times;</span>
-        <img id="lb-img" src="">
+    <div id="ad-lightbox" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; align-items: center; justify-content: center; padding: 20px;">
+        <span id="close-lb" style="position: absolute; top: 20px; right: 40px; color: white; font-size: 50px; cursor: pointer;">&times;</span>
+        <img id="lb-img" src="" style="max-width: 95%; max-height: 85vh; border: 10px solid white; background: white;">
     </div>
 
-    <!-- FULL WIDTH SMLC BANNER -->
+    <!-- 100% FULL WIDTH BANNER -->
     <header class="header-full">
         <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="Support My Local Community">
     </header>
@@ -240,19 +232,25 @@
                 <div class="heritage-text">
                     Flora, IL was established in 1854 by Samuel White, who donated land to the City of Flora for several buildings and the city park. The City Park, at that time called the Public Square, is present day Library Park where Flora Public Library is located.
                     <br><br>
-                    This donation served as the anchor for the town's early growth. Mr. White's vision allowed for the construction of the original library, which remains a landmark of education and culture.
+                    This donation served as the anchor for the town's early growth. Mr. White's vision allowed for the construction of the original library, which remains a landmark of education and culture. Over the years, the park has evolved from a simple square into a hub of community events, historical reflection, and local gathering.
                 </div>
                 <div class="library-side">
-                    <div style="font-family:'Times New Roman',serif; font-size:1.8rem; border-bottom:1px solid #000; margin-bottom:20px; display:inline-block; letter-spacing:1px;">FLORA LIBRARY</div>
-                    <div style="display:flex; gap:15px;">
-                        <div class="lib-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Old-Flora-Library.jpg"><p style="font-size:12px; font-weight:bold; margin-top:5px;">Flora Library in 1903</p></div>
-                        <div class="lib-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/New-Flora-Libray.jpg"><p style="font-size:12px; font-weight:bold; margin-top:5px;">Flora Library in 1933</p></div>
+                    <div style="font-family:'Times New Roman',serif; font-size:1.8rem; border-bottom:1px solid #000; margin-bottom:20px; display:inline-block; letter-spacing:1px; font-weight:bold;">FLORA LIBRARY</div>
+                    <div style="display:flex; gap:15px; justify-content:center;">
+                        <div class="lib-item">
+                            <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Old-Flora-Library.jpg">
+                            <p style="font-size:12px; font-weight:bold; margin-top:5px; text-transform:uppercase;">Flora Library in 1903</p>
+                        </div>
+                        <div class="lib-item">
+                            <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/New-Flora-Libray.jpg">
+                            <p style="font-size:12px; font-weight:bold; margin-top:5px; text-transform:uppercase;">Flora Library in 1933</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- HISTORICAL TIMELINE -->
+        <!-- TIMELINE SECTION -->
         <section class="timeline-section" style="border-top:1px solid #eee; margin-top:50px; padding-top:50px;">
             <h2>Flora's Historical Timeline</h2>
             <div class="timeline-grid">
@@ -284,23 +282,27 @@
         </section>
     </div>
 
-    <!-- AD STRIP 1 -->
+    <!-- AD STRIP 1 (5 Slots) -->
     <section class="blue-ad-strip-container">
         <div class="blue-ad-row" id="slot-top"></div>
     </section>
 
-    <!-- MAIN CONTENT COLUMNS -->
+    <!-- CONTENT GRID -->
     <section class="flora-bottom-columns">
         <div class="bottom-three-grid">
             
+            <!-- Column 1: Events -->
             <div class="bottom-col">
                 <div class="col-header">Upcoming Events in Flora</div>
                 <div class="news-clipping-wrapper">
                     <div class="clipping-masthead"><span class="black-tag">Community Bulletin</span></div>
-                    <div id="event-list"></div>
+                    <div id="event-list">
+                        <p style="text-align:center; font-style:italic; padding:20px;">Fetching dispatches...</p>
+                    </div>
                 </div>
             </div>
 
+            <!-- Column 2: Spotlight + Gas -->
             <div class="bottom-col">
                 <div style="text-align:center; margin-bottom:25px;">
                     <img src="https://ourflora.com/wp-content/uploads/2023/08/Ourflora.png" style="width:200px;">
@@ -309,7 +311,7 @@
                     <div class="clipping-masthead"><h3>Business Spotlight</h3></div>
                     <div style="padding:0 20px; text-align:center;">
                         <img src="https://github.com/KFruti88/images/blob/main/localbusiness.jpeg?raw=true" style="width:100%; border:1px solid #222;">
-                        <h4 style="margin:15px 0; font-size:22px;">Flora Family Diner</h4>
+                        <h4 style="margin:15px 0; font-size:22px; font-weight:bold;">Flora Family Diner</h4>
                         <p style="font-size:13px; font-style:italic;">Serving home-cooked favorites for over two decades. Friendly service and Clay County spirit.</p>
                         <a href="#" class="pill-btn-blue" style="margin-top:15px; font-size:12px; border-radius:4px; text-transform:uppercase; width:100%;">Visit Website</a>
                     </div>
@@ -320,42 +322,35 @@
                     <div id="notification-toast">Live Update</div>
                     <div class="brand-overlay-bill">S & K Ventures, Inc. • Digital Advertising</div>
                     <div id="fuel-screen" class="digital-screen">
-                        <div style="color:var(--brand-gold); font-weight:bold; text-align:center;">
-                            <div style="margin-bottom:5px;">⚡</div>
-                            SYNCING...
-                        </div>
+                        <div style="color:var(--brand-gold); font-weight:bold; text-align:center;">⚡ SYNCING...</div>
                     </div>
                     <div style="position:absolute; bottom:0; left:0; right:0; background:var(--brand-red); color:var(--brand-gold); text-align:center; font-size:10px; padding:5px 0; border-top:1px solid var(--brand-gold); z-index:5;">Click billboard to update prices</div>
                 </div>
             </div>
 
+            <!-- Column 3: Scores -->
             <div class="bottom-col">
                 <div class="col-header">OurFlora Connection</div>
                 <div style="background:#fff; border:1px solid #222; box-shadow:6px 6px 0px #222; margin-bottom:30px; overflow:hidden;">
                     <div style="background:#0033cc; padding:15px; text-align:center;"><img src="https://github.com/skventuresigns-design/media/blob/main/scorestream-logo-white.png?raw=true" style="width:160px;"></div>
-                    <div class="scorestream-widget-container" data-ss_widget_type="vertScoreboard" style="height:600px;" data-user-widget-id="67533"></div>
+                    <div id="scorestream-wrap" style="height:600px; min-height:600px;">
+                        <div class="scorestream-widget-container" data-ss_widget_type="vertScoreboard" style="height:600px;" data-user-widget-id="67533"></div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- AD STRIP 2 -->
+    <!-- AD STRIP 2 (5 Slots) -->
     <section class="blue-ad-strip-container">
         <div class="blue-ad-row" id="slot-bottom"></div>
     </section>
 
-    <!-- FOOTER BRANDING STRIP (SIDE-BY-SIDE) -->
+    <!-- FOOTER SIDE-BY-SIDE -->
     <footer class="flora-footer-branding">
-        <div class="brand-logo-item">
-            <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/R.jpg" alt="Map">
-        </div>
-        <div class="brand-logo-item">
-            <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Charlie-Brown-Park.jpg" alt="Park">
-        </div>
-        <div class="brand-logo-item">
-            <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/City-our-flora-sign.jpg" alt="Sign">
-        </div>
+        <div class="brand-logo-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/R.jpg" alt="Map"></div>
+        <div class="brand-logo-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/Charlie-Brown-Park.jpg" alt="Park"></div>
+        <div class="brand-logo-item"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/images/City-our-flora-sign.jpg" alt="Sign"></div>
         <div class="brand-logo-item sk-ventures">
             <a href="https://skventuresigns.com" target="_blank">
                 <img src="https://i0.wp.com/skventuresigns.com/wp-content/uploads/2025/03/SK-Sign-White.png?w=1000" alt="SK Ventures">
@@ -365,22 +360,20 @@
 
     <div class="site-footer">All Content &copy; 2019-2026 Support My Local Community | S&K Ventures</div>
 
-    <!-- SCRIPTS -->
+    <!-- STANDALONE SCRIPTS - HARDCODED FOR GITHUB/WP -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     <script async src="https://scorestream.com/apiJsCdn/widgets/embed.js"></script>
 
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
-        import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
-
-        // MAIN ENVIRONMENT SETUP
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'flora-prod-01';
+    <script>
+        // FORCED CONFIGURATION FOR UNIVERSAL DEPLOYMENT
+        const firebaseConfig = {
+            apiKey: "AIzaSyBYPbGWDNPUmCSnFWDPPWtiXe2F6MPinXg",
+            authDomain: "smlc-fuel-monitor.firebaseapp.com",
+            databaseURL: "https://smlc-fuel-monitor-default-rtdb.firebaseio.com",
+            projectId: "smlc-fuel-monitor"
+        };
 
         const ENDPOINTS = {
             ADS: 'https://raw.githubusercontent.com/skventuresigns-design/smlc/main/slideshow/ads.json',
@@ -389,79 +382,60 @@
             RSS: 'https://www.google.com/alerts/feeds/16385066500020016213/3177914264312887151'
         };
 
-        // --- GAS MONITOR ---
+        const app = firebase.initializeApp(firebaseConfig, 'OurFlora_Universal_' + Date.now());
+        const db = app.database();
+        const auth = app.auth();
+
+        // GAS WIDGET
         function startGasWidget() {
-            const fuelConfig = {
-                apiKey: "AIzaSyBYPbGWDNPUmCSnFWDPPWtiXe2F6MPinXg",
-                authDomain: "smlc-fuel-monitor.firebaseapp.com",
-                databaseURL: "https://smlc-fuel-monitor-default-rtdb.firebaseio.com",
-                projectId: "smlc-fuel-monitor"
-            };
-            
-            const gasApp = firebase.initializeApp(fuelConfig, 'GasBillboard_' + Math.random().toString(36).substr(2, 9));
-            const rtdb = gasApp.database();
-            
-            const stations = {
-                "48100": { name: "CASEY'S", logo: "Casey's.png" },
-                "48101": { name: "HUCK'S", logo: "Hucks.png" },
-                "128128": { name: "MACH 1", logo: "Mach 1.png" },
-                "120226": { name: "FAST STOP", logo: "Fast stop.png" }
-            };
+            const stations = { "48100": { name: "CASEY'S", logo: "Casey's.png" }, "48101": { name: "HUCK'S", logo: "Hucks.png" }, "128128": { name: "MACH 1", logo: "Mach 1.png" }, "120226": { name: "FAST STOP", logo: "Fast stop.png" } };
             const ids = Object.keys(stations);
             let idx = 0, lastHash = null;
 
-            rtdb.ref('fuel_prices').on('value', (snap) => {
+            db.ref('fuel_prices').on('value', (snap) => {
                 const data = snap.val();
                 if (!data) return;
-
                 const hash = JSON.stringify(data);
                 if (lastHash && lastHash !== hash) {
                     const toast = document.getElementById('notification-toast');
-                    if (toast) {
-                        toast.classList.add('show');
-                        setTimeout(() => toast.classList.remove('show'), 3500);
-                    }
+                    if(toast) { toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3500); }
                 }
                 lastHash = hash;
 
-                const update = () => {
+                const rotate = () => {
                     const sid = ids[idx];
                     const cfg = stations[sid];
                     const val = data[sid] || { reg: "---", dsl: "---", date: "..." };
-                    const logoUrl = `https://raw.githubusercontent.com/skventuresigns-design/smlc/main/gas-prices/image/${encodeURIComponent(cfg.logo)}`;
                     const screen = document.getElementById('fuel-screen');
+                    if (!screen) return;
                     
-                    if (screen) {
-                        screen.innerHTML = `
-                            <div style="text-align:center; padding:15px; width:100%; animation:fadeEffect 0.8s;">
-                                <div style="color:var(--brand-gold); font-weight:bold; letter-spacing:2px; margin-bottom:10px;">FLORA, IL</div>
-                                <div style="height:50px; margin-bottom:12px; display:flex; justify-content:center;">
-                                    <img src="${logoUrl}" class="${sid==='128128'?'logo-bg-white':''}" style="max-height:100%; border-radius:4px;">
-                                </div>
-                                <div style="display:flex; justify-content:space-between; width:90%; margin:0 auto;"><span style="color:var(--brand-gold); font-size:11px; font-weight:bold;">REGULAR</span><span class="led-red">${val.reg}</span></div>
-                                <div style="display:flex; justify-content:space-between; width:90%; margin:0 auto;"><span style="color:var(--brand-gold); font-size:11px; font-weight:bold;">DIESEL</span><span class="led-grn">${(!val.dsl||val.dsl==='0')?'---':val.dsl}</span></div>
-                                <div style="color:var(--brand-gold); font-size:8px; opacity:0.6; margin-top:10px;">UPDATED: ${val.date}</div>
+                    screen.innerHTML = `
+                        <div style="text-align:center; padding:15px; width:100%; animation:fadeEffect 0.8s;">
+                            <div style="color:var(--brand-gold); font-weight:bold; letter-spacing:2px; margin-bottom:10px;">FLORA, IL</div>
+                            <div style="height:50px; margin-bottom:12px; display:flex; justify-content:center;">
+                                <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/gas-prices/image/${encodeURIComponent(cfg.logo)}" class="${sid==='128128'?'logo-bg-white':''}" style="max-height:100%; border-radius:4px;">
                             </div>
-                        `;
-                    }
+                            <div style="display:flex; justify-content:space-between; width:90%; margin:0 auto;"><span style="color:var(--brand-gold); font-size:11px; font-weight:bold;">REGULAR</span><span class="led-red">${val.reg}</span></div>
+                            <div style="display:flex; justify-content:space-between; width:90%; margin:0 auto;"><span style="color:var(--brand-gold); font-size:11px; font-weight:bold;">DIESEL</span><span class="led-grn">${(!val.dsl||val.dsl==='0')?'---':val.dsl}</span></div>
+                        </div>`;
                     idx = (idx + 1) % ids.length;
                 };
-                update();
-                if (window.gasInterval) clearInterval(window.gasInterval);
-                window.gasInterval = setInterval(update, 6000);
+                rotate();
+                if (window.gasInt) clearInterval(window.gasInt);
+                window.gasInt = setInterval(rotate, 6000);
             });
         }
 
-        // --- PAGE CONTENT LOADERS ---
-        async function loadData() {
+        // LOAD PAGE DATA
+        async function loadContent() {
             try {
-                const [ads, carousel, bulletin] = await Promise.all([
+                const [ads, carImages, bulletin] = await Promise.all([
                     fetch(ENDPOINTS.ADS).then(r => r.json()),
                     fetch(ENDPOINTS.CAROUSEL).then(r => r.json()),
                     fetch(ENDPOINTS.BULLETIN).then(r => r.json())
                 ]);
 
-                const renderAds = (id, list) => {
+                const renderRow = (id, list) => {
                     const box = document.getElementById(id);
                     if(!box) return;
                     box.innerHTML = '';
@@ -469,49 +443,34 @@
                     shuf.slice(0, 5).forEach(ad => {
                         const div = document.createElement('div');
                         div.className = 'ad-card-item';
-                        div.innerHTML = `
-                            <div class="ad-image-wrap"><img src="${ad.img}"></div>
-                            <a href="${ad.link}" target="_blank" class="ad-label-link">${ad.label}</a>
-                        `;
-                        div.querySelector('.ad-image-wrap').onclick = () => {
-                            document.getElementById('lb-img').src = ad.img;
-                            document.getElementById('ad-lightbox').style.display = 'flex';
-                        };
+                        div.innerHTML = `<div class="ad-image-wrap"><img src="${ad.img}"></div><a href="${ad.link}" target="_blank" class="ad-label-link">${ad.label}</a>`;
+                        div.querySelector('.ad-image-wrap').onclick = () => { document.getElementById('lb-img').src = ad.img; document.getElementById('ad-lightbox').style.display = 'flex'; };
                         box.appendChild(div);
                     });
                 };
-                renderAds('slot-top', ads);
-                renderAds('slot-bottom', ads);
+                renderRow('slot-top', ads); renderRow('slot-bottom', ads);
 
                 const car = document.getElementById('flora-carousel');
-                carousel.forEach((src, i) => {
+                carImages.forEach((src, i) => {
                     const d = document.createElement('div');
                     d.className = 'flora-slide';
                     if (i === 0) d.style.display = 'block';
-                    d.innerHTML = `<img src="${src}">`;
-                    car.appendChild(d);
+                    d.innerHTML = `<img src="${src}">`; car.appendChild(d);
                 });
-                let cIdx = 0;
-                setInterval(() => {
-                    const slides = document.querySelectorAll('.flora-slide');
-                    if (!slides.length) return;
-                    slides[cIdx].style.display = 'none';
-                    cIdx = (cIdx + 1) % slides.length;
-                    slides[cIdx].style.display = 'block';
-                }, 6000);
+                let cIdx = 0; setInterval(() => { const s = document.querySelectorAll('.flora-slide'); if (!s.length) return; s[cIdx].style.display = 'none'; cIdx = (cIdx + 1) % s.length; s[cIdx].style.display = 'block'; }, 6000);
 
                 const evList = document.getElementById('event-list');
-                bulletin.slice(0, 4).forEach(e => {
-                    const d = document.createElement('div');
-                    d.className = 'divi-event-item';
-                    d.innerHTML = `<div class="divi-event-date">${e.date}</div><div style="font-weight:bold; font-size:1.1rem;">${e.name}</div><div style="font-size:11px;">@ ${e.location}</div>`;
+                evList.innerHTML = '';
+                bulletin.slice(0, 5).forEach(e => {
+                    const d = document.createElement('div'); d.className = 'divi-event-item';
+                    d.innerHTML = `<div class="divi-event-date">${e.date}</div><div style="font-weight:bold; font-size:1.1rem; margin-top:5px;">${e.name}</div><div style="font-size:11px; margin-top:5px; color:#555;">@ ${e.location}</div>`;
                     evList.appendChild(d);
                 });
 
-            } catch (e) { console.error("Loader failed", e); }
+            } catch (e) { console.error("Data fail", e); }
         }
 
-        function initRSS() {
+        function initTicker() {
             fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(ENDPOINTS.RSS)}`)
                 .then(r => r.json()).then(d => {
                     const entries = new DOMParser().parseFromString(d.contents, "text/xml").getElementsByTagName("entry");
@@ -521,24 +480,18 @@
                         const l = entries[i].getElementsByTagName("link")[0].getAttribute("href");
                         h += `<span class="ticker-item"><a href="${l}" target="_blank" style="color:#fff; text-decoration:none;">NEWS: ${t}</a></span>`;
                     }
-                    if (h) {
-                        document.getElementById('news-ticker-container').style.display = 'block';
-                        document.getElementById('ticker-content').innerHTML = h + h;
-                    }
-                }).catch(()=>{});
+                    if (h) { document.getElementById('news-ticker-container').style.display = 'block'; document.getElementById('ticker-content').innerHTML = h + h; }
+                });
         }
 
         document.getElementById('hamburger').onclick = () => document.getElementById('nav-links').classList.toggle('open');
         document.getElementById('close-lb').onclick = () => document.getElementById('ad-lightbox').style.display = 'none';
 
         window.onload = async () => {
-            await signInAnonymously(auth);
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    startGasWidget();
-                    loadData();
-                    initRSS();
-                }
+            auth.signInAnonymously().then(() => {
+                startGasWidget();
+                loadContent();
+                initTicker();
             });
         };
     </script>
