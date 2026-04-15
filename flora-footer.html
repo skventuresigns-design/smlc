@@ -3,42 +3,47 @@
 <div class="elfsight-app-d65d99f2-6e18-41a9-8b77-2639002c8d36" data-elfsight-app-lazy></div>
 
 <!-- 
-  INSTRUCTIONS: 
-  Paste this entire code block into a Divi Code Module 
-  placed in your Footer or Global Footer layout.
+  INSTRUCTIONS FOR DIVI/GITHUB: 
+  1. Paste this entire code block into a Divi "Code Module".
+  2. If hosting on GitHub, ensure you use the "Raw" file link 
+     through a CDN like raw.githack.com for external script calls.
 -->
 
 <style>
-    /* Sticky Wrapper to force this to the top of the screen */
+    /* Sticky Wrapper - Forced to top with maximum z-index for Divi compatibility */
     .sticky-top-wrap {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 99999;
+        z-index: 9999999 !important; 
         box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        background: #ffffff;
     }
 
     /* News Ticker Bar - Red background, White text */
     #news-ticker-container {
         background: #cc0000; /* Brand Red */
-        color: #ffffff; /* White Text */
+        color: #ffffff; 
         overflow: hidden;
         white-space: nowrap;
-        padding: 10px 0;
+        padding: 4px 0; /* Reduced padding to make the bar slimmer */
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 16px;
-        display: none; /* Shown by JS if content exists */
+        font-size: 18px; 
+        display: block !important; 
         border-bottom: 1px solid rgba(255,255,255,0.2);
+        min-height: auto; /* Removed fixed min-height to hug the text */
+        line-height: 1.2;
     }
 
     .ticker-wrapper {
         display: inline-block;
         padding-left: 100%;
-        animation: ticker-scroll 60s linear infinite; /* Slowed for readability */
+        animation: ticker-scroll 60s linear infinite;
+        will-change: transform;
     }
 
-    /* Pause on hover for easy clicking */
+    /* Pause on hover for easier reading/clicking */
     #news-ticker-container:hover .ticker-wrapper {
         animation-play-state: paused;
     }
@@ -46,10 +51,12 @@
     .ticker-item {
         display: inline-block;
         padding: 0 60px;
+        font-size: 18px; 
+        vertical-align: middle;
     }
 
     .ticker-item a {
-        color: #ffffff; /* White Links */
+        color: #ffffff;
         text-decoration: none;
         font-weight: bold;
     }
@@ -58,10 +65,11 @@
         text-decoration: underline;
     }
 
-    /* Highlighted Game Alerts - Yellow text */
+    /* Game Alerts - Yellow text */
     .game-alert {
         color: #ffeb3b !important; 
         text-transform: uppercase;
+        font-weight: 800;
     }
 
     @keyframes ticker-scroll {
@@ -73,24 +81,23 @@
     .sports-ticker-wrap {
         background: #ffffff; 
         width: 100%;
-        min-height: 50px;
+        min-height: 40px;
         border-bottom: 1px solid #eeeeee;
+        overflow: hidden;
     }
 
-    /* Mobile Adjustments for Divi Preferences (14px body / 30px headers) */
+    /* Mobile Adjustments for User Preferences */
     @media (max-width: 768px) {
         #news-ticker-container {
-            font-size: 14px; /* User Mobile Body Preference: 14 */
+            font-size: 14px !important; /* Mobile Body Preference: 14 */
+            padding: 4px 0; /* Slimmer bar on mobile as well */
+            min-height: auto;
         }
         .ticker-wrapper {
             animation: ticker-scroll 45s linear infinite;
         }
-        /* Enforce user header size preference in case of dynamic titles */
-        h1, h2, h3, .ticker-item {
-            font-size: 14px !important;
-        }
-        .game-alert {
-            font-size: 14px !important;
+        .ticker-item, .ticker-item a, .game-alert {
+            font-size: 14px !important; /* Mobile Body Preference: 14 */
         }
     }
 </style>
@@ -99,7 +106,7 @@
     <!-- News Ticker Area -->
     <div id="news-ticker-container">
         <div class="ticker-wrapper" id="ticker-content">
-            <!-- Content will be dynamically interleaved by the script below -->
+            <span class="ticker-item">Loading local Flora updates...</span>
         </div>
     </div>
 
@@ -112,52 +119,39 @@
 
 <script>
 (function() {
-    // Config Constants
     const RSS_URL = 'https://www.google.com/alerts/feeds/16385066500020016213/3177914264312887151';
     const TEAM_URL = 'https://scorestream.com/team/flora-high-school-wolves-5114/games';
     const PROXY_URL = 'https://api.allorigins.win/get?url=';
 
-    /**
-     * Attempts to see if the game is currently live via ScoreStream Team page
-     */
     async function fetchGameStatus() {
         try {
             const response = await fetch(`${PROXY_URL}${encodeURIComponent(TEAM_URL)}`);
             if (!response.ok) return null;
             const data = await response.json();
             const bodyText = data.contents;
-            
-            // Indicators that a game is happening now
             if (bodyText.includes("Flora") && (bodyText.includes("Live") || bodyText.includes("Qtr") || bodyText.includes("Half"))) {
                 return "🔥 LIVE: Wolves Game in Progress! Click for scores";
             }
             return null;
-        } catch (e) {
-            return null;
-        }
+        } catch (e) { return null; }
     }
 
-    /**
-     * Initializes the bar, fetches data, and alternates news/sports
-     */
     async function initFloraBar() {
         const container = document.getElementById('news-ticker-container');
         const content = document.getElementById('ticker-content');
         const barWrapper = document.getElementById('flora-sticky-bar');
         
-        // 1. Determine Game Message
+        // 1. Game Status
         let gameHtml = '';
         const liveStatus = await fetchGameStatus();
         
         if (liveStatus) {
             gameHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">${liveStatus}</a></span>`;
         } else {
-            // Fallback: Check time for 5:30 PM (17:30) kickoffs (Central Time)
             const now = new Date();
             const local = new Date(now.toLocaleString("en-US", {timeZone: "America/Chicago"}));
             const hours = local.getHours();
             const mins = local.getMinutes();
-            
             if (hours < 17 || (hours === 17 && mins < 30)) {
                 gameHtml = `<span class="ticker-item game-alert"><a href="${TEAM_URL}" target="_blank">🚨 TONIGHT: Wolves Game at 5:30 PM!</a></span>`;
             } else {
@@ -165,62 +159,66 @@
             }
         }
 
-        // 2. Fetch News (Filtered for Today in Central Time)
+        // 2. News Feed
         const chicagoDate = new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Chicago'}).format(new Date());
 
         try {
             const response = await fetch(`${PROXY_URL}${encodeURIComponent(RSS_URL)}`);
             const data = await response.json();
-            const xmlDoc = new DOMParser().parseFromString(data.contents, "text/xml");
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(data.contents, "text/xml");
             const entries = xmlDoc.getElementsByTagName("entry");
-
             const newsItems = [];
 
             for (let i = 0; i < entries.length; i++) {
-                const dateNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
-                if (dateNode) {
-                    const entryDate = dateNode.textContent.split('T')[0];
-                    // Check if news is from today
+                const updatedNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
+                if (updatedNode) {
+                    const entryDate = updatedNode.textContent.split('T')[0];
                     if (entryDate === chicagoDate) {
-                        const title = entries[i].getElementsByTagName("title")[0].textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
-                        const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
-                        newsItems.push(`<span class="ticker-item"><a href="${link}" target="_blank">NEWS: ${title}</a></span>`);
+                        const titleNode = entries[i].getElementsByTagName("title")[0];
+                        const linkNode = entries[i].getElementsByTagName("link")[0];
+                        if (titleNode && linkNode) {
+                            const title = titleNode.textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
+                            const link = linkNode.getAttribute("href");
+                            newsItems.push(`<span class="ticker-item"><a href="${link}" target="_blank">NEWS: ${title}</a></span>`);
+                        }
                     }
                 }
             }
 
-            // 3. Alternate logic: Interleave Game Info between News items
+            // 3. Interleave
             let interleavedHtml = '';
             if (newsItems.length > 0) {
                 newsItems.forEach(newsHtml => {
                     interleavedHtml += gameHtml + newsHtml;
                 });
             } else {
-                // If no news for today, just show the game info
-                interleavedHtml = gameHtml;
+                interleavedHtml = gameHtml + gameHtml + gameHtml;
             }
 
-            // Duplicate content for seamless infinite loop effect
             content.innerHTML = interleavedHtml + interleavedHtml;
-            container.style.display = 'block';
             
-            // 4. Adjust Website Padding to prevent overlap
-            setTimeout(() => {
+            // 4. Adjust Layout for Divi
+            const adjustLayout = () => {
                 const height = barWrapper.offsetHeight;
-                document.body.style.transition = "padding-top 0.5s ease";
-                document.body.style.paddingTop = height + "px";
-            }, 1000);
+                if (height > 0) {
+                    document.body.style.transition = "padding-top 0.4s ease";
+                    document.body.style.paddingTop = height + "px";
+                }
+            };
+
+            adjustLayout();
+            window.addEventListener('resize', adjustLayout);
+            setTimeout(adjustLayout, 1500);
+            setTimeout(adjustLayout, 4000);
 
         } catch (error) {
-            console.error("Ticker Load Error:", error);
-            content.innerHTML = gameHtml + gameHtml;
-            container.style.display = 'block';
-            document.body.style.paddingTop = "110px";
+            content.innerHTML = gameHtml + gameHtml + gameHtml;
+            document.body.style.paddingTop = "100px";
         }
     }
 
-    // Run when window loads
-    if (document.readyState === "complete") {
+    if (document.readyState === 'complete') {
         initFloraBar();
     } else {
         window.addEventListener('load', initFloraBar);
