@@ -3,231 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Bulletin | Support My Local Community</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/skventuresigns-design/media/main/favicon.png">
-    <link rel="stylesheet" href="../style.css"> 
-    <style>
-        /* --- STANDALONE BULLETIN STYLES --- */
-        body { 
-            background-color: #0C70C2 !important; 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Times New Roman', serif; 
-            color: #222; 
-        }
-        
-        .bulletin-page-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+    <title>Clay County Community Bulletin | Local Events & Dispatches</title>
+    
+    <!-- SEO & GOOGLE SMART TAGS -->
+    <meta name="description" content="Official community bulletin for Clay County, Flora, and Louisville, IL. Stay updated on local church events, fundraisers, and town happenings.">
+    <meta name="keywords" content="Clay County IL Events, Flora IL Happenings, Louisville IL News, Community Calendar, Support My Local Community">
+    <meta property="og:title" content="Clay County Community Bulletin">
+    <meta property="og:description" content="Local dispatches and upcoming events for our community.">
+    <meta property="og:type" content="website">
 
+    <!-- GOOGLE ANALYTICS (ID: 533053210) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=533053210"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '533053210');
+    </script>
+
+    <style>
+        /* --- CLIPPING AESTHETIC --- */
         .news-clipping-wrapper {
-            background-color: #fffdf5; 
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.8); 
-            border: 2px solid #222;
-            width: 100%;
-            margin-bottom: 50px;
+            background-color: #fffdf5; /* Aged Paper Tint */
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6); 
+            border: 1px solid #222;
+            font-family: 'Times New Roman', Times, serif;
+            color: #222;
+            max-width: 500px;
+            margin: 20px auto;
+            overflow: hidden;
+            /* --- DIVI SETTINGS: Section Height 50 --- */
+            padding-top: 50px;
+            padding-bottom: 50px;
         }
 
         .clipping-masthead {
             text-align: center;
-            padding: 30px 15px;
+            padding: 0 10px;
             border-bottom: 4px double #222; 
-            margin: 0 25px;
+            /* --- DIVI SETTINGS: Row Height 30 --- */
+            margin: 0 30px; 
+            padding-bottom: 20px;
         }
 
         .black-tag {
             background: #000;
             color: #fff;
             text-transform: uppercase;
-            font-size: 24px;
+            /* --- DIVI SETTINGS: Header Text Size 30 --- */
+            font-size: 30px;
             font-weight: bold;
-            padding: 6px 20px;
+            padding: 5px 15px;
             display: inline-block;
             letter-spacing: 1px;
+            line-height: 1;
         }
 
-        .event-item {
+        .clipping-tagline {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin: 10px 0 0 0;
+            letter-spacing: 1px;
+            color: #444;
+        }
+
+        #divi-event-list {
+            /* --- DIVI SETTINGS: Row Height 30 --- */
+            padding: 10px 30px; 
+        }
+
+        .divi-event-item {
             border-bottom: 1px dashed #777;
-            padding: 25px 0;
-            margin: 0 25px;
+            padding: 15px 0;
+            text-align: left;
         }
 
-        .event-item:last-child { border-bottom: none; }
-
-        .event-date { color: #cc0000; font-weight: bold; font-size: 15px; text-transform: uppercase; }
-        .event-title { font-size: 26px; font-weight: bold; margin: 8px 0; line-height: 1.1; }
-
-        .event-details {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #333;
-            margin: 15px 0;
-            background: rgba(0,0,0,0.03);
-            padding: 15px;
-            border-left: 4px solid #cc0000;
+        .divi-event-item:last-child {
+            border-bottom: none;
         }
 
-        .cal-links { margin-top: 20px; font-size: 14px; }
-        .cal-text-link { color: #cc0000 !important; text-decoration: none !important; font-weight: bold; text-transform: uppercase; }
-        .cal-text-link:hover { text-decoration: underline !important; }
-
-        .clipping-footer {
-            border-top: 1px solid #222;
-            padding: 20px;
-            text-align: center;
-            font-style: italic;
+        .divi-event-date {
+            color: #cc0000;
+            font-weight: bold;
             font-size: 13px;
             text-transform: uppercase;
         }
 
-        /* --- GLOBAL DIVI MOBILE SETTINGS (USER PREFERENCE) --- */
-        @media (max-width: 768px) {
-            .bulletin-page-container {
-                margin: 50px auto !important; /* Section Height: 50 */
-                padding: 0 10px;
-            }
+        .divi-event-title {
+            font-size: 20px; 
+            font-weight: bold;
+            margin: 5px 0;
+            line-height: 1.2;
+        }
 
-            .news-clipping-wrapper {
-                margin-top: 30px !important; /* Row Height: 30 */
-            }
+        /* --- DIVI SETTINGS: Body Text Size 14 --- */
+        .event-info-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+        }
 
-            body, p, .event-details, .cal-links {
-                font-size: 14px !important; /* Body Text Size: 14 */
-            }
+        /* --- ONGOING "RIGHT NOW" INDICATOR --- */
+        .right-now-badge {
+            display: inline-block;
+            background-color: #cc0000;
+            color: #fff;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 8px;
+            vertical-align: middle;
+            animation: pulse-red 2s infinite;
+        }
 
-            .event-title, h1, h2, .black-tag {
-                font-size: 30px !important; /* Header Text Size: 30 */
-            }
+        @keyframes pulse-red {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
 
-            .clipping-masthead {
-                padding: 20px 10px;
-                margin: 0 10px;
-            }
+        .event-snippet {
+            font-size: 13px;
+            color: #555;
+            font-style: italic;
+            margin: 8px 0;
+            line-height: 1.4;
+            display: block;
+        }
 
-            .event-item {
-                margin: 0 15px;
-                padding: 20px 0;
-            }
+        .full-details {
+            display: none;
+            font-size: 13px;
+            color: #222;
+            font-style: normal;
+            margin: 10px 0;
+            line-height: 1.5;
+            background: rgba(0,0,0,0.03);
+            padding: 10px;
+            border-left: 3px solid #cc0000;
+        }
+
+        .read-more-btn {
+            color: #cc0000;
+            text-decoration: underline;
+            font-weight: bold;
+            font-style: normal;
+            font-size: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        /* --- CALENDAR LINKS --- */
+        .cal-links { 
+            margin-top: 15px;
+            font-size: 12px;
+        }
+
+        .cal-label {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .cal-text-link {
+            color: #cc0000 !important;
+            text-decoration: none !important;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+        
+        .cal-text-link:hover { text-decoration: underline !important; }
+
+        .clipping-footer {
+            border-top: 1px solid #222;
+            padding: 15px;
+            text-align: center;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 10px;
+        }
+
+        .loader {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #cc0000;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 600px) {
+            .news-clipping-wrapper { width: 95%; margin: 10px auto; }
+            .black-tag { font-size: 24px; } 
         }
     </style>
 </head>
-<body class="home-bg">
+<body>
 
-    <header class="header">
-        <img src="https://raw.githubusercontent.com/skventuresigns-design/media/main/smlc-web.png" class="header-logo" alt="SMLC Logo">
-        <nav class="nav-bar">
-            <button class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </button>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../clay-city.html">Clay City</a></li>
-                <li><a href="https://www.ourflora.com" target="_blank">Flora</a></li>
-                <li><a href="../louisville.html">Louisville</a></li>
-                <li><a href="../sailor-springs.html">Sailor Springs</a></li>
-                <li><a href="../xenia.html">Xenia</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="bulletin-page-container">
-        <div class="news-clipping-wrapper">
-            <div class="clipping-masthead">
-                <span class="black-tag">Community Bulletin</span>
-                <p style="text-transform:uppercase; font-size:12px; font-weight:bold; margin-top:10px; letter-spacing: 1px;">Full Event Details & Community Dispatches</p>
-            </div>
-            
-            <div id="event-list">
-                <p style="text-align:center; padding: 60px; font-style: italic;">Loading the latest local intelligence...</p>
-            </div>
-            
-            <div class="clipping-footer">Support My Local Community</div>
-        </div>
+<div class="news-clipping-wrapper">
+    <div class="clipping-masthead">
+        <span class="black-tag">Community Bulletin</span>
+        <p class="clipping-tagline" id="month-tagline">Dispatches & Happenings</p>
     </div>
+    
+    <div id="divi-event-list">
+        <p style="text-align:center; font-style: italic; padding: 20px;">
+            <span class="loader"></span> Connecting to the wire...
+        </p>
+    </div>
+    
+    <div class="clipping-footer">
+        View Full Community Calendar & Details<br>
+        Support My Local Community
+    </div>
+</div>
 
-    <footer class="site-footer">
-         <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
-         <p>All Rights Reserved - <a href="https://www.skventuresigns.com" target="_blank" class="footer-link">S&K Ventures</a></p>
-    </footer>
+<!-- Placeholder for Structured Data (SEO) -->
+<script type="application/ld+json" id="structured-data-block"></script>
 
-    <script>
-        const BULLETIN_URL = "https://script.google.com/macros/s/AKfycbyMQKX6USKUL8cxo4mSR9aXfiwHR4kqsElU4DH8rAi63W7KRuILDeayiEAv_uG_85qd0A/exec";
+<script>
+    /**
+     * SKELETON ENGINE - SMART CACHE & ANALYTICS ENABLED
+     */
+    const MY_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtunjBquRf8yjnYdpMNMglMQB6n0j4pHSNke-9yADxZ3-9HvJqXT2DdVTUjdhRroGcxQ/exec";
 
-        async function loadAllEvents() {
-            const list = document.getElementById('event-list');
-            
-            // Get Current Date (at Midnight) for comparison
-            const now = new Date();
-            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    // Set Dynamic Month Title
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const currentMonthName = monthNames[new Date().getMonth()];
+    document.getElementById('month-tagline').innerText = `${currentMonthName} Dispatches & Happenings`;
 
-            try {
-                const response = await fetch(BULLETIN_URL);
-                const events = await response.json();
-
-                if (events && events.length > 0) {
-                    // Filter out past events
-                    const futureEvents = events.filter(item => {
-                        const eventDate = new Date(item.date);
-                        // If the date is invalid, we show it just in case, 
-                        // otherwise only show if it's today or in the future
-                        return isNaN(eventDate) ? true : eventDate >= today;
-                    });
-
-                    if (futureEvents.length > 0) {
-                        list.innerHTML = '';
-                        
-                        // Sort events by date (closest first)
-                        futureEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-                        futureEvents.forEach(item => {
-                            const eventDateObj = new Date(item.date);
-                            const friendlyDate = isNaN(eventDateObj) ? item.date : eventDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                            const gDate = isNaN(eventDateObj) ? "" : eventDateObj.toISOString().replace(/-|:|\.\d\d\d/g, "").split("T")[0];
-                            
-                            const gCalLink = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(item.name)}&dates=${gDate}/${gDate}&details=${encodeURIComponent(item.details || '')}&location=${encodeURIComponent(item.location)}&sf=true&output=xml`;
-                            const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${item.name}\nLOCATION:${item.location}\nDTSTART:${gDate}\nDTEND:${gDate}\nDESCRIPTION:${item.details || ''}\nEND:VEVENT\nEND:VCALENDAR`;
-                            const icsData = "data:text/calendar;charset=utf8," + encodeURIComponent(icsContent);
-
-                            const div = document.createElement('div');
-                            div.className = 'event-item';
-                            div.innerHTML = `
-                                <div class="event-date">${friendlyDate}</div>
-                                <div class="event-title">${item.name}</div>
-                                <div style="font-size: 15px; color:#444;"><strong>Location:</strong> ${item.location} <br> <strong>Time:</strong> ${item.time}</div>
-                                
-                                <div class="event-details">
-                                    ${item.details ? item.details : "No additional details provided."}
-                                </div>
-
-                                <div class="cal-links">
-                                    <span>Save to Calendar:</span>
-                                    <a href="${gCalLink}" target="_blank" class="cal-text-link">Google</a> | 
-                                    <a href="${icsData}" download="event.ics" class="cal-text-link">Apple / Outlook</a>
-                                </div>
-                            `;
-                            list.appendChild(div);
-                        });
-                    } else {
-                        list.innerHTML = "<p style='text-align:center; padding: 60px;'>All scheduled events have concluded. Check back soon for new dispatches!</p>";
-                    }
-                } else {
-                    list.innerHTML = "<p style='text-align:center; padding: 60px;'>No current events scheduled in Clay County.</p>";
-                }
-            } catch (e) {
-                list.innerHTML = "<p style='text-align:center; padding: 60px;'>Unable to connect to the community wire.</p>";
-            }
+    /**
+     * Analytics Tracker
+     */
+    function trackEvent(action, label) {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', action, {
+                'event_category': 'Bulletin Widget',
+                'event_label': label
+            });
         }
+    }
 
-        // Hamburger Navigation Logic
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        hamburger.addEventListener('click', () => { 
-            navLinks.classList.toggle('open'); 
-        });
+    function toggleDetails(id, title) {
+        const detailEl = document.getElementById('details-' + id);
+        const snippetEl = document.getElementById('snippet-' + id);
+        const btnEl = document.getElementById('btn-' + id);
+        
+        if (detailEl.style.display === 'block') {
+            detailEl.style.display = 'none';
+            snippetEl.style.display = 'block';
+            btnEl.innerText = 'Read More';
+        } else {
+            detailEl.style.display = 'block';
+            snippetEl.style.display = 'none';
+            btnEl.innerText = 'Show Less';
+            // Track Read More click
+            trackEvent('read_more_click', title);
+        }
+    }
 
-        document.addEventListener('DOMContentLoaded', loadAllEvents);
-    </script>
+    /**
+     * Google Smart Logic: Generates Schema.org Structured Data
+     * This helps Google recognize these as legitimate events for Clay County.
+     */
+    function injectStructuredData(events) {
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": events.map((ev, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "item": {
+                    "@type": "Event",
+                    "name": ev.name,
+                    "startDate": ev.date,
+                    "location": {
+                        "@type": "Place",
+                        "name": ev.location,
+                        "address": {
+                            "@type": "PostalAddress",
+                            "addressLocality": "Flora",
+                            "addressRegion": "IL"
+                        }
+                    },
+                    "description": ev.details
+                }
+            }))
+        };
+        document.getElementById('structured-data-block').textContent = JSON.stringify(schema);
+    }
+
+    async function displayDiviEvents() {
+        const list = document.getElementById('divi-event-list');
+        const cacheBuster = `t=${Date.now()}&v=${Math.random().toString(36).substring(7)}`;
+        const BULLETIN_URL = `${MY_SCRIPT_URL}?feed=true&${cacheBuster}`;
+
+        try {
+            const response = await fetch(BULLETIN_URL);
+            if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+
+            const events = await response.json();
+
+            if (Array.isArray(events) && events.length > 0) {
+                list.innerHTML = '';
+                
+                // SEO: Inject Structured Data
+                injectStructuredData(events);
+
+                events.forEach((item, index) => {
+                    const title = item.name || "Untitled Event";
+                    const displayDate = item.date || item.displayDate || "Date TBA";
+                    const displayTime = item.time || item.displayTime || "Time TBA";
+                    const location = item.location || "Clay County";
+                    const details = item.details || "";
+                    const isOngoing = item.isOngoing || false;
+                    
+                    let gCalLink = item.googleLink;
+                    if (!gCalLink || gCalLink === "#" || gCalLink.includes("/edit")) {
+                        const cleanTitle = encodeURIComponent(title);
+                        const cleanLoc = encodeURIComponent(location);
+                        const cleanDesc = encodeURIComponent(details);
+                        gCalLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${cleanTitle}&details=${cleanDesc}&location=${cleanLoc}&sf=true&output=xml`;
+                    }
+
+                    const icsLink = item.icalData ? "data:text/calendar;base64," + item.icalData : "#";
+
+                    const isLong = details.length > 85;
+                    const snippetText = isLong ? details.substring(0, 85) + "..." : details;
+
+                    const div = document.createElement('div');
+                    div.className = 'divi-event-item';
+                    div.innerHTML = `
+                        <div class="divi-event-date">${displayDate}</div>
+                        <div class="divi-event-title">${title}</div>
+                        <div class="event-info-text">
+                            <strong>Where:</strong> ${location} <br> 
+                            <strong>Time:</strong> ${displayTime} ${isOngoing ? '<span class="right-now-badge">Right Now!</span>' : ''}
+                        </div>
+                        
+                        ${details ? `
+                            <div class="event-snippet" id="snippet-${index}">"${snippetText}"</div>
+                            <div class="full-details" id="details-${index}">${details}</div>
+                            ${isLong ? `<div class="read-more-btn" id="btn-${index}" onclick="toggleDetails(${index}, '${title.replace(/'/g, "\\'")}')">Read More</div>` : ''}
+                        ` : ''}
+
+                        <div class="cal-links">
+                            <span class="cal-label">Add to Calendar</span>
+                            <a href="${gCalLink}" target="_blank" class="cal-text-link" onclick="trackEvent('google_cal_add', '${title.replace(/'/g, "\\'")}')">Google</a>
+                            <span style="color:#777; margin: 0 5px;">|</span>
+                            <a href="${icsLink}" download="${title.replace(/\s+/g, '_')}.ics" class="cal-text-link" onclick="trackEvent('apple_cal_add', '${title.replace(/'/g, "\\'")}')">Apple / Outlook</a>
+                        </div>
+                    `;
+                    list.appendChild(div);
+                });
+            } else {
+                list.innerHTML = `<p style='text-align:center; padding: 20px; font-style:italic;'>No more dispatches scheduled for ${currentMonthName}.</p>`;
+            }
+        } catch (e) {
+            console.error("Fetch failure:", e);
+            list.innerHTML = `<p style='text-align:center; padding: 20px; color:#cc0000;'>Sync Error. Please check script permissions.</p>`;
+        }
+    }
+
+    if (document.readyState === 'complete') {
+        displayDiviEvents();
+    } else {
+        window.addEventListener('load', displayDiviEvents);
+    }
+</script>
+
 </body>
 </html>
