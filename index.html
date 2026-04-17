@@ -6,6 +6,15 @@
     <title>Support My Local Community | Clay County, IL</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/skventuresigns-design/media/main/favicon.png">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Mobile layout adjustments based on global settings */
+        @media (max-width: 768px) {
+            .header-logo { height: 50px; } /* Section/Header height */
+            .nav-bar { height: 30px; }    /* Row height */
+            body, p, .biz-description { font-size: 14px; } /* Body Text Size */
+            h1, h2, .news-heading-bar h2 { font-size: 30px !important; } /* Header Text Size */
+        }
+    </style>
 </head>
 <body class="home-bg">
     <header class="header">
@@ -17,7 +26,7 @@
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="clay-city.html">Clay City</a></li>
-                <li><a href="https://www.ourflora.com" target="_blank">Flora</a></li>
+                <li><a href="flora.html">Flora</a></li>
                 <li><a href="louisville.html">Louisville</a></li>
                 <li><a href="sailor-springs.html">Sailor Springs</a></li>
                 <li><a href="xenia.html">Xenia</a></li>
@@ -67,7 +76,7 @@
 
     <div class="orange-master-section">
         <div class="news-heading-bar">
-            <h2 style="font-size: 32px !important;"><strong><u>Your Source For Local News</u></strong></h2>
+            <h2><strong><u>Your Source For Local News</u></strong></h2>
         </div>
         
         <div class="orange-grid-row" style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 20px;">
@@ -135,8 +144,8 @@
                     <div style="text-align: center; margin-top: 15px; padding-top: 10px; border-top: 1px solid #ddd;">
                         <a href="/bulletin/index.html" class="footer-master-link" style="color: #222; font-weight: bold; font-size: 12px; text-transform: uppercase; text-decoration: underline;">View Full Calendar & Details</a>
                     </div>
+            </div>
         </div>
-    </div>
 
         <div class="intricate-col">
             <div class="clay-county-news-box spotlight-clipping">
@@ -230,7 +239,7 @@
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
 
-       // Bulletin       
+        // Bulletin       
         const BULLETIN_DATA_URL = "https://script.google.com/macros/s/AKfycbyMQKX6USKUL8cxo4mSR9aXfiwHR4kqsElU4DH8rAi63W7KRuILDeayiEAv_uG_85qd0A/exec";
 
         async function loadDirectEvents() {
