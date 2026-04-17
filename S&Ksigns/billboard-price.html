@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>S&K Venture Signs | High-Traffic Digital Billboard Advertising</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Venture Signs">
+    <link rel="apple-touch-icon" href="https://i0.wp.com/skventuresigns.com/wp-content/uploads/2025/02/SK-Advertising-Sign-in-Sky.png?w=250&ssl=1">
+    
+    <!-- Embedded Manifest for "Add to Home Screen" Support -->
+    <link rel="manifest" href='data:application/json,{"name":"S&K Venture Signs Portal","short_name":"Venture Signs","start_url":".","display":"standalone","background_color":"#3E0100","theme_color":"#3E0100","icons":[{"src":"https://i0.wp.com/skventuresigns.com/wp-content/uploads/2025/02/SK-Advertising-Sign-in-Sky.png?w=250&ssl=1","sizes":"250x250","type":"image/png"}]}'>
+
+    <!-- SEO Metadata -->
+    <meta name="description" content="S&K Venture Signs provides high-traffic digital billboard placements across Illinois. Monetize your property or grow your business with premium advertising.">
+    <meta name="author" content="S&K Venture Signs">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=533053210"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '533053210');
+    </script>
+
+    <style>
+        /* Global Design Tokens: Divi Mobile Phone Layout Settings */
+        :root {
+            --divi-section: 50px;
+            --divi-row: 30px;
+            --divi-body: 14px;
+            --divi-header: 30px;
+            --sk-maroon: #3E0100;
+            --sk-gold: #FFC627;
+        }
+
+        /* HIDE SCROLLBAR - Mandatory for a clean mobile app experience */
+        ::-webkit-scrollbar { display: none; }
+
+        html, body {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            overflow-x: hidden;
+            background-color: var(--sk-maroon);
+            background-image: linear-gradient(rgba(62, 1, 0, 0.95), rgba(62, 1, 0, 0.98)), url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+            background-attachment: fixed;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: white;
+            font-size: var(--divi-body);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .section-padding { padding-top: var(--divi-section); padding-bottom: var(--divi-section); }
+        .row-margin { margin-bottom: var(--divi-row); }
+        .header-text { font-size: var(--divi-header); }
+
+        @keyframes progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+        .animate-progress { animation: progress 2s infinite linear; }
+        .card-shadow { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+
+        /* PWA Install Banner Style */
+        #pwa-install-banner {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s;
+        }
+        .install-visible { transform: translateY(0) !important; opacity: 1 !important; }
+
+        .cta-gradient {
+            background: linear-gradient(135deg, rgba(255,198,39,0.15) 0%, rgba(255,198,39,0) 100%);
+        }
+
+        .traffic-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Notification Toast System -->
+    <div id="toast-container" class="fixed top-24 right-5 z-[9999] flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- PWA INSTALL BANNER -->
+    <div id="pwa-install-banner" class="fixed bottom-0 left-0 w-full z-[10001] p-4 transform translate-y-full opacity-0 pointer-events-none">
+        <div class="max-w-md mx-auto bg-black/95 border-t-4 border-[#FFC627] rounded-t-3xl p-6 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] pointer-events-auto">
+            <div class="flex items-center gap-4 mb-4">
+                <img src="https://i0.wp.com/skventuresigns.com/wp-content/uploads/2025/02/SK-Advertising-Sign-in-Sky.png?w=250&ssl=1" class="w-12 h-12 rounded-xl border border-[#FFC627]/30 object-cover" alt="App Icon">
+                <div class="flex-1">
+                    <h4 class="font-black uppercase text-[#FFC627] text-xs tracking-widest">Install Venture Signs</h4>
+                    <p class="text-[11px] opacity-70 font-medium leading-tight">Get real-time traffic growth alerts and competitive billboard rates.</p>
+                </div>
+                <button onclick="closeInstallBanner()" class="opacity-40 hover:opacity-100 p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div id="install-action-container">
+                <button id="android-install-btn" onclick="triggerAndroidInstall()" class="hidden w-full bg-[#FFC627] text-[#3E0100] py-3 rounded-xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i> Install App
+                </button>
+                <div id="ios-install-info" class="hidden text-center bg-white/5 p-3 rounded-xl border border-white/5">
+                    <p class="text-[10px] font-bold uppercase tracking-tighter flex items-center justify-center gap-2 text-white/80">
+                        Tap <i data-lucide="share" class="w-4 h-4 text-blue-400"></i> then <span class="text-[#FFC627]">"Add to Home Screen"</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-[1000] transition-all duration-700 flex flex-col items-center bg-[#3E0100] border-b border-white/5 py-10 px-6">
+        <div class="mb-6 transition-all duration-700">
+            <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/c2bfac650f1e9df5206190fbf33a3cffb0776a8f/S%26Ksigns/Venture-Signs.png" alt="S&K Venture Signs" class="max-w-[500px] w-full h-auto transition-all duration-700" id="header-logo" />
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 md:gap-10 w-full transition-all duration-700">
+            <nav class="flex gap-8"><a href="https://skventuresigns.com" class="text-[#FFC627] uppercase font-black text-sm tracking-[0.2em] hover:opacity-70 transition-opacity">Home</a></nav>
+            <div id="alert-toggle-container"></div>
+            <button onclick="downloadVCard()" class="bg-[#FFC627] text-[#3E0100] px-5 py-2 rounded-xl shadow-xl font-black text-[10px] uppercase flex items-center gap-2 hover:scale-105 transition-transform"><i data-lucide="user-plus" class="w-4 h-4"></i> Save Contact</button>
+            <a href="tel:8449074450" onclick="trackGA('call_click', 'Header')" class="text-[#FFC627] font-black tracking-tighter text-2xl md:text-4xl hover:opacity-70 transition-opacity flex items-center gap-2">
+                <i data-lucide="phone" class="w-6 h-6 md:w-8 md:h-8"></i> 844-907-4450
+            </a>
+        </div>
+        <div id="refresh-indicator" class="hidden absolute bottom-0 left-0 w-full h-[2px] bg-[#FFC627]/20 overflow-hidden"><div class="h-full bg-[#FFC627] w-1/3 animate-progress"></div></div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="billboard-container" class="max-w-7xl mx-auto px-4 pb-24" style="padding-top: 380px;">
+        
+        <!-- STRATEGIC PARTNERSHIP CTA -->
+        <section class="mb-16 p-10 bg-black/40 border border-[#FFC627]/30 rounded-[40px] cta-gradient text-center shadow-2xl overflow-hidden relative">
+            <div class="absolute top-4 right-6 flex items-center gap-2 opacity-30">
+                <i data-lucide="trending-up" class="w-4 h-4 text-[#FFC627]"></i>
+                <span class="text-[9px] font-black uppercase tracking-[0.3em] text-[#FFC627]">High-Traffic Impact</span>
+            </div>
+            <h2 class="text-[#FFC627] font-black italic uppercase tracking-[0.2em] text-2xl mb-4">Grow Your Regional Sales</h2>
+            <p class="max-w-3xl mx-auto text-white/70 mb-8 font-medium leading-relaxed">S&K Venture Signs specializes in premium high-traffic digital billboard placements. We analyze real-world driving metrics to ensure your brand reaches thousands of daily commuters. View our inventory or partner with us to monetize your property.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="tel:8449074450" class="bg-[#FFC627] text-[#3E0100] px-10 py-3.5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white transition-all shadow-[0_15px_30px_rgba(255,198,39,0.2)]">Get Billboard Rates</a>
+                <button onclick="document.getElementById('landowner-partnership').scrollIntoView({behavior:'smooth'})" class="bg-white/5 border border-white/10 text-white px-10 py-3.5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white/20 transition-all">Host a Billboard</button>
+            </div>
+        </section>
+
+        <div id="loading-spinner" class="flex flex-col items-center justify-center py-32 space-y-4">
+            <div class="w-12 h-12 border-4 border-[#FFC627]/20 border-t-[#FFC627] rounded-full animate-spin"></div>
+            <div class="text-[#FFC627] font-black uppercase tracking-[0.4em] text-[10px]">Syncing Traffic Data...</div>
+        </div>
+
+        <div id="grid-root" class="hidden grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 items-stretch"></div>
+    </main>
+
+    <!-- LANDOWNER PARTNERSHIP -->
+    <section id="landowner-partnership" class="max-w-4xl mx-auto px-6 mb-24 text-center">
+        <div class="p-12 bg-black/60 border-2 border-dashed border-[#FFC627]/40 rounded-[50px] shadow-2xl relative overflow-hidden">
+            <i data-lucide="traffic-cone" class="absolute -bottom-10 -left-10 w-40 h-40 text-[#FFC627] opacity-5"></i>
+            <h2 class="text-[#FFC627] font-black italic uppercase text-3xl mb-4 tracking-tighter">Monetize Your High-Traffic Property</h2>
+            <p class="text-white/60 mb-10 font-medium text-lg leading-relaxed max-w-2xl mx-auto">Do you own land on a busy street or highway? S&K Venture Signs is actively seeking new locations to drive local commerce. Let's discuss a partnership that puts your location to work.</p>
+            <div class="flex flex-col items-center gap-4">
+                <a href="mailto:Scott.Robinson@skventuresigns.com?subject=Property Traffic Inquiry" class="bg-[#FFC627] text-[#3E0100] px-12 py-5 rounded-2xl font-black uppercase text-sm tracking-widest hover:scale-105 transition-transform shadow-2xl">Contact Scott Robinson</a>
+                <span class="text-[9px] uppercase font-black text-[#FFC627] tracking-[0.5em] opacity-40">Illinois Regional Partnership Program</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer class="bg-black/40 border-t border-white/5 text-center px-6 section-padding">
+        <h2 class="text-[#FFC627] font-black italic uppercase tracking-[0.3em] mb-16 text-3xl md:text-4xl">Faith • Family • Community</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto text-left">
+            <div class="p-10 bg-black/40 rounded-3xl border border-white/5 card-shadow group hover:border-[#FFC627]/30 transition-colors">
+                <h3 class="text-[#FFC627] font-black uppercase text-[10px] tracking-[0.3em] mb-6 opacity-30">Main Office</h3>
+                <p class="text-base font-semibold leading-relaxed">607 W Clark Ave<br/>Effingham, IL 62401</p>
+            </div>
+            <div class="p-10 bg-black/40 rounded-3xl border border-white/5 card-shadow group hover:border-[#FFC627]/30 transition-colors">
+                <h3 class="text-[#FFC627] font-black uppercase text-[10px] tracking-[0.3em] mb-6 opacity-30">Direct Line</h3>
+                <div class="text-base font-semibold">Scott Robinson<br/><a href="tel:8449074450" class="hover:text-[#FFC627] transition-colors flex items-center gap-2 mt-1"><i data-lucide="phone" class="w-4 h-4"></i> 844-907-4450</a></div>
+            </div>
+            <div class="p-10 bg-black/40 rounded-3xl border border-white/5 card-shadow group hover:border-[#FFC627]/30 transition-colors">
+                <h3 class="text-[#FFC627] font-black uppercase text-[10px] tracking-[0.3em] mb-6 opacity-30">Electronic</h3>
+                <div class="text-base font-semibold"><a href="mailto:Scott.Robinson@skventuresigns.com" class="hover:text-[#FFC627] transition-colors flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> Scott.Robinson@<br/>skventuresigns.com</a></div>
+            </div>
+        </div>
+        <div class="mt-24"><p class="text-white/10 text-[9px] uppercase tracking-[0.6em] font-black">© 2026 S&K Venture Signs — Established 2019</p></div>
+    </footer>
+
+    <script>
+        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRIkCZ_6qzk9T82iPH1DcZFplAdev1n_kSasC_QKO1v1zfcGorTHN6MKjCtOcOOk_j2Txx481WB2LB3/pub?output=csv";
+        const CACHE_KEY = "sk_portal_smart_cache_v5";
+        const OPT_OUT_KEY = "sk_alert_opt_out";
+        const PROFILE_IMAGE_URL = "https://i0.wp.com/skventuresigns.com/wp-content/uploads/2025/02/SK-Advertising-Sign-in-Sky.png?w=250&ssl=1";
+        
+        // Comprehensive Community Leads Map
+        const COMMUNITY_HUBS = [
+            { name: "Louisville", lat: 38.7717, lng: -88.5034, county: "Clay" },
+            { name: "Flora", lat: 38.6681, lng: -88.4851, county: "Clay" },
+            { name: "Effingham", lat: 39.1200, lng: -88.5434, county: "Effingham" },
+            { name: "Casey", lat: 39.3006, lng: -87.9892, county: "Clark" },
+            { name: "Paris", lat: 39.6111, lng: -87.6961, county: "Edgar" },
+            { name: "Carbondale", lat: 37.7273, lng: -89.2167, county: "Jackson" },
+            { name: "Fairfield", lat: 38.3792, lng: -88.3601, county: "Wayne" },
+            { name: "Cisne", lat: 38.5134, lng: -88.4359, county: "Wayne" },
+            { name: "Teutopolis", lat: 39.1317, lng: -88.4770, county: "Effingham" },
+            { name: "Marshall", lat: 39.3923, lng: -87.6939, county: "Clark" }
+        ];
+
+        let billboards = [];
+        let base64ProfileImage = "";
+
+        async function preloadProfileImage() {
+            try {
+                const response = await fetch(PROFILE_IMAGE_URL);
+                const blob = await response.blob();
+                const reader = new FileReader();
+                reader.onloadend = () => { base64ProfileImage = reader.result.split(',')[1]; };
+                reader.readAsDataURL(blob);
+            } catch (e) { console.warn("Photo preload skipped"); }
+        }
+
+        /**
+         * V5 STATE-MACHINE CSV PARSER
+         * PRIORITIZES ROW 7 (INDEX 6) AS PRIMARY COUNTY SOURCE
+         */
+        function parseCSV(text) {
+            const result = [];
+            let row = [];
+            let cell = '';
+            let inQuotes = false;
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const nextChar = text[i + 1];
+                if (inQuotes) {
+                    if (char === '"' && nextChar === '"') { cell += '"'; i++; }
+                    else if (char === '"') { inQuotes = false; }
+                    else { cell += char; }
+                } else {
+                    if (char === '"') { inQuotes = true; }
+                    else if (char === ',') { row.push(cell.trim()); cell = ''; }
+                    else if (char === '\n' || char === '\r') {
+                        if (char === '\r' && nextChar === '\n') i++;
+                        row.push(cell.trim());
+                        if (row.length > 0) result.push(row);
+                        row = []; cell = '';
+                    } else { cell += char; }
+                }
+            }
+            if (cell || row.length > 0) { row.push(cell.trim()); result.push(row); }
+
+            const list = [];
+            if (result.length >= 7) {
+                const towns = result[0];
+                for (let col = 1; col < towns.length; col++) {
+                    if (towns[col]) {
+                        list.push({
+                            town: towns[col],
+                            price: result[1] ? result[1][col] : "",
+                            plan: result[2] ? result[2][col] : "",
+                            coords: result[3] ? result[3][col] : "",
+                            info: result[4] ? result[4][col] : "",
+                            pdf: result[5] ? result[5][col] : "",
+                            // Use Row 7 (Index 6) as the Master County source
+                            county: (result[6] && result[6][col]) ? result[6][col] : "Regional Illinois"
+                        });
+                    }
+                }
+            }
+            return list.sort((a, b) => a.town.localeCompare(b.town));
+        }
+
+        /**
+         * PRICE & PLAN CHANGE DETECTION
+         * Specifically monitors Row 2 and Row 3 for changes.
+         */
+        function detectPriceChanges(newData) {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (!cached) return;
+            
+            try {
+                const oldData = JSON.parse(cached);
+                newData.forEach(newItem => {
+                    const oldItem = oldData.find(o => o.town === newItem.town);
+                    if (oldItem) {
+                        // Check Price (Row 2) or Plan (Row 3) changes
+                        if (oldItem.price !== newItem.price || oldItem.plan !== newItem.plan) {
+                            addToast(`Price Updated for ${newItem.town}!`, "success");
+                        }
+                    }
+                });
+            } catch (e) { console.warn("Cache diff failed"); }
+        }
+
+        function trackGA(action, label) {
+            if (typeof gtag === 'function') {
+                gtag('event', action, { 'event_category': 'Engagement', 'event_label': label });
+            }
+        }
+
+        function addToast(msg, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const color = type === 'success' ? 'border-green-500' : 'border-[#FFC627]';
+            toast.className = `bg-black border-l-4 ${color} text-white px-6 py-4 shadow-2xl transition-all duration-300 transform translate-x-full font-black text-[11px] uppercase tracking-widest`;
+            toast.innerText = msg;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-x-full'), 100);
+            setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 500); }, 4000);
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('grid-root');
+            const spinner = document.getElementById('loading-spinner');
+            grid.innerHTML = '';
+            billboards.forEach((item, idx) => {
+                const card = `
+                    <div class="bg-black/40 border border-white/5 rounded-2xl overflow-hidden hover:border-[#FFC627] transition-all duration-500 group relative shadow-2xl flex flex-col h-full" style="margin-bottom: var(--divi-row)">
+                        <div class="h-[180px] md:h-[280px] relative bg-[#1a0100] overflow-hidden">
+                            <div class="absolute top-3 right-3 z-20 bg-black/80 backdrop-blur-md border border-[#FFC627]/40 text-[#FFC627] px-2 py-1.5 rounded text-[8px] font-black uppercase tracking-[0.2em] traffic-pulse">High-Traffic Spot</div>
+                            ${item.coords ? `
+                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.coords)}" target="_blank" onclick="trackGA('maps_click', '${item.town}')" class="absolute top-3 left-3 md:top-4 md:left-4 z-20 bg-white text-blue-600 px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-[9px] md:text-[10px] font-black uppercase flex items-center gap-1 md:gap-2 shadow-2xl hover:bg-blue-50 transition-colors">
+                                    <i data-lucide="map-pin" class="w-3 h-3 md:w-4 md:h-4"></i> Maps
+                                </a>
+                                <iframe class="w-full h-full grayscale-[30%] opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" src="https://www.google.com/maps?q=${encodeURIComponent(item.coords)}&z=16&t=k&output=embed" loading="lazy"></iframe>
+                            ` : `<div class="h-full flex flex-col items-center justify-center space-y-2 opacity-20"><i data-lucide="globe" class="w-8 h-8"></i><span class="text-[9px] uppercase font-bold tracking-widest">GPS Missing</span></div>`}
+                        </div>
+                        <div class="p-4 md:p-8 flex flex-col flex-grow">
+                            <div class="flex justify-between items-start border-b border-white/10 pb-3 md:pb-5 mb-3 md:mb-5">
+                                <div class="flex-1 pr-2 md:pr-4">
+                                    <h2 class="text-[#FFC627] font-black italic uppercase tracking-tighter leading-none group-hover:underline header-text">${item.town}</h2>
+                                    <div class="flex items-center gap-1 mt-2 opacity-50"><i data-lucide="navigation" class="w-3 h-3 text-[#FFC627]"></i><span class="text-[9px] text-[#FFC627] font-bold uppercase tracking-widest">${item.county}</span></div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[#2ecc71] font-black text-lg md:text-2xl tracking-tighter">${item.price}</div>
+                                    <div class="text-[8px] md:text-[9px] uppercase opacity-40 font-black tracking-[0.2em] mt-1">Per ${item.plan || 'Mo'}</div>
+                                </div>
+                            </div>
+                            <p class="text-white/80 leading-relaxed font-medium mb-6 md:mb-10 flex-grow" style="font-size: var(--divi-body)">${item.info}</p>
+                            ${item.pdf ? `
+                                <div class="mt-auto pt-4 md:pt-6 border-t border-white/5">
+                                    <button onclick="window.open('${item.pdf}', '_blank'); trackGA('info_click', '${item.town}')" class="flex items-center justify-between w-full text-[#FFC627] group/btn">
+                                        <span class="font-black text-[9px] md:text-[11px] uppercase tracking-[0.2em] group-hover/btn:translate-x-1 transition-transform">More Information</span>
+                                        <div class="p-1.5 md:p-2 rounded-full bg-[#FFC627]/10 group-hover/btn:bg-[#FFC627] group-hover/btn:text-[#3E0100] transition-all"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></div>
+                                    </button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+            spinner.classList.add('hidden');
+            grid.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        async function fetchCSVData() {
+            document.getElementById('refresh-indicator').classList.remove('hidden');
+            try {
+                const res = await fetch(CSV_URL);
+                const text = await res.text();
+                const newData = parseCSV(text);
+                
+                detectPriceChanges(newData);
+                
+                const cached = localStorage.getItem(CACHE_KEY);
+                if (cached !== JSON.stringify(newData)) {
+                    billboards = newData;
+                    localStorage.setItem(CACHE_KEY, JSON.stringify(newData));
+                    renderGrid();
+                }
+            } catch (e) { console.warn("Sync delay"); } 
+            finally { document.getElementById('refresh-indicator').classList.add('hidden'); }
+        }
+
+        function downloadVCard() {
+            const vCardData = ["BEGIN:VCARD", "VERSION:3.0", "FN:Scott Robinson", "ORG:S&K Venture Signs", "TITLE:Owner", "TEL;TYPE=WORK,VOICE:18449074450", "EMAIL;TYPE=PREF,INTERNET:Scott.Robinson@skventuresigns.com", "URL:https://skventuresigns.com", base64ProfileImage ? `PHOTO;ENCODING=b;TYPE=PNG:${base64ProfileImage}` : "", "END:VCARD"].filter(Boolean).join("\n");
+            const blob = new Blob([vCardData], { type: 'text/vcard' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'Scott_Robinson_Venture.vcf';
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            addToast("Rich Contact Downloaded", "success");
+        }
+
+        function startGeofencing() {
+            if (!("geolocation" in navigator)) return;
+            setInterval(() => {
+                if (localStorage.getItem(OPT_OUT_KEY) === 'true') return;
+                navigator.geolocation.getCurrentPosition(pos => {
+                    const userLat = pos.coords.latitude;
+                    const userLng = pos.coords.longitude;
+                    
+                    billboards.forEach(item => {
+                        if (!item.coords) return;
+                        const [bLat, bLng] = item.coords.split(',').map(c => parseFloat(c.trim()));
+                        if (calculateDistance(userLat, userLng, bLat, bLng) < 8.05) {
+                            triggerAlert(item.county, item.town, "billboard");
+                        }
+                    });
+
+                    COMMUNITY_HUBS.forEach(hub => {
+                        if (calculateDistance(userLat, userLng, hub.lat, hub.lng) < 8.05) {
+                            triggerAlert(hub.county, hub.name, "community");
+                        }
+                    });
+                }, null, { enableHighAccuracy: true });
+            }, 60000);
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; 
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
+
+        function triggerAlert(county, location, type) {
+            if (Notification.permission === 'granted' && localStorage.getItem(OPT_OUT_KEY) !== 'true') {
+                const key = `sk_notif_${location}`;
+                const last = localStorage.getItem(key);
+                if (!last || (Date.now() - parseInt(last) > 3600000)) {
+                    const isEven = Math.floor(Date.now() / 3600000) % 2 === 0;
+                    const body = type === "billboard" 
+                        ? `Target daily traffic in ${location}! View verified billboard rates.`
+                        : (isEven 
+                            ? `Increase your business traffic! High-traffic billboard zones open in ${county}.` 
+                            : `Is your street high-traffic? Partner with S&K Signs to host a billboard.`);
+                    
+                    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                        navigator.serviceWorker.ready.then(reg => {
+                            reg.showNotification(`S&K Venture Signs`, {
+                                body: body,
+                                icon: PROFILE_IMAGE_URL,
+                                silent: true,
+                                tag: location
+                            });
+                        });
+                    } else {
+                        new Notification(`S&K Venture Signs`, { body: body, icon: PROFILE_IMAGE_URL, silent: true });
+                    }
+                    localStorage.setItem(key, Date.now());
+                    trackGA('geofence_triggered', `${type}_${location}`);
+                }
+            }
+        }
+
+        function setupAlertToggle() {
+            const container = document.getElementById('alert-toggle-container');
+            const optedOut = localStorage.getItem(OPT_OUT_KEY) === 'true';
+            container.innerHTML = optedOut ? 
+                `<button onclick="enableAlerts()" class="bg-[#FFC627] text-[#3E0100] px-4 py-2 rounded-lg font-black text-[10px] uppercase tracking-wider flex items-center gap-2 hover:bg-white transition-colors"><i data-lucide="bell" class="w-3.5 h-3.5"></i> Alerts On</button>` :
+                `<button onclick="disableAlerts()" class="bg-white/10 text-white/60 px-4 py-2 rounded-lg font-black text-[10px] uppercase tracking-wider flex items-center gap-2 hover:bg-white/20 transition-colors"><i data-lucide="bell-off" class="w-3.5 h-3.5"></i> Opt Out</button>`;
+            lucide.createIcons();
+        }
+
+        function enableAlerts() { localStorage.setItem(OPT_OUT_KEY, 'false'); Notification.requestPermission().then(() => setupAlertToggle()); }
+        function disableAlerts() { localStorage.setItem(OPT_OUT_KEY, 'true'); setupAlertToggle(); }
+        function closeInstallBanner() { document.getElementById('pwa-install-banner').classList.remove('install-visible'); }
+
+        function checkPWAInstall() {
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+            if (isStandalone) return;
+            const banner = document.getElementById('pwa-install-banner');
+            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                document.getElementById('ios-install-info').classList.remove('hidden');
+                banner.classList.add('install-visible');
+            }
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault(); deferredPrompt = e;
+                document.getElementById('android-install-btn').classList.remove('hidden');
+                banner.classList.add('install-visible');
+            });
+        }
+
+        function triggerAndroidInstall() {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(() => { closeInstallBanner(); });
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            const logo = document.getElementById('header-logo');
+            if (window.scrollY > 60) {
+                header.classList.add('py-2', 'shadow-2xl', 'bg-opacity-95');
+                header.classList.remove('py-10');
+                logo.classList.add('max-w-[180px]');
+            } else {
+                header.classList.remove('py-2', 'shadow-2xl', 'bg-opacity-95');
+                header.classList.add('py-10');
+                logo.classList.remove('max-w-[180px]');
+            }
+        });
+
+        window.onload = () => {
+            preloadProfileImage();
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (cached) { billboards = JSON.parse(cached); renderGrid(); }
+            fetchCSVData();
+            setupAlertToggle();
+            startGeofencing();
+            checkPWAInstall();
+            lucide.createIcons();
+            const prompt = () => { if (localStorage.getItem(OPT_OUT_KEY) !== 'true') enableAlerts(); window.removeEventListener('click', prompt); };
+            window.addEventListener('click', prompt);
+        };
+    </script>
+</body>
+</html>
