@@ -1,39 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-518297235"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-518297235');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xenia, IL | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
-    
-    <!-- External Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="xenia.css">
 </head>
 <body class="xenia_bg">
 
-    <!-- News Ticker (Xenia Feed) -->
-    <div id="news-ticker-container" style="display: none;">
-        <div class="ticker-wrapper" id="ticker-content">
-            <!-- News items injected via JavaScript -->
-        </div>
-    </div>
-
     <header class="header">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
+        <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo">
         <nav class="nav-bar">
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="clay-city.html">Clay City</a></li>
@@ -45,25 +25,23 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <div class="xenia-hero-container">
-        <img src="https://github.com/skventuresigns-design/media/blob/main/xenia.png?raw=true" alt="Xenia, Illinois Banner">
-        <div class="xenia-overlay">
-            <h1>Xenia, Illinois</h1>
-            <p class="xenia-subtitle">Est. 1853 | 62899</p>
+    <div class="xenia-outer-wrap">
+        <div class="xenia-hero-container">
+            <img src="https://github.com/skventuresigns-design/media/blob/main/xenia.png?raw=true" alt="Xenia, Illinois Banner">
+            <div class="xenia-overlay">
+                <h1>Xenia, Illinois</h1>
+                <p class="xenia-subtitle">Est. 1853 | 62899</p>
+            </div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT CONTAINER -->
     <div class="xenia-wp-container">
         
-        <!-- Section 1: History -->
         <section class="xenia-wp-section">
             <h2>Historic Roots</h2>
-            <p>Xenia's roots run deep in Clay County history. Named after the Greek word for <strong>"Hospitality,"</strong> the town flourished after the arrival of the railroad in 1854. What began as an early hunting ground became a vital community where the work ethic is built on handshakes and local spirit.</p>
+            <p>While records point to an 1853 survey for a town called Xenia in what became Clay County, it's sometimes linked to the area that became Atlanta. <strong>Clay & Wayne</strong>. Began as early hunting grounds, with the town formally established around 1830 when Dr. Davenport opened the first post office, named from the Greek word for "hospitality". Its growth was spurred by the 1854 railroad, connecting it to the wider region.</p>
         </section>
 
-        <!-- Section 2: Attractions -->
         <section class="xenia-wp-section">
             <h2>Attractions & Landmark Beauty</h2>
             <div class="xenia-wp-grid">
@@ -74,173 +52,50 @@
                 </div>
                 <div class="xenia-wp-card">
                     <img src="https://ourflora.com/wp-content/uploads/2026/01/Xenia-FishFry.jpg" class="xenia-wp-img" alt="Xenia Fish Fry">
-                    <h3>Annual Fish Fry</h3>
-                    <p>Support the <strong>XFPD</strong> at our annual Fish Fry. All funds go directly to the purchase of life-saving safety equipment for our volunteers.</p>
+                    <h3>Fish Fry</h3>
+                    <p>Come and help <strong>XFPD</strong> with our annual Fish Fry. All funds go to purchase of safety equipment.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: Work & LIVE Billboard -->
         <section class="xenia-wp-section">
             <h2>Local Work & Spirit</h2>
             <div class="xenia-wp-grid">
                 <div class="xenia-wp-card">
                     <span class="xenia-wp-tag">Agriculture</span>
-                    <h3>Heartland Labor</h3>
-                    <p>Farming is the backbone of Xenia. Local families work the land daily to provide grain and livestock for the region.</p>
-                    <hr style="margin: 15px 0; opacity: 0.2; border: 0; border-top: 1px solid #222;">
-                    <span class="xenia-wp-tag">Community</span>
+                    <h3>The Heartland Labor</h3>
+                    <p>Farming is the backbone of Xenia. Our local families work the land, providing grain and livestock.</p>
+                    <hr>
+                     <span class="xenia-wp-tag">Community</span>
                     <h3>The Xenia Spirit</h3>
-                    <p>From skilled tradesmen to small business owners, our community thrives on neighborly support and shared values.</p>
+                    <p>From local tradesmen to small business owners, the work ethic here is built on handshakes.</p>
                 </div>
-                
-                <!-- THE LIVE GAS BILLBOARD -->
-                <div class="xenia-wp-card" style="padding:0; overflow:hidden; background: #111; border: 8px solid #2a2a2a; border-radius: 12px;">
-                    <div id="fuel-monitor-container">
-                        <div id="wp-custom-wrapper" style="position: relative; width: 100%; margin: 0 auto;">
-                            <a href="https://supportmylocalcommunity.com/gas-prices/" target="_parent" class="billboard-link">
-                                <div class="billboard-inner-frame">
-                                    <div class="brand-overlay-bill">S & K Ventures, Inc. • Digital Advertising</div>
-                                    <div id="fuel-screen" class="digital-screen">
-                                        <div style="color: #ffc929; font-weight: bold; font-size: 13px;">SYNCING...</div>
-                                    </div>
-                                    <div class="brand-footer-bill">Click to update prices</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                <div class="xenia-wp-card">
+                    <iframe src="/gas-prices/index.html?town=xenia" style="width:100%; height:450px; border:none;" scrolling="no">
+                    </iframe>
                 </div>
             </div>
         </section>
 
-        <!-- Section 4: Landmarks (FIXED: Side-by-Side and Full Images) -->
         <section class="xenia-wp-section">
             <h2>Community Landmarks</h2>
-            <div class="landmark-row">
-                <div class="landmark-item">
-                    <img src="https://github.com/skventuresigns-design/media/blob/main/xenia-water-tower.png?raw=true" alt="Xenia Water Tower">
-                </div>
-                <div class="landmark-item">
-                    <img src="https://github.com/skventuresigns-design/media/blob/main/xenia-sign.png?raw=true" alt="Xenia Sign">
-                </div>
+            <div class="xenia-wp-grid">
+                <img src="https://github.com/skventuresigns-design/media/blob/main/xenia-water-tower.png?raw=true" class="xenia-wp-img" alt="Xenia Water Tower">
+                <img src="https://github.com/skventuresigns-design/media/blob/main/xenia-sign.png?raw=true" class="xenia-wp-img" alt="Xenia Sign">
             </div>
         </section>
-    </div> 
-
-    <footer class="site-footer">
-        <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
-        <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
-    </footer>
-
-    <!-- Firebase SDKs for the Inline Billboard -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+        
+    </div>
 
     <script>
-        // 1. Hamburger Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
-
-        // 2. FUEL MONITOR LOGIC (Firebase Live Sync)
-        (function() {
-            const firebaseConfig = {
-                apiKey: "AIzaSyBYPbGWDNPUmCSnFWDPPWtiXe2F6MPinXg",
-                authDomain: "smlc-fuel-monitor.firebaseapp.com",
-                databaseURL: "https://smlc-fuel-monitor-default-rtdb.firebaseio.com",
-                projectId: "smlc-fuel-monitor",
-                storageBucket: "smlc-fuel-monitor.firebasestorage.app",
-                messagingSenderId: "22397440085",
-                appId: "1:22397440085:web:c88e71688ed58896bc4dc"
-            };
-
-            const fuelApp = firebase.initializeApp(firebaseConfig, 'XeniaFuelBoard_' + Math.random().toString(36).substr(2, 9));
-            const db = fuelApp.database();
-
-            const stationConfigs = {
-                "87817": { town: "xenia", display: "Xenia", name: "KNAPP'S", logo: "Knapps.png" }
-            };
-
-            const screen = document.getElementById('fuel-screen');
-
-            function render(data) {
-                screen.innerHTML = '';
-                const id = "87817";
-                const config = stationConfigs[id];
-                const info = data[id] || { reg: "---", dsl: "---", date: "PENDING" };
-                
-                const slide = document.createElement('div');
-                slide.className = 'gas-slide';
-                slide.style.opacity = "1"; 
-                slide.innerHTML = `
-                    <div class="town-header-bill">${config.display.toUpperCase()}, IL</div>
-                    <div class="logo-container-bill">
-                        <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/gas-prices/image/${encodeURIComponent(config.logo)}" style="max-height:100%; object-fit:contain;">
-                    </div>
-                    <div class="price-row-bill"><span class="price-label-bill">REGULAR</span><span class="led-red-bill">${info.reg}</span></div>
-                    <div class="price-row-bill"><span class="price-label-bill">DIESEL</span><span class="led-grn-bill">${(info.dsl === "0" || !info.dsl) ? "---" : info.dsl}</span></div>
-                    <div class="update-tag-bill">Updated: ${info.date}</div>
-                `;
-                screen.appendChild(slide);
-            }
-
-            db.ref('fuel_prices').on('value', (snap) => {
-                const val = snap.val();
-                if (val) render(val);
-            });
-        })();
-
-        // 3. NEWS TICKER LOGIC (Triple-Proxy to prevent Fetch Errors)
-        const RSS_URL = 'https://www.google.com/alerts/feeds/16385066500020016213/12587969293010780741';
-        const proxies = [
-            'https://api.allorigins.win/get?url=',
-            'https://corsproxy.io/?',
-            'https://thingproxy.freeboard.io/fetch/'
-        ];
-
-        async function fetchXeniaNews() {
-            const tickerContainer = document.getElementById('news-ticker-container');
-            const tickerContent = document.getElementById('ticker-content');
-            const today = new Date().toISOString().split('T')[0];
-            let xmlString = null;
-
-            for (let proxy of proxies) {
-                try {
-                    const response = await fetch(`${proxy}${encodeURIComponent(RSS_URL)}`);
-                    if (!response.ok) continue;
-                    if (proxy.includes('allorigins')) {
-                        const data = await response.json();
-                        xmlString = data.contents;
-                    } else {
-                        xmlString = await response.text();
-                    }
-                    if (xmlString) break; 
-                } catch (e) { }
-            }
-
-            if (xmlString) {
-                const xmlDoc = new DOMParser().parseFromString(xmlString, "text/xml");
-                const entries = xmlDoc.getElementsByTagName("entry");
-                let tickerHtml = '';
-                let itemsFound = 0;
-
-                for (let i = 0; i < entries.length; i++) {
-                    const dateNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
-                    if (dateNode && dateNode.textContent.split('T')[0] === today) {
-                        const title = entries[i].getElementsByTagName("title")[0].textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
-                        const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
-                        tickerHtml += `<span class="ticker-item"><a href="${link}" target="_blank">XENIA NEWS: ${title}</a></span>`;
-                        itemsFound++;
-                    }
-                }
-
-                if (itemsFound > 0) {
-                    tickerContent.innerHTML = tickerHtml + tickerHtml;
-                    tickerContainer.style.display = 'block';
-                }
-            }
-        }
-        window.addEventListener('DOMContentLoaded', fetchXeniaNews);
     </script>
+
+     <footer class="site-footer">
+        <p>All Content, Photographs, Writings, Letters and Documents &copy; 2026 - Support My Local Community</p>
+        <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
+    </footer>
 </body>
 </html>
