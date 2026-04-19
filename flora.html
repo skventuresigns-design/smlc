@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) - Global OurFlora Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHE0C5Q0MJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Tracking Configurations
+      gtag('config', 'G-YHE0C5Q0MJ');
+      gtag('config', 'GT-5DFP725T');
+      gtag('config', '533053210');
+    </script>
+
     <!-- SEO & META TAGS: Page-Wide Optimization -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -27,16 +40,6 @@
     <!-- Resource Preloading -->
     <link rel="preload" href="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/slideshow/flora-carousel.json" as="fetch" crossorigin="anonymous">
     <link rel="preload" href="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/slideshow/partners.json" as="fetch" crossorigin="anonymous">
-
-    <!-- Google tag (gtag.js) - Global Flora ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHE0C5Q0MJ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YHE0C5Q0MJ');
-      gtag('config', '533053210');
-    </script>
 
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
     
@@ -415,11 +418,11 @@
     <section class="flora-bottom-columns">
         <div class="bottom-three-grid">
             <div class="bottom-col">
+                <div class="col-header">Community Events</div>
                 <div class="bulletin-card-wrapper">
-                    <div class="news-clipping-wrapper">
-                        <div class="clipping-masthead">
-                            <span class="black-tag">Community Bulletin</span>
-                            <p class="clipping-tagline" id="month-tagline"></p>
+                    <div class="news-clipping-wrapper" style="margin-top: -25px; border-radius: 0 0 8px 8px;">
+                        <div style="text-align:center; padding: 10px 0; border-bottom: 2px solid #222; margin: 0 25px;">
+                            <p class="clipping-tagline" id="month-tagline" style="margin:0;"></p>
                         </div>
                         <div id="divi-event-list"><p style="text-align:center; padding: 20px;"><span class="loader"></span> Connecting...</p></div>
                         <div class="clipping-footer">
@@ -470,7 +473,7 @@
 
             <div class="bottom-col">
                 <div class="col-header">Clay County Sports</div>
-                <div class="connection-box">
+                <div class="connection-box" style="margin-top: -25px; border-radius: 0 0 8px 8px;">
                     <div class="score-blue-header" style="background:#0033cc; padding:15px; text-align:center;">
                         <img src="https://github.com/skventuresigns-design/smlc/raw/774c627dc2c8403a272e26891e2170a5fb4202d9/images/Scorestream.png" alt="ScoreStream" style="width:150px; cursor:pointer;" onclick="openLightbox(this.src)">
                     </div>
