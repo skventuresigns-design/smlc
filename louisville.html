@@ -1,48 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Primary Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-518297235"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-518297235');
-    </script>
-    
-    <!-- Secondary Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-530038574"></script>
-    <script>
-      gtag('config', 'G-530038574');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Louisville, IL | Support My Local Community</title>
     <link rel="icon" type="image/png" href="https://github.com/skventuresigns-design/media/blob/main/favicon.png?raw=true">
-    
-    <!-- External Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="louisville.css">
 </head>
 <body class="louisville-bg">
 
-    <!-- News Ticker (Louisville Feed) -->
-    <div id="news-ticker-container">
-        <div class="ticker-wrapper" id="ticker-content"></div>
-    </div>
-
-    <!-- ScoreStream Scoreboard -->
-    <div class="sports-ticker-wrap">
-        <div class="scorestream-widget-container" data-ss_widget_type="horzScoreboard" data-user-widget-id="68601"></div>
-        <script async="async" type="text/javascript" src="https://scorestream.com/apiJsCdn/widgets/embed.js"></script>
-    </div>
-
     <header class="header">
         <img src="https://github.com/skventuresigns-design/media/blob/main/smlc-web.png?raw=true" class="header-logo" alt="SMLC Logo">
         <nav class="nav-bar">
-            <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
-                <span></span><span></span><span></span>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -51,23 +25,22 @@
                 <li><a href="louisville.html" class="active">Louisville</a></li>
                 <li><a href="sailor-springs.html">Sailor Springs</a></li>
                 <li><a href="xenia.html">Xenia</a></li>
-                <li><a href="https://amzn.to/4sznw7i" target="_blank">Amazon</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <div class="Louisville-hero-container">
-        <div class="Louisville-overlay">
-            <h1>Louisville, Illinois</h1>
-            <p class="Louisville-subtitle">EST. 1861 | 62858</p>
+    <div class="Louisville-outer-wrap">
+        <div class="Louisville-hero-container">
+            <div class="Louisville-overlay">
+                <h1>Louisville, Illinois</h1>
+                <p class="Louisville-subtitle">EST. 1861 | 62858</p>
+            </div>
         </div>
     </div>
 
     <div class="louisville-content-wrapper">
         <div class="louisville-grid-row">
             
-            <!-- Main Article Column -->
             <div class="louisville-col-main">
                 <div class="article-container">
                     <header class="hero-section">
@@ -121,48 +94,51 @@
                 </div>
             </div>
 
-            <!-- Sidebar Column -->
             <div class="louisville-col-side">
-                <!-- White Newspaper Sidebar -->
                 <aside class="newspaper-sidebar">
                     <div class="news-masthead">
                         <h4>The Clay County Community</h4>
                         <small>Louisville, Illinois • Vol. CLXXXIV</small>
                     </div>
-                    
+
                     <div class="news-double-line"></div>
+
                     <div class="news-headline-section">
                         <h2>A Legacy on the Wabash</h2>
                         <p class="news-dek">Tracing Two Centuries of Prairie Progress</p>
                     </div>
+
                     <div class="news-single-line"></div>
+
                     <div class="news-content-block">
-                        <p>Louisville’s story began long before its formal incorporation. Nestled along the winding banks of the Little Wabash River, the area was a beacon for early pioneers seeking fertile soil and reliable water transport.</p>
+                        <p>Louisville’s story began long before its formal incorporation. Nestled along the winding banks of the Little Wabash River, the area was a beacon for early pioneers seeking fertile soil and reliable water transport. By the 1820s, the surrounding prairie began to transform into a tapestry of homesteading life.</p>
                     </div>
+
                     <div class="news-single-line"></div>
+
                     <div class="news-timeline">
                         <div><strong>1824 —</strong> Clay County is organized; Louisville emerges as a trading post.</div>
                         <div><strong>1842 —</strong> Louisville is chosen as the official County Seat.</div>
-                        <div><strong>2026 —</strong> Modern Louisville celebrates its heritage.</div>
+                        <div><strong>2026 —</strong> Modern Louisville celebrates its heritage as a center for community and culture.</div>
                     </div>
+
                     <div class="news-single-line"></div>
+
+                    <div class="news-content-block">
+                        <p>The town's destiny was cemented in 1842 when it was designated the permanent County Seat. This move triggered rapid development around the iconic public square, making the little Wabash the town's early lifeblood.</p>
+                    </div>
+
+                    <div class="news-single-line"></div>
+
                     <div class="news-footer">
-                        <span>PRICE: TWO CENTS</span>
-                        <span>LATE EDITION</span>
+                        <span class="price">PRICE: TWO CENTS</span>
+                        <span class="edition">LATE EDITION</span>
                     </div>
                 </aside>
 
-                <!-- THE LIVE GAS BILLBOARD (Positioned in the black space below the box) -->
-                <div id="sidebar-fuel-monitor">
-                    <a href="https://supportmylocalcommunity.com/gas-prices/" target="_parent" class="billboard-link">
-                        <div class="billboard-frame-sidebar">
-                            <div class="brand-overlay-bill">S & K Ventures • Fuel Monitor</div>
-                            <div id="fuel-screen" class="digital-screen-sidebar">
-                                <div style="color: #ffc929; font-weight: bold; font-size: 13px;">SYNCING...</div>
-                            </div>
-                            <div class="brand-footer-bill">Casey's Louisville • Click to Update</div>
-                        </div>
-                    </a>
+                <div class="github-sync-container">
+                    <iframe src="/gas-prices/index.html?town=louisville" style="width:100%; height:450px; border:none;" scrolling="no">
+                    </iframe>
                 </div>
             </div> 
         </div> 
@@ -173,84 +149,12 @@
         <p>All Rights Reserved - <a href="https://skventuresigns.com" target="_blank">S&K Ventures</a></p>
     </footer>
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
-
     <script>
-        // Nav Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
-        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
-
-        // --- FUEL MONITOR LOGIC (Louisville Casey's) ---
-        (function() {
-            const firebaseConfig = {
-                apiKey: "AIzaSyBYPbGWDNPUmCSnFWDPPWtiXe2F6MPinXg",
-                authDomain: "smlc-fuel-monitor.firebaseapp.com",
-                databaseURL: "https://smlc-fuel-monitor-default-rtdb.firebaseio.com",
-                projectId: "smlc-fuel-monitor",
-                storageBucket: "smlc-fuel-monitor.firebasestorage.app",
-                messagingSenderId: "22397440085",
-                appId: "1:22397440085:web:c88e71688ed58896bc4dc"
-            };
-
-            const fuelApp = firebase.initializeApp(firebaseConfig, 'LVille_Sidebar_Widget_' + Math.random().toString(36).substr(2, 9));
-            const db = fuelApp.database();
-            const stationId = "48026"; // Louisville Casey's ID
-            const screen = document.getElementById('fuel-screen');
-
-            function render(data) {
-                screen.innerHTML = '';
-                const info = data[stationId] || { reg: "---", dsl: "---", date: "PENDING" };
-                const slide = document.createElement('div');
-                slide.className = 'gas-slide-sidebar';
-                slide.innerHTML = `
-                    <div class="logo-container-bill">
-                        <img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/gas-prices/image/Casey's.png" style="max-height:100%; object-fit:contain;">
-                    </div>
-                    <div class="price-row-bill"><span class="price-label-bill">REGULAR</span><span class="led-red-bill">${info.reg}</span></div>
-                    <div class="price-row-bill"><span class="price-label-bill">DIESEL</span><span class="led-grn-bill">${(info.dsl === "0" || !info.dsl) ? "---" : info.dsl}</span></div>
-                    <div class="update-tag-bill">Updated: ${info.date}</div>
-                `;
-                screen.appendChild(slide);
-            }
-            db.ref('fuel_prices').on('value', (snap) => {
-                const val = snap.val();
-                if (val) render(val);
-            });
-        })();
-
-        // RSS News Ticker Logic
-        const RSS_URL = 'https://www.google.com/alerts/feeds/16385066500020016213/12587969293010780741';
-        const PROXY_URL = 'https://api.allorigins.win/get?url=';
-        async function fetchNews() {
-            const tickerContainer = document.getElementById('news-ticker-container');
-            const tickerContent = document.getElementById('ticker-content');
-            const today = new Date().toISOString().split('T')[0];
-            try {
-                const response = await fetch(`${PROXY_URL}${encodeURIComponent(RSS_URL)}`);
-                const data = await response.json();
-                const xmlDoc = new DOMParser().parseFromString(data.contents, "text/xml");
-                const entries = xmlDoc.getElementsByTagName("entry");
-                let tickerHtml = '';
-                let found = 0;
-                for (let i = 0; i < entries.length; i++) {
-                    const updatedNode = entries[i].getElementsByTagName("updated")[0] || entries[i].getElementsByTagName("published")[0];
-                    if (updatedNode && updatedNode.textContent.split('T')[0] === today) {
-                        const title = entries[i].getElementsByTagName("title")[0].textContent.replace(/<\/?[^>]+(>|$)/g, ""); 
-                        const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
-                        tickerHtml += `<span class="ticker-item"><a href="${link}" target="_blank">LOUISVILLE NEWS: ${title}</a></span>`;
-                        found++;
-                    }
-                }
-                if (found > 0) {
-                    tickerContent.innerHTML = tickerHtml + tickerHtml;
-                    tickerContainer.style.display = 'block';
-                }
-            } catch (e) { console.error("Ticker failed", e); }
-        }
-        window.addEventListener('DOMContentLoaded', fetchNews);
+        hamburger.addEventListener('click', () => { 
+            navLinks.classList.toggle('open'); 
+        });
     </script>
 </body>
 </html>
