@@ -1,0 +1,61 @@
+/* * NYT Timestamp: June 4, 2026, 2:57 PM EDT
+ * NO STRIPPING, NO COMPRESSING, DON'T CHANGE WHAT I DIDN'T SAY TO CHANGE 
+ */
+
+body { 
+    font-family: -apple-system, sans-serif; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    margin: 0; 
+    background-color: #000000; /* Solid Black */
+    color: #fff; 
+}
+
+.loader { 
+    border: 3px solid rgba(255,255,255,0.2); 
+    border-top: 3px solid #FF4500; /* Jet Orange */
+    border-radius: 50%; 
+    width: 35px; 
+    height: 35px; 
+    animation: spin 1s linear infinite; 
+    margin-bottom: 15px; 
+}
+
+@keyframes spin { 
+    0% { transform: rotate(0deg); } 
+    100% { transform: rotate(360deg); } 
+}
+
+p { 
+    font-weight: 300; 
+    letter-spacing: 1px; 
+    font-size: 0.9rem; 
+    text-transform: uppercase; 
+}
+
+/* KF Signature Watermark - Bottom Left */
+.kf-watermark {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.kf-k {
+    color: #FF4500;
+    display: inline-block;
+    transform: scaleX(-1);
+    position: relative;
+    z-index: 2;
+}
+
+.kf-f {
+    color: #000000;
+    margin-left: -0.22em;
+    position: relative;
+    z-index: 1;
+}
