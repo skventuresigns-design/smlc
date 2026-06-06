@@ -1,355 +1,672 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Scott's Branding Analytics G-Tags & Invisible Watermark Tracking -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L376P3NPY4"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H6Q756MVE8"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=535646739"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        
-        gtag('config', 'G-L376P3NPY4');
-        gtag('config', 'G-H6Q756MVE8');
-        gtag('config', 'G-530038574'); /* Fuel Monitor Tracking */
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKVentureSigns Portal</title>
+    <title>Home - Ourflora.com - Support My Local Community</title>
+    
+    <!-- GOOGLE ANALYTICS: Main Measurement ID G-YHE0C5Q0MJ & Fuel ID G-530038574 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHE0C5Q0MJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YHE0C5Q0MJ');
+      gtag('config', 'G-530038574'); 
 
-    <!-- Google Web Fonts for Playfair Display and Radley -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Radley:ital@0;1&display=swap" rel="stylesheet">
+      /**
+       * Central Tracking Function
+       * Records every interaction to keep Analytics happy
+       */
+      function trackEvent(category, action, label) {
+          if (typeof gtag === 'function') {
+              gtag('event', action, {
+                  'event_category': category,
+                  'event_label': label,
+                  'tracking_id': '0246362377'
+              });
+          }
+      }
+    </script>
+    
+    <!-- SEO & GOOGLE SMART TAGS -->
+    <meta name="description" content="Official community bulletin for Clay County, Flora, and Louisville, IL. Stay updated on local church events, fundraisers, and town happenings.">
+    <meta name="keywords" content="Clay County IL Events, Flora IL Happenings, Louisville IL News, Community Calendar, Support My Local Community">
 
-    <!-- Inline Web App Manifest Data URI -->
-    <link rel="manifest" href="data:application/json, {
-        &quot;name&quot;: &quot;SKVentureSigns Portal&quot;,
-        &quot;short_name&quot;: &quot;SKVSigns&quot;,
-        &quot;start_url&quot;: &quot;.&quot;,
-        &quot;display&quot;: &quot;standalone&quot;,
-        &quot;background_color&quot;: &quot;#121212&quot;,
-        &quot;theme_color&quot;: &quot;#FF4500&quot;
-    }">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900|Source+Sans+Pro:300,400,600,700|Poppins:400,700,900|Radley:400,700&display=swap" rel="stylesheet">
 
-    <!-- Complete Style Block -->
     <style>
-        /* CSS GOES IN THE CSS PANEL - DO NOT OVERWRITE */
+        /* 1. THE RESET */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #000000; 
+            color: #ffffff;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px; /* GLOBAL MOBILE SETTING: Body Text 14 */
+        }
+
+        * { box-sizing: border-box; }
+
+        /* 2. THE HEADER SECTION */
+        .header-top-orange-bar {
+            height: 15px;
+            background-color: #ff5f05;
+            width: 100%;
+        }
+
+        .header-blue-main {
+            background-color: #00205b;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .header-logo {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .header-menu-orange {
+            background-color: #ff5f05;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap; gap: 20px; padding: 10px; margin: 0; justify-content: center;
+        }
+
+        .nav-menu li a {
+            color: #ffffff; text-decoration: underline; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px;
+        }
+
+        /* 3. LAYOUT ENGINE (Divi Settings Locked) */
+        .section { padding: 50px 0; width: 100%; position: relative; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        .row { display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 30px; }
+        .col-full { width: 100%; }
+        .col-1-2 { flex: 1; min-width: 300px; }
+        .col-1-4 { width: calc(25% - 23px); min-width: 200px; }
+        .col-1-3 { width: calc(33.33% - 20px); min-width: 280px; }
+        .col-1-5 { width: calc(20% - 24px); min-width: 150px; }
+
+        @media (max-width: 980px) {
+            .col-1-2, .col-1-3, .col-1-4, .col-1-5 { width: 100%; }
+            h2.heritage-main-title, h2.timeline-main-title { font-size: 30px !important; line-height: 1.2 !important; height: auto !important; }
+            .heritage-desc-text { font-size: 18px !important; line-height: 1.4 !important; }
+        }
+
+        /* 4. TYPOGRAPHY */
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-size: 30px; margin-bottom: 15px; text-align: center; color: #ffffff; }
+
+        h2.heritage-main-title {
+            display: block; font-family: "Playfair Display", Georgia, "Times New Roman", serif; font-size: 50px; font-weight: 500; color: rgb(14, 12, 25); height: 70px; line-height: 60px; text-align: center; padding-bottom: 10px; margin: 0; width: 100%; -webkit-font-smoothing: antialiased;
+        }
+
+        .heritage-desc-text {
+            display: inline; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 30px; font-weight: 700; color: rgb(0, 0, 0); line-height: 54px; text-align: left; -webkit-font-smoothing: antialiased; overflow-wrap: break-word;
+        }
+
+        h2.timeline-main-title {
+            display: block; font-family: "Playfair Display", serif; font-size: 50px; font-weight: 500; color: rgb(14, 12, 25); height: 70px; line-height: 60px; text-align: center; padding-bottom: 10px; margin: 0; width: 100%;
+        }
+
+        .timeline-sub-title {
+            display: block; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 16px; font-weight: 500; color: rgb(60, 58, 71); line-height: 28px; text-align: center;
+        }
+
+        /* 5. DIRECTORY BUTTON */
+        .btn-directory {
+            display: inline-block; background-color: rgb(13, 16, 235); color: rgb(255, 255, 255); width: 242.406px; height: 38.5px; line-height: 25.5px; padding: 4.5px 15px; text-align: center; font-family: 'Radley', Georgia, serif; font-size: 15px; font-weight: 700; text-decoration: none; border: 2px solid rgb(255, 95, 5); border-radius: 31px; cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-directory:hover { background-color: rgb(255, 95, 5); border-color: rgb(13, 16, 235); }
+
+        /* 6. DISCOVER SLIDER */
+        .discover-section { position: relative; width: 100%; min-height: 413px; margin: 0; overflow: hidden; background-color: #ffffff; }
+        .discover-parallax-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url("https://ourflora.com/wp-content/uploads/2025/02/0-e3025285-dbe1-43b4-ae62-24477e1908d7-1920x1080.jpg"); background-size: cover; background-position: center; }
+        .discover-gradient-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.75) 100%); }
+        .discover-content-container { position: relative; z-index: 10; width: 100%; padding: 60px 0; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #ffffff; text-align: center; }
+        .custom-image-slider { width: 100%; max-width: 1200px; height: 200px; position: relative; overflow: hidden; margin-top: 20px; }
+        .custom-image-slider .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; justify-content: center; align-items: center; }
+        .custom-image-slider .slide.active { opacity: 1; }
+        .custom-image-slider img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* 7. COMMUNITY BULLETIN (CLIPPING STYLE) */
+        .news-clipping-wrapper {
+            background-color: rgb(255, 253, 245); box-shadow: 6px 6px 0px rgba(0,0,0,0.6); border: 1px solid rgb(34, 34, 34); font-family: "Times New Roman", Times, serif; color: rgb(34, 34, 34); width: 100%; max-width: 500px; margin: 0 auto; overflow: hidden; padding: 50px 0; overflow-wrap: break-word; word-wrap: break-word; height: auto;
+        }
+        .clipping-masthead { text-align: center; padding: 0 10px; border-bottom: 4px double #222; margin: 0 30px; padding-bottom: 20px; }
+        .black-tag { background: #000; color: #fff; text-transform: uppercase; font-size: 30px; font-weight: bold; padding: 5px 15px; display: inline-block; letter-spacing: 1px; line-height: 1; }
+        .clipping-tagline { font-size: 11px; text-transform: uppercase; font-weight: bold; margin: 10px 0 0 0; color: #444; }
+        #divi-event-list { padding: 10px 30px; width: 100%; }
+        .divi-event-item { border-bottom: 1px dashed #777; padding: 15px 0; text-align: left; width: 100%; }
+        .divi-event-item:last-child { border-bottom: none; }
+        .divi-event-date { color: #cc0000; font-weight: bold; font-size: 14px; text-transform: uppercase; margin-bottom: 5px; }
+        .divi-event-title { font-size: 20px; font-weight: bold; margin: 5px 0; line-height: 1.2; color: #000; }
+        .event-info-text { font-size: 14px; line-height: 1.5; color: #333; overflow-wrap: break-word; }
+        .event-snippet { font-size: 13px; color: #555; font-style: italic; margin: 8px 0; line-height: 1.4; display: block; }
+        .full-details { display: none; font-size: 13px; color: #222; font-style: normal; margin: 10px 0; line-height: 1.5; background: rgba(0,0,0,0.03); padding: 10px; border-left: 3px solid #cc0000; overflow-wrap: break-word; white-space: pre-wrap; }
+        .read-more-btn { color: #cc0000; text-decoration: underline; font-weight: bold; font-size: 12px; cursor: pointer; text-transform: uppercase; display: inline-block; margin-top: 5px; }
+        .cal-links { margin-top: 15px; font-size: 12px; }
+        .cal-label { display: block; font-size: 10px; text-transform: uppercase; font-weight: bold; color: #666; margin-bottom: 4px; letter-spacing: 0.5px; }
+        .cal-text-link { color: #cc0000 !important; text-decoration: none !important; font-weight: bold; text-transform: uppercase; font-size: 11px; cursor: pointer; }
+        .clipping-footer { border-top: 1px solid #222; padding: 15px; text-align: center; font-style: italic; text-transform: uppercase; letter-spacing: 1px; font-size: 10px; color: #000; }
+
+        /* 7b. SUBMIT EVENT CLIPPING STYLE */
+        .clay-county-news-box.event-clipping {
+            box-sizing: border-box; width: 100%; max-width: 600px; margin: 20px auto; padding: 25px; border: 2px solid #222; background-color: #fffdf5; box-shadow: 6px 6px 0px #222; font-family: "Times New Roman", Times, serif; position: relative;
+        }
+        .clipping-tag { position: absolute; top: -12px; left: 15px; background: #222; color: #fff; font-size: 10px; padding: 3px 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; z-index: 10; }
+        .event-clipping-header { text-align: center; border-top: 4px double #222; border-bottom: 2px solid #222; padding: 15px 0; margin-bottom: 20px; margin-top: 5px; }
+        .event-clipping-header h3 { font-family: "Times New Roman", Times, serif !important; font-weight: 900 !important; text-transform: uppercase; letter-spacing: 1px; margin: 0 !important; color: #d9534f !important; font-size: 26px !important; line-height: 1.1 !important; }
+        .event-clipping-text { font-size: 16px; line-height: 1.5; color: #222; text-align: center; margin-bottom: 20px; font-style: italic; }
+        .event-clipping-btn { display: block; text-align: center; background-color: #222; color: #fff !important; padding: 14px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; text-decoration: none; font-size: 14px; border: 1px solid #222; transition: all 0.3s; }
+        .event-clipping-btn:hover { background-color: #d9534f; border-color: #d9534f; }
+
+        /* 7c. BUSINESS SPOTLIGHT CLIPPING STYLE */
+        .clay-county-news-box.spotlight-clipping {
+            max-width: 500px; margin: 20px auto; padding: 25px; border: 1px solid #222; background-color: #fffdf5; box-shadow: 6px 6px 0px #222; font-family: Arial, sans-serif; position: relative; height: auto;
+        }
+        .news-box-header { text-align: center; border-top: 4px solid #222; border-bottom: 2px solid #222; padding: 15px 0; margin-bottom: 20px; }
+        .news-box-header h3 { font-family: "Times New Roman", Times, serif !important; font-weight: 900 !important; text-transform: uppercase; letter-spacing: 1px; margin: 0 !important; color: #222 !important; font-size: 24px !important; line-height: 1.2 !important; }
+        .spotlight-image-wrap { width: 100%; height: auto; border: 1px solid #222; margin-bottom: 15px; overflow: hidden; background-color: #eee; }
+        .spotlight-image-wrap img { width: 100%; display: block; filter: grayscale(10%) contrast(110%) sepia(5%); }
+        .biz-title { font-family: "Times New Roman", Times, serif; font-size: 22px; font-weight: bold; color: #222; text-align: center; display: block; margin-bottom: 5px; }
+        .biz-location { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #d9534f; font-weight: bold; display: block; text-align: center; margin-bottom: 15px; }
+        .biz-description { font-size: 14px; line-height: 1.5; color: #333; padding: 0 5px; margin-bottom: 20px; text-align: justify; }
+        .spotlight-btn { display: block; text-align: center; background-color: #222; color: #fff !important; padding: 12px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; text-decoration: none; font-size: 13px; border: 1px solid #222; transition: all 0.3s; }
+        .spotlight-btn:hover { background-color: #fffdf5; color: #222 !important; }
+
+        /* 7d. FUEL MONITOR BILLBOARD STYLE */
+        :root { --brand-red: #3e0100; --brand-gold: #ffc929; --led-red: #ff3b3b; --led-green: #39ff14; --bg-dark: #111; --border-gray: #2a2a2a; }
+        .billboard-link { text-decoration: none; cursor: pointer; display: block; width: 100%; max-width: 500px; margin: 20px auto; }
+        .billboard-frame { 
+            background: var(--bg-dark); border: 8px solid var(--border-gray); border-radius: 12px; padding: 45px 15px; 
+            position: relative; width: 100%; 
+            aspect-ratio: 16 / 18;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; 
+        }
+        .brand-overlay { position: absolute; top: 0; left: 0; right: 0; background: var(--brand-red); color: var(--brand-gold); font-weight: bold; text-align: center; font-size: 14px; padding: 10px 5px; border-bottom: 2px solid var(--brand-gold); z-index: 10; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .brand-footer { position: absolute; bottom: 0; left: 0; right: 0; background: var(--brand-red); color: var(--brand-gold); font-weight: bold; text-align: center; font-size: 11px; padding: 8px 0; border-top: 2px solid var(--brand-gold); z-index: 10; letter-spacing: 0.5px; }
+        .digital-screen { width: 100%; height: 100%; background: #000; border-radius: 6px; position: relative; overflow: hidden; border: 1px solid #333; display: flex; align-items: center; justify-content: center; }
+        .gas-slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.8s ease-in-out; padding: 10px; }
+        .gas-slide.active { opacity: 1; }
+        .town-header { color: var(--brand-gold); font-size: clamp(12px, 3vw, 16px); font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; text-shadow: 0 0 8px rgba(255, 201, 41, 0.6); text-align: center; }
+        .logo-container { height: clamp(40px, 12vw, 65px); width: 100%; max-width: 200px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
+        .station-logo { max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 4px; }
+        .logo-bg-white { background-color: white; padding: 5px 12px; box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
+        .logo-fallback { color: #fff; font-size: 18px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; border: 1px solid #444; padding: 5px 15px; }
+        .price-row { width: 90%; display: flex; justify-content: space-between; align-items: center; margin: 2px 0; }
+        .price-label { color: var(--brand-gold); font-size: 14px; font-weight: bold; letter-spacing: 1px; text-shadow: 0 0 5px rgba(255, 201, 41, 0.4); }
+        .led-red, .led-grn { font-family: 'Courier New', Courier, monospace; font-size: clamp(1.8rem, 8vw, 2.8rem); font-weight: bold; }
+        .led-red { color: var(--led-red); text-shadow: 0 0 15px #ff0000; }
+        .led-grn { color: var(--led-green); text-shadow: 0 0 15px #228b22; }
+        .update-tag { color: var(--brand-gold); font-size: 9px; margin-top: 8px; font-weight: 600; text-shadow: 0 0 5px rgba(255, 201, 41, 0.4); text-transform: uppercase; opacity: 0.7; }
+
+        /* 7e. GROUP INVITATION SNIPPET STYLES */
+        .clay-county-news-box.group-invitation-master {
+            max-width: 400px; margin: 20px auto; padding: 25px; border: 3px double #222; background-color: #fffdf5; box-shadow: 6px 6px 0px #222; font-family: Arial, sans-serif; position: relative; text-align: center;
+        }
+        .notice-tag-red {
+            background: #d9534f; color: #fff; font-size: 11px; padding: 4px 15px; text-transform: uppercase; font-weight: bold; display: inline-block; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); border: 1px solid #222; box-shadow: 2px 2px 0px #222; z-index: 10; white-space: nowrap; 
+        }
+        .polaroid-wrap { background: #fff; padding: 10px 10px 25px 10px; border: 1px solid #ccc; box-shadow: 3px 3px 8px rgba(0,0,0,0.2); transform: rotate(-3deg); margin-bottom: 20px; }
+        .polaroid-wrap img { width: 100%; display: block; filter: grayscale(20%) sepia(10%); }
+        .invitation-header-main { border-top: 4px double #222; border-bottom: 1px solid #222; padding: 12px 0; margin-bottom: 15px; }
+        .invitation-header-main h3 { font-family: "Times New Roman", Times, serif !important; font-weight: 900 !important; text-transform: uppercase; font-size: 20px !important; margin: 0 0 5px 0 !important; color: #222 !important; line-height: 1.1 !important; }
+        .sub-header-text { font-size: 11px; color: #444; font-weight: bold; display: block; letter-spacing: 0.5px; text-transform: none; }
+        .invitation-body-text { font-family: "Times New Roman", Times, serif; font-size: 15px; line-height: 1.4; color: #333; font-style: italic; margin-bottom: 20px; padding: 0 10px; }
+        .fb-action-btn { display: block; background-color: #222; color: #fff !important; padding: 12px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; text-decoration: none; font-size: 13px; border: 2px solid #222; transition: all 0.3s ease; }
+        .fb-action-btn:hover { background-color: #fffdf5; color: #222 !important; }
+
+        /* 7f. FOOTER AD STRIP STYLE */
+        .et_pb_section_9 {
+            background-color: rgb(0, 32, 91); background-repeat: no-repeat; background-size: cover; background-position: center; border: none; padding: 50px 0; position: relative; width: 100%; transform: matrix(1, 0, 0, 1, 0, -83);
+        }
+        .ad-link-container { margin-top: 10px; text-align: center; }
+        .ad-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .ad-link { text-decoration: none; }
+        .ad-business-name { color: #ffffff; font-weight: bold; font-size: 14px; font-family: -apple-system, sans-serif; }
+
+        /* SPORTS LINK STYLE */
+        .sports-link {
+            display: inline-block; background-color: rgba(0, 0, 0, 0); color: rgb(51, 51, 51); cursor: pointer; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 17px; font-variant: small-caps; font-weight: 500; line-height: 17px; text-align: center; text-decoration: none; overflow-wrap: break-word; -webkit-font-smoothing: antialiased; margin-top: 15px;
+        }
+        .sports-link:hover { color: #d9534f; }
+
+        /* 8. FLORA LIBRARY SPECIFIC */
+        .library-column-wrap { width: 100%; position: relative; z-index: 2; }
+        .library-main-h1 { font-family: 'Playfair Display', serif; font-size: 30px; color: #333; margin-bottom: 20px; text-align: center; }
+        .library-sub-heading { font-family: 'Playfair Display', serif; font-size: 16px; color: #000; display: block; margin-top: 10px; text-align: center; font-weight: bold; }
+        .side-by-side-row { display: flex; flex-wrap: nowrap; gap: 15px; margin-top: 10px; justify-content: center; }
+        .side-by-side-col { flex: 1; text-align: center; min-width: 0; }
+        .library-img-container img { width: 100%; height: auto; max-width: 100%; display: block; object-fit: contain; border: 1px solid #ccc; }
+        .library-history-text { display: inline; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; font-weight: 500; color: rgb(0, 0, 0); line-height: 23.8px; text-align: left; }
+        .library-history-link { color: #0000ff; text-decoration: underline; }
+
+        /* 9. TIMELINE CARDS */
+        .timeline-card { background: #ffffff; color: #000000; padding: 25px; border-radius: 4px; text-align: center; border-top: 5px solid #00205b; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .timeline-card h3 { display: block; font-family: "Playfair Display", serif; font-size: 32px; font-weight: 500; color: rgb(34, 87, 122); line-height: 41.6px; padding-bottom: 10px; margin: 0; width: 100%; }
+        .timeline-card h5 { display: block; font-family: "Playfair Display", serif; font-size: 18px; font-weight: 500; color: rgb(14, 12, 25); line-height: 25.2px; padding-bottom: 10px; margin: 0; text-align: center; }
+        .timeline-card p { font-size: 13px; line-height: 1.5; color: #333; }
+        .timeline-card img { width: 100%; border: 1px solid #ddd; margin-top: 15px; }
+
+        /* 10. IMAGE ROW GALLERY */
+        .image-row { display: flex; justify-content: center; gap: 15px; padding: 40px 20px; background-color: #000; }
+        .image-box { width: 250px; height: 200px; overflow: hidden; }
+        .image-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* 11. FOOTER SPECIFICATIONS (UPDATED BLUE LINK) */
+        .footer-copyright {
+            display: block;
+            background-color: rgba(0, 0, 0, 0);
+            color: rgb(0, 0, 0);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            height: auto;
+            line-height: 23.8px;
+            text-align: center;
+            overflow-wrap: break-word;
+            -webkit-font-smoothing: antialiased;
+            padding: 40px 20px;
+        }
+        /* UPDATED: BRIGHT BLUE LINK WITH 700 WEIGHT */
+        .footer-copyright a {
+            color: rgb(46, 163, 242) !important;
+            text-decoration: none !important;
+            font-weight: 700 !important;
+            cursor: pointer;
+        }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100vw; height: 100vh; background-color: #000; align-items: center; justify-content: center; }
+        .modal-content { max-width: 95%; max-height: 90%; object-fit: contain; }
     </style>
 </head>
-<body class="light-mode">
+<body>
 
-    <!-- Full-Width Orange Divider Bar (Top of Section 1 / Above Header Image Banner) -->
-    <div id="orange-divider-bar"></div>
-
-    <!-- Section 1: Fluid Navbar/Header with Dynamic Banner and 00205B Background -->
-    <header>
-        <div class="header-content">
-            <!-- Overlay branding words removed to leverage graphics-only logo layout -->
-        </div>
+    <!-- 1. HEADER SECTION -->
+    <div class="header-top-orange-bar"></div>
+    <header class="header-blue-main">
+        <img src="https://ourflora.com/wp-content/uploads/2026/01/SMLC-logo.png" alt="OurFlora Logo" class="header-logo" style="cursor:pointer;" onclick="trackEvent('Header', 'Logo Click', 'Main Logo')">
     </header>
-
-    <!-- Section 2: Full-Width Navigation Bar with FF5F05 Background and Easy-to-Click Elements -->
-    <nav class="nav-bar">
-        <div class="nav-container">
-            <button class="nav-toggle" id="nav-toggle-btn" aria-label="Toggle navigation" onclick="toggleMobileNav()">☰</button>
-            <ul class="nav-links" id="nav-menu">
-                <li><a href="https://www.supportmylocalcommunity.com/" target="supportmylocalcommunity">Home</a></li>
-                <li><a href="https://supportmylocalcommunity.com/clay-city?_gl=1*yrqbj2*_ga*NzA5OTY2OTAyLjE3NzgxMjUyMDE.*_ga_YHE0C5Q0MJ*czE3Nzk2NDM1NzUkbzM5JGcxJHQxNzc5NjQzOTE0JGo2MCRsMCRoMjA0NzA5NDc2Ng.." target="supportmylocalcommunity">Clay City</a></li>
-                <li><a href="https://ourflora.com" target="supportmylocalcommunity">Flora</a></li>
-                <li><a href="https://supportmylocalcommunity.com/louisville?_gl=1*yrqbj2*_ga*NzA5OTY2OTAyLjE3NzgxMjUyMDE.*_ga_YHE0C5Q0MJ*czE3Nzk2NDM1NzUkbzM5JGcxJHQxNzc5NjQzOTE0JGo2MCRsMCRoMjA0NzA5NDc2Ng.." target="supportmylocalcommunity">Louisville</a></li>
-                <li><a href="https://supportmylocalcommunity.com/xenia?_gl=1*yrqbj2*_ga*NzA5OTY2OTAyLjE3NzgxMjUyMDE.*_ga_YHE0C5Q0MJ*czE3Nzk2NDM1NzUkbzM5JGcxJHQxNzc5NjQzOTE0JGo2MCRsMCRoMjA0NzA5NDc2Ng.." target="supportmylocalcommunity">Xenia</a></li>
-                <li><a href="https://supportmylocalcommunity.com/sailor-springs?_gl=1*lymdhr*_ga*NzA5OTY2OTAyLjE3NzgxMjUyMDE.*_ga_YHE0C5Q0MJ*czE3Nzk2NDM1NzUkbzM5JGcxJHQxNzc5NjQzOTE0JGo2MCRsMCRoMjA0NzA5NDc2Ng.." target="supportmylocalcommunity">Sailor Springs</a></li>
-                <li><a href="https://amzn.to/3OIJ97c" target="supportmylocalcommunity">Affiliated</a></li>
-            </ul>
-        </div>
+    <nav class="header-menu-orange">
+        <ul class="nav-menu">
+            <li><a href="https://www.supportmylocalcommunity.com" onclick="trackEvent('Navigation', 'Click', 'Home')">Home</a></li>
+            <li><a href="https://supportmylocalcommunity.com/clay-city" onclick="trackEvent('Navigation', 'Click', 'Clay City')">Clay City</a></li>
+            <li><a href="https://ourflora.com/" onclick="trackEvent('Navigation', 'Click', 'Flora')">Flora</a></li>
+            <li><a href="https://supportmylocalcommunity.com/louisville" onclick="trackEvent('Navigation', 'Click', 'Louisville')">Louisville</a></li>
+            <li><a href="https://supportmylocalcommunity.com/sailor-springs" onclick="trackEvent('Navigation', 'Click', 'Sailor Springs')">Sailor Springs</a></li>
+            <li><a href="https://supportmylocalcommunity.com/xenia" onclick="trackEvent('Navigation', 'Click', 'Xenia')">Xenia</a></li>
+            <li><a href="https://amzn.to/3OIJ97c" onclick="trackEvent('Navigation', 'Click', 'Affiliated')">Affiliated</a></li>
+        </ul>
     </nav>
 
-    <!-- Section 3: Clay County Business Directory Banner -->
-    <section id="section-3-container">
-        <div class="banner-image-wrap">
-            <img src="https://lh3.googleusercontent.com/d/1yCujyb4EKKQABcywqz4PPBCUQ3ZxTKtL" alt="Clay County Illinois #1 Destination for Local Coupons and Discounts">
+    <!-- 2. MAIN BANNER -->
+    <div class="banner-wrapper" style="background-color: #ffffff; padding: 40px 0; margin: 0; width: 100%; overflow: hidden; text-align: center;">
+        <img loading="lazy" decoding="async" width="1200" height="200" 
+             src="https://ourflora.com/wp-content/uploads/2026/02/smlc.png" alt="Support My Local Community Banner" style="width: 100%; height: auto; display: block; margin-bottom: 30px;">
+        <div>
+            <a href="https://clay-county-business-directory.supportmylocalcommunity.com" class="btn-directory" target="_blank" onclick="trackEvent('Directory', 'Click', 'Clay County Business Directory Button')">Clay County Business Directory</a>
         </div>
-        <div class="button-section">
-            <a class="et_pb_button et_pb_button_0 et_pb_bg_layout_light" href="https://clay-county-business-directory.supportmylocalcommunity.com" target="supportmylocalcommunity">Clay County Business Directory</a>
-        </div>
-    </section>
+    </div>
 
-    <!-- Section 4: Discover Flora's Vibrant Community -->
-    <section id="section-4-container">
-        <div class="flora-content-wrap">
-            <h2 class="et_pb_module_heading" data-i18n="sec4_flora_title">Discover Flora's Vibrant Community</h2>
-            <div class="et_pb_text_inner">
-                <p data-i18n="sec4_flora_body">Join us in supporting local businesses and dive into the exciting events happening in Flora, IL. Experience the warmth of our community and make unforgettable memories.</p>
-                
-                <div class="slideshow-wrapper">
-                    <button class="slide-arrow prev" onclick="moveSlide(-1)">❮</button>
-                    <div class="slides-container">
-                        <div class="slide active" onclick="launchLightbox('https://lh3.googleusercontent.com/d/102PQT39s_DMEk9GDY6u0qIyi7Tzilq_k')">
-                            <img src="https://lh3.googleusercontent.com/d/102PQT39s_DMEk9GDY6u0qIyi7Tzilq_k" alt="Flora Community Panorama scene 1">
-                        </div>
-                        <div class="slide" onclick="launchLightbox('https://lh3.googleusercontent.com/d/13bTEwoMbZzJ79d-4AhBp7EfYAxUZGfBh')">
-                            <img src="https://lh3.googleusercontent.com/d/13bTEwoMbZzJ79d-4AhBp7EfYAxUZGfBh" alt="Flora Community Panorama scene 2">
-                        </div>
-                        <div class="slide" onclick="launchLightbox('https://lh3.googleusercontent.com/d/1Jj8xHeI8KdkVYGRLXX1Y-TEXU6-SvAHY')">
-                            <img src="https://lh3.googleusercontent.com/d/1Jj8xHeI8KdkVYGRLXX1Y-TEXU6-SvAHY" alt="Flora Community Panorama scene 3">
-                        </div>
-                    </div>
-                    <button class="slide-arrow next" onclick="moveSlide(1)">❯</button>
-                    
-                    <div class="slide-dots">
-                        <span class="dot active" onclick="setSlide(0)"></span>
-                        <span class="dot" onclick="setSlide(1)"></span>
-                        <span class="dot" onclick="setSlide(2)"></span>
-                    </div>
-                </div>
+    <!-- 3. DISCOVER SECTION -->
+    <div class="discover-section">
+        <div class="discover-parallax-bg"></div><div class="discover-gradient-overlay"></div>
+        <div class="discover-content-container">
+            <h2 style="text-decoration: underline;">Discover Flora's Vibrant Community</h2>
+            <p style="font-size: 16px; line-height: 1.8em; width: 90%; max-width: 100%; margin: 10px 0;">Join us in supporting local businesses and dive into the exciting events happening in Flora, IL.</p>
+            <div id="smart-slider-container" class="custom-image-slider">
+                <div class="slide active"><img src="https://ourflora.com/wp-content/uploads/2025/11/SKbanner.png" alt="S&K Banner"></div>
+                <div class="slide"><img src="https://ourflora.com/wp-content/uploads/2023/08/railroad2.jpg" alt="Railroad 2"></div>
+                <div class="slide"><img src="https://ourflora.com/wp-content/uploads/2023/08/railroad.jpg" alt="Railroad"></div>
+                <div class="slide"><img src="https://ourflora.com/wp-content/uploads/2023/08/park2.jpg" alt="Park 2"></div>
+                <div class="slide"><img src="https://ourflora.com/wp-content/uploads/2023/08/park.jpg" alt="Park"></div>
+                <div class="slide"><img src="https://ourflora.com/wp-content/uploads/2023/08/mural.jpg" alt="Mural"></div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <div id="app-container">
-
-        <!-- Section 5: Flora Illinois Rich Heritage -->
-        <section class="content-section" id="section-5-heritage" style="padding-top: 40px; padding-bottom: 40px;">
-            <h2 class="heritage-main-title" data-i18n="sec5_heritage_title">Flora Illinois Rich Heritage</h2>
-            <div class="heritage-split-layout">
-                <div class="heritage-left-column">
-                    <p class="heritage-left-p" data-i18n="sec5_heritage_p1">
-                        Flora, IL was established in 1854 by Samuel White, who donated land to the City of Flora for several buildings and the city park. The City Park, at that time called the Public Square, is present day Library Park where Flora Public Library is located.
-                    </p>
+    <!-- 4. RICH HERITAGE SECTION -->
+    <div class="section" style="background: #ffffff; padding-top: 50px;">
+        <div class="container">
+            <h2 class="heritage-main-title">Flora Illinois Rich Heritage</h2>
+            <div class="row" style="margin-top: 40px;">
+                <div class="col-1-2">
+                    <p class="heritage-desc-text">Flora, IL was established in 1854 by Samuel White, who donated land to the City of Flora for several buildings and the city park. The City Park, at that time called the Public Square, is present day Library Park where Flora Public Library is located.</p>
                 </div>
-                <div class="heritage-right-column">
-                    <h1 class="heritage-sub-heading" data-i18n="sec5_heritage_sub">Flora Library</h1>
-                    
-                    <div class="heritage-images-container">
-                        <div class="heritage-card" onclick="launchLightbox('https://lh3.googleusercontent.com/d/1mkZZ7SlRHJkxmQFEulH_TatsSV_QOyrk')">
-                            <img src="https://lh3.googleusercontent.com/d/1mkZZ7SlRHJkxmQFEulH_TatsSV_QOyrk" alt="Flora Library in 1903">
-                            <h1 class="heritage-caption" data-i18n="sec5_heritage_cap1">Flora Library in 1903</h1>
+                <div class="col-1-2">
+                    <div class="library-column-wrap">
+                        <h1 class="library-main-h1">Flora Library</h1>
+                        <div class="side-by-side-row">
+                            <div class="side-by-side-col">
+                                <div class="library-img-container"><img src="https://ourflora.com/wp-content/uploads/2026/01/Old-Flora-Library.webp" alt="Old Flora Library"></div>
+                                <a href="https://florapubliclibrary.org/news/history/" target="_blank" class="library-sub-heading" onclick="trackEvent('Heritage', 'Library History Click', '1903 History')">Flora Library in 1903</a>
+                            </div>
+                            <div class="side-by-side-col">
+                                <div class="library-img-container">
+                                    <a href="https://florapubliclibrary.org/news/history/" target="_blank" onclick="trackEvent('Heritage', 'Library Photo Click', '1933 Library Image')">
+                                        <img src="https://ourflora.com/wp-content/uploads/2026/01/New-Flora-Libray.webp" alt="New Flora Library">
+                                    </a>
+                                </div>
+                                <a href="https://florapubliclibrary.org/news/history/" target="_blank" class="library-sub-heading" onclick="trackEvent('Heritage', 'Library History Click', '1933 History')">Flora Library in 1933</a>
+                            </div>
                         </div>
-                        <div class="heritage-card" onclick="launchLightbox('https://lh3.googleusercontent.com/d/1OM9IE0fVt9qKI-Vdu1OXF-BmKampOKDm')">
-                            <img src="https://lh3.googleusercontent.com/d/1OM9IE0fVt9qKI-Vdu1OXF-BmKampOKDm" alt="Flora Library in 1933">
-                            <h1 class="heritage-caption" data-i18n="sec5_heritage_cap2">Flora Library in 1933</h1>
+                        <div style="margin-top: 20px;">
+                            <span class="library-history-text">
+                                The Flora Public Library is located in Library Park at 216 North Main Street.  The 9,285 square foot facility was completed in 1992 and dedicated in March 1993.  This spacious, modern building replaced the Flora Carnegie Library building, a two-story yellow brick, which stood in Library Park from 1903 until 1990.  In January 1990, the Carnegie building was deemed structurally unsafe and closed to the public.  After a two-year building campaign, along with the generosity and assistance of a supportive community, the new red brick structure was completed. https://florail.govoffice2.com/library
+                                <a href="https://florail.govoffice2.com/library" target="_blank" rel="noopener" class="library-history-link" onclick="trackEvent('Heritage', 'External Link Click', 'Flora Gov Library Site')">https://florail.govoffice2.com/library</a>
+                            </span>
                         </div>
                     </div>
-                    
-                    <p class="heritage-desc-p">
-                        <span data-i18n="sec5_heritage_p2">The Flora Public Library is located in Library Park at 216 North Main Street.  The 9,285 square foot facility was completed in 1992 and dedicated in March 1993.  This spacious, modern building replaced the Flora Carnegie Library building, a two-story yellow brick, which stood in Library Park from 1903 until 1990.  In January 1990, the Carnegie building was deemed structurally unsafe and closed to the public.  After a two-year building campaign, along with the generosity and assistance of a supportive community, the new red brick structure was completed.</span> 
-                        <a href="https://florail.govoffice2.com/library" target="_blank" rel="noopener">https://florail.govoffice2.com/library</a>
-                    </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- Section 6: Flora's Historical Timeline -->
-        <section class="content-section" id="section-6-timeline" style="padding-top: 40px; padding-bottom: 40px;">
-            <div class="timeline-header-block">
-                <h2 class="timeline-main-title" data-i18n="sec6_timeline_title">Flora's Historical Timeline</h2>
-                <p class="timeline-sub-p" data-i18n="sec6_timeline_p">Journey through the significant milestones that have shaped Flora, IL, into the community it is today.</p>
+    <!-- 5. HISTORICAL TIMELINE SECTION -->
+    <div class="section" style="background: #f1f1f1;">
+        <div class="container">
+            <h2 class="timeline-main-title">Flora's Historical Timeline</h2>
+            <p class="timeline-sub-title">Journey through the significant milestones that have shaped Flora, IL.</p>
+            <div class="row" style="margin-top: 40px;">
+                <div class="col-1-4"><div class="timeline-card"><h3>1854</h3><h5>Founding of Flora</h5><p>Flora was established as a key stop along the railroad, setting the stage for future growth and development.</p><img src="https://ourflora.com/wp-content/uploads/2026/01/Flora-railroad.png"></div></div>
+                <div class="col-1-4"><div class="timeline-card"><h3>1900</h3><h5>Industrial Expansion</h5><p>The turn of the century brought industrial growth, with new businesses and factories contributing to the town’s prosperity.</p><img src="https://ourflora.com/wp-content/uploads/2026/01/shoe-factory.jpg"></div></div>
+                <div class="col-1-4"><div class="timeline-card"><h3>1950</h3><h5>Cultural Renaissance</h5><p>Post-war Flora saw a cultural boom, with new schools, theaters, and community centers.  In 1954 the Centenial Birthday was celebrated.</p><img src="https://ourflora.com/wp-content/uploads/2026/01/Flora-Centenial.png"></div></div>
+                <div class="col-1-4"><div class="timeline-card"><h3>2000</h3><h5>Modern Revitalization</h5><p>Flora embraced modernization while preserving its historical charm, leading to a revitalized downtown area and renewed community spirit.</p><img src="https://ourflora.com/wp-content/uploads/2026/01/CCH-Hospital.jpg"></div></div>
             </div>
-            
-            <div class="timeline-columns-container">
-                <div class="timeline-item-slot">
-                    <h3 class="timeline-item-date" data-i18n="sec6_timeline_s1_date">1854</h3>
-                    <h5 class="timeline-item-heading" data-i18n="sec6_timeline_s1_head">Founding of Flora</h5>
-                    <p class="timeline-item-desc" data-i18n="sec6_timeline_s1_desc">Flora was established as a key stop along the railroad, setting the stage for future growth and development.</p>
-                    <img src="https://lh3.googleusercontent.com/d/1HkOR6E1q2Db6SEfMW_W-fohaMUKWOYxQ" alt="Founding of Flora" onclick="launchLightbox('https://lh3.googleusercontent.com/d/1HkOR6E1q2Db6SEfMW_W-fohaMUKWOYxQ')">
-                </div>
-                <div class="timeline-item-slot">
-                    <h3 class="timeline-item-date" data-i18n="sec6_timeline_s2_date">1900</h3>
-                    <h5 class="timeline-item-heading" data-i18n="sec6_timeline_s2_head">Industrial Expansion</h5>
-                    <p class="timeline-item-desc" data-i18n="sec6_timeline_s2_desc">The turn of the century brought industrial growth, with new businesses and factories contributing to the town’s prosperity.</p>
-                    <img src="https://lh3.googleusercontent.com/d/1dWUwyb-39gNHIMsKmmBZKoHCv8pLrt--" alt="Industrial Expansion" onclick="launchLightbox('https://lh3.googleusercontent.com/d/1dWUwyb-39gNHIMsKmmBZKoHCv8pLrt--')">
-                </div>
-                <div class="timeline-item-slot">
-                    <h3 class="timeline-item-date" data-i18n="sec6_timeline_s3_date">1950</h3>
-                    <h5 class="timeline-item-heading" data-i18n="sec6_timeline_s3_head">Cultural Renaissance</h5>
-                    <p class="timeline-item-desc" data-i18n="sec6_timeline_s3_desc">Post-war Flora saw a cultural boom, with new schools, theaters, and community centers.  In 1954 the Centenial Birthday was celebrated.</p>
-                    <img src="https://lh3.googleusercontent.com/d/1IBYNS-hfSMmfLfYTaPWh-IY4xjaGQYUt" alt="Cultural Renaissance" onclick="launchLightbox('https://lh3.googleusercontent.com/d/1IBYNS-hfSMmfLfYTaPWh-IY4xjaGQYUt')">
-                </div>
-                <div class="timeline-item-slot">
-                    <h3 class="timeline-item-date" data-i18n="sec6_timeline_s4_date">2000</h3>
-                    <h5 class="timeline-item-heading" data-i18n="sec6_timeline_s4_head">Modern Revitalization</h5>
-                    <p class="timeline-item-desc" data-i18n="sec6_timeline_s4_desc">Flora embraced modernization while preserving its historical charm, leading to a revitalized downtown area and renewed community spirit.</p>
-                    <img src="https://lh3.googleusercontent.com/d/14tto0escrXCSB0hbaSQVvMZLI__jibym" alt="Modern Revitalization" onclick="launchLightbox('https://lh3.googleusercontent.com/d/14tto0escrXCSB0hbaSQVvMZLI__jibym')">
-                </div>
-            </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- Section 7: Flora Featured Ads Showcase (FULL WIDTH SCREEN) -->
-        <section class="content-section" id="section-7">
-            <div id="section-7-ads-container" class="flora-ads-wrapper">
-                <!-- Dynamically loaded Ads -->
-            </div>
-        </section>
-
-        <!-- Section 8: 3-Column Community Info & Event Tracker (LIQUID FLOW) -->
-        <section class="content-section" id="section-8">
-            <div class="three-column-grid">
-                
-                <!-- LEFT COLUMN: Upcoming Events & Bulletin -->
-                <div class="column left-col">
-                    <h2 class="et_pb_module_heading pill-header">Upcoming Events in Flora</h2>
-                    
-                    <!-- Clay County Community Bulletin -->
+    <!-- 6. DYNAMIC AD WIDGETS SECTION -->
+    <div class="section" style="background: #ffffcc;">
+        <div class="container">
+            <div class="row">
+                <!-- BULLETIN COLUMN -->
+                <div class="col-1-3">
+                    <div style="background:#8b4513; color:#fff; padding:10px; text-align:center; border-radius:20px 20px 0 0; font-weight:bold;">Upcoming Events in Flora</div>
                     <div class="news-clipping-wrapper">
                         <div class="clipping-masthead">
                             <span class="black-tag">Community Bulletin</span>
                             <p class="clipping-tagline" id="month-tagline">Dispatches & Happenings</p>
                         </div>
-                        <div id="divi-event-list">
-                            <p style="text-align:center; font-style: italic; padding: 20px;">
-                                <span class="loader"></span> Connecting to the wire...
-                            </p>
-                        </div>
-                        <div class="clipping-footer">
-                            View Full Community Calendar & Details<br>
-                            Support My Local Community
-                        </div>
+                        <div id="divi-event-list"><p style="text-align:center; font-style: italic; padding: 20px;">Connecting to the wire...</p></div>
+                        <div class="clipping-footer">View Full Community Calendar & Details<br>Support My Local Community</div>
                     </div>
-                    
-                    <!-- Event Clipping -->
                     <div class="clay-county-news-box event-clipping">
                         <div class="clipping-tag">Community Bulletin</div>
-                        <div class="event-clipping-header">
-                            <h3>What's Happening?</h3>
-                            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #222; font-weight: bold;">Clay County Community Calendar</span>
-                        </div>
-                        <p class="event-clipping-text">
-                            "Got a local fundraiser, school event, or church dinner coming up? Share your news with the community for free!"
-                        </p>
-                        <a href="https://www.supportmylocalcommunity.com/submit-event" target="_blank" class="event-clipping-btn">
-                            Submit Your Event
-                        </a>
-                        <div class="clipping-footer">
-                            Clay City • Flora • Louisville • Sailor Springs • Xenia
-                        </div>
+                        <div class="event-clipping-header"><h3>What's Happening?</h3><span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #222; font-weight: bold;">Clay County Community Calendar</span></div>
+                        <p class="event-clipping-text">"Got a local fundraiser, school event, or church dinner coming up? Share your news with the community for free!"</p>
+                        <a href="https://www.supportmylocalcommunity.com/submit-event" class="event-clipping-btn" onclick="trackEvent('Bulletin', 'Submit Click', 'Submit Your Event')">Submit Your Event</a>
+                        <div class="clipping-footer">Clay City • Flora • Louisville • Sailor Springs • Xenia</div>
                     </div>
                 </div>
 
-                <!-- MIDDLE COLUMN: Spotlight & Fuel Monitor -->
-                <div class="column middle-col">
-                    <img src="https://ourflora.com/wp-content/uploads/2023/08/Ourflora.png" alt="OurFlora Logo">
-                    
-                    <!-- Business Spotlight -->
+                <!-- SPOTLIGHT COLUMN -->
+                <div class="col-1-3" style="text-align: center;">
+                    <div style="display:inline-block; margin-bottom:20px; position: relative;">
+                        <img loading="lazy" decoding="async" width="250" height="195" src="https://ourflora.com/wp-content/uploads/2023/08/Ourflora.png" alt="" title="Ourflora" class="wp-image-9" style="width: 250px; height: 195px; aspect-ratio: auto 250 / 195; display: inline; border: none;">
+                    </div>
                     <div class="clay-county-news-box spotlight-clipping">
-                        <div class="news-box-header">
-                            <h3>Business Spotlight</h3>
-                            <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #666;">Supporting Local Clay County News</span>
-                        </div>
-                        <div class="spotlight-image-wrap">
-                            <img src="https://github.com/KFruti88/images/blob/main/localbusiness.jpeg?raw=true" alt="Featured Local Business">
-                        </div>
-                        <span class="biz-title">Flora Family Diner</span>
-                        <span class="biz-location">Flora, Illinois</span>
-                        <p class="biz-description">
-                            Serving home-cooked favorites for over two decades, the Family Diner is a staple of our community. Known for their "Early Bird" specials and the friendliest service in Clay County. 
-                        </p>
-                        <a href="#" class="spotlight-btn">Visit Website</a>
+                        <div class="news-box-header"><h3>Business Spotlight</h3><span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #666;">Supporting Local Clay County News</span></div>
+                        <div class="spotlight-image-wrap"><img decoding="async" src="https://github.com/KFruti88/images/blob/main/localbusiness.jpeg?raw=true" alt="Featured Local Business"></div>
+                        <span class="biz-title">Flora Family Diner</span><span class="biz-location">Flora, Illinois</span>
+                        <p class="biz-description">Serving home-cooked favorites for over two decades, the Family Diner is a staple of our community. Known for their "Early Bird" specials and the friendliest service in Clay County.</p> 
+                        <a href="#" class="spotlight-btn" onclick="trackEvent('Widget', 'Spotlight Click', 'Flora Family Diner')">Visit Website</a>
                     </div>
-
-                    <!-- UPDATED Fuel Monitor Billboard -->
-                    <div id="fuel-monitor-container">
-                        <div id="wp-custom-wrapper" style="position: relative; width: 100%; max-width: 600px; margin: 0 auto;">
-                            
-                            <div id="notification-toast">
-                                <span class="live-indicator"></span> Live Update
+                    <div id="fuel-monitor-container" style="width: 100%; max-width: 500px; margin: 20px auto;">
+                        <div id="notification-toast"><span class="live-indicator"></span> Live Update</div>
+                        <a href="https://supportmylocalcommunity.com/gas-prices/" target="_parent" class="billboard-link" onclick="trackEvent('Billboard', 'Click', 'Gas Prices')">
+                            <div class="billboard-frame">
+                                <div class="brand-overlay">S & K Ventures, Inc. • Digital Advertising</div>
+                                <div id="fuel-screen" class="digital-screen"><div style="color: #ffc929; font-weight: bold; font-size: 13px; text-align: center;">SYNCING...</div></div>
+                                <div class="brand-footer">Click to update prices</div>
                             </div>
-
-                            <a href="./price-update.html" target="_parent" class="billboard-link">
-                                <div class="billboard-frame">
-                                    <div class="brand-overlay">S & K Ventures, Inc. • Digital Advertising</div>
-                                    <div id="fuel-screen" class="digital-screen">
-                                        <div style="color: #ffc929; font-weight: bold; font-size: 13px; text-align: center;">
-                                            <div style="margin-bottom: 5px; animation: pulse 1s infinite;">⚡</div>
-                                            SYNCING...
-                                        </div>
-                                    </div>
-                                    <div class="brand-footer">Click to update prices</div>
-                                </div>
-                            </a>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
-                <!-- RIGHT COLUMN: Connections, Sports & Facebook -->
-                <div class="column right-col">
-                    <h2 class="et_pb_module_heading pill-header">OurFlora Connection</h2>
-                    
-                    <!-- ScoreStream Widget -->
-                    <div class="scorestream-widget-container" data-ss_widget_type="vertScoreboard" style="height:600px;" data-user-widget-id="67533"></div>
-                    
-                    <div class="et_pb_module et_pb_text et_pb_text_15 et_pb_text_align_left et_pb_bg_layout_light" style="margin-bottom: 30px; text-align: center;">
-                        <div class="et_pb_text_inner">
-                            <h3 style="text-align: center; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 20px; display: inline-block;">
-                                <a href="https://ourflora.com/Clay-Co-Sports/" style="color: #000; text-decoration: underline;">Click for more Clay County Sports</a>
-                            </h3>
-                        </div>
-                    </div>
-
-                    <h1 class="et_pb_module_heading pill-header">Connect with Us on Facebook</h1>
-                    
-                    <!-- Facebook Group Invitation -->
+                <!-- CONNECTION COLUMN -->
+                <div class="col-1-3" style="text-align: center;">
+                    <div style="background:#8b4513; color:#fff; padding:10px; text-align:center; border-radius:20px 20px 0 0; font-weight:bold; margin-bottom:10px;">OurFlora Connection</div>
+                    <div class="scorestream-widget-container" data-ss_widget_type="vertScoreboard" style="height: 600px;" data-user-widget-id="64642"></div>
+                    <a href="https://ourflora.com/Clay-Co-Sports/" class="sports-link" onclick="trackEvent('Sports', 'Click', 'More Sports Link')">Click for more Clay County Sports</a>
                     <div class="clay-county-news-box group-invitation-master">
                         <div class="notice-tag-red">Local Conversation</div>
-                        <div class="polaroid-wrap">
-                            <img src="https://ourflora.com/wp-content/uploads/2023/08/Ourflora.png" alt="OurFlora Community">
-                        </div>
-                        <div class="invitation-header-main">
-                            <h3>Join the Community</h3>
-                            <span class="sub-header-text">Official OurFlora Facebook page</span>
-                        </div>
-                        <p class="invitation-body-text">
-                            "Stay connected with your neighbors. Discuss local news, share community updates, and join neighbors in the OurFlora conversation."
-                        </p>
-                        <a href="https://www.facebook.com/OurFloraIL" target="_blank" class="fb-action-btn">
-                            Enter the Conversation
-                        </a>
-                        <span style="display: block; margin-top: 15px; font-size: 9px; text-transform: uppercase; color: #999;">
-                            Community Voice • Clay County, IL
-                        </span>
+                        <div class="polaroid-wrap"><img decoding="async" src="https://ourflora.com/wp-content/uploads/2023/08/Ourflora.png" alt="OurFlora Community"></div>
+                       <div class="invitation-header-main"><h3>Join the Community</h3><span class="sub-header-text">Official OurFlora Facebook page</span></div>
+                        <p class="invitation-body-text">"Stay connected with your neighbors. Discuss local news, share community updates, and join neighbors in the OurFlora conversation."</p> 
+                        <a href="https://www.facebook.com/OurFloraIL" target="_blank" class="fb-action-btn" onclick="trackEvent('Social', 'Join Click', 'Facebook Invitation')">Enter the Conversation</a>
+                        <span class="community-voice-footer">Community Voice • Clay County, IL</span>
                     </div>
                 </div>
-
             </div>
-        </section>
-
-        <!-- Section 9: Flora Operations & Billboard Display (FULL WIDTH SCREEN) -->
-        <section class="content-section" id="section-9">
-            <div id="section-9-ads-container" class="flora-ads-wrapper">
-                <!-- Dynamically loaded Ads -->
-            </div>
-        </section>
-
-        <!-- Section 10: Image Gallery (Full Width Black Background) -->
-        <section class="content-section" id="section-10-gallery">
-            <div class="gallery-four-images">
-                <img src="https://lh3.googleusercontent.com/d/11kvWYG5kcO0gtpYPS1Ev-aQiRFYMrMLF" alt="Gallery Image 1" onclick="launchLightbox('https://lh3.googleusercontent.com/d/11kvWYG5kcO0gtpYPS1Ev-aQiRFYMrMLF')">
-                <img src="https://lh3.googleusercontent.com/d/1_Ar901K9jzLXR1THYx66KMeopweRPgVW" alt="Gallery Image 2" onclick="launchLightbox('https://lh3.googleusercontent.com/d/1_Ar901K9jzLXR1THYx66KMeopweRPgVW')">
-                <img src="https://lh3.googleusercontent.com/d/1BXF4JwucGRQFO0QCK2vUxQO0mm5G7qX2" alt="Gallery Image 3" onclick="launchLightbox('https://lh3.googleusercontent.com/d/1BXF4JwucGRQFO0QCK2vUxQO0mm5G7qX2')">
-                <img src="https://lh3.googleusercontent.com/d/1TmYNuiBVZmKjsIB9sNhFCcdOLZ5WD1h0" alt="Gallery Image 4" onclick="launchLightbox('https://lh3.googleusercontent.com/d/1TmYNuiBVZmKjsIB9sNhFCcdOLZ5WD1h0')">
-            </div>
-        </section>
-
-    </div> <!-- End App Container -->
-
-    <!-- Section 11: System Footer -->
-    <footer id="section-11-footer">
-        <p>All Content, Photographs, Writings, Letters and Documents – Copyright – 2019-2026 – Our Flora<br>
-        All Rights Reserved – <a href="https://www.skventuresigns.com" target="_blank" rel="noopener">S&amp;K Ventures</a></p>
-    </footer>
-
-    <!-- Immersive Lightbox Modal Container -->
-    <div id="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close">×</span>
-        <img id="lightbox-img" src="" alt="Sign Asset Zoomed">
+        </div>
     </div>
 
-    <!-- Placeholder for Structured Data (SEO) -->
-    <script type="application/ld+json" id="structured-data-block"></script>
+    <!-- 5-COLUMN FOOTER AD STRIP -->
+    <div class="et_pb_section_9">
+        <div class="container">
+            <div class="row" style="margin-bottom: 0;">
+                <div class="col-1-5">
+                    <div class="ad-box" data-ad-group="footer_ads">
+                        <div class="ad-wrapper">
+                            <img decoding="async" class="ad-image" src="https://ourflora.com/wp-content/uploads/2026/01/SKad.png" alt="Ad" onclick="openModal(this.src)" style="cursor:pointer; width:100%; height:80px; object-fit:cover;">
+                            <div class="ad-link-container">
+                                <a class="ad-link" href="https://www.skventuresigns.com" target="_blank" onclick="trackAdClick(this)"><span class="ad-business-name">S&K Venture Signs</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1-5">
+                    <div class="ad-box" data-ad-group="R1A2_ads">
+                        <div class="ad-wrapper">
+                            <img decoding="async" class="ad-image" src="https://ourflora.com/wp-content/uploads/2025/12/GTC1.png" alt="Ad" onclick="openModal(this.src)" style="cursor:pointer; width:100%; height:80px; object-fit:cover;">
+                            <div class="ad-link-container">
+                                <a class="ad-link" href="https://graceandtruthcounseling.com" target="_blank" onclick="trackAdClick(this)"><span class="ad-business-name">Grace and Truth</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1-5">
+                    <div class="ad-box" data-ad-group="sidebar_ads">
+                        <div class="ad-wrapper">
+                            <img decoding="async" class="ad-image" src="https://skventuresigns.com/wp-content/uploads/2025/06/Hometown-Appliance.png" alt="Ad" onclick="openModal(this.src)" style="cursor:pointer; width:100%; height:80px; object-fit:cover;">
+                            <div class="ad-link-container">
+                                <a class="ad-link" href="https://www.hometownappliance.com" target="_blank" onclick="trackAdClick(this)"><span class="ad-business-name">Hometown Appliance</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1-5">
+                    <div class="ad-box" data-ad-group="R1A2_ads">
+                        <div class="ad-wrapper">
+                            <img decoding="async" class="ad-image" src="https://ourflora.com/wp-content/uploads/2025/12/AngelaFlorist.png" alt="Ad" onclick="openModal(this.src)" style="cursor:pointer; width:100%; height:80px; object-fit:cover;">
+                            <div class="ad-link-container">
+                                <a class="ad-link" href="https://angelasvillageflorist.com" target="_blank" onclick="trackAdClick(this)"><span class="ad-business-name">Angela's Village Florist</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1-5">
+                    <div class="ad-box" data-ad-group="footer_ads">
+                        <div class="ad-wrapper">
+                            <img decoding="async" class="ad-image" src="https://ourflora.com/wp-content/uploads/2025/12/HeritageWoods.png" alt="Ad" onclick="openModal(this.src)" style="cursor:pointer; width:100%; height:80px; object-fit:cover;">
+                            <div class="ad-link-container">
+                                <a class="ad-link" href="https://gardant.com/heritagewoodsflora" target="_blank" onclick="trackAdClick(this)"><span class="ad-business-name">Heritage Woods of Flora</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Comprehensive JS Block -->
+    <!-- 8. GALLERY SECTION -->
+    <div class="section" style="background: #000;">
+        <div class="image-row">
+            <div class="image-box"><img src="./images/R.jpg"></div>
+            <div class="image-box"><img src="./images/Charlie-Brown-Park.jpg"></div>
+            <div class="image-box"><img src="./images/City-our-flora-sign.jpg"></div>
+            <div class="image-box"><img src="https://ourflora.com/wp-content/uploads/2025/12/Screenshot-2025-05-31-205146.png"></div>
+        </div>
+    </div>
+
+    <!-- 9. FOOTER -->
+    <footer style="background-color: #ffffcc;">
+        <div class="container">
+            <p class="footer-copyright">
+                All Content, Photographs, Writings, Letters and Documents – Copyright – 2019-2026 – Our Flora<br>
+                All Rights Reserved – <a href="https://www.skventuresigns.com" target="_blank" rel="noopener" onclick="trackEvent('Footer', 'External Click', 'S&K Ventures')">S&K Ventures</a>
+            </p>
+        </div>
+    </footer>
+
+    <div id="imageModal" class="modal" onclick="closeModal()"><img class="modal-content" id="expandedImg"></div>
+
+    <!-- SCRIPTS -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
     <script>
-        /* JS GOES IN THE JS PANEL - SEE JS BLOCK BELOW */
+        const MY_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtunjBquRf8yjnYdpMNMglMQB6n0j4pHSNke-9yADxZ3-9HvJqXT2DdVTUjdhRroGcxQ/exec";
+        const AD_JSON_URL = "https://raw.githubusercontent.com/skventuresigns-design/smlc/main/slideshow/partners.json";
+        
+        let adData = { "sidebar_ads": [], "R1A2_ads": [], "footer_ads": [] };
+        let boxIndices = {};
+
+        function trackAdClick(element) { 
+            const biz = element.closest('.ad-box').querySelector('.ad-business-name').innerText; 
+            trackEvent('Advertisements', 'Click', biz); 
+        }
+
+        async function fetchAdData() { 
+            try { 
+                const r = await fetch(AD_JSON_URL); 
+                const d = await r.json(); 
+                adData = d; 
+                initAds(); 
+            } catch (e) { initAds(); } 
+        }
+
+        function initAds() { 
+            const boxes = document.querySelectorAll('.ad-box');
+            boxes.forEach((box, idx) => { 
+                const group = box.getAttribute('data-ad-group'); 
+                if (adData[group] && adData[group].length > 0) { 
+                    boxIndices[idx] = idx % adData[group].length; 
+                    updateBoxContent(box, group, idx); 
+                    setInterval(() => { rotateBox(box, group, idx); }, 10000); 
+                } 
+            }); 
+        }
+
+        function updateBoxContent(box, group, elementId) { 
+            const groupData = adData[group];
+            const currentAd = groupData[boxIndices[elementId]]; 
+            const img = box.querySelector('.ad-image'); 
+            const linkTag = box.querySelector('.ad-link'); 
+            const nameTag = box.querySelector('.ad-business-name'); 
+            if(img && currentAd.img) img.src = currentAd.img; 
+            if(linkTag && currentAd.link) linkTag.href = currentAd.link; 
+            if(nameTag && currentAd.name) { nameTag.href = currentAd.link; nameTag.innerText = currentAd.name; } 
+        }
+
+        function rotateBox(box, group, elementId) { 
+            const img = box.querySelector('.ad-image'); 
+            if(!img) return; 
+            img.style.opacity = '0'; 
+            img.style.transition = 'opacity 0.5s';
+            setTimeout(() => { 
+                boxIndices[elementId] = (boxIndices[elementId] + 1) % adData[group].length; 
+                updateBoxContent(box, group, elementId); 
+                img.style.opacity = '1'; 
+            }, 500); 
+        }
+
+        function openModal(src) { document.getElementById("imageModal").style.display = "flex"; document.getElementById("expandedImg").src = src; }
+        function closeModal() { document.getElementById("imageModal").style.display = "none"; }
+        function toggleDetails(id, title) { const d = document.getElementById('details-' + id); const s = document.getElementById('snippet-' + id); const b = document.getElementById('btn-' + id); if (d.style.display === 'block') { d.style.display = 'none'; if(s) s.style.display = 'block'; b.innerText = 'Read More'; } else { d.style.display = 'block'; if(s) s.style.display = 'none'; b.innerText = 'Show Less'; trackEvent('Bulletin', 'Read More Click', title); } }
+
+        async function displayDiviEvents() {
+            const list = document.getElementById('divi-event-list');
+            try {
+                const r = await fetch(`${MY_SCRIPT_URL}?feed=true&t=${Date.now()}`);
+                const events = await r.json();
+                if (Array.isArray(events) && events.length > 0) {
+                    list.innerHTML = '';
+                    events.forEach((item, index) => {
+                        const getVal = (v) => (v && v.toString().toLowerCase() !== 'undefined' && v.toString().toLowerCase() !== 'tba' && v.toString().toLowerCase() !== 'null') ? v.toString().trim() : '';
+                        const title = getVal(item.name || item.title);
+                        const date = getVal(item.date || item.displayDate);
+                        const time = getVal(item.time || item.displayTime);
+                        const loc = getVal(item.location || item.where);
+                        const details = getVal(item.details || item.description);
+                        if (!title) return;
+                        const cleanTitle = title.replace(/'/g, "\\'");
+                        const isLong = details.length > 85;
+                        const snippetText = isLong ? details.substring(0, 85) + "..." : details;
+                        const div = document.createElement('div'); div.className = 'divi-event-item';
+                        div.innerHTML = `
+                            <div class="divi-event-date">${date}</div><div class="divi-event-title">${title}</div>
+                            <div class="event-info-text"><strong>Where:</strong> ${loc} <br><strong>Time:</strong> ${time}</div>
+                            ${details ? `<div class="event-snippet" id="snippet-${index}">"${snippetText}"</div><div class="full-details" id="details-${index}">${details}</div><div class="read-more-btn" id="btn-${index}" onclick="toggleDetails(${index}, '${cleanTitle}')">Read More</div>` : ''}
+                            <div class="cal-links"><span class="cal-label">Add to Calendar</span><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(loc)}&sf=true&output=xml" target="_blank" class="cal-text-link" onclick="trackEvent('Bulletin', 'Google Cal', '${cleanTitle}')">Google</a> | <a href="#" class="cal-text-link" onclick="trackEvent('Bulletin', 'Apple Cal', '${cleanTitle}')">Apple / Outlook</a></div>`;
+                        list.appendChild(div);
+                    });
+                } else { list.innerHTML = `<p style="text-align:center; padding:20px; font-style:italic;">No dispatches scheduled.</p>`; }
+            } catch (e) { list.innerHTML = `<p style="text-align:center; color:#cc0000;">Sync Error.</p>`; }
+        }
+
+        (function() {
+            const firebaseConfig = { apiKey: "AIzaSyBYPbGWDNPUmCSnFWDPPWtiXe2F6MPinXg", authDomain: "smlc-fuel-monitor.firebaseapp.com", databaseURL: "https://smlc-fuel-monitor-default-rtdb.firebaseio.com", projectId: "smlc-fuel-monitor", storageBucket: "smlc-fuel-monitor.firebasestorage.app", messagingSenderId: "22397440085", appId: "1:22397440085:web:c88e71688ed58896bc4dc" };
+            const fuelApp = firebase.initializeApp(firebaseConfig, 'SMLCFuelBillboard_' + Math.random().toString(36).substr(2, 9));
+            const db = fuelApp.database();
+            const stationConfigs = { "48100": { display: "Flora", name: "CASEY'S", logo: "Casey's.png" }, "48101": { display: "Flora", name: "HUCK'S", logo: "Hucks.png" }, "128128": { display: "Flora", name: "MACH 1", logo: "Mach 1.png" }, "120226": { display: "Flora", name: "FAST STOP", logo: "Fast stop.png" }, "48026": { display: "Louisville", name: "CASEY'S", logo: "Casey's.png" }, "87817": { display: "Xenia", name: "KNAPP'S", logo: "Knapps.png" }, "171711": { display: "Clay City", name: "CASEY'S", logo: "Casey's.png" } };
+            const screen = document.getElementById('fuel-screen');
+            let currentIdx = 0;
+            function render(data) {
+                screen.innerHTML = '';
+                Object.keys(stationConfigs).forEach(id => {
+                    const config = stationConfigs[id];
+                    const info = data[id] || { reg: "---", dsl: "---", date: "PENDING" };
+                    const logoClass = (id === "128128") ? "station-logo logo-bg-white" : "station-logo";
+                    const slide = document.createElement('div');
+                    slide.className = 'gas-slide';
+                    slide.innerHTML = `
+                        <div class="town-header">${config.display.toUpperCase()}, IL</div>
+                        <div class="logo-container"><img src="https://raw.githubusercontent.com/skventuresigns-design/smlc/main/gas-prices/image/${encodeURIComponent(config.logo)}" class="${logoClass}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><div class="logo-fallback" style="display:none;">${config.name}</div></div>
+                        <div class="price-row"><span class="price-label">REGULAR</span><span class="led-red">${info.reg}</span></div>
+                        <div class="price-row"><span class="price-label">DIESEL</span><span class="led-grn">${(info.dsl === "0" || !info.dsl) ? "---" : info.dsl}</span></div>
+                        <div class="update-tag">Updated: ${info.date}</div>`;
+                    screen.appendChild(slide);
+                });
+                const slides = screen.querySelectorAll('.gas-slide');
+                function cycle() { if(slides.length === 0) return; slides.forEach(s => s.classList.remove('active')); slides[currentIdx].classList.add('active'); currentIdx = (currentIdx + 1) % slides.length; }
+                if (slides.length > 0) { currentIdx = 0; cycle(); setInterval(cycle, 6000); }
+            }
+            db.ref('fuel_prices').on('value', (snap) => { const v = snap.val(); if (v) render(v); });
+        })();
+
+        window.onload = function() {
+            fetchAdData(); displayDiviEvents();
+            setInterval(() => { const s = document.getElementById('smart-slider-container'); const slides = s.querySelectorAll('.slide'); if(slides.length === 0) return; const current = Array.from(slides).findIndex(sl => sl.classList.contains('active')); slides[current].classList.remove('active'); slides[(current + 1) % slides.length].classList.add('active'); }, 5000);
+        };
     </script>
+    <script async src="https://scorestream.com/apiJsCdn/widgets/embed.js"></script>
+    <script src="https://platform.elfsight.com/platform.js" async></script>
 </body>
 </html>
