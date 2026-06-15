@@ -1,1 +1,45 @@
-
+{
+  "town": "Flora",
+  "state": "IL",
+  "county": "Clay",
+  "zip": "62839",
+  "last_updated": "2026-06-14T23:05:00Z",
+  "version": "1.0.0",
+  "history": [
+    {
+      "year": 1854,
+      "event": "Founding and Incorporation",
+      "description": "Flora was officially platted in February 1854 by Samuel White, Ethelred Nixon, and John Brown. The town grew as a central hub along the B&O Railroad line.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1872,
+      "event": "Construction of B&O Depot",
+      "description": "The first Baltimore and Ohio (B&O) Railroad Depot was built, which eventually became a primary economic driver for the community for decades.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1917,
+      "event": "New B&O Depot Completed",
+      "description": "After the 1872 depot was destroyed by fire in 1916, a new three-story brick depot was completed in 1917, serving as a vital hub for passengers and rail operations.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1960,
+      "event": "Designated 'Ford Town USA'",
+      "description": "Ford Motor Company designated Flora as 'Ford Town USA' and provided over 1,200 residents with new Ford vehicles to drive for one week, a signature moment in the town's history.",
+      "image_url": "",
+      "image_caption": "Historic promotional event where the town was filled with white Ford vehicles."
+    },
+    {
+      "year": 2020,
+      "event": "Modern Census",
+      "description": "The 2020 Census recorded a population of 4,803, maintaining Flora's status as the largest community in Clay County.",
+      "image_url": "",
+      "image_caption": ""
+    }
+  ]
+}
