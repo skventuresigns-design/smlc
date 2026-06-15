@@ -1,0 +1,31 @@
+{
+  "town": "Kenner",
+  "state": "IL",
+  "county": "Clay",
+  "status": "Unincorporated Community",
+  "last_updated": "2026-06-14T23:12:00Z",
+  "version": "1.0.0",
+  "history": [
+    {
+      "year": 1880,
+      "event": "Establishment of Settlement",
+      "description": "Kenner emerged as a small rural settlement and shipping point along the railroad line southwest of Flora, Illinois, serving the surrounding farming population in Clay County.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1920,
+      "event": "Agricultural Support Era",
+      "description": "Throughout the early 20th century, Kenner functioned as a local agricultural community, facilitating the movement of crops and goods from neighboring farms via the railway.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 2026,
+      "event": "Modern Status",
+      "description": "Kenner remains a quiet, unincorporated community in Clay County. It continues to exist today as a small, rural residential enclave situated along the rail corridor southwest of the city of Flora.",
+      "image_url": "",
+      "image_caption": ""
+    }
+  ]
+}
