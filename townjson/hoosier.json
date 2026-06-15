@@ -1,0 +1,31 @@
+{
+  "town": "Hoosier",
+  "state": "IL",
+  "county": "Clay",
+  "status": "Unincorporated Community",
+  "last_updated": "2026-06-14T23:40:00Z",
+  "version": "1.0.0",
+  "history": [
+    {
+      "year": 1850,
+      "event": "Settlement Establishment",
+      "description": "Hoosier developed as a small rural settlement within Hoosier Township, Clay County. It was established by settlers during the mid-19th-century expansion of the Illinois prairie.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1880,
+      "event": "Agricultural Hub",
+      "description": "Throughout the late 1800s, the community served as a local center for the surrounding farm families, supported by the nearby Hoosier Prairie and the local rural infrastructure.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 2026,
+      "event": "Modern Status",
+      "description": "Hoosier remains a quiet, unincorporated community located approximately four miles northeast of Louisville, Illinois. It continues to serve as a residential area within the rural landscape of Clay County.",
+      "image_url": "",
+      "image_caption": ""
+    }
+  ]
+}
