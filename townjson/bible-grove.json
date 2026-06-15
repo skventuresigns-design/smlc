@@ -1,0 +1,45 @@
+{
+  "town": "Bible Grove",
+  "state": "IL",
+  "county": "Clay",
+  "status": "Unincorporated Community",
+  "last_updated": "2026-06-14T23:55:00Z",
+  "version": "1.0.0",
+  "history": [
+    {
+      "year": 1835,
+      "event": "First Permanent Settlement",
+      "description": "Cyrus Mason established the first homestead in the township on Section 31, drawing pioneers from Kentucky, Indiana, and North Carolina.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1852,
+      "event": "Founding as Edinburg/Georgetown",
+      "description": "The village was platted as Edinburg by George Monical, later renamed Georgetown. The name 'Bible Grove' originated from a local legend where hunters discovered a Bible in a nearby grove of trees.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1876,
+      "event": "Church Organization",
+      "description": "The Bible Grove Christian Church was organized with 37 charter members, on land deeded by early resident Henry Brooks.",
+      "image_url": "",
+      "image_caption": "Bible Grove Christian Church"
+    },
+    {
+      "year": 1988,
+      "event": "Post Office Closure",
+      "description": "The community's post office, which had served the area since 1854, officially closed on October 22, 1988.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 2020,
+      "event": "Modern Status",
+      "description": "Bible Grove remains a quiet, historic unincorporated community in Clay County, serving as the center of Bible Grove Township.",
+      "image_url": "",
+      "image_caption": ""
+    }
+  ]
+}
