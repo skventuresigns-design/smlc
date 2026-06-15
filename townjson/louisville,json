@@ -1,0 +1,44 @@
+{
+  "town": "Louisville",
+  "state": "IL",
+  "county": "Clay",
+  "last_updated": "2026-06-14T22:49:00Z",
+  "version": "1.0.2",
+  "history": [
+    {
+      "year": 1824,
+      "event": "Clay County Formation",
+      "description": "Clay County was formed in 1824 out of portions of Wayne, Crawford, and Fayette counties. Its name is in honor of Henry Clay – famous American statesman, member of the United States Senate from Kentucky, and United States Secretary of State in the 19th Century. Clay was a candidate for President in the year the county was named. John Quincy Adams won however, and was elected President on February 9, 1825.",
+      "image_url": "https://claycountyillinois.org/wp-content/uploads/2014/08/courthouse-inside.jpg",
+      "image_caption": ""
+    },
+    {
+      "year": 1841,
+      "event": "Designated County Seat",
+      "description": "Commissioners officially moved the county seat from the original location of Maysville to the newly established village of Louisville.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1883,
+      "event": "Grand Army of the Republic",
+      "description": "The local chapter (Post No. 249) of the Grand Army of the Republic was chartered in Louisville, marking a significant milestone for local Civil War veterans.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 2020,
+      "event": "Modern Census",
+      "description": "As of the 2020 Census, Louisville continues to serve as the administrative center of Clay County with a population of 1,136.",
+      "image_url": "https://claycountyillinois.org/wp-content/uploads/2014/08/courthouse2.jpg",
+      "image_caption": ""
+    },
+    {
+      "year": 2022,
+      "event": "Rise of Bailey Zimmerman",
+      "description": "Louisville native Bailey Zimmerman achieved national fame in the country music industry, putting the small town on the map for his chart-topping hits like 'Fall in Love' and 'Rock and a Hard Place'.",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ6mgJbZ8bp4AJSm1jeSpSSBCY2y2emptRxQAJ-hWeomxk1Hz2QvtbFeY&s=10",
+      "image_caption": "Bailey Zimmerman, notable country music artist from Louisville, IL."
+    }
+  ]
+}
