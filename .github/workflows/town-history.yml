@@ -10,7 +10,7 @@ jobs:
   update-history:
     runs-on: ubuntu-latest
     permissions:
-      contents: write 
+      contents: write
     
     steps:
       - name: Checkout repository
@@ -26,21 +26,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
 
-      - name: Download town.py from repository
-        # This downloads the raw file to the current runner workspace
-        run: |
-          curl -o town.py https://raw.githubusercontent.com/skventuresigns-design/smlc/main/townjson/town.py
-
       - name: Run update script
-        run: python town.py
+        # This navigates into your townjson folder and runs the script from there
+        run: |
+          cd townjson
+          python town.py
 
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          # Only commit if files have actually changed
-          if [ -n "$(git status --porcelain)" ]; then
-            git add *.json
+          # Only commit if JSON files in the townjson folder have changed
+          if [ -n "$(git status --porcelain townjson/*.json)" ]; then
+            git add townjson/*.json
             git commit -m "Auto-update: Monthly historical data sync"
             git push
           else
