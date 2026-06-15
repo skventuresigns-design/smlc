@@ -1,1 +1,45 @@
-
+{
+  "town": "Clay City",
+  "state": "IL",
+  "county": "Clay",
+  "zip": "62824",
+  "last_updated": "2026-06-14T23:10:00Z",
+  "version": "1.0.0",
+  "history": [
+    {
+      "year": 1810,
+      "event": "First Settlement",
+      "description": "John McCawley settled near the Little Wabash River, establishing 'McCawley's Tavern,' which became an early stagecoach stop and trading center for the region.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1855,
+      "event": "Establishment of Clay City",
+      "description": "Following the placement of the Ohio & Mississippi (O&M) Railroad, J.D. Perkey officially established Clay City on the north side of the tracks.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1862,
+      "event": "Maysville Annexation",
+      "description": "The neighboring village of Maysville, the former county seat of Clay County, was formally incorporated into the Village of Clay City.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1936,
+      "event": "Oil Discovery",
+      "description": "The discovery of oil in the area significantly shifted the local economy, leading to the development of various oil-related industries that continue to operate today.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 2020,
+      "event": "Modern Census",
+      "description": "As of the 2020 Census, Clay City remains a close-knit community with a population of 847, known for its deep agricultural roots and history as a transportation gateway.",
+      "image_url": "",
+      "image_caption": ""
+    }
+  ]
+}
