@@ -1,0 +1,31 @@
+{
+  "town": "Ingraham",
+  "state": "IL",
+  "county": "Clay",
+  "status": "Unincorporated Community",
+  "last_updated": "2026-06-14T23:55:00Z",
+  "version": "1.0.0",
+  "history": [
+    {
+      "year": 1834,
+      "event": "Early Settlement",
+      "description": "The area was settled by early pioneers, including the Ingraham family, for whom the community was eventually named.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1880,
+      "event": "Community Development",
+      "description": "Throughout the late 19th century, Ingraham served as a small rural center supporting the surrounding agricultural families in Pixley Township.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 2020,
+      "event": "Modern Status",
+      "description": "Ingraham remains a quiet, unincorporated community in Clay County, serving as a residential area for local farmers and rural families.",
+      "image_url": "",
+      "image_caption": ""
+    }
+  ]
+}
