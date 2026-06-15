@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-530038574"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -275,12 +274,11 @@
 <div id="fuel-monitor-container">
     <div id="wp-custom-wrapper" style="position: relative; width: 100%; max-width: 600px; margin: 0 auto;">
         
-        <!-- Notification Pop-up -->
         <div id="notification-toast">
             <span class="live-indicator"></span> Live Update
         </div>
 
-        <a href="./price-update.html" target="_parent" class="billboard-link">
+        <a id="dynamic-billboard-link" href="./price-update.html" target="_parent" class="billboard-link">
             <div class="billboard-frame">
                 <div class="brand-overlay">S & K Ventures, Inc. • Digital Advertising</div>
                 <div id="fuel-screen" class="digital-screen">
@@ -289,7 +287,7 @@
                         SYNCING...
                     </div>
                 </div>
-                <div class="brand-footer">Click to update prices</div>
+                <div id="dynamic-brand-footer" class="brand-footer">Click to update prices</div>
             </div>
         </a>
     </div>
@@ -325,6 +323,24 @@
 
     const urlParams = new URLSearchParams(window.location.search);
     const targetTown = urlParams.get('town')?.toLowerCase();
+    
+    // --- DYNAMIC LINK REDIRECTION UPDATE ---
+    const customRedirect = urlParams.get('redirect');
+    const linkElement = document.getElementById('dynamic-billboard-link');
+    const footerElement = document.getElementById('dynamic-brand-footer');
+    
+    if (customRedirect) {
+        linkElement.href = customRedirect;
+        // Update footer text dynamically to represent general actions if routed elsewhere
+        footerElement.textContent = "Click for more information";
+        
+        // Named window targeting fallback logic for cross-tab stability on web domains
+        if (customRedirect.startsWith('http://') || customRedirect.startsWith('https://')) {
+            linkElement.target = "main-content-window";
+        }
+    }
+    // ---------------------------------------
+
     const screen = document.getElementById('fuel-screen');
     const toast = document.getElementById('notification-toast');
     
