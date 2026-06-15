@@ -1,0 +1,31 @@
+{
+  "town": "Hord",
+  "state": "IL",
+  "county": "Clay",
+  "status": "Unincorporated Community",
+  "last_updated": "2026-06-14T23:45:00Z",
+  "version": "1.0.0",
+  "history": [
+    {
+      "year": 1920,
+      "event": "Formation of Hord",
+      "description": "Following the construction of U.S. Route 45, businesses from the nearby village of Jordon relocated to the new highway route to capture traffic. The new community was named Hord after Jim Hord, who donated six acres of land for its development.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1924,
+      "event": "Relocation of the Church",
+      "description": "The original church, which had served the Jordon community since approximately 1880, was carefully moved to Hord in 1924 to serve the new population center.",
+      "image_url": "",
+      "image_caption": "Historic church relocated from Jordon."
+    },
+    {
+      "year": 2026,
+      "event": "Modern Status",
+      "description": "Hord remains an unincorporated community in Blair Township. It stands as a unique example of a community that was physically relocated and rebuilt to adapt to the modernization of regional transportation infrastructure.",
+      "image_url": "",
+      "image_caption": ""
+    }
+  ]
+}
