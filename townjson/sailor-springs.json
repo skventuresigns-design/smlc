@@ -1,0 +1,36 @@
+{
+  "town": "Sailor Springs",
+  "state": "IL",
+  "last_updated": "2026-06-14T22:38:00Z",
+  "version": "1.0.0",
+  "history": [
+    {
+      "year": 1883,
+      "event": "Village Incorporation",
+      "description": "The village of Sailor Springs was officially incorporated on August 10, 1883, following the establishment of its post office.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1890,
+      "event": "Mineral Springs Resort Era",
+      "description": "The town became historically renowned as a popular health resort. Visitors traveled from hundreds of miles away to experience the curative mineral waters.",
+      "image_url": "",
+      "image_caption": "Historic promotional materials for the mineral springs."
+    },
+    {
+      "year": 1903,
+      "event": "The Dry Vote",
+      "description": "Following a local vote to ban alcohol, the health resort industry declined rapidly, as many patrons were discouraged by the change in local lifestyle.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 2020,
+      "event": "Modern Era",
+      "description": "As of the 2020 Census, Sailor Springs remains a quiet village in Clay County with a population of 89 residents.",
+      "image_url": "",
+      "image_caption": "Current view of the village."
+    }
+  ]
+}
