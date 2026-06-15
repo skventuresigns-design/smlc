@@ -1,1 +1,45 @@
-
+{
+  "town": "Xenia",
+  "state": "IL",
+  "county": "Clay",
+  "zip": "62899",
+  "last_updated": "2026-06-14T23:15:00Z",
+  "version": "1.0.0",
+  "history": [
+    {
+      "year": 1830,
+      "event": "Founding",
+      "description": "After a pioneer named Lewis sold his property, Dr. Davenport helped establish a post office at his home, which served as the foundation for the town of Xenia.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1854,
+      "event": "Railroad Expansion",
+      "description": "The construction of the railroad through the area provided a significant boost to the local economy and helped expand the village's footprint.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1870,
+      "event": "Population Milestone",
+      "description": "By 1870, Xenia had grown significantly, reaching a population of approximately 1,000 residents.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 1984,
+      "event": "Sesquicentennial Celebration",
+      "description": "The village held a major celebration to commemorate its 150th anniversary.",
+      "image_url": "",
+      "image_caption": ""
+    },
+    {
+      "year": 2020,
+      "event": "Modern Census",
+      "description": "As of the 2020 Census, Xenia remains a small, historic village in Clay County with a population of 380 residents.",
+      "image_url": "",
+      "image_caption": ""
+    }
+  ]
+}
