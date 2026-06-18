@@ -4,8 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Your Event | Support My Local Community</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="submit-event.css">
+    
+    <style>
+        /* --- BASE --- */
+        .submit-event-page { background-color: #0c70c2 !important; margin: 0; padding: 0; min-height: 100vh; }
+        .site-header { width: 100%; background-color: #fff; }
+        .banner-img { width: 100%; height: auto; display: block; }
+
+        /* --- NAV (UNDERLINED) --- */
+        .nav-bar { width: 100%; background-color: #fff; border-top: 1px solid #ccc; padding: 15px 0; position: relative; }
+        .nav-links { display: flex; justify-content: center; list-style: none; gap: 30px; margin: 0; padding: 0; transition: 0.3s; }
+        .nav-links a { 
+            font-family: "Times New Roman", Times, serif; color: #222 !important; 
+            font-weight: 900; text-transform: uppercase; 
+            text-decoration: underline; font-size: 14px; 
+        }
+
+        /* Hamburger UI */
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; margin-left: 20px; }
+        .bar { width: 25px; height: 3px; background-color: #222; }
+
+        /* --- GRID --- */
+        .submit-event-main-wrapper { width: 95%; max-width: 1300px; margin: 40px auto; }
+        .index-grid-row { display: flex; gap: 30px; align-items: flex-start; }
+        .index-col { flex: 1; }
+
+        /* --- COLUMN 1 (DIVI STYLE) --- */
+        .submission-guidelines-large, .next-steps-clipping, .reach-clipping {
+            background-color: #fffdf6 !important; box-shadow: 10px 10px 0px #222;
+            margin-bottom: 25px; box-sizing: border-box; width: 100%;
+        }
+        .submission-guidelines-large { padding: 45px; border: 3px double #222; }
+        .guidelines-masthead { text-align: center; border-bottom: 3px solid #222; margin-bottom: 30px; padding-bottom: 15px; }
+        .guidelines-masthead h2 { font-family: "Times New Roman", serif; font-weight: 900; text-transform: uppercase; font-size: 28px; color: #d9534f; margin: 0; }
+        .rule-section { font-family: "Times New Roman", serif; font-size: 18px; line-height: 1.7; color: #222; }
+        .rule-item { margin-bottom: 20px; padding-left: 25px; position: relative; }
+        .rule-item::before { content: "✔"; position: absolute; left: 0; color: #d9534f; font-weight: bold; }
+        .editor-signature { margin-top: 40px; padding-top: 20px; border-top: 1px solid #222; font-family: "Times New Roman", serif; font-style: italic; }
+        .disclaimer-box { margin-top: 20px; font-size: 13px; color: #666; text-align: center; }
+
+        .next-steps-clipping { padding: 20px; border: 1px solid #222; box-shadow: 6px 6px 0px #222; }
+        .step-row { display: flex; align-items: center; margin-bottom: 10px; }
+        .step-num { 
+            background: #222; color: #fff; width: 25px; height: 25px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 12px; 
+        }
+        .reach-clipping { padding: 25px; border: 1px dashed #d9534f; box-shadow: 6px 6px 0px #222; text-align: center; }
+
+        /* --- COLUMN 2 (FORM) --- */
+        .wf-wrapper { background-color: #fffdf6 !important; border: 2px solid #222 !important; box-shadow: 10px 10px 0px #000; padding: 40px; width: 100%; }
+        .wf-header {
+            font-family: "Times New Roman", serif; font-size: 32px; font-weight: 900; 
+            text-transform: uppercase; text-align: center; border-top: 4px solid #222; 
+            border-bottom: 2px solid #222; padding: 15px 0; margin-bottom: 25px;
+        }
+        .wf-label {
+            font-family: "Times New Roman", serif; font-weight: bold; font-size: 14px; 
+            text-transform: uppercase; color: #222; margin-bottom: 8px; display: block; 
+            border-bottom: 1px solid #ccc;
+        }
+        .wf-field-input { 
+            width: 100%; border: 1px solid #222; padding: 12px; font-size: 16px; 
+            background-color: #ffffff; margin-bottom: 15px; box-sizing: border-box; 
+        }
+        .wf-text-area-input { height: 100px; resize: vertical; }
+        .wf-btn { 
+            width: 100%; background-color: #222; color: #fff; padding: 20px; 
+            font-family: "Times New Roman", serif; font-weight: bold; 
+            text-transform: uppercase; border: none; cursor: pointer; 
+            font-size: 22px; letter-spacing: 2px; 
+        }
+
+        /* --- DECOUPLED AUTOCOMPLETE DROPDOWN STYLE MATRIX --- */
+        .autocomplete-container {
+            position: relative;
+        }
+
+        .osm-autocomplete-container {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fffdf6;
+            border: 2px solid #222;
+            box-shadow: 6px 6px 0px #000;
+            font-family: "Times New Roman", serif;
+            z-index: 99999;
+            max-height: 220px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            margin-top: -15px; /* Pulls container directly up beneath the margin layout field line */
+        }
+
+        .osm-autocomplete-item {
+            padding: 12px;
+            cursor: pointer;
+            border-bottom: 1px dashed #777;
+            font-size: 14px;
+            color: #222;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .osm-autocomplete-item:last-child {
+            border-bottom: none;
+        }
+
+        .osm-autocomplete-item:hover {
+            background-color: #f4edd2;
+        }
+
+        /* --- FOOTER (USER STYLE) --- */
+        .site-footer { background-color: #fff; padding: 20px; text-align: center; border-top: 1px solid #ccc; }
+        .site-footer p { margin: 5px 0; font-family: Arial, sans-serif; font-size: 14px; }
+        .footer-link { color: #222; text-decoration: underline; font-weight: bold; }
+
+        /* Mobile CSS Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .index-grid-row { flex-direction: column; }
+            .hamburger { display: flex; }
+            .nav-links { 
+                display: none; flex-direction: column; gap: 15px; 
+                padding: 20px; border-top: 1px solid #ccc; width: 100%; 
+            }
+            .nav-links.open { display: flex; }
+        }
+    </style>
 </head>
 <body class="submit-event-page">
 
@@ -78,9 +203,20 @@
                     <p style="text-align:center; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-top: -15px; font-weight: bold; color: #222; padding-bottom:10px;">Clay County Event Submission</p>
                     <form id="smlc-event-form">
                         <div class="wf-row"><label class="wf-label">Event Name</label><input name="eventName" type="text" class="wf-field-input" required /></div>
-                        <div class="wf-row"><label class="wf-label">Event Date (MM/DD/YYYY)</label><input name="eventDate" type="text" placeholder="MM/DD/YYYY" class="wf-field-input" required /></div>
-                        <div class="wf-row"><label class="wf-label">Event Location</label><input name="location" type="text" class="wf-field-input" required /></div>
-                        <div class="wf-row"><label class="wf-label">Time of Event</label><input name="eventTime" type="text" class="wf-field-input" required /></div>
+                        
+                        <div class="wf-row"><label class="wf-label">Start Date (MM/DD/YYYY)</label><input name="eventDate" type="text" placeholder="MM/DD/YYYY" class="wf-field-input" required /></div>
+                        
+                        <div class="wf-row"><label class="wf-label">End Date (Optional - For Recurring/Multi-Day)</label><input name="eventEndDate" type="text" placeholder="MM/DD/YYYY" class="wf-field-input" /></div>
+                        
+                        <div class="wf-row autocomplete-container">
+                            <label class="wf-label">Event Location (Search Place or Address)</label>
+                            <input id="location-autocomplete" name="location" type="text" placeholder="Start typing place name or address..." class="wf-field-input" required autocomplete="off" />
+                        </div>
+                        
+                        <div class="wf-row"><label class="wf-label">Start Time</label><input name="eventTime" type="text" placeholder="e.g., 6:00 PM" class="wf-field-input" required /></div>
+                        
+                        <div class="wf-row"><label class="wf-label">End Time (Optional)</label><input name="eventEndTime" type="text" placeholder="e.g., 9:00 PM" class="wf-field-input" /></div>
+                        
                         <div class="wf-row"><label class="wf-label">First Name</label><input name="firstName" type="text" class="wf-field-input" required /></div>
                         <div class="wf-row"><label class="wf-label">Last Name</label><input name="lastName" type="text" class="wf-field-input" required /></div>
                         <div class="wf-row"><label class="wf-label">Email</label><input name="email" type="email" class="wf-field-input" required /></div>
@@ -97,7 +233,7 @@
                 <div class="wf-wrapper" id="thank-you-container" style="display: none; text-align:center;">
                     <div class="wf-header">SUCCESS!</div>
                     <p style="font-family:'Times New Roman', serif; font-size:20px; margin-top:20px;">
-                        Your Event has been submitted, Thank you for allowing us to share you Event !!
+                        Your Event has been submitted, Thank you for allowing us to share your Event !!
                     </p>
                     <button onclick="location.reload()" class="wf-btn" style="margin-top:20px;">Submit Another</button>
                 </div>
@@ -111,6 +247,85 @@
     </footer>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('location-autocomplete');
+            if (!input) return;
+
+            const dropdown = document.createElement('div');
+            dropdown.className = 'osm-autocomplete-container';
+            input.parentNode.appendChild(dropdown);
+
+            let debounceTimer;
+
+            input.addEventListener('input', () => {
+                clearTimeout(debounceTimer);
+                const query = input.value.trim();
+                
+                if (query.length < 3) {
+                    dropdown.style.display = 'none';
+                    return;
+                }
+
+                debounceTimer = setTimeout(() => {
+                    // Fetch address details explicitly from the Nominatim API
+                    const searchUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=us&addressdetails=1&limit=5`;
+                    
+                    fetch(searchUrl, { headers: { 'User-Agent': 'SMLC-Community-Bulletin' } })
+                        .then(res => res.json())
+                        .then(places => {
+                            dropdown.innerHTML = '';
+                            if (places.length === 0) {
+                                dropdown.style.display = 'none';
+                                return;
+                            }
+
+                            places.forEach(place => {
+                                const item = document.createElement('div');
+                                item.className = 'osm-autocomplete-item';
+                                
+                                // Address component reconstructor logic matching postal structural conventions
+                                const addr = place.address;
+                                let readableAddress = place.display_name;
+                                
+                                if (addr) {
+                                    const venueName = place.name || "";
+                                    const road = addr.road || "";
+                                    const houseNumber = addr.house_number || "";
+                                    const city = addr.city || addr.town || addr.village || "";
+                                    const state = addr.state || "IL";
+                                    const postcode = addr.postcode || "";
+                                    
+                                    if (road && city) {
+                                        const streetPart = houseNumber ? `${houseNumber} ${road}` : road;
+                                        readableAddress = venueName 
+                                            ? `${venueName}, ${streetPart}, ${city}, ${state} ${postcode}`
+                                            : `${streetPart}, ${city}, ${state} ${postcode}`;
+                                    }
+                                }
+                                
+                                item.innerHTML = readableAddress;
+                                
+                                item.addEventListener('click', () => {
+                                    input.value = readableAddress;
+                                    dropdown.style.display = 'none';
+                                });
+                                dropdown.appendChild(item);
+                            });
+
+                            dropdown.style.display = 'block';
+                        })
+                        .catch(err => console.error("OSM API Exception:", err));
+                }, 300);
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target !== input && e.target !== dropdown) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        });
+
+        // App Registry Sheet Pipeline Sync Engine
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyMQKX6USKUL8cxo4mSR9aXfiwHR4kqsElU4DH8rAi63W7KRuILDeayiEAv_uG_85qd0A/exec'; 
         const form = document.getElementById('smlc-event-form');
         const submitBtn = document.getElementById('submit-btn');
@@ -132,7 +347,6 @@
                 .catch(error => { alert("Connection Failed."); submitBtn.disabled = false; });
         });
 
-        // The Hamburger Navigation Script
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
