@@ -11,12 +11,13 @@
     <meta property="og:description" content="Local dispatches and upcoming events for our community.">
     <meta property="og:type" content="website">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=533053210"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H6Q756MVE8"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', '533053210');
+      gtag('config', 'G-H6Q756MVE8', { 'page_title': 'SMLC Bulletin Widget Feed' });
+      gtag('config', 'G-L376P3NPY4', { 'page_title': 'Global Watermark Profile' });
     </script>
 
     <style>
@@ -226,8 +227,10 @@
     </div>
     
     <div class="clipping-footer">
-        View Full Community Calendar & Details<br>
-        Support My Local Community
+        <a href="https://supportmylocalcommunity.com" id="footer-main-link" target="main-content-window" style="color: inherit; text-decoration: none; display: block;">
+            View Full Community Calendar & Details<br>
+            Support My Local Community
+        </a>
     </div>
 </div>
 
@@ -236,22 +239,42 @@
 <script>
     /**
      * SKELETON ENGINE - SMART CACHE & ANALYTICS ENABLED
+     * TIMESTAMP: June 18, 2026 - 6:20 PM EST (New York Time)
      */
-    const MY_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtunjBquRf8yjnYdpMNMglMQB6n0j4pHSNke-9yADxZ3-9HvJqXT2DdVTUjdhRroGcxQ/exec";
+    // Live verified Script Authority URL via bulletin-engine.js mapping
+    const BULLETIN_URL = "https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec";
 
-    // Set Dynamic Month Title
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const currentMonthName = monthNames[new Date().getMonth()];
     document.getElementById('month-tagline').innerText = `${currentMonthName} Dispatches & Happenings`;
 
     /**
-     * Analytics Tracker
+     * UTM Link Generation Matrix
+     */
+    function generateTrackedUrl(base) {
+        try {
+            const url = new URL(base);
+            url.searchParams.set('utm_source', 'SMLC');
+            url.searchParams.set('utm_medium', 'bulletin_widget');
+            url.searchParams.set('utm_campaign', 'clay_county_feed');
+            return url.toString();
+        } catch(e) {
+            return base;
+        }
+    }
+
+    const fl = document.getElementById('footer-main-link');
+    if (fl) { fl.href = generateTrackedUrl(fl.href); }
+
+    /**
+     * Analytics Event Tracker
      */
     function trackEvent(action, label) {
         if (typeof gtag !== 'undefined') {
             gtag('event', action, {
                 'event_category': 'Bulletin Widget',
-                'event_label': label
+                'event_label': label,
+                'utm_source': 'SMLC'
             });
         }
     }
@@ -269,14 +292,12 @@
             detailEl.style.display = 'block';
             snippetEl.style.display = 'none';
             btnEl.innerText = 'Show Less';
-            // Track Read More click
             trackEvent('read_more_click', title);
         }
     }
 
     /**
-     * Google Smart Logic: Generates Schema.org Structured Data
-     * This helps Google recognize these as legitimate events for Clay County.
+     * Schema microdata engine injection targeting structured-data blocks
      */
     function injectStructuredData(events) {
         const schema = {
@@ -308,24 +329,64 @@
     async function displayDiviEvents() {
         const list = document.getElementById('divi-event-list');
         const cacheBuster = `t=${Date.now()}&v=${Math.random().toString(36).substring(7)}`;
-        const BULLETIN_URL = `${MY_SCRIPT_URL}?feed=true&${cacheBuster}`;
+        const targetFeedUrl = `${BULLETIN_URL}?feed=true&${cacheBuster}`;
 
         try {
-            const response = await fetch(BULLETIN_URL);
+            const response = await fetch(targetFeedUrl);
             if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
 
-            const events = await response.json();
+            let events = await response.json();
 
             if (Array.isArray(events) && events.length > 0) {
                 list.innerHTML = '';
                 
-                // SEO: Inject Structured Data
+                const now = new Date();
+                const thirtyDaysFromNow = new Date(now.getTime() + (30 * 24 * 60 * 60 * 1000));
+                
+                const todayMidnight = new Date();
+                todayMidnight.setHours(0, 0, 0, 0);
+
+                events = events.filter(item => {
+                    if (item.isRecurring || item.recurring === true) {
+                        return true;
+                    }
+
+                    if (!item.date) return false;
+                    
+                    let eventDate = new Date(item.date);
+                    if (isNaN(eventDate.getTime())) {
+                        eventDate = new Date(item.date.replace(/-/g, "/")); 
+                    }
+                    if (isNaN(eventDate.getTime())) {
+                        return true;
+                    }
+
+                    // Checks if item shares the active current text date baseline 
+                    const checkToday = new Date(eventDate);
+                    checkToday.setHours(0,0,0,0);
+                    if (checkToday.getTime() === todayMidnight.getTime()) {
+                        return true;
+                    }
+                    
+                    // Temporal execution window parsing range validation matching your specifications
+                    return eventDate >= now && eventDate <= thirtyDaysFromNow;
+                });
+
+                if (events.length === 0) {
+                    list.innerHTML = `<p style='text-align:center; padding: 20px; font-style:italic;'>No active dispatches scheduled at this time.</p>`;
+                    return;
+                }
+                
                 injectStructuredData(events);
 
                 events.forEach((item, index) => {
                     const title = item.name || "Untitled Event";
-                    const displayDate = item.date || item.displayDate || "Date TBA";
-                    const displayTime = item.time || item.displayTime || "Time TBA";
+                    
+                    // Handle inner calculations corresponding to engine formatting arrays
+                    const eventDateObj = new Date(item.date);
+                    const displayDate = isNaN(eventDateObj.getTime()) ? (item.date || "Date TBA") : eventDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    
+                    const displayTime = item.time || "Time TBA";
                     const location = item.location || "Clay County";
                     const details = item.details || "";
                     const isOngoing = item.isOngoing || false;
@@ -335,11 +396,14 @@
                         const cleanTitle = encodeURIComponent(title);
                         const cleanLoc = encodeURIComponent(location);
                         const cleanDesc = encodeURIComponent(details);
-                        gCalLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${cleanTitle}&details=${cleanDesc}&location=${cleanLoc}&sf=true&output=xml`;
+                        const gDate = isNaN(eventDateObj.getTime()) ? "" : eventDateObj.toISOString().replace(/-|:|\.\d\d\d/g, "").split("T")[0];
+                        gCalLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${cleanTitle}&dates=${gDate}/${gDate}&details=${cleanDesc}&location=${cleanLoc}&sf=true&output=xml`;
                     }
-
-                    const icsLink = item.icalData ? "data:text/calendar;base64," + item.icalData : "#";
-
+                    
+                    gCalLink = generateTrackedUrl(gCalLink);
+                    
+                    const icsLink = item.icalData ? "data:text/calendar;base64," + item.icalData : ("data:text/calendar;charset=utf8," + encodeURIComponent(`BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${title}\nLOCATION:${location}\nDESCRIPTION:${details || 'Local Event'}\nEND:VEVENT\nEND:VCALENDAR`));
+                    
                     const isLong = details.length > 85;
                     const snippetText = isLong ? details.substring(0, 85) + "..." : details;
 
@@ -361,9 +425,9 @@
 
                         <div class="cal-links">
                             <span class="cal-label">Add to Calendar</span>
-                            <a href="${gCalLink}" target="_blank" class="cal-text-link" onclick="trackEvent('google_cal_add', '${title.replace(/'/g, "\\'")}')">Google</a>
+                            <a href="${gCalLink}" target="main-content-window" class="cal-text-link" onclick="trackEvent('google_cal_add', '${title.replace(/'/g, "\\'")}')">Google</a>
                             <span style="color:#777; margin: 0 5px;">|</span>
-                            <a href="${icsLink}" download="${title.replace(/\s+/g, '_')}.ics" class="cal-text-link" onclick="trackEvent('apple_cal_add', '${title.replace(/'/g, "\\'")}')">Apple / Outlook</a>
+                            <a href="${icsLink}" download="event.ics" class="cal-text-link" onclick="trackEvent('apple_cal_add', '${title.replace(/'/g, "\\'")}')">Apple / Outlook</a>
                         </div>
                     `;
                     list.appendChild(div);
