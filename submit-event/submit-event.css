@@ -67,12 +67,52 @@
     font-size: 22px; letter-spacing: 2px; 
 }
 
+/* --- DECOUPLED AUTOCOMPLETE DROPDOWN STYLE MATRIX --- */
+.autocomplete-container {
+    position: relative;
+}
+
+.osm-autocomplete-container {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fffdf6;
+    border: 2px solid #222;
+    box-shadow: 6px 6px 0px #000;
+    font-family: "Times New Roman", serif;
+    z-index: 99999;
+    max-height: 220px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin-top: -15px; /* Pulls container directly up beneath the margin layout field line */
+}
+
+.osm-autocomplete-item {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px dashed #777;
+    font-size: 14px;
+    color: #222;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.osm-autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.osm-autocomplete-item:hover {
+    background-color: #f4edd2;
+}
+
 /* --- FOOTER (USER STYLE) --- */
 .site-footer { background-color: #fff; padding: 20px; text-align: center; border-top: 1px solid #ccc; }
 .site-footer p { margin: 5px 0; font-family: Arial, sans-serif; font-size: 14px; }
 .footer-link { color: #222; text-decoration: underline; font-weight: bold; }
 
-/* Mobile */
+/* Mobile CSS Responsive Breakpoints */
 @media (max-width: 900px) {
     .index-grid-row { flex-direction: column; }
     .hamburger { display: flex; }
