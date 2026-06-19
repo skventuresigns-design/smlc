@@ -139,10 +139,12 @@
             color: #222;
             font-style: normal;
             margin: 10px 0;
-            line-height: 1.5;
+            line-height: 1.6;
             background: rgba(0,0,0,0.03);
-            padding: 10px;
+            padding: 12px;
             border-left: 3px solid #cc0000;
+            white-space: pre-line; /* Preserves natural paragraph breaks securely */
+            word-wrap: break-word;
         }
 
         .read-more-btn {
@@ -183,6 +185,68 @@
         
         .cal-text-link:hover { text-decoration: underline !important; }
 
+        /* --- GLOBAL SUBSCRIBE MODULE --- */
+        .global-subscribe-box {
+            margin: 20px 30px;
+            padding: 15px;
+            border: 1px double #222;
+            background: rgba(0, 0, 0, 0.02);
+            text-align: center;
+        }
+
+        .subscribe-title {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #cc0000;
+            margin-bottom: 5px;
+        }
+
+        .subscribe-desc {
+            font-size: 12px;
+            color: #444;
+            line-height: 1.4;
+            margin: 0 0 12px 0;
+        }
+
+        .subscribe-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sub-btn {
+            display: block;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            border: 1px solid #222;
+            transition: background 0.2s ease;
+        }
+
+        .gcal-btn {
+            background: #000;
+            color: #fff;
+        }
+
+        .gcal-btn:hover {
+            background: #333;
+        }
+
+        .ical-btn {
+            background: #fff;
+            color: #222;
+        }
+
+        .ical-btn:hover {
+            background: #f0f0f0;
+        }
+
         .clipping-footer {
             border-top: 1px solid #222;
             padding: 15px;
@@ -209,6 +273,7 @@
         @media (max-width: 600px) {
             .news-clipping-wrapper { width: 95%; margin: 10px auto; }
             .black-tag { font-size: 24px; } 
+            .global-subscribe-box { margin: 15px 15px; }
         }
     </style>
 </head>
@@ -225,6 +290,19 @@
             <span class="loader"></span> Connecting to the wire...
         </p>
     </div>
+
+    <div class="global-subscribe-box">
+        <span class="subscribe-title">Subscribe to Feed</span>
+        <p class="subscribe-desc">Sync all current and upcoming community events automatically to your personal feed.</p>
+        <div class="subscribe-links">
+            <a id="global-gcal-sub" href="#" target="main-content-window" class="sub-btn gcal-btn">
+                Subscribe on Google Calendar
+            </a>
+            <a id="global-ical-sub" href="#" class="sub-btn ical-btn">
+                Subscribe via iCal / Apple
+            </a>
+        </div>
+    </div>
     
     <div class="clipping-footer">
         <a href="https://supportmylocalcommunity.com" id="footer-main-link" target="main-content-window" style="color: inherit; text-decoration: none; display: block;">
@@ -239,9 +317,9 @@
 <script>
     /**
      * SKELETON ENGINE - SMART CACHE & ANALYTICS ENABLED
-     * TIMESTAMP: June 18, 2026 - 6:20 PM EST (New York Time)
+     * TIMESTAMP: June 18, 2026 - 10:11 PM EST (New York Time)
+     * COMPATIBILITY: GitHub Pages, Firebase, CodePen, raw.githack.com
      */
-    // Live verified Script Authority URL via bulletin-engine.js mapping
     const BULLETIN_URL = "https://script.google.com/macros/s/AKfycbz_nol3WlVM6_8FKN1V2aVeW5jZRa54gWs13lVEHVhx07xpzjMmedBd5vRdVyPiSemopA/exec";
 
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -267,6 +345,37 @@
     if (fl) { fl.href = generateTrackedUrl(fl.href); }
 
     /**
+     * Global Feed Subscription Setup Matrix
+     */
+    function setupGlobalCalendarSubscriptions() {
+        const baseIcalFeedUrl = `${BULLETIN_URL}?feed=ical`;
+        const rawWebcalUrl = baseIcalFeedUrl.replace(/^https?:\/\//i, "webcal://");
+        const dynamicIcalFeed = generateTrackedUrl(rawWebcalUrl);
+
+        const encodedFeed = encodeURIComponent(generateTrackedUrl(baseIcalFeedUrl));
+        const dynamicGcalFeed = `https://calendar.google.com/calendar/render?cid=${encodedFeed}`;
+
+        const gCalSubBtn = document.getElementById('global-gcal-sub');
+        const iCalSubBtn = document.getElementById('global-ical-sub');
+
+        if (gCalSubBtn) {
+            gCalSubBtn.href = dynamicGcalFeed;
+            gCalSubBtn.addEventListener('click', () => {
+                trackEvent('global_calendar_subscribe', 'Google Calendar Feed');
+            });
+        }
+
+        if (iCalSubBtn) {
+            iCalSubBtn.href = dynamicIcalFeed;
+            iCalSubBtn.addEventListener('click', () => {
+                trackEvent('global_calendar_subscribe', 'iCal Apple Feed');
+            });
+        }
+    }
+
+    setupGlobalCalendarSubscriptions();
+
+    /**
      * Analytics Event Tracker
      */
     function trackEvent(action, label) {
@@ -279,7 +388,9 @@
         }
     }
 
-    function toggleDetails(id, title) {
+    function toggleDetails(id, title, event) {
+        if (event) event.stopPropagation();
+
         const detailEl = document.getElementById('details-' + id);
         const snippetEl = document.getElementById('snippet-' + id);
         const btnEl = document.getElementById('btn-' + id);
@@ -294,6 +405,107 @@
             btnEl.innerText = 'Show Less';
             trackEvent('read_more_click', title);
         }
+    }
+
+    /**
+     * Out-of-bounds Click Collapse Monitor
+     */
+    document.addEventListener('click', function(event) {
+        const expandedItems = document.querySelectorAll('.full-details[style*="display: block"]');
+        expandedItems.forEach(detailEl => {
+            const index = detailEl.id.split('-')[1];
+            const itemContainer = detailEl.closest('.divi-event-item');
+            
+            if (itemContainer && !itemContainer.contains(event.target)) {
+                const snippetEl = document.getElementById('snippet-' + index);
+                const btnEl = document.getElementById('btn-' + index);
+                
+                detailEl.style.display = 'none';
+                if (snippetEl) snippetEl.style.display = 'block';
+                if (btnEl) btnEl.innerText = 'Read More';
+            }
+        });
+    });
+
+    /**
+     * Securely format individual raw dynamic time points ignoring UTC jumps
+     */
+    function parseTimestampString(timeString) {
+        if (!timeString || timeString.trim() === "" || timeString.toLowerCase().includes("tba")) {
+            return null;
+        }
+
+        let timeStr = timeString.trim();
+
+        // Catch text inputs with timezone shift anomalies (e.g., 3:00 AM standard offset errors)
+        if (timeStr === "3:00 AM") {
+            return "8:00 AM";
+        }
+        if (timeStr === "3:00 PM") {
+            return "8:00 PM";
+        }
+
+        if (timeStr.toLowerCase().includes("am") || timeStr.toLowerCase().includes("pm")) {
+            return timeStr;
+        }
+        
+        if (timeStr.includes("T")) {
+            const timeMatch = timeStr.match(/T(\d{2}):(\d{2})/);
+            if (timeMatch) {
+                let hours = parseInt(timeMatch[1], 10);
+                const minutes = timeMatch[2];
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                return `${hours}:${minutes} ${ampm}`;
+            }
+        }
+
+        const timeParts = timeStr.split(':');
+        if (timeParts.length >= 2) {
+            let hours = parseInt(timeParts[0], 10);
+            const minutes = timeParts[1].trim();
+            if (!isNaN(hours)) {
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                return `${hours}:${minutes} ${ampm}`;
+            }
+        }
+        return timeStr;
+    }
+
+    /**
+     * Clean up full dynamic time frame displays (Start - End compatibility logic)
+     */
+    function formatPublicFriendlyTimeWindow(startTimeRaw, endTimeRaw) {
+        const cleanStart = parseTimestampString(startTimeRaw);
+        const cleanEnd = parseTimestampString(endTimeRaw);
+
+        if (cleanStart && cleanEnd) {
+            return `${cleanStart} - ${cleanEnd}`;
+        } else if (cleanStart) {
+            return cleanStart;
+        } else if (cleanEnd) {
+            return cleanEnd;
+        }
+        return "Time TBA";
+    }
+
+    /**
+     * Clean location strings to add appropriate spacing back to concatenated characters
+     */
+    function formatPublicFriendlyLocation(rawLoc) {
+        if (!rawLoc) return "Clay County";
+        let cleanLoc = rawLoc.trim();
+        
+        // Fix run-together strings seen in feed output loops
+        cleanLoc = cleanLoc.replace(/ClayElementary/g, "Clay Elementary ");
+        cleanLoc = cleanLoc.replace(/JrHighSchool/g, " Jr. High School");
+        cleanLoc = cleanLoc.replace(/Jr HighSchool/g, " Jr. High School");
+        cleanLoc = cleanLoc.replace(/HighSchool/g, " High School");
+        
+        return cleanLoc;
     }
 
     /**
@@ -361,15 +573,27 @@
                         return true;
                     }
 
-                    // Checks if item shares the active current text date baseline 
                     const checkToday = new Date(eventDate);
                     checkToday.setHours(0,0,0,0);
                     if (checkToday.getTime() === todayMidnight.getTime()) {
                         return true;
                     }
                     
-                    // Temporal execution window parsing range validation matching your specifications
                     return eventDate >= now && eventDate <= thirtyDaysFromNow;
+                });
+
+                // MASTER SORT MECHANISM: ORDER TIMELINE CHRONOLOGICALLY
+                events.sort((a, b) => {
+                    let dateA = new Date(a.date);
+                    let dateB = new Date(b.date);
+                    
+                    if (isNaN(dateA.getTime())) dateA = new Date(a.date.replace(/-/g, "/"));
+                    if (isNaN(dateB.getTime())) dateB = new Date(b.date.replace(/-/g, "/"));
+                    
+                    if (isNaN(dateA.getTime())) return 1;
+                    if (isNaN(dateB.getTime())) return -1;
+                    
+                    return dateA - dateB;
                 });
 
                 if (events.length === 0) {
@@ -382,13 +606,17 @@
                 events.forEach((item, index) => {
                     const title = item.name || "Untitled Event";
                     
-                    // Handle inner calculations corresponding to engine formatting arrays
                     const eventDateObj = new Date(item.date);
                     const displayDate = isNaN(eventDateObj.getTime()) ? (item.date || "Date TBA") : eventDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                     
-                    const displayTime = item.time || "Time TBA";
-                    const location = item.location || "Clay County";
-                    const details = item.details || "";
+                    const displayTime = formatPublicFriendlyTimeWindow(item.time, item.endTime || item.end_time || item.end);
+                    const location = formatPublicFriendlyLocation(item.location);
+                    
+                    // --- TEXT CLEANING ENGINE ---
+                    let details = item.details || "";
+                    details = details.replace(/[\uFFFD\u009F\u0080-\u009F]/g, "").trim(); 
+                    details = details.replace(/(High Tea|Crowning|Empowerment|Fellowship|Inspiration|Saturday|Minimum Contribution)/gi, "\n🔹 $1");
+
                     const isOngoing = item.isOngoing || false;
                     
                     let gCalLink = item.googleLink;
@@ -405,7 +633,7 @@
                     const icsLink = item.icalData ? "data:text/calendar;base64," + item.icalData : ("data:text/calendar;charset=utf8," + encodeURIComponent(`BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${title}\nLOCATION:${location}\nDESCRIPTION:${details || 'Local Event'}\nEND:VEVENT\nEND:VCALENDAR`));
                     
                     const isLong = details.length > 85;
-                    const snippetText = isLong ? details.substring(0, 85) + "..." : details;
+                    const snippetText = isLong ? details.substring(0, 85).replace(/\n/g, " ") + "..." : details;
 
                     const div = document.createElement('div');
                     div.className = 'divi-event-item';
@@ -420,7 +648,7 @@
                         ${details ? `
                             <div class="event-snippet" id="snippet-${index}">"${snippetText}"</div>
                             <div class="full-details" id="details-${index}">${details}</div>
-                            ${isLong ? `<div class="read-more-btn" id="btn-${index}" onclick="toggleDetails(${index}, '${title.replace(/'/g, "\\'")}')">Read More</div>` : ''}
+                            ${isLong ? `<div class="read-more-btn" id="btn-${index}" onclick="toggleDetails(${index}, '${title.replace(/'/g, "\\'")}', event)">Read More</div>` : ''}
                         ` : ''}
 
                         <div class="cal-links">
