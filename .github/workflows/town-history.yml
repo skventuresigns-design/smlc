@@ -36,9 +36,9 @@ jobs:
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          # Only commit if JSON files in the townjson folder have changed
-          if [ -n "$(git status --porcelain townjson/*.json)" ]; then
-            git add townjson/*.json
+          # Only commit if JSON files in the townhistory folder have changed
+          if [ -n "$(git status --porcelain townhistory/*.json)" ]; then
+            git add townhistory/*.json
             git commit -m "Auto-update: Monthly historical data sync"
             git push
           else
