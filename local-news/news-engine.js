@@ -1,13 +1,12 @@
 /* === SECTION: File Header & Config === */
-// Active Version: v1.0.7 | Timestamp: 2026-07-26_18:00:00
-// Description: Local News Processor - Dynamic Location Injector, Copyright Cleaner & UTM Builder
+// Active Version: v1.0.8 | Timestamp: 2026-07-26_18:10:00
+// Description: Local News Engine - In-Memory Location Injector & Filter Matrix
 
 function formatMoney(text) {
     if (!text) return "";
     return text.replace(/(\$\d+(?:,\d{3})*(?:\.\d{2})?)/g, '<span style="white-space: nowrap; font-weight: bold;">$1</span>');
 }
 
-// Master town array
 const CLAY_TOWNS = [
     "flora", "louisville", "clay city", "xenia", "iola", "sailor springs",
     "bible grove", "blair", "harter", "hoosier", "larkinsburg", 
@@ -16,9 +15,7 @@ const CLAY_TOWNS = [
 
 const CLAY_COUNTY_KEYWORDS = ["clay county", "state news", "illinois news"];
 
-/**
- * Clean Copyright / Provider text from story body
- */
+// Removes "© Copyright..." text from WNOI
 function cleanStoryBody(storyText) {
     if (!storyText) return "";
     return storyText
@@ -26,12 +23,9 @@ function cleanStoryBody(storyText) {
         .trim();
 }
 
-/**
- * Determine dynamic Location tag ("Louisville", "Flora", or "Clay County")
- */
+// Determines Location tag
 function resolveStoryLocation(item) {
-    // Check if the JSON already has a location property
-    if (item.location) return item.location;
+    if (item.location) return item.location; // Use JSON location if present
 
     const textBlob = `${item.title || ""} ${item.full_story || ""}`.toLowerCase();
     
@@ -40,13 +34,10 @@ function resolveStoryLocation(item) {
             return town.replace(/\b\w/g, char => char.toUpperCase());
         }
     }
-    
     return "Clay County";
 }
 
-/**
- * Append UTM tracking parameters to source URLs
- */
+// Appends UTM parameters to external links
 function appendUTMParameters(url) {
     if (!url) return "#";
     try {
@@ -61,9 +52,7 @@ function appendUTMParameters(url) {
     }
 }
 
-/**
- * Strict Inclusion Filter
- */
+// Drops Fairfield and non-Clay County stories
 function isClayCountyArticle(item) {
     const textBlob = `${item.title || ""} ${item.full_story || ""} ${item.location || ""}`.toLowerCase();
     if (textBlob.includes("fairfield")) return false;
@@ -76,12 +65,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const summaryContainer = document.getElementById('town-summaries'); 
     const fullContainer = document.getElementById('full-news-container'); 
 
-    const jsonUrl = `https://www.supportmylocalcommunity.com/local-news/news_data.json?v=${new Date().getTime()}`;
+    const jsonUrl = `https://raw.githubusercontent.com/skventuresigns-design/smlc/main/local-news/news_data.json?v=${new Date().getTime()}`;
 
     fetch(jsonUrl)
         .then(res => res.json())
         .then(data => {
-            // STEP 1: Dynamically transform each JSON object in memory to ensure "location", clean text, and UTM link exist
+            // DYNAMIC INJECTION: Adds "location", cleans text, adds UTM to links
             const processedData = data.map(item => {
                 const locationTag = resolveStoryLocation(item);
                 const cleanedStory = cleanStoryBody(item.full_story);
@@ -89,16 +78,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 return {
                     ...item,
-                    location: locationTag,       // <-- Directly attaches "location" key to object!
-                    full_story: cleanedStory,   // <-- Cleaned text without WNOI copyright
-                    link: utmLink               // <-- Updated link with UTM parameters
+                    location: locationTag,      // Adds "location" property
+                    full_story: cleanedStory,  // Cleans copyright
+                    link: utmLink              // Adds UTMs
                 };
             });
 
-            // STEP 2: Filter out non-Clay County stories
+            // Filter down to allowed articles
             const filteredData = processedData.filter(isClayCountyArticle);
 
-            // --- MODE A: SMLC FRONT PAGE (Grid View) ---
+            // MODE A: FRONT PAGE GRID
             if (summaryContainer) {
                 summaryContainer.style.display = "grid";
                 summaryContainer.style.gridTemplateColumns = "repeat(auto-fit, minmax(300px, 1fr))";
@@ -124,7 +113,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             } 
             
-            // --- MODE B: HUB PAGE (Full Articles View) ---
+            // MODE B: HUB PAGE ARTICLES
             if (fullContainer) {
                 fullContainer.innerHTML = ''; 
 
@@ -155,7 +144,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
         .catch(err => console.error("Error loading news JSON pipeline:", err));
 });
-
-function openWeatherTab() { 
-    window.open("https://www.accuweather.com/en/us/flora/62839/weather-forecast/332851", "_top"); 
-}
