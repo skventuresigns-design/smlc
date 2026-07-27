@@ -1,5 +1,5 @@
 /* === SECTION: File Header & Config === */
-// Active Version: v1.0.8 | Timestamp: 2026-07-26_18:10:00
+// Active Version: v1.0.9 | Timestamp: 2026-07-27_07:04:00
 // Description: Local News Engine - In-Memory Location Injector & Filter Matrix
 
 function formatMoney(text) {
@@ -52,10 +52,10 @@ function appendUTMParameters(url) {
     }
 }
 
-// Drops Fairfield and non-Clay County stories
+// Drops Fairfield, Effingham, and non-Clay County stories
 function isClayCountyArticle(item) {
     const textBlob = `${item.title || ""} ${item.full_story || ""} ${item.location || ""}`.toLowerCase();
-    if (textBlob.includes("fairfield")) return false;
+    if (textBlob.includes("fairfield") || textBlob.includes("effingham")) return false;
     
     const allLocations = [...CLAY_TOWNS, ...CLAY_COUNTY_KEYWORDS];
     return allLocations.some(place => textBlob.includes(place));
