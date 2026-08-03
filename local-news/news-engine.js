@@ -1,19 +1,29 @@
 /* === SECTION: File Header & Config === */
-// Active Version: v1.0.9 | Timestamp: 2026-07-27_07:04:00
-// Description: Local News Engine - In-Memory Location Injector & Filter Matrix
+// Active Version: v1.1.0 | Timestamp: 2026-08-03_19:00:00
+// Description: Local News Engine - Clay County IL Filtering Matrix & Dynamic Injector
 
 function formatMoney(text) {
     if (!text) return "";
     return text.replace(/(\$\d+(?:,\d{3})*(?:\.\d{2})?)/g, '<span style="white-space: nowrap; font-weight: bold;">$1</span>');
 }
 
+/* Complete Clay County IL Towns, Unincorporated Communities, & Townships */
 const CLAY_TOWNS = [
+    // Cities & Villages
     "flora", "louisville", "clay city", "xenia", "iola", "sailor springs",
-    "bible grove", "blair", "harter", "hoosier", "larkinsburg", 
-    "oskaloosa", "pixley", "songer", "stanford"
+    // Unincorporated Communities
+    "bible grove", "ingraham", "hord", "hoosier", "oskaloosa", "wendelin", "bethel", "riffle",
+    // Civil Townships
+    "blair", "harter", "larkinsburg", "pixley", "songer", "stanford"
 ];
 
-const CLAY_COUNTY_KEYWORDS = ["clay county", "state news", "illinois news"];
+/* Local matching phrases for regional feeds */
+const CLAY_COUNTY_IL_KEYWORDS = [
+    "clay county", "state news", "illinois news", "wnoi", "troop 9", "isp troop 9"
+];
+
+/* Explicit Out-of-State Clay County phrases ONLY */
+const OUT_OF_STATE_CLAY_REGEX = /\bclay\s+county\s*,?\s*(ia|fl|mn|ms|nc|al|ks|ne|iowa|florida|minnesota|mississippi)\b/i;
 
 // Removes "© Copyright..." text from WNOI
 function cleanStoryBody(storyText) {
@@ -23,14 +33,15 @@ function cleanStoryBody(storyText) {
         .trim();
 }
 
-// Determines Location tag
+// Determines Location tag using exact word boundary matching
 function resolveStoryLocation(item) {
     if (item.location) return item.location; // Use JSON location if present
 
     const textBlob = `${item.title || ""} ${item.full_story || ""}`.toLowerCase();
     
     for (const town of CLAY_TOWNS) {
-        if (textBlob.includes(town)) {
+        const regex = new RegExp(`\\b${town}\\b`, 'i');
+        if (regex.test(textBlob)) {
             return town.replace(/\b\w/g, char => char.toUpperCase());
         }
     }
@@ -52,13 +63,37 @@ function appendUTMParameters(url) {
     }
 }
 
-// Drops Fairfield, Effingham, and non-Clay County stories
+// Filter logic that allows local IL feeds without requiring explicit "IL" state text
 function isClayCountyArticle(item) {
-    const textBlob = `${item.title || ""} ${item.full_story || ""} ${item.location || ""}`.toLowerCase();
-    if (textBlob.includes("fairfield") || textBlob.includes("effingham")) return false;
+    const titleText = (item.title || "").toLowerCase();
+    const bodyText = (item.full_story || "").toLowerCase();
+    const fullText = `${titleText} ${bodyText} ${item.location || ""}`.toLowerCase();
     
-    const allLocations = [...CLAY_TOWNS, ...CLAY_COUNTY_KEYWORDS];
-    return allLocations.some(place => textBlob.includes(place));
+    // 1. HARD BLOCK: Drop if explicitly referencing another state's Clay County (e.g. "Clay County, IA")
+    if (OUT_OF_STATE_CLAY_REGEX.test(fullText)) {
+        return false;
+    }
+
+    // 2. CHECK TOWNS (Using strict word boundaries so "flora" doesn't hit on "floral")
+    const matchesTown = CLAY_TOWNS.some(town => {
+        const regex = new RegExp(`\\b${town}\\b`, 'i');
+        return regex.test(fullText);
+    });
+    
+    if (matchesTown) return true;
+
+    // 3. CHECK GENERAL KEYWORDS ("clay county", "wnoi", "state news")
+    const matchesKeyword = CLAY_COUNTY_IL_KEYWORDS.some(kw => fullText.includes(kw));
+    if (matchesKeyword) return true;
+
+    // 4. FALLBACK FOR LOCAL RSS FEEDS:
+    // If story comes from WNOI or City of Flora feeds, allow local items even without city name explicitly listed
+    const sourceName = (item.source || item.feed_name || item.name || "").toLowerCase();
+    if (sourceName.includes("wnoi") || sourceName.includes("flora city")) {
+        return true;
+    }
+
+    return false;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -78,8 +113,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 return {
                     ...item,
-                    location: locationTag,      // Adds "location" property
-                    full_story: cleanedStory,  // Cleans copyright
+                    location: locationTag,     // Adds "location" property
+                    full_story: cleanedStory,  // Cleans copyright text
                     link: utmLink              // Adds UTMs
                 };
             });
