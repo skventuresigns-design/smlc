@@ -1,7 +1,7 @@
 /* === SECTION: File Header & Config === */
-// Active Version: v1.2.1 | Timestamp: 2026-08-03_19:25:00
-// CSS / JS Imports: ?v=20260803_192500
-// Description: Local News Engine - Firestore Direct Target (/local_news)
+// Active Version: v1.2.4 | Timestamp: 2026-08-03_19:45:00
+// CSS / JS Imports: ?v=20260803_194500
+// Description: Local News Engine - Universal Copyright Removal & Full Description Preservation
 
 function formatMoney(text) {
     if (!text) return "";
@@ -26,19 +26,32 @@ const CLAY_COUNTY_IL_KEYWORDS = [
 /* Explicit Out-of-State Clay County phrases ONLY */
 const OUT_OF_STATE_CLAY_REGEX = /\bclay\s+county\s*,?\s*(ia|fl|mn|ms|nc|al|ks|ne|iowa|florida|minnesota|mississippi)\b/i;
 
-// Removes "© Copyright..." text from WNOI
+/**
+ * REFINED CLEANER:
+ * Strips out any line or phrase containing the word "copyright".
+ */
 function cleanStoryBody(storyText) {
     if (!storyText) return "";
     return storyText
-        .replace(/[\u00a9\u24b8\u2122]?\s*Copyright\s+\d{4},?\s*WNOI[\s\S]*/gi, '')
+        // Removes anything saying "copyright..." up to the end of the sentence/line
+        .replace(/(?:[\u00a9\u24b8\u2122]|&copy;)?\s*copyright[^\.\n]*\.?/gi, '')
         .trim();
+}
+
+/**
+ * FULL STORY EXTRACTOR:
+ * Checks full_story, description, and content so no text is dropped.
+ */
+function extractFullStoryText(item) {
+    const rawText = item.full_story || item.description || item.content || "";
+    return cleanStoryBody(rawText);
 }
 
 // Determines Location tag using exact word boundary matching
 function resolveStoryLocation(item) {
-    if (item.location) return item.location; // Use JSON location if present
+    if (item.location) return item.location; 
 
-    const textBlob = `${item.title || ""} ${item.full_story || ""}`.toLowerCase();
+    const textBlob = `${item.title || ""} ${item.full_story || ""} ${item.description || ""}`.toLowerCase();
     
     for (const town of CLAY_TOWNS) {
         const regex = new RegExp(`\\b${town}\\b`, 'i');
@@ -67,7 +80,7 @@ function appendUTMParameters(url) {
 // Filter logic that allows local IL feeds without requiring explicit "IL" state text
 function isClayCountyArticle(item) {
     const titleText = (item.title || "").toLowerCase();
-    const bodyText = (item.full_story || "").toLowerCase();
+    const bodyText = (item.full_story || item.description || "").toLowerCase();
     const fullText = `${titleText} ${bodyText} ${item.location || ""}`.toLowerCase();
     
     // 1. HARD BLOCK: Drop if explicitly referencing another state's Clay County (e.g. "Clay County, IA")
@@ -97,45 +110,42 @@ function isClayCountyArticle(item) {
 }
 
 /**
- * PUSH FILTERED NEWS TO FIRESTORE
+ * PUSH FULL UNTRUNCATED NEWS TO FIRESTORE
  * Target Collection: /local_news/
  */
 async function pushNewsToFirestore(articles) {
-    // Note: Line reference - expects SDK window binding from HTML header
     if (!window.db || !window.setDoc || !window.doc) {
         console.warn("Firestore SDK not initialized on window context. Skipping push.");
         return;
     }
 
-    console.log(`Pushing ${articles.length} filtered Clay County articles to Firestore collection: /local_news...`);
+    console.log(`Pushing ${articles.length} full Clay County articles to Firestore collection: /local_news...`);
     
     let successCount = 0;
     for (const item of articles) {
         try {
-            // Generate clean document ID (e.g. "news_104_flora_fire_dept")
             const cleanTitle = (item.title || "story").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 20);
             const docId = `news_${item.id || Date.now()}_${cleanTitle}`;
 
-            // Line 118: Collection reference changed to 'local_news'
             const newsDocRef = window.doc(window.db, "local_news", docId);
 
             await window.setDoc(newsDocRef, {
                 id: item.id || docId,
                 title: item.title || "",
                 location: item.location || "Clay County",
-                full_story: item.full_story || "",
+                full_story: item.full_story || "", // Pushes full description with all copyright mentions hidden
                 date: item.date || new Date().toISOString(),
                 image: item.image || "",
                 link: item.link || "",
                 updatedAt: new Date().toISOString()
-            }, { merge: true }); // Merge preserves any existing custom attributes in Firestore
+            }, { merge: true });
 
             successCount++;
         } catch (err) {
             console.error(`Error saving story ID ${item.id} to Firestore:`, err);
         }
     }
-    console.log(`Successfully synced ${successCount} articles to Firestore collection: /local_news`);
+    console.log(`Successfully synced ${successCount} untruncated articles to Firestore collection: /local_news`);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -147,24 +157,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     fetch(jsonUrl)
         .then(res => res.json())
         .then(async data => {
-            // DYNAMIC INJECTION: Adds "location", cleans text, adds UTM to links
+            // DYNAMIC INJECTION: Extracts full text while removing anything that says "copyright"
             const processedData = data.map(item => {
+                const fullText = extractFullStoryText(item);
                 const locationTag = resolveStoryLocation(item);
-                const cleanedStory = cleanStoryBody(item.full_story);
                 const utmLink = appendUTMParameters(item.link);
 
                 return {
                     ...item,
-                    location: locationTag,     // Adds "location" property
-                    full_story: cleanedStory,  // Cleans copyright text
-                    link: utmLink              // Adds UTMs
+                    location: locationTag,
+                    full_story: fullText, 
+                    link: utmLink
                 };
             });
 
             // Filter down to allowed articles
             const filteredData = processedData.filter(isClayCountyArticle);
 
-            // AUTOMATED FIRESTORE SYNC (Pushes to /local_news)
+            // FIRESTORE SYNC: Pushes complete text to /local_news
             await pushNewsToFirestore(filteredData);
 
             // MODE A: FRONT PAGE GRID
@@ -184,7 +194,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <h1>${formatMoney(item.title)}</h1>
                             <p style="font-size: 0.8rem; font-weight: bold; color: #777;">${item.date || ''}</p>
                             ${imgHTML}
-                            <div class="story-body">${formatMoney(item.full_story)}</div>
+                            <div class="story-body" style="white-space: pre-wrap; word-break: break-word; overflow: visible; max-height: none;">${formatMoney(item.full_story)}</div>
                             <button class="news-read-more-btn" 
                                     onclick="window.location.href='https://www.supportmylocalcommunity.com/local-news/index.html#${item.id}'">
                                 Read Full Story
@@ -206,7 +216,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <h1 style="font-size:2.8rem; margin-bottom:10px;">${formatMoney(item.title)}</h1>
                             <p style="font-style:italic; color:#666; margin-bottom:20px;">${item.date || ''}</p>
                             ${imgHTML}
-                            <div class="story-body-full" style="font-size: 1.25rem; line-height: 1.8; white-space: pre-wrap;">${formatMoney(item.full_story)}</div>
+                            <div class="story-body-full" style="font-size: 1.25rem; line-height: 1.8; white-space: pre-wrap; word-break: break-word; overflow: visible; max-height: none;">${formatMoney(item.full_story)}</div>
                             <div style="margin-top:20px;">
                                 <a href="${item.link}" target="_blank" style="color:#0258A3; font-weight:bold; font-size:1rem;">View Original Source &rarr;</a>
                             </div>
