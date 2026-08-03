@@ -6,5 +6,6 @@
     { "name": "Southern Illinois Now", "url": "https://southernillinoisnow.com/local-news/feed/", "type": "rss" },
     { "name": "WSIL TV 3", "url": "https://www.wsiltv.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc", "type": "rss" },
     { "name": "Flora City Official", "url": "https://florail.govoffice2.com/index.asp?SEC=A8C9DDA7-E259-48EE-AD30-63ADE2D6CAD9", "type": "html" },
-    { "name": "Olney Gazette", "url": "https://olneygazettenews.com/", "type": "html" }
+    { "name": "Olney Gazette", "url": "https://olneygazettenews.com/", "type": "html" },
+    { "name": "Google Alerts", "url": "https://www.google.com/alerts/feeds/16385066500020016213/12503335251711666256", "type": "rss" },
 ]
