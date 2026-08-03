@@ -1,6 +1,7 @@
 /* === SECTION: File Header & Config === */
-// Active Version: v1.1.0 | Timestamp: 2026-08-03_19:00:00
-// Description: Local News Engine - Clay County IL Filtering Matrix & Dynamic Injector
+// Active Version: v1.2.1 | Timestamp: 2026-08-03_19:25:00
+// CSS / JS Imports: ?v=20260803_192500
+// Description: Local News Engine - Firestore Direct Target (/local_news)
 
 function formatMoney(text) {
     if (!text) return "";
@@ -87,13 +88,54 @@ function isClayCountyArticle(item) {
     if (matchesKeyword) return true;
 
     // 4. FALLBACK FOR LOCAL RSS FEEDS:
-    // If story comes from WNOI or City of Flora feeds, allow local items even without city name explicitly listed
     const sourceName = (item.source || item.feed_name || item.name || "").toLowerCase();
     if (sourceName.includes("wnoi") || sourceName.includes("flora city")) {
         return true;
     }
 
     return false;
+}
+
+/**
+ * PUSH FILTERED NEWS TO FIRESTORE
+ * Target Collection: /local_news/
+ */
+async function pushNewsToFirestore(articles) {
+    // Note: Line reference - expects SDK window binding from HTML header
+    if (!window.db || !window.setDoc || !window.doc) {
+        console.warn("Firestore SDK not initialized on window context. Skipping push.");
+        return;
+    }
+
+    console.log(`Pushing ${articles.length} filtered Clay County articles to Firestore collection: /local_news...`);
+    
+    let successCount = 0;
+    for (const item of articles) {
+        try {
+            // Generate clean document ID (e.g. "news_104_flora_fire_dept")
+            const cleanTitle = (item.title || "story").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 20);
+            const docId = `news_${item.id || Date.now()}_${cleanTitle}`;
+
+            // Line 118: Collection reference changed to 'local_news'
+            const newsDocRef = window.doc(window.db, "local_news", docId);
+
+            await window.setDoc(newsDocRef, {
+                id: item.id || docId,
+                title: item.title || "",
+                location: item.location || "Clay County",
+                full_story: item.full_story || "",
+                date: item.date || new Date().toISOString(),
+                image: item.image || "",
+                link: item.link || "",
+                updatedAt: new Date().toISOString()
+            }, { merge: true }); // Merge preserves any existing custom attributes in Firestore
+
+            successCount++;
+        } catch (err) {
+            console.error(`Error saving story ID ${item.id} to Firestore:`, err);
+        }
+    }
+    console.log(`Successfully synced ${successCount} articles to Firestore collection: /local_news`);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -104,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     fetch(jsonUrl)
         .then(res => res.json())
-        .then(data => {
+        .then(async data => {
             // DYNAMIC INJECTION: Adds "location", cleans text, adds UTM to links
             const processedData = data.map(item => {
                 const locationTag = resolveStoryLocation(item);
@@ -121,6 +163,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Filter down to allowed articles
             const filteredData = processedData.filter(isClayCountyArticle);
+
+            // AUTOMATED FIRESTORE SYNC (Pushes to /local_news)
+            await pushNewsToFirestore(filteredData);
 
             // MODE A: FRONT PAGE GRID
             if (summaryContainer) {
