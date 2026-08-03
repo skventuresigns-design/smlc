@@ -18,9 +18,20 @@ const CLAY_TOWNS = [
     "blair", "harter", "larkinsburg", "pixley", "songer", "stanford"
 ];
 
-/* Local matching phrases for regional feeds */
+/* Local matching phrases for regional feeds, schools, & sports */
 const CLAY_COUNTY_IL_KEYWORDS = [
-    "clay county", "state news", "illinois news", "wnoi", "troop 9", "isp troop 9"
+    // General County & Regional News
+    "clay county", "state news", "illinois news", "wnoi", "troop 9", "isp troop 9",
+    
+    // North Clay Schools & Athletics
+    "north clay", "nc cardinals", "north clay cardinals", "north clay indians",
+    
+    // Flora Schools & Athletics
+    "floyd henson", "floyd henson jr high", "floyd henson junior high", 
+    "flora wolves", "flora lady wolves", "flora unit 35",
+    
+    // Clay City Schools & Athletics
+    "clay city wolves", "clay city lady wolves", "clay city cusd", "clay city school"
 ];
 
 /* Explicit Out-of-State Clay County phrases ONLY */
