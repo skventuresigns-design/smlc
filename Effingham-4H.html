@@ -279,6 +279,55 @@
   </div>
 
   <script>
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyteGNfAEgGJ3IV1LZ1rYitfWKqPn4dS5X7liqAGj2a0RZ_VfeedFkV38SpcAXzsohK/exec";
+
+// 1. Get or generate a persistent unique ID for this specific phone
+function getDeviceID() {
+  let id = localStorage.getItem("four_h_device_id");
+  if (!id) {
+    id = "dev_" + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+    localStorage.setItem("four_h_device_id", id);
+  }
+  return id;
+}
+
+// 2. Validate code against Google Sheet
+async function validateAccess() {
+  const urlParams = new URLSearchParams(window.location.search);
+  let passCode = urlParams.get("code") || localStorage.getItem("saved_pass_code");
+
+  if (!passCode) {
+    document.body.innerHTML = "<div style='text-align:center; padding:40px; font-family:sans-serif;'><h2>No Pass Code Provided</h2><p>Please use the link provided by the 4-H office.</p></div>";
+    return;
+  }
+
+  const deviceId = getDeviceID();
+
+  try {
+    const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(passCode)}&deviceId=${encodeURIComponent(deviceId)}`);
+    const result = await response.json();
+
+    if (result.status === "success") {
+      // Save code for future visits so user doesn't need to re-enter query param
+      localStorage.setItem("saved_pass_code", passCode);
+      document.getElementById("supporterName").textContent = result.name;
+    } else {
+      document.body.innerHTML = `<div style='text-align:center; padding:40px; font-family:sans-serif;'><h2>Access Denied</h2><p>${result.message}</p></div>`;
+    }
+  } catch (err) {
+    // If offline, allow access if previously validated on this device
+    if (localStorage.getItem("saved_pass_code")) {
+      document.getElementById("supporterName").textContent = "Verified Member (Offline)";
+    } else {
+      document.body.innerHTML = "<div style='text-align:center; padding:40px; font-family:sans-serif;'><h2>Connection Error</h2><p>Could not verify pass. Please connect to internet.</p></div>";
+    }
+  }
+}
+
+// Run verification immediately
+validateAccess();
+
     // Live Ticking Clock (Updates every 1000ms)
     function updateClock() {
       const now = new Date();
