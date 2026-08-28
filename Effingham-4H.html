@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>4-H Digital Discount Pass</title>
+  <style>
+    :root {
+      --bg-cream: #fcf6de;
+      --forest-green: #00703c;
+      --dark-green: #004d2a;
+      --gold: #d4af37;
+      --text-dark: #222222;
+      --text-muted: #555555;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #f0f2f5;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Pass Card */
+    .digital-pass {
+      background: var(--bg-cream);
+      border: 2px solid var(--forest-green);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid rgba(0, 112, 60, 0.15);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .org-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--forest-green);
+      letter-spacing: -0.5px;
+    }
+
+    .season-badge {
+      background-color: var(--forest-green);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    /* Live Security Verification Indicator */
+    .live-indicator-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      background: rgba(0, 112, 60, 0.08);
+      padding: 6px 12px;
+      border-radius: 8px;
+      width: fit-content;
+    }
+
+    .pulsing-dot {
+      width: 12px;
+      height: 12px;
+      background-color: var(--forest-green);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(0, 112, 60, 0.7);
+      animation: pulse-ring 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 112, 60, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(0, 112, 60, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 112, 60, 0);
+      }
+    }
+
+    .live-text {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--dark-green);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .member-info {
+      margin-bottom: 16px;
+    }
+
+    .label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .member-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    /* Real-Time Clock Display */
+    .timer-box {
+      background: #ffffff;
+      border: 1px solid rgba(0, 112, 60, 0.2);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .timer-clock {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--dark-green);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 1px;
+    }
+
+    .timer-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Tap Ripple Effect */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 112, 60, 0.15);
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* Directory Listing Section */
+    .directory-header {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-top: 8px;
+    }
+
+    .vendor-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .vendor-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .vendor-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .vendor-cat {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .discount-badge {
+      background: rgba(0, 112, 60, 0.1);
+      color: var(--forest-green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <div class="digital-pass" id="digitalPass">
+      <div class="header-row">
+        <div class="org-title">4-H Supporter Pass</div>
+        <div class="season-badge">2026–2027</div>
+      </div>
+
+      <div class="live-indicator-container">
+        <div class="pulsing-dot"></div>
+        <span class="live-text">Official Active Pass</span>
+      </div>
+
+      <div class="member-info">
+        <div class="label">Issued To</div>
+        <div class="member-name" id="supporterName">Household Pass</div>
+      </div>
+
+      <div class="timer-box">
+        <div class="timer-clock" id="liveClock">00:00:00 AM</div>
+        <div class="timer-date" id="liveDate">Loading date...</div>
+      </div>
+    </div>
+
+    <div class="directory-header">Participating Local Businesses</div>
+    <div class="vendor-list" id="vendorDirectory">
+      <div class="vendor-card">
+        <div>
+          <div class="vendor-name">Cornerstone Bakery</div>
+          <div class="vendor-cat">Bakery & Cafe</div>
+        </div>
+        <div class="discount-badge">10% Off Order</div>
+      </div>
+
+      <div class="vendor-card">
+        <div>
+          <div class="vendor-name">Valley Auto Care</div>
+          <div class="vendor-cat">Automotive</div>
+        </div>
+        <div class="discount-badge">$5 Off Oil Change</div>
+      </div>
+
+      <div class="vendor-card">
+        <div>
+          <div class="vendor-name">Hometown Hardware</div>
+          <div class="vendor-cat">Home Improvement</div>
+        </div>
+        <div class="discount-badge">15% Off 1 Item</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Live Ticking Clock (Updates every 1000ms)
+    function updateClock() {
+      const now = new Date();
+      
+      const timeString = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+
+      const dateString = now.toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+
+      document.getElementById('liveClock').textContent = timeString;
+      document.getElementById('liveDate').textContent = dateString;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Tap Ripple Animation (Visual proof of live interactive screen)
+    const passCard = document.getElementById('digitalPass');
+    passCard.addEventListener('click', function (e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      
+      const rect = passCard.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      ripple.style.width = ripple.style.height = `${Math.max(rect.width, rect.height)}px`;
+
+      passCard.appendChild(ripple);
+
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    });
+  </script>
+</body>
+</html>
