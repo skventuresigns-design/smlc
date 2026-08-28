@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="4-H Pass" />
   <title>Effingham County 4-H Digital Pass</title>
   <style>
     :root {
@@ -38,7 +41,53 @@
       max-width: 440px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
+    }
+
+    /* Add to Home Screen Banner */
+    .pwa-banner {
+      background: linear-gradient(135deg, var(--forest-green), var(--dark-green));
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(0, 112, 60, 0.2);
+      cursor: pointer;
+    }
+
+    .pwa-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pwa-icon {
+      font-size: 1.5rem;
+    }
+
+    .pwa-text-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .pwa-text-sub {
+      font-size: 0.72rem;
+      opacity: 0.85;
+    }
+
+    .pwa-btn {
+      background: var(--bg-cream);
+      color: var(--dark-green);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      border: 1px solid var(--gold);
     }
 
     /* Pass Card */
@@ -49,7 +98,6 @@
       padding: 20px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
       position: relative;
-      overflow: hidden;
       user-select: none;
     }
 
@@ -130,7 +178,6 @@
       color: var(--text-dark);
     }
 
-    /* Real-Time Clock Display */
     .timer-box {
       background: #ffffff;
       border: 1px solid rgba(0, 112, 60, 0.2);
@@ -154,7 +201,7 @@
       margin-top: 2px;
     }
 
-    /* Directory Listing */
+    /* Directory */
     .directory-header {
       font-size: 1.05rem;
       font-weight: 800;
@@ -214,7 +261,6 @@
       white-space: nowrap;
     }
 
-    /* Action & Redemption Area */
     .action-row {
       display: flex;
       justify-content: flex-end;
@@ -245,20 +291,7 @@
       text-transform: uppercase;
     }
 
-    .active-timer-box {
-      background: #fff3cd;
-      border: 1px solid #ffeeba;
-      color: #856404;
-      font-weight: 800;
-      font-size: 0.85rem;
-      padding: 8px 12px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* Modals & Overlays */
+    /* Modals */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -357,12 +390,31 @@
       line-height: 1.4;
     }
 
+    .ios-step {
+      text-align: left;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+
     .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
   <div class="container">
+
+    <!-- Add to Home Screen Quick Ribbon -->
+    <div id="pwaBanner" class="pwa-banner" onclick="handleAddHomeScreenClick()">
+      <div class="pwa-left">
+        <div class="pwa-icon">📲</div>
+        <div>
+          <div class="pwa-text-title">Add Pass to Home Screen</div>
+          <div class="pwa-text-sub">Instant 1-tap access on your phone</div>
+        </div>
+      </div>
+      <div class="pwa-btn">Install</div>
+    </div>
 
     <!-- Loading Screen -->
     <div id="loadingScreen" class="status-screen">
@@ -408,7 +460,23 @@
 
   </div>
 
-  <!-- PIN Modal -->
+  <!-- iOS Add to Home Screen Guide Modal -->
+  <div id="iosInstallModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-title">Save Pass to Phone</div>
+      <div class="modal-desc" style="margin-bottom: 12px;">Keep your 4-H Card on your home screen for quick access at checkout:</div>
+      
+      <div class="ios-step">1. Tap the <strong>Share</strong> button at the bottom of Safari (<span style="font-size:1.1rem;">⎋</span> or <span style="font-size:1.1rem;">📤</span>).</div>
+      <div class="ios-step">2. Scroll down and tap <strong>"Add to Home Screen"</strong> (➕).</div>
+      <div class="ios-step">3. Tap <strong>Add</strong> in the top right corner.</div>
+
+      <div class="modal-btn-row" style="margin-top: 16px;">
+        <button class="btn-modal btn-modal-confirm" onclick="closeIosInstallModal()">Got It</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cashier PIN Modal -->
   <div id="pinModal" class="modal-overlay hidden">
     <div class="modal-card">
       <div class="modal-title" id="pinModalTitle">Cashier PIN Required</div>
@@ -417,18 +485,6 @@
       <div class="modal-btn-row">
         <button class="btn-modal btn-modal-cancel" onclick="closePinModal()">Cancel</button>
         <button class="btn-modal btn-modal-confirm" onclick="submitPinRedemption()">Confirm</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Burner Confirmation Modal -->
-  <div id="timerModal" class="modal-overlay hidden">
-    <div class="modal-card">
-      <div class="modal-title">Redeem Coupon Now?</div>
-      <div class="modal-desc">This starts a 3-minute timer in front of the cashier and marks the coupon used for both household devices. This cannot be undone.</div>
-      <div class="modal-btn-row">
-        <button class="btn-modal btn-modal-cancel" onclick="closeTimerModal()">Cancel</button>
-        <button class="btn-modal btn-modal-confirm" onclick="confirmTimerRedemption()">Redeem Now</button>
       </div>
     </div>
   </div>
@@ -442,7 +498,31 @@
     let activePassCode = "";
     let activeSponsorsList = [];
     let pendingRedeemSponsor = null;
-    let activeTimers = {};
+    let deferredPrompt = null;
+
+    // Listen for Android install prompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('pwaBanner').classList.remove('hidden');
+    });
+
+    function handleAddHomeScreenClick() {
+      if (deferredPrompt) {
+        // Native Android Prompt
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+          deferredPrompt = null;
+        });
+      } else {
+        // Show Safari/iOS Step-by-Step Guide
+        document.getElementById('iosInstallModal').classList.remove('hidden');
+      }
+    }
+
+    function closeIosInstallModal() {
+      document.getElementById('iosInstallModal').classList.add('hidden');
+    }
 
     // 1. Device Identifier
     function getDeviceID() {
@@ -502,7 +582,7 @@
       }
     }
 
-    // 3. Render Sponsors & Coupons
+    // 3. Render Sponsors & Offers
     function renderSponsors(sponsors) {
       const container = document.getElementById("vendorDirectory");
       container.innerHTML = "";
@@ -515,11 +595,11 @@
         let actionHtml = "";
 
         if (sponsor.isRedeemed) {
-          actionHtml = `<div class="action-row"><span class="redeemed-badge">Redeemed</span></div>`;
-        } else if (sponsor.offerType === "one-time-timer") {
+          actionHtml = `<div class="action-row"><span class="redeemed-badge">✔ Redeemed</span></div>`;
+        } else if (sponsor.offerType === "one-time-timer" || sponsor.offerType === "one-time") {
           actionHtml = `
             <div class="action-row" id="action_${sponsor.id}">
-              <button class="btn-redeem" onclick="openTimerModal('${sponsor.name}', '${sponsor.id}')">Redeem (Cashier)</button>
+              <button class="btn-redeem" onclick="punchInstantRedeem('${sponsor.name}', '${sponsor.id}')">Redeem Coupon</button>
             </div>`;
         } else if (sponsor.offerType === "one-time-pin") {
           actionHtml = `
@@ -530,7 +610,7 @@
           const promoCode = `EFF-${activePassCode.replace(/[^a-zA-Z0-9]/g, '')}-${sponsor.id.toUpperCase()}`;
           actionHtml = `
             <div class="action-row" id="action_${sponsor.id}">
-              <button class="btn-redeem" onclick="confirmCodeRedeem('${sponsor.name}', '${sponsor.id}', '${promoCode}')">Reveal One-Time Code</button>
+              <button class="btn-redeem" onclick="confirmCodeRedeem('${sponsor.name}', '${sponsor.id}', '${promoCode}')">Reveal Voucher Code</button>
             </div>`;
         }
 
@@ -549,7 +629,27 @@
       });
     }
 
-    // 4. Modal Handlers: PIN
+    // 4. Instant 1-Tap Coupon Punch
+    async function punchInstantRedeem(sponsorName, cardId) {
+      if (!confirm(`Redeem "${sponsorName}" now in front of cashier?\n\nThis will lock the coupon for both devices in your household.`)) return;
+
+      const deviceId = getDeviceID();
+      try {
+        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(activePassCode)}&deviceId=${encodeURIComponent(deviceId)}&action=redeem&sponsorName=${encodeURIComponent(sponsorName)}`);
+        const result = await response.json();
+
+        if (result.status === "redeem_success") {
+          document.getElementById(`action_${cardId}`).innerHTML = `<span class="redeemed-badge">✔ Redeemed</span>`;
+          document.getElementById(`card_${cardId}`).classList.add("redeemed-card");
+        } else {
+          alert(result.message || "Coupon could not be redeemed.");
+        }
+      } catch (e) {
+        alert("Connection error while logging redemption.");
+      }
+    }
+
+    // 5. Cashier PIN Handlers
     function openPinModal(sponsorName) {
       pendingRedeemSponsor = sponsorName;
       document.getElementById("pinModalTitle").textContent = `${sponsorName} - PIN`;
@@ -583,65 +683,9 @@
       }
     }
 
-    // 5. Modal Handlers: Timer Burner
-    let pendingTimerCardId = null;
-    function openTimerModal(sponsorName, cardId) {
-      pendingRedeemSponsor = sponsorName;
-      pendingTimerCardId = cardId;
-      document.getElementById("timerModal").classList.remove("hidden");
-    }
-
-    function closeTimerModal() {
-      document.getElementById("timerModal").classList.add("hidden");
-      pendingRedeemSponsor = null;
-      pendingTimerCardId = null;
-    }
-
-    async function confirmTimerRedemption() {
-      const deviceId = getDeviceID();
-      const sponsor = pendingRedeemSponsor;
-      const cardId = pendingTimerCardId;
-      closeTimerModal();
-
-      try {
-        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(activePassCode)}&deviceId=${encodeURIComponent(deviceId)}&action=redeem&sponsorName=${encodeURIComponent(sponsor)}`);
-        const result = await response.json();
-
-        if (result.status === "redeem_success") {
-          startBurnerCountdown(cardId, 180); // 3-minute timer
-        } else {
-          alert(result.message || "Coupon could not be redeemed.");
-        }
-      } catch (e) {
-        alert("Connection error while logging redemption.");
-      }
-    }
-
-    function startBurnerCountdown(cardId, seconds) {
-      const actionContainer = document.getElementById(`action_${cardId}`);
-      let remaining = seconds;
-
-      const interval = setInterval(() => {
-        const mins = Math.floor(remaining / 60);
-        const secs = remaining % 60;
-        actionContainer.innerHTML = `
-          <div class="active-timer-box">
-            <span>⏱️ Active: ${mins}:${secs < 10 ? '0' : ''}${secs}</span>
-          </div>
-        `;
-        remaining--;
-
-        if (remaining < 0) {
-          clearInterval(interval);
-          actionContainer.innerHTML = `<span class="redeemed-badge">Redeemed</span>`;
-          document.getElementById(`card_${cardId}`).classList.add("redeemed-card");
-        }
-      }, 1000);
-    }
-
-    // 6. One-Time Code Reveal
+    // 6. Voucher Code Handlers
     async function confirmCodeRedeem(sponsorName, cardId, promoCode) {
-      if (!confirm(`Reveal one-time voucher code for ${sponsorName}? This will lock the coupon for your household.`)) return;
+      if (!confirm(`Reveal one-time voucher code for ${sponsorName}?\n\nThis marks the coupon as used for your household.`)) return;
       
       const deviceId = getDeviceID();
       try {
@@ -650,10 +694,11 @@
 
         if (result.status === "redeem_success") {
           document.getElementById(`action_${cardId}`).innerHTML = `
-            <div class="active-timer-box" style="background:#e8f4fd; border-color:#b6d4fe; color:#0d6efd;">
-              Voucher Code: <strong>${promoCode}</strong>
+            <div style="background:#e8f4fd; border:1px solid #b6d4fe; color:#0d6efd; padding:6px 10px; border-radius:6px; font-weight:700; font-size:0.8rem;">
+              Code: <strong>${promoCode}</strong>
             </div>
           `;
+          document.getElementById(`card_${cardId}`).classList.add("redeemed-card");
         } else {
           alert(result.message || "Failed to reveal code.");
         }
