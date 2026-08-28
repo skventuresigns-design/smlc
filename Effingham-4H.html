@@ -11,7 +11,8 @@
       --dark-green: #004d2a;
       --gold: #d4af37;
       --text-dark: #222222;
-      --text-muted: #555555;
+      --text-muted: #666666;
+      --danger-red: #c5221f;
     }
 
     * {
@@ -78,7 +79,7 @@
       text-transform: uppercase;
     }
 
-    /* Live Security Verification Indicator */
+    /* Live Security Pulsing Indicator */
     .live-indicator-container {
       display: flex;
       align-items: center;
@@ -177,7 +178,7 @@
       }
     }
 
-    /* Directory Listing Section */
+    /* Directory Listing */
     .directory-header {
       font-size: 1rem;
       font-weight: 700;
@@ -199,6 +200,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
     }
 
     .vendor-name {
@@ -210,6 +212,7 @@
     .vendor-cat {
       font-size: 0.75rem;
       color: var(--text-muted);
+      margin-top: 2px;
     }
 
     .discount-badge {
@@ -220,144 +223,214 @@
       padding: 6px 10px;
       border-radius: 6px;
       text-align: right;
+      white-space: nowrap;
+    }
+
+    /* Status Overlays */
+    .status-screen {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--danger-red);
+    }
+
+    .status-msg {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .hidden {
+      display: none !important;
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    
-    <div class="digital-pass" id="digitalPass">
-      <div class="header-row">
-        <div class="org-title">4-H Supporter Pass</div>
-        <div class="season-badge">2026–2027</div>
-      </div>
 
-      <div class="live-indicator-container">
-        <div class="pulsing-dot"></div>
-        <span class="live-text">Official Active Pass</span>
-      </div>
-
-      <div class="member-info">
-        <div class="label">Issued To</div>
-        <div class="member-name" id="supporterName">Household Pass</div>
-      </div>
-
-      <div class="timer-box">
-        <div class="timer-clock" id="liveClock">00:00:00 AM</div>
-        <div class="timer-date" id="liveDate">Loading date...</div>
-      </div>
+    <!-- Loading & Error Screens -->
+    <div id="loadingScreen" class="status-screen">
+      <div class="pulsing-dot"></div>
+      <div class="status-msg">Verifying pass access...</div>
     </div>
 
-    <div class="directory-header">Participating Local Businesses</div>
-    <div class="vendor-list" id="vendorDirectory">
-      <div class="vendor-card">
-        <div>
-          <div class="vendor-name">Cornerstone Bakery</div>
-          <div class="vendor-cat">Bakery & Cafe</div>
+    <div id="errorScreen" class="status-screen hidden">
+      <div class="status-title" id="errorTitle">Access Restricted</div>
+      <div class="status-msg" id="errorMsg">Please check with the 4-H office.</div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div id="mainContent" class="hidden">
+      
+      <!-- Dynamic Verification Pass -->
+      <div class="digital-pass" id="digitalPass">
+        <div class="header-row">
+          <div class="org-title">4-H Supporter Pass</div>
+          <div class="season-badge">2026–2027</div>
         </div>
-        <div class="discount-badge">10% Off Order</div>
+
+        <div class="live-indicator-container">
+          <div class="pulsing-dot"></div>
+          <span class="live-text">Official Active Pass</span>
+        </div>
+
+        <div class="member-info">
+          <div class="label">Issued To</div>
+          <div class="member-name" id="supporterName">Loading...</div>
+        </div>
+
+        <div class="timer-box">
+          <div class="timer-clock" id="liveClock">00:00:00 AM</div>
+          <div class="timer-date" id="liveDate">Loading date...</div>
+        </div>
       </div>
 
-      <div class="vendor-card">
-        <div>
-          <div class="vendor-name">Valley Auto Care</div>
-          <div class="vendor-cat">Automotive</div>
-        </div>
-        <div class="discount-badge">$5 Off Oil Change</div>
+      <!-- Live Dynamic Directory -->
+      <div class="directory-header" style="margin-top: 16px;">Participating Local Businesses</div>
+      <div class="vendor-list" id="vendorDirectory" style="margin-top: 10px;">
+        <!-- Injected dynamically from Google Sheets -->
       </div>
 
-      <div class="vendor-card">
-        <div>
-          <div class="vendor-name">Hometown Hardware</div>
-          <div class="vendor-cat">Home Improvement</div>
-        </div>
-        <div class="discount-badge">15% Off 1 Item</div>
-      </div>
     </div>
 
   </div>
 
   <script>
+    // ----------------------------------------------------
+    // CONFIGURATION: Replace with your Apps Script Web App URL
+    // ----------------------------------------------------
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyteGNfAEgGJ3IV1LZ1rYitfWKqPn4dS5X7liqAGj2a0RZ_VfeedFkV38SpcAXzsohK/exec";
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyteGNfAEgGJ3IV1LZ1rYitfWKqPn4dS5X7liqAGj2a0RZ_VfeedFkV38SpcAXzsohK/exec";
-
-// 1. Get or generate a persistent unique ID for this specific phone
-function getDeviceID() {
-  let id = localStorage.getItem("four_h_device_id");
-  if (!id) {
-    id = "dev_" + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
-    localStorage.setItem("four_h_device_id", id);
-  }
-  return id;
-}
-
-// 2. Validate code against Google Sheet
-async function validateAccess() {
-  const urlParams = new URLSearchParams(window.location.search);
-  let passCode = urlParams.get("code") || localStorage.getItem("saved_pass_code");
-
-  if (!passCode) {
-    document.body.innerHTML = "<div style='text-align:center; padding:40px; font-family:sans-serif;'><h2>No Pass Code Provided</h2><p>Please use the link provided by the 4-H office.</p></div>";
-    return;
-  }
-
-  const deviceId = getDeviceID();
-
-  try {
-    const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(passCode)}&deviceId=${encodeURIComponent(deviceId)}`);
-    const result = await response.json();
-
-    if (result.status === "success") {
-      // Save code for future visits so user doesn't need to re-enter query param
-      localStorage.setItem("saved_pass_code", passCode);
-      document.getElementById("supporterName").textContent = result.name;
-    } else {
-      document.body.innerHTML = `<div style='text-align:center; padding:40px; font-family:sans-serif;'><h2>Access Denied</h2><p>${result.message}</p></div>`;
+    // 1. Persistent Device Identifier
+    function getDeviceID() {
+      let id = localStorage.getItem("four_h_device_id");
+      if (!id) {
+        id = "dev_" + Math.random().toString(36).substring(2, 12) + Date.now().toString(36);
+        localStorage.setItem("four_h_device_id", id);
+      }
+      return id;
     }
-  } catch (err) {
-    // If offline, allow access if previously validated on this device
-    if (localStorage.getItem("saved_pass_code")) {
-      document.getElementById("supporterName").textContent = "Verified Member (Offline)";
-    } else {
-      document.body.innerHTML = "<div style='text-align:center; padding:40px; font-family:sans-serif;'><h2>Connection Error</h2><p>Could not verify pass. Please connect to internet.</p></div>";
+
+    // 2. Render Sponsors from Google Sheet
+    function renderSponsors(sponsors) {
+      const container = document.getElementById("vendorDirectory");
+      container.innerHTML = "";
+
+      if (!sponsors || sponsors.length === 0) {
+        container.innerHTML = "<div class='status-msg'>No sponsors loaded.</div>";
+        return;
+      }
+
+      sponsors.forEach(sponsor => {
+        const card = document.createElement("div");
+        card.className = "vendor-card";
+        card.innerHTML = `
+          <div>
+            <div class="vendor-name">${sponsor.name}</div>
+            <div class="vendor-cat">${sponsor.category || ""}</div>
+          </div>
+          <div class="discount-badge">${sponsor.discount || "Discount"}</div>
+        `;
+        container.appendChild(card);
+      });
     }
-  }
-}
 
-// Run verification immediately
-validateAccess();
+    // 3. Validate Device & Access Code
+    async function validateAccess() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let passCode = urlParams.get("code") || localStorage.getItem("saved_pass_code");
 
-    // Live Ticking Clock (Updates every 1000ms)
+      const loadingScreen = document.getElementById("loadingScreen");
+      const errorScreen = document.getElementById("errorScreen");
+      const mainContent = document.getElementById("mainContent");
+      const errorTitle = document.getElementById("errorTitle");
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (!passCode) {
+        loadingScreen.classList.add("hidden");
+        errorScreen.classList.remove("hidden");
+        errorTitle.textContent = "No Pass Code Found";
+        errorMsg.textContent = "Please use the official link provided by your 4-H office to access this pass.";
+        return;
+      }
+
+      const deviceId = getDeviceID();
+
+      try {
+        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(passCode)}&deviceId=${encodeURIComponent(deviceId)}`);
+        const result = await response.json();
+
+        loadingScreen.classList.add("hidden");
+
+        if (result.status === "success") {
+          localStorage.setItem("saved_pass_code", passCode);
+          document.getElementById("supporterName").textContent = result.name;
+          
+          // Render the dynamic sponsor list from Google Sheets
+          renderSponsors(result.sponsors);
+          
+          mainContent.classList.remove("hidden");
+        } else {
+          errorScreen.classList.remove("hidden");
+          errorTitle.textContent = "Access Denied";
+          errorMsg.textContent = result.message || "This pass code is invalid or has expired.";
+        }
+      } catch (err) {
+        // Fallback: If device was previously validated, allow offline load
+        loadingScreen.classList.add("hidden");
+        if (localStorage.getItem("saved_pass_code")) {
+          document.getElementById("supporterName").textContent = "Verified Member (Offline)";
+          mainContent.classList.remove("hidden");
+        } else {
+          errorScreen.classList.remove("hidden");
+          errorTitle.textContent = "Connection Error";
+          errorMsg.textContent = "Please check your internet connection to activate your pass.";
+        }
+      }
+    }
+
+    // 4. Live Running Clock
     function updateClock() {
       const now = new Date();
       
-      const timeString = now.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
+      const timeString = now.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
         hour12: true
       });
 
-      const dateString = now.toLocaleDateString('en-US', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
+      const dateString = now.toLocaleDateString("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        year: "numeric"
       });
 
-      document.getElementById('liveClock').textContent = timeString;
-      document.getElementById('liveDate').textContent = dateString;
+      document.getElementById("liveClock").textContent = timeString;
+      document.getElementById("liveDate").textContent = dateString;
     }
 
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Tap Ripple Animation (Visual proof of live interactive screen)
-    const passCard = document.getElementById('digitalPass');
-    passCard.addEventListener('click', function (e) {
-      const ripple = document.createElement('span');
-      ripple.classList.add('ripple');
+    // 5. Card Tap Ripple
+    const passCard = document.getElementById("digitalPass");
+    passCard.addEventListener("click", function (e) {
+      const ripple = document.createElement("span");
+      ripple.classList.add("ripple");
       
       const rect = passCard.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -373,6 +446,9 @@ validateAccess();
         ripple.remove();
       }, 600);
     });
+
+    // Run verification on page load
+    validateAccess();
   </script>
 </body>
 </html>
