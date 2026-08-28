@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>4-H Digital Discount Pass</title>
+  <title>Effingham County 4-H Digital Pass</title>
   <style>
     :root {
       --bg-cream: #fcf6de;
@@ -13,6 +13,7 @@
       --text-dark: #222222;
       --text-muted: #666666;
       --danger-red: #c5221f;
+      --gray-bg: #e9ecef;
     }
 
     * {
@@ -34,7 +35,7 @@
 
     .container {
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -49,7 +50,6 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
       position: relative;
       overflow: hidden;
-      cursor: pointer;
       user-select: none;
     }
 
@@ -79,7 +79,6 @@
       text-transform: uppercase;
     }
 
-    /* Live Security Pulsing Indicator */
     .live-indicator-container {
       display: flex;
       align-items: center;
@@ -101,15 +100,9 @@
     }
 
     @keyframes pulse-ring {
-      0% {
-        box-shadow: 0 0 0 0 rgba(0, 112, 60, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(0, 112, 60, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(0, 112, 60, 0);
-      }
+      0% { box-shadow: 0 0 0 0 rgba(0, 112, 60, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 112, 60, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 112, 60, 0); }
     }
 
     .live-text {
@@ -121,7 +114,7 @@
     }
 
     .member-info {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .label {
@@ -132,8 +125,8 @@
     }
 
     .member-name {
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: var(--text-dark);
     }
 
@@ -161,51 +154,46 @@
       margin-top: 2px;
     }
 
-    /* Tap Ripple Effect */
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(0, 112, 60, 0.15);
-      transform: scale(0);
-      animation: ripple-animation 0.6s linear;
-      pointer-events: none;
-    }
-
-    @keyframes ripple-animation {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-
     /* Directory Listing */
     .directory-header {
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 1.05rem;
+      font-weight: 800;
       color: var(--text-dark);
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
     .vendor-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .vendor-card {
       background: #ffffff;
-      border-radius: 12px;
-      padding: 14px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .vendor-card.redeemed-card {
+      background: #f8f9fa;
+      opacity: 0.75;
+      border: 1px solid #e0e0e0;
+    }
+
+    .card-main-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
     }
 
     .vendor-name {
-      font-size: 0.95rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 800;
       color: var(--text-dark);
     }
 
@@ -226,7 +214,125 @@
       white-space: nowrap;
     }
 
-    /* Status Overlays */
+    /* Action & Redemption Area */
+    .action-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-top: 1px dashed #e0e0e0;
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+
+    .btn-redeem {
+      background: var(--forest-green);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+
+    .redeemed-badge {
+      background: #6c757d;
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .active-timer-box {
+      background: #fff3cd;
+      border: 1px solid #ffeeba;
+      color: #856404;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Modals & Overlays */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .pin-input {
+      width: 160px;
+      font-size: 1.6rem;
+      letter-spacing: 8px;
+      text-align: center;
+      padding: 8px;
+      border: 2px solid var(--forest-green);
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .modal-btn-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-modal {
+      flex: 1;
+      padding: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-modal-cancel {
+      background: #e9ecef;
+      color: #333333;
+    }
+
+    .btn-modal-confirm {
+      background: var(--forest-green);
+      color: #ffffff;
+    }
+
     .status-screen {
       background: #ffffff;
       border-radius: 16px;
@@ -251,34 +357,32 @@
       line-height: 1.4;
     }
 
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
   <div class="container">
 
-    <!-- Loading & Error Screens -->
+    <!-- Loading Screen -->
     <div id="loadingScreen" class="status-screen">
       <div class="pulsing-dot"></div>
-      <div class="status-msg">Verifying pass access...</div>
+      <div class="status-msg">Verifying pass credentials...</div>
     </div>
 
+    <!-- Error / Expired Screen -->
     <div id="errorScreen" class="status-screen hidden">
       <div class="status-title" id="errorTitle">Access Restricted</div>
       <div class="status-msg" id="errorMsg">Please check with the 4-H office.</div>
     </div>
 
-    <!-- Main Content Container -->
+    <!-- Main Member Pass View -->
     <div id="mainContent" class="hidden">
       
-      <!-- Dynamic Verification Pass -->
-      <div class="digital-pass" id="digitalPass">
+      <div class="digital-pass">
         <div class="header-row">
-          <div class="org-title">4-H Supporter Pass</div>
-          <div class="season-badge">2026–2027</div>
+          <div class="org-title">Effingham County 4-H</div>
+          <div class="season-badge" id="seasonBadge">2026–2027</div>
         </div>
 
         <div class="live-indicator-container">
@@ -287,8 +391,8 @@
         </div>
 
         <div class="member-info">
-          <div class="label">Issued To</div>
-          <div class="member-name" id="supporterName">Loading...</div>
+          <div class="label">Pass Holder</div>
+          <div class="member-name" id="supporterName">Member Name</div>
         </div>
 
         <div class="timer-box">
@@ -297,23 +401,50 @@
         </div>
       </div>
 
-      <!-- Live Dynamic Directory -->
-      <div class="directory-header" style="margin-top: 16px;">Participating Local Businesses</div>
-      <div class="vendor-list" id="vendorDirectory" style="margin-top: 10px;">
-        <!-- Injected dynamically from Google Sheets -->
-      </div>
+      <div class="directory-header">Participating Local Businesses</div>
+      <div class="vendor-list" id="vendorDirectory"></div>
 
     </div>
 
   </div>
 
+  <!-- PIN Modal -->
+  <div id="pinModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-title" id="pinModalTitle">Cashier PIN Required</div>
+      <div class="modal-desc">Please present this screen to the server or cashier to enter their 4-digit store code.</div>
+      <input type="password" id="pinCodeInput" class="pin-input" maxlength="4" placeholder="••••" inputmode="numeric" />
+      <div class="modal-btn-row">
+        <button class="btn-modal btn-modal-cancel" onclick="closePinModal()">Cancel</button>
+        <button class="btn-modal btn-modal-confirm" onclick="submitPinRedemption()">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Burner Confirmation Modal -->
+  <div id="timerModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-title">Redeem Coupon Now?</div>
+      <div class="modal-desc">This starts a 3-minute timer in front of the cashier and marks the coupon used for both household devices. This cannot be undone.</div>
+      <div class="modal-btn-row">
+        <button class="btn-modal btn-modal-cancel" onclick="closeTimerModal()">Cancel</button>
+        <button class="btn-modal btn-modal-confirm" onclick="confirmTimerRedemption()">Redeem Now</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ----------------------------------------------------
-    // CONFIGURATION: Replace with your Apps Script Web App URL
+    // CONFIGURATION: Google Apps Script Web App URL
     // ----------------------------------------------------
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyteGNfAEgGJ3IV1LZ1rYitfWKqPn4dS5X7liqAGj2a0RZ_VfeedFkV38SpcAXzsohK/exec";
+    const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 
-    // 1. Persistent Device Identifier
+    let activePassCode = "";
+    let activeSponsorsList = [];
+    let pendingRedeemSponsor = null;
+    let activeTimers = {};
+
+    // 1. Device Identifier
     function getDeviceID() {
       let id = localStorage.getItem("four_h_device_id");
       if (!id) {
@@ -323,34 +454,10 @@
       return id;
     }
 
-    // 2. Render Sponsors from Google Sheet
-    function renderSponsors(sponsors) {
-      const container = document.getElementById("vendorDirectory");
-      container.innerHTML = "";
-
-      if (!sponsors || sponsors.length === 0) {
-        container.innerHTML = "<div class='status-msg'>No sponsors loaded.</div>";
-        return;
-      }
-
-      sponsors.forEach(sponsor => {
-        const card = document.createElement("div");
-        card.className = "vendor-card";
-        card.innerHTML = `
-          <div>
-            <div class="vendor-name">${sponsor.name}</div>
-            <div class="vendor-cat">${sponsor.category || ""}</div>
-          </div>
-          <div class="discount-badge">${sponsor.discount || "Discount"}</div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // 3. Validate Device & Access Code
+    // 2. Validate Access on Load
     async function validateAccess() {
       const urlParams = new URLSearchParams(window.location.search);
-      let passCode = urlParams.get("code") || localStorage.getItem("saved_pass_code");
+      activePassCode = urlParams.get("code") || localStorage.getItem("saved_pass_code");
 
       const loadingScreen = document.getElementById("loadingScreen");
       const errorScreen = document.getElementById("errorScreen");
@@ -358,96 +465,217 @@
       const errorTitle = document.getElementById("errorTitle");
       const errorMsg = document.getElementById("errorMsg");
 
-      if (!passCode) {
+      if (!activePassCode) {
         loadingScreen.classList.add("hidden");
         errorScreen.classList.remove("hidden");
         errorTitle.textContent = "No Pass Code Found";
-        errorMsg.textContent = "Please use the official link provided by your 4-H office to access this pass.";
+        errorMsg.textContent = "Please use your official pass link or contact the 4-H office.";
         return;
       }
 
       const deviceId = getDeviceID();
 
       try {
-        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(passCode)}&deviceId=${encodeURIComponent(deviceId)}`);
+        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(activePassCode)}&deviceId=${encodeURIComponent(deviceId)}`);
         const result = await response.json();
 
         loadingScreen.classList.add("hidden");
 
         if (result.status === "success") {
-          localStorage.setItem("saved_pass_code", passCode);
+          localStorage.setItem("saved_pass_code", activePassCode);
           document.getElementById("supporterName").textContent = result.name;
-          
-          // Render the dynamic sponsor list from Google Sheets
-          renderSponsors(result.sponsors);
-          
+          if (result.season) document.getElementById("seasonBadge").textContent = result.season;
+
+          activeSponsorsList = result.sponsors || [];
+          renderSponsors(activeSponsorsList);
           mainContent.classList.remove("hidden");
         } else {
           errorScreen.classList.remove("hidden");
-          errorTitle.textContent = "Access Denied";
-          errorMsg.textContent = result.message || "This pass code is invalid or has expired.";
+          errorTitle.textContent = result.status === "expired" ? "Pass Expired" : "Access Denied";
+          errorMsg.textContent = result.message || "Invalid pass credentials.";
         }
       } catch (err) {
-        // Fallback: If device was previously validated, allow offline load
         loadingScreen.classList.add("hidden");
-        if (localStorage.getItem("saved_pass_code")) {
-          document.getElementById("supporterName").textContent = "Verified Member (Offline)";
-          mainContent.classList.remove("hidden");
-        } else {
-          errorScreen.classList.remove("hidden");
-          errorTitle.textContent = "Connection Error";
-          errorMsg.textContent = "Please check your internet connection to activate your pass.";
-        }
+        errorScreen.classList.remove("hidden");
+        errorTitle.textContent = "Connection Error";
+        errorMsg.textContent = "Please check your internet connection to load your pass.";
       }
     }
 
-    // 4. Live Running Clock
-    function updateClock() {
-      const now = new Date();
-      
-      const timeString = now.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-      });
+    // 3. Render Sponsors & Coupons
+    function renderSponsors(sponsors) {
+      const container = document.getElementById("vendorDirectory");
+      container.innerHTML = "";
 
-      const dateString = now.toLocaleDateString("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-      });
+      sponsors.forEach(sponsor => {
+        const card = document.createElement("div");
+        card.className = `vendor-card ${sponsor.isRedeemed ? 'redeemed-card' : ''}`;
+        card.id = `card_${sponsor.id}`;
 
-      document.getElementById("liveClock").textContent = timeString;
-      document.getElementById("liveDate").textContent = dateString;
+        let actionHtml = "";
+
+        if (sponsor.isRedeemed) {
+          actionHtml = `<div class="action-row"><span class="redeemed-badge">Redeemed</span></div>`;
+        } else if (sponsor.offerType === "one-time-timer") {
+          actionHtml = `
+            <div class="action-row" id="action_${sponsor.id}">
+              <button class="btn-redeem" onclick="openTimerModal('${sponsor.name}', '${sponsor.id}')">Redeem (Cashier)</button>
+            </div>`;
+        } else if (sponsor.offerType === "one-time-pin") {
+          actionHtml = `
+            <div class="action-row" id="action_${sponsor.id}">
+              <button class="btn-redeem" onclick="openPinModal('${sponsor.name}')">Enter Store PIN</button>
+            </div>`;
+        } else if (sponsor.offerType === "one-time-code") {
+          const promoCode = `EFF-${activePassCode.replace(/[^a-zA-Z0-9]/g, '')}-${sponsor.id.toUpperCase()}`;
+          actionHtml = `
+            <div class="action-row" id="action_${sponsor.id}">
+              <button class="btn-redeem" onclick="confirmCodeRedeem('${sponsor.name}', '${sponsor.id}', '${promoCode}')">Reveal One-Time Code</button>
+            </div>`;
+        }
+
+        card.innerHTML = `
+          <div class="card-main-row">
+            <div>
+              <div class="vendor-name">${sponsor.name}</div>
+              <div class="vendor-cat">${sponsor.category || ""}</div>
+              ${sponsor.address ? `<div class="vendor-cat">📍 ${sponsor.address}</div>` : ""}
+            </div>
+            <div class="discount-badge">${sponsor.discount}</div>
+          </div>
+          ${actionHtml}
+        `;
+        container.appendChild(card);
+      });
     }
 
+    // 4. Modal Handlers: PIN
+    function openPinModal(sponsorName) {
+      pendingRedeemSponsor = sponsorName;
+      document.getElementById("pinModalTitle").textContent = `${sponsorName} - PIN`;
+      document.getElementById("pinCodeInput").value = "";
+      document.getElementById("pinModal").classList.remove("hidden");
+      document.getElementById("pinCodeInput").focus();
+    }
+
+    function closePinModal() {
+      document.getElementById("pinModal").classList.add("hidden");
+      pendingRedeemSponsor = null;
+    }
+
+    async function submitPinRedemption() {
+      const pin = document.getElementById("pinCodeInput").value.trim();
+      if (!pin) return;
+
+      const deviceId = getDeviceID();
+      try {
+        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(activePassCode)}&deviceId=${encodeURIComponent(deviceId)}&action=redeem&sponsorName=${encodeURIComponent(pendingRedeemSponsor)}&pin=${encodeURIComponent(pin)}`);
+        const result = await response.json();
+
+        if (result.status === "redeem_success") {
+          closePinModal();
+          validateAccess(); // Refresh state
+        } else {
+          alert(result.message || "Invalid PIN.");
+        }
+      } catch (e) {
+        alert("Failed to communicate with server. Try again.");
+      }
+    }
+
+    // 5. Modal Handlers: Timer Burner
+    let pendingTimerCardId = null;
+    function openTimerModal(sponsorName, cardId) {
+      pendingRedeemSponsor = sponsorName;
+      pendingTimerCardId = cardId;
+      document.getElementById("timerModal").classList.remove("hidden");
+    }
+
+    function closeTimerModal() {
+      document.getElementById("timerModal").classList.add("hidden");
+      pendingRedeemSponsor = null;
+      pendingTimerCardId = null;
+    }
+
+    async function confirmTimerRedemption() {
+      const deviceId = getDeviceID();
+      const sponsor = pendingRedeemSponsor;
+      const cardId = pendingTimerCardId;
+      closeTimerModal();
+
+      try {
+        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(activePassCode)}&deviceId=${encodeURIComponent(deviceId)}&action=redeem&sponsorName=${encodeURIComponent(sponsor)}`);
+        const result = await response.json();
+
+        if (result.status === "redeem_success") {
+          startBurnerCountdown(cardId, 180); // 3-minute timer
+        } else {
+          alert(result.message || "Coupon could not be redeemed.");
+        }
+      } catch (e) {
+        alert("Connection error while logging redemption.");
+      }
+    }
+
+    function startBurnerCountdown(cardId, seconds) {
+      const actionContainer = document.getElementById(`action_${cardId}`);
+      let remaining = seconds;
+
+      const interval = setInterval(() => {
+        const mins = Math.floor(remaining / 60);
+        const secs = remaining % 60;
+        actionContainer.innerHTML = `
+          <div class="active-timer-box">
+            <span>⏱️ Active: ${mins}:${secs < 10 ? '0' : ''}${secs}</span>
+          </div>
+        `;
+        remaining--;
+
+        if (remaining < 0) {
+          clearInterval(interval);
+          actionContainer.innerHTML = `<span class="redeemed-badge">Redeemed</span>`;
+          document.getElementById(`card_${cardId}`).classList.add("redeemed-card");
+        }
+      }, 1000);
+    }
+
+    // 6. One-Time Code Reveal
+    async function confirmCodeRedeem(sponsorName, cardId, promoCode) {
+      if (!confirm(`Reveal one-time voucher code for ${sponsorName}? This will lock the coupon for your household.`)) return;
+      
+      const deviceId = getDeviceID();
+      try {
+        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(activePassCode)}&deviceId=${encodeURIComponent(deviceId)}&action=redeem&sponsorName=${encodeURIComponent(sponsorName)}`);
+        const result = await response.json();
+
+        if (result.status === "redeem_success") {
+          document.getElementById(`action_${cardId}`).innerHTML = `
+            <div class="active-timer-box" style="background:#e8f4fd; border-color:#b6d4fe; color:#0d6efd;">
+              Voucher Code: <strong>${promoCode}</strong>
+            </div>
+          `;
+        } else {
+          alert(result.message || "Failed to reveal code.");
+        }
+      } catch (e) {
+        alert("Connection error.");
+      }
+    }
+
+    // 7. Live Clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("liveClock").textContent = now.toLocaleTimeString("en-US", {
+        hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true
+      });
+      document.getElementById("liveDate").textContent = now.toLocaleDateString("en-US", {
+        weekday: "short", month: "short", day: "numeric", year: "numeric"
+      });
+    }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // 5. Card Tap Ripple
-    const passCard = document.getElementById("digitalPass");
-    passCard.addEventListener("click", function (e) {
-      const ripple = document.createElement("span");
-      ripple.classList.add("ripple");
-      
-      const rect = passCard.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-      ripple.style.width = ripple.style.height = `${Math.max(rect.width, rect.height)}px`;
-
-      passCard.appendChild(ripple);
-
-      setTimeout(() => {
-        ripple.remove();
-      }, 600);
-    });
-
-    // Run verification on page load
+    // Start verification
     validateAccess();
   </script>
 </body>
