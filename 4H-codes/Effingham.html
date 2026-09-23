@@ -582,52 +582,65 @@
       }
     }
 
-    // 3. Render Sponsors & Offers
-    function renderSponsors(sponsors) {
-      const container = document.getElementById("vendorDirectory");
-      container.innerHTML = "";
+   // 3. Render Sponsors & Offers (Sorted: Unredeemed top, Redeemed bottom with date)
+function renderSponsors(sponsors) {
+  const container = document.getElementById("vendorDirectory");
+  container.innerHTML = "";
 
-      sponsors.forEach(sponsor => {
-        const card = document.createElement("div");
-        card.className = `vendor-card ${sponsor.isRedeemed ? 'redeemed-card' : ''}`;
-        card.id = `card_${sponsor.id}`;
+  // Sort: Unredeemed first, Redeemed drop to the bottom
+  const sortedSponsors = [...sponsors].sort((a, b) => {
+    return (a.isRedeemed === b.isRedeemed) ? 0 : a.isRedeemed ? 1 : -1;
+  });
 
-        let actionHtml = "";
+  sortedSponsors.forEach(sponsor => {
+    const card = document.createElement("div");
+    card.className = `vendor-card ${sponsor.isRedeemed ? 'redeemed-card' : ''}`;
+    card.id = `card_${sponsor.id}`;
 
-        if (sponsor.isRedeemed) {
-          actionHtml = `<div class="action-row"><span class="redeemed-badge">✔ Redeemed</span></div>`;
-        } else if (sponsor.offerType === "one-time-timer" || sponsor.offerType === "one-time") {
-          actionHtml = `
-            <div class="action-row" id="action_${sponsor.id}">
-              <button class="btn-redeem" onclick="punchInstantRedeem('${sponsor.name}', '${sponsor.id}')">Redeem Coupon</button>
-            </div>`;
-        } else if (sponsor.offerType === "one-time-pin") {
-          actionHtml = `
-            <div class="action-row" id="action_${sponsor.id}">
-              <button class="btn-redeem" onclick="openPinModal('${sponsor.name}')">Enter Store PIN</button>
-            </div>`;
-        } else if (sponsor.offerType === "one-time-code") {
-          const promoCode = `EFF-${activePassCode.replace(/[^a-zA-Z0-9]/g, '')}-${sponsor.id.toUpperCase()}`;
-          actionHtml = `
-            <div class="action-row" id="action_${sponsor.id}">
-              <button class="btn-redeem" onclick="confirmCodeRedeem('${sponsor.name}', '${sponsor.id}', '${promoCode}')">Reveal Voucher Code</button>
-            </div>`;
-        }
+    let actionHtml = "";
 
-        card.innerHTML = `
-          <div class="card-main-row">
-            <div>
-              <div class="vendor-name">${sponsor.name}</div>
-              <div class="vendor-cat">${sponsor.category || ""}</div>
-              ${sponsor.address ? `<div class="vendor-cat">📍 ${sponsor.address}</div>` : ""}
-            </div>
-            <div class="discount-badge">${sponsor.discount}</div>
-          </div>
-          ${actionHtml}
-        `;
-        container.appendChild(card);
-      });
+    if (sponsor.isRedeemed) {
+      let dateDisplay = "";
+      if (sponsor.redeemedAt) {
+        // Formats the timestamp to a clean date (e.g., Sep 22, 2026)
+        const d = new Date(sponsor.redeemedAt);
+        dateDisplay = !isNaN(d.getTime()) 
+          ? ` on ${d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}` 
+          : ` on ${sponsor.redeemedAt.split(" ")[0]}`;
+      }
+      actionHtml = `<div class="action-row"><span class="redeemed-badge">✔ Redeemed${dateDisplay}</span></div>`;
+    } else if (sponsor.offerType === "one-time-timer" || sponsor.offerType === "one-time") {
+      actionHtml = `
+        <div class="action-row" id="action_${sponsor.id}">
+          <button class="btn-redeem" onclick="punchInstantRedeem('${sponsor.name}', '${sponsor.id}')">Redeem Coupon</button>
+        </div>`;
+    } else if (sponsor.offerType === "one-time-pin") {
+      actionHtml = `
+        <div class="action-row" id="action_${sponsor.id}">
+          <button class="btn-redeem" onclick="openPinModal('${sponsor.name}')">Enter Store PIN</button>
+        </div>`;
+    } else if (sponsor.offerType === "one-time-code") {
+      const promoCode = `EFF-${activePassCode.replace(/[^a-zA-Z0-9]/g, '')}-${sponsor.id.toUpperCase()}`;
+      actionHtml = `
+        <div class="action-row" id="action_${sponsor.id}">
+          <button class="btn-redeem" onclick="confirmCodeRedeem('${sponsor.name}', '${sponsor.id}', '${promoCode}')">Reveal Voucher Code</button>
+        </div>`;
     }
+
+    card.innerHTML = `
+      <div class="card-main-row">
+        <div>
+          <div class="vendor-name">${sponsor.name}</div>
+          <div class="vendor-cat">${sponsor.category || ""}</div>
+          ${sponsor.address ? `<div class="vendor-cat">📍 ${sponsor.address}</div>` : ""}
+        </div>
+        <div class="discount-badge">${sponsor.discount}</div>
+      </div>
+      ${actionHtml}
+    `;
+    container.appendChild(card);
+  });
+}
 
     // 4. Instant 1-Tap Coupon Punch
     async function punchInstantRedeem(sponsorName, cardId) {
