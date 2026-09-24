@@ -6,13 +6,10 @@
   <title>Effingham County 4-H Digital Discount Pass | Support My Local Community</title>
   <style>
     :root {
-      --bg-cream: #fcf6de;
-      --forest-green: #00703c;
-      --dark-green: #004d2a;
+      --text-dark: #111111;
+      --text-muted: #555555;
+      --border-gray: #e5e7eb;
       --maroon: #3E0100;
-      --gold: #FFC000;
-      --text-dark: #222222;
-      --text-muted: #666666;
     }
 
     * {
@@ -40,19 +37,19 @@
       gap: 24px;
     }
 
-    /* Hero & Card Preview Header */
+    /* Header / Hero Section - Clean White & Black */
     .hero-card {
-      background: var(--bg-cream);
-      border: 2px solid var(--forest-green);
+      background: #ffffff;
+      border: 1px solid var(--border-gray);
       border-radius: 18px;
       padding: 24px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
       text-align: center;
     }
 
     .badge-year {
       display: inline-block;
-      background: var(--forest-green);
+      background: #111111;
       color: #ffffff;
       font-size: 0.8rem;
       font-weight: 700;
@@ -65,29 +62,29 @@
     .hero-title {
       font-size: 1.6rem;
       font-weight: 800;
-      color: var(--forest-green);
+      color: #111111;
       margin-bottom: 8px;
     }
 
     .hero-desc {
       font-size: 0.95rem;
-      color: var(--text-dark);
+      color: var(--text-muted);
       line-height: 1.5;
       margin-bottom: 14px;
     }
 
     .highlight-pill {
       display: inline-block;
-      background: rgba(0, 112, 60, 0.1);
-      border: 1px solid rgba(0, 112, 60, 0.25);
-      color: var(--dark-green);
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      color: #111111;
       font-size: 0.85rem;
       font-weight: 700;
       padding: 6px 14px;
       border-radius: 8px;
     }
 
-    /* Two-Column Layout Grid */
+    /* Two-Column Grid */
     .content-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -106,14 +103,15 @@
       background: #ffffff;
       border-radius: 18px;
       padding: 24px 16px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-gray);
       text-align: center;
     }
 
     .form-heading {
       font-size: 1.3rem;
       font-weight: 800;
-      color: var(--maroon);
+      color: #111111;
       margin-bottom: 6px;
     }
 
@@ -136,7 +134,8 @@
       background: #ffffff;
       border-radius: 18px;
       padding: 24px 20px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-gray);
       display: flex;
       flex-direction: column;
     }
@@ -144,7 +143,7 @@
     .section-title {
       font-size: 1.3rem;
       font-weight: 800;
-      color: var(--maroon);
+      color: #111111;
       margin-bottom: 6px;
       text-align: center;
     }
@@ -156,7 +155,7 @@
       text-align: center;
     }
 
-    /* Preview-Only Security Notices */
+    /* Notice Banners */
     .preview-notice-banner {
       background: #fff3cd;
       border: 1px dashed #856404;
@@ -164,7 +163,7 @@
       font-size: 0.8rem;
       font-weight: 800;
       text-align: center;
-      padding: 8px 12px;
+      padding: 9px 12px;
       border-radius: 8px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
@@ -188,12 +187,13 @@
       padding-right: 6px;
     }
 
+    /* Sponsor Card - All White Background */
     .sponsor-card {
-      background: var(--bg-cream);
-      border: 1px solid rgba(0, 112, 60, 0.2);
+      background: #ffffff;
+      border: 1px solid var(--border-gray);
       border-radius: 12px;
       padding: 14px 16px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -209,7 +209,7 @@
     .sponsor-name {
       font-size: 1rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: #111111;
     }
 
     .sponsor-cat {
@@ -229,17 +229,17 @@
     .preview-offer-text {
       font-size: 0.9rem;
       font-weight: 700;
-      color: var(--forest-green);
+      color: #111111;
     }
 
     .locked-badge {
       font-size: 0.75rem;
       font-weight: 700;
-      background: rgba(62, 1, 0, 0.08);
-      color: var(--maroon);
+      background: #f3f4f6;
+      color: #4b5563;
       padding: 4px 8px;
       border-radius: 6px;
-      border: 1px solid rgba(62, 1, 0, 0.15);
+      border: 1px solid #d1d5db;
       white-space: nowrap;
     }
 
@@ -255,7 +255,7 @@
 
   <div class="main-wrapper">
 
-    <!-- Card Preview Hero -->
+    <!-- Header Section -->
     <div class="hero-card">
       <div class="badge-year" id="seasonDisplay">2026–2027 Season</div>
       <h1 class="hero-title">Effingham County 4-H Digital Pass</h1>
@@ -268,7 +268,7 @@
     <!-- Two-Column Grid -->
     <div class="content-grid">
 
-      <!-- Left: Registration Form -->
+      <!-- Left Column: Registration Form -->
       <div class="form-wrapper">
         <div class="form-heading">Register for Your Digital Pass</div>
         <div class="form-subtext">
@@ -277,22 +277,22 @@
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScgyKZTmzFXvqBTkmIXcpv5DVS_F0IxYEoYXWKjiuvs6UturA/viewform?embedded=true" width="100%" height="750" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
       </div>
 
-      <!-- Right: Sponsor Directory Preview -->
+      <!-- Right Column: Sponsor Directory Preview -->
       <div class="directory-wrapper">
         <div class="section-title">Included Businesses & Offers</div>
         <div class="directory-subtext">Explore the deals you unlock once your pass is activated.</div>
 
-        <!-- Top Notice Banner -->
+        <!-- Top Yellow Notice Banner -->
         <div class="preview-notice-banner">
           🔒 PREVIEW ONLY • NOT VALID FOR CASHIER REDEMPTION
         </div>
 
-        <!-- Scrollable List -->
+        <!-- Scrollable List of White Cards with Black Text -->
         <div class="sponsor-list" id="sponsorDirectory">
           <div class="loading-text">Loading participating businesses...</div>
         </div>
 
-        <!-- Bottom Notice Banner -->
+        <!-- Bottom Red Alert Banner -->
         <div class="preview-notice-banner preview-notice-bottom">
           ⚠️ ACTIVE DIGITAL PASS REQUIRED AT TIME OF PURCHASE
         </div>
@@ -309,7 +309,6 @@
     async function loadPublicDirectory() {
       const container = document.getElementById("sponsorDirectory");
       try {
-        // Calling without code or deviceId triggers the public directory mode
         const response = await fetch(SCRIPT_URL);
         const data = await response.json();
 
@@ -329,7 +328,7 @@
                   <div class="sponsor-cat">${sp.category || "Local Merchant"}</div>
                   ${sp.address ? `<div class="sponsor-cat" style="font-size:0.75rem;">📍 ${sp.address}</div>` : ""}
                 </div>
-                <span class="locked-badge">🔒 Unlock with Pass</span>
+                <span class="locked-badge">🔒 Locked</span>
               </div>
               <div class="sponsor-body">
                 <div class="preview-offer-text">${sp.discount}</div>
