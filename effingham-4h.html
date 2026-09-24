@@ -152,15 +152,38 @@
     .directory-subtext {
       font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       text-align: center;
+    }
+
+    /* Preview-Only Security Notices */
+    .preview-notice-banner {
+      background: #fff3cd;
+      border: 1px dashed #856404;
+      color: #856404;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .preview-notice-bottom {
+      margin-top: 14px;
+      margin-bottom: 0;
+      background: #f8d7da;
+      border: 1px dashed #721c24;
+      color: #721c24;
     }
 
     .sponsor-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      max-height: 750px;
+      max-height: 650px;
       overflow-y: auto;
       padding-right: 6px;
     }
@@ -169,11 +192,17 @@
       background: var(--bg-cream);
       border: 1px solid rgba(0, 112, 60, 0.2);
       border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      padding: 14px 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sponsor-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
     }
 
@@ -189,14 +218,28 @@
       margin-top: 2px;
     }
 
-    .discount-badge {
-      background: rgba(0, 112, 60, 0.12);
-      color: var(--forest-green);
+    .sponsor-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .preview-offer-text {
+      font-size: 0.9rem;
       font-weight: 700;
-      font-size: 0.85rem;
-      padding: 6px 12px;
+      color: var(--forest-green);
+    }
+
+    .locked-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(62, 1, 0, 0.08);
+      color: var(--maroon);
+      padding: 4px 8px;
       border-radius: 6px;
-      text-align: right;
+      border: 1px solid rgba(62, 1, 0, 0.15);
       white-space: nowrap;
     }
 
@@ -212,7 +255,7 @@
 
   <div class="main-wrapper">
 
-    <!-- Card Preview Hero (Full Width Across Top) -->
+    <!-- Card Preview Hero -->
     <div class="hero-card">
       <div class="badge-year" id="seasonDisplay">2026–2027 Season</div>
       <h1 class="hero-title">Effingham County 4-H Digital Pass</h1>
@@ -222,10 +265,10 @@
       <div class="highlight-pill">Valid on up to 2 devices per household</div>
     </div>
 
-    <!-- Side-by-Side Content Grid -->
+    <!-- Two-Column Grid -->
     <div class="content-grid">
 
-      <!-- Left Column: Form Section -->
+      <!-- Left: Registration Form -->
       <div class="form-wrapper">
         <div class="form-heading">Register for Your Digital Pass</div>
         <div class="form-subtext">
@@ -234,12 +277,24 @@
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScgyKZTmzFXvqBTkmIXcpv5DVS_F0IxYEoYXWKjiuvs6UturA/viewform?embedded=true" width="100%" height="750" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
       </div>
 
-      <!-- Right Column: Participating Businesses Section -->
+      <!-- Right: Sponsor Directory Preview -->
       <div class="directory-wrapper">
         <div class="section-title">Included Businesses & Offers</div>
-        <div class="directory-subtext">Show your digital pass at these locations to redeem.</div>
+        <div class="directory-subtext">Explore the deals you unlock once your pass is activated.</div>
+
+        <!-- Top Notice Banner -->
+        <div class="preview-notice-banner">
+          🔒 PREVIEW ONLY • NOT VALID FOR CASHIER REDEMPTION
+        </div>
+
+        <!-- Scrollable List -->
         <div class="sponsor-list" id="sponsorDirectory">
           <div class="loading-text">Loading participating businesses...</div>
+        </div>
+
+        <!-- Bottom Notice Banner -->
+        <div class="preview-notice-banner preview-notice-bottom">
+          ⚠️ ACTIVE DIGITAL PASS REQUIRED AT TIME OF PURCHASE
         </div>
       </div>
 
@@ -268,12 +323,17 @@
             const card = document.createElement("div");
             card.className = "sponsor-card";
             card.innerHTML = `
-              <div>
-                <div class="sponsor-name">${sp.name}</div>
-                <div class="sponsor-cat">${sp.category || "Local Merchant"}</div>
-                ${sp.address ? `<div class="sponsor-cat" style="font-size:0.75rem;">📍 ${sp.address}</div>` : ""}
+              <div class="sponsor-header">
+                <div>
+                  <div class="sponsor-name">${sp.name}</div>
+                  <div class="sponsor-cat">${sp.category || "Local Merchant"}</div>
+                  ${sp.address ? `<div class="sponsor-cat" style="font-size:0.75rem;">📍 ${sp.address}</div>` : ""}
+                </div>
+                <span class="locked-badge">🔒 Unlock with Pass</span>
               </div>
-              <div class="discount-badge">${sp.discount}</div>
+              <div class="sponsor-body">
+                <div class="preview-offer-text">${sp.discount}</div>
+              </div>
             `;
             container.appendChild(card);
           });
