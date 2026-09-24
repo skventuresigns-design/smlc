@@ -90,6 +90,31 @@
       border: 1px solid var(--gold);
     }
 
+    /* Device-Specific Install Guide Box */
+    .install-guide-box {
+      background: #ffffff;
+      border: 2px solid var(--forest-green);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 12px rgba(0, 112, 60, 0.1);
+    }
+
+    .install-guide-title {
+      font-weight: 800;
+      color: var(--forest-green);
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .install-guide-steps {
+      font-size: 0.84rem;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
     /* Pass Card */
     .digital-pass {
       background: var(--bg-cream);
@@ -431,6 +456,31 @@
     <!-- Main Member Pass View -->
     <div id="mainContent" class="hidden">
       
+      <!-- Device-Specific Install Guide Container -->
+      <div id="installGuideContainer" class="hidden" style="margin-bottom: 12px;">
+        
+        <!-- iPhone / iPad Instructions -->
+        <div id="iosInstallBox" class="install-guide-box hidden">
+          <div class="install-guide-title">📲 Save Pass to iPhone:</div>
+          <div class="install-guide-steps">
+            1. Tap the <strong>Share</strong> button at bottom (<span style="font-size:1rem;">📤</span>).<br>
+            2. Scroll down & tap <strong>"Add to Home Screen"</strong>.<br>
+            3. Tap <strong>"Add"</strong> in top right.
+          </div>
+        </div>
+
+        <!-- Android / Samsung Instructions -->
+        <div id="androidInstallBox" class="install-guide-box hidden">
+          <div class="install-guide-title">📲 Save Pass to Android:</div>
+          <div class="install-guide-steps">
+            1. Tap the <strong>Menu (⋮ or ☰)</strong> in your browser.<br>
+            2. Tap <strong>"Add to Home screen"</strong> (or <strong>"Install app"</strong>).<br>
+            3. Tap <strong>"Add"</strong> to confirm.
+          </div>
+        </div>
+
+      </div>
+
       <div class="digital-pass">
         <div class="header-row">
           <div class="org-title">Effingham County 4-H</div>
@@ -466,7 +516,7 @@
       <div class="modal-title">Save Pass to Phone</div>
       <div class="modal-desc" style="margin-bottom: 12px;">Keep your 4-H Card on your home screen for quick access at checkout:</div>
       
-      <div class="ios-step">1. Tap the <strong>Share</strong> button at the bottom of Safari (<span style="font-size:1.1rem;">⎋</span> or <span style="font-size:1.1rem;">📤</span>).</div>
+      <div class="ios-step">1. Tap the <strong>Share</strong> button at the bottom of Safari (<span style="font-size:1.1rem;">📤</span>).</div>
       <div class="ios-step">2. Scroll down and tap <strong>"Add to Home Screen"</strong> (➕).</div>
       <div class="ios-step">3. Tap <strong>Add</strong> in the top right corner.</div>
 
@@ -500,6 +550,33 @@
     let pendingRedeemSponsor = null;
     let deferredPrompt = null;
 
+    // Detect Device OS and show the matching install guide
+    function checkDeviceInstallGuide() {
+      // If already opened as a standalone PWA app, hide all install prompts
+      const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+      if (isStandalone) {
+        document.getElementById('pwaBanner').classList.add('hidden');
+        document.getElementById('installGuideContainer').classList.add('hidden');
+        return;
+      }
+
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      const isAndroid = /Android/.test(ua);
+
+      const guideContainer = document.getElementById("installGuideContainer");
+      const iosBox = document.getElementById("iosInstallBox");
+      const androidBox = document.getElementById("androidInstallBox");
+
+      if (isIOS) {
+        guideContainer.classList.remove("hidden");
+        iosBox.classList.remove("hidden");
+      } else if (isAndroid) {
+        guideContainer.classList.remove("hidden");
+        androidBox.classList.remove("hidden");
+      }
+    }
+
     // Listen for Android install prompt
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
@@ -515,8 +592,16 @@
           deferredPrompt = null;
         });
       } else {
-        // Show Safari/iOS Step-by-Step Guide
-        document.getElementById('iosInstallModal').classList.remove('hidden');
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        if (isIOS) {
+          document.getElementById('iosInstallModal').classList.remove('hidden');
+        } else {
+          // If Android or Desktop without native prompt, guide via box
+          const guide = document.getElementById("installGuideContainer");
+          guide.classList.remove("hidden");
+          guide.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
 
@@ -569,6 +654,7 @@
           activeSponsorsList = result.sponsors || [];
           renderSponsors(activeSponsorsList);
           mainContent.classList.remove("hidden");
+          checkDeviceInstallGuide();
         } else {
           errorScreen.classList.remove("hidden");
           errorTitle.textContent = result.status === "expired" ? "Pass Expired" : "Access Denied";
@@ -582,65 +668,64 @@
       }
     }
 
-   // 3. Render Sponsors & Offers (Sorted: Unredeemed top, Redeemed bottom with date)
-function renderSponsors(sponsors) {
-  const container = document.getElementById("vendorDirectory");
-  container.innerHTML = "";
+    // 3. Render Sponsors & Offers (Sorted: Unredeemed top, Redeemed bottom with date)
+    function renderSponsors(sponsors) {
+      const container = document.getElementById("vendorDirectory");
+      container.innerHTML = "";
 
-  // Sort: Unredeemed first, Redeemed drop to the bottom
-  const sortedSponsors = [...sponsors].sort((a, b) => {
-    return (a.isRedeemed === b.isRedeemed) ? 0 : a.isRedeemed ? 1 : -1;
-  });
+      // Sort: Unredeemed first, Redeemed drop to the bottom
+      const sortedSponsors = [...sponsors].sort((a, b) => {
+        return (a.isRedeemed === b.isRedeemed) ? 0 : a.isRedeemed ? 1 : -1;
+      });
 
-  sortedSponsors.forEach(sponsor => {
-    const card = document.createElement("div");
-    card.className = `vendor-card ${sponsor.isRedeemed ? 'redeemed-card' : ''}`;
-    card.id = `card_${sponsor.id}`;
+      sortedSponsors.forEach(sponsor => {
+        const card = document.createElement("div");
+        card.className = `vendor-card ${sponsor.isRedeemed ? 'redeemed-card' : ''}`;
+        card.id = `card_${sponsor.id}`;
 
-    let actionHtml = "";
+        let actionHtml = "";
 
-    if (sponsor.isRedeemed) {
-      let dateDisplay = "";
-      if (sponsor.redeemedAt) {
-        // Formats the timestamp to a clean date (e.g., Sep 22, 2026)
-        const d = new Date(sponsor.redeemedAt);
-        dateDisplay = !isNaN(d.getTime()) 
-          ? ` on ${d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}` 
-          : ` on ${sponsor.redeemedAt.split(" ")[0]}`;
-      }
-      actionHtml = `<div class="action-row"><span class="redeemed-badge">✔ Redeemed${dateDisplay}</span></div>`;
-    } else if (sponsor.offerType === "one-time-timer" || sponsor.offerType === "one-time") {
-      actionHtml = `
-        <div class="action-row" id="action_${sponsor.id}">
-          <button class="btn-redeem" onclick="punchInstantRedeem('${sponsor.name}', '${sponsor.id}')">Redeem Coupon</button>
-        </div>`;
-    } else if (sponsor.offerType === "one-time-pin") {
-      actionHtml = `
-        <div class="action-row" id="action_${sponsor.id}">
-          <button class="btn-redeem" onclick="openPinModal('${sponsor.name}')">Enter Store PIN</button>
-        </div>`;
-    } else if (sponsor.offerType === "one-time-code") {
-      const promoCode = `EFF-${activePassCode.replace(/[^a-zA-Z0-9]/g, '')}-${sponsor.id.toUpperCase()}`;
-      actionHtml = `
-        <div class="action-row" id="action_${sponsor.id}">
-          <button class="btn-redeem" onclick="confirmCodeRedeem('${sponsor.name}', '${sponsor.id}', '${promoCode}')">Reveal Voucher Code</button>
-        </div>`;
+        if (sponsor.isRedeemed) {
+          let dateDisplay = "";
+          if (sponsor.redeemedAt) {
+            const d = new Date(sponsor.redeemedAt);
+            dateDisplay = !isNaN(d.getTime()) 
+              ? ` on ${d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}` 
+              : ` on ${sponsor.redeemedAt.split(" ")[0]}`;
+          }
+          actionHtml = `<div class="action-row"><span class="redeemed-badge">✔ Redeemed${dateDisplay}</span></div>`;
+        } else if (sponsor.offerType === "one-time-timer" || sponsor.offerType === "one-time") {
+          actionHtml = `
+            <div class="action-row" id="action_${sponsor.id}">
+              <button class="btn-redeem" onclick="punchInstantRedeem('${sponsor.name}', '${sponsor.id}')">Redeem Coupon</button>
+            </div>`;
+        } else if (sponsor.offerType === "one-time-pin") {
+          actionHtml = `
+            <div class="action-row" id="action_${sponsor.id}">
+              <button class="btn-redeem" onclick="openPinModal('${sponsor.name}')">Enter Store PIN</button>
+            </div>`;
+        } else if (sponsor.offerType === "one-time-code") {
+          const promoCode = `EFF-${activePassCode.replace(/[^a-zA-Z0-9]/g, '')}-${sponsor.id.toUpperCase()}`;
+          actionHtml = `
+            <div class="action-row" id="action_${sponsor.id}">
+              <button class="btn-redeem" onclick="confirmCodeRedeem('${sponsor.name}', '${sponsor.id}', '${promoCode}')">Reveal Voucher Code</button>
+            </div>`;
+        }
+
+        card.innerHTML = `
+          <div class="card-main-row">
+            <div>
+              <div class="vendor-name">${sponsor.name}</div>
+              <div class="vendor-cat">${sponsor.category || ""}</div>
+              ${sponsor.address ? `<div class="vendor-cat">📍 ${sponsor.address}</div>` : ""}
+            </div>
+            <div class="discount-badge">${sponsor.discount}</div>
+          </div>
+          ${actionHtml}
+        `;
+        container.appendChild(card);
+      });
     }
-
-    card.innerHTML = `
-      <div class="card-main-row">
-        <div>
-          <div class="vendor-name">${sponsor.name}</div>
-          <div class="vendor-cat">${sponsor.category || ""}</div>
-          ${sponsor.address ? `<div class="vendor-cat">📍 ${sponsor.address}</div>` : ""}
-        </div>
-        <div class="discount-badge">${sponsor.discount}</div>
-      </div>
-      ${actionHtml}
-    `;
-    container.appendChild(card);
-  });
-}
 
     // 4. Instant 1-Tap Coupon Punch
     async function punchInstantRedeem(sponsorName, cardId) {
