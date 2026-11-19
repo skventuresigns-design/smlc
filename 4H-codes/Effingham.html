@@ -481,6 +481,10 @@
 
       </div>
 
+      <div id="offlineBanner" class="hidden" style="background:#fff3cd; border:1px solid #856404; color:#856404; font-size:0.8rem; font-weight:700; text-align:center; padding:8px 12px; border-radius:10px; margin-bottom:12px;">
+        Offline: showing your last saved pass. Coupons that need a signal to redeem are paused.
+      </div>
+      
       <div class="digital-pass">
         <div class="header-row">
           <div class="org-title">Effingham County 4-H</div>
@@ -653,7 +657,17 @@
           if (result.season) document.getElementById("seasonBadge").textContent = result.season;
 
           activeSponsorsList = result.sponsors || [];
+          document.getElementById("offlineBanner").classList.add("hidden");
+          try {
+            localStorage.setItem("four_h_cached_pass", JSON.stringify({
+              code: activePassCode,
+              name: result.name,
+              season: result.season,
+              sponsors: activeSponsorsList
+            }));
+          } catch (e) {}
           renderSponsors(activeSponsorsList);
+          
           mainContent.classList.remove("hidden");
           checkDeviceInstallGuide();
         } else {
@@ -661,16 +675,29 @@
           errorTitle.textContent = result.status === "expired" ? "Pass Expired" : "Access Denied";
           errorMsg.textContent = result.message || "Invalid pass credentials.";
         }
-      } catch (err) {
+            } catch (err) {
         loadingScreen.classList.add("hidden");
-        errorScreen.classList.remove("hidden");
-        errorTitle.textContent = "Connection Error";
-        errorMsg.textContent = "Please check your internet connection to load your pass.";
+
+        // No signal: show the last saved copy of this pass, if it is for the current season
+        let saved = null;
+        try { saved = JSON.parse(localStorage.getItem("four_h_cached_pass")); } catch (e) {}
+
+        if (saved && saved.code === activePassCode && saved.season === currentSeasonLocal()) {
+          document.getElementById("supporterName").textContent = saved.name;
+          if (saved.season) document.getElementById("seasonBadge").textContent = saved.season;
+          document.getElementById("offlineBanner").classList.remove("hidden");
+          renderSponsors(saved.sponsors || [], true);
+          mainContent.classList.remove("hidden");
+          checkDeviceInstallGuide();
+        } else {
+          errorScreen.classList.remove("hidden");
+          errorTitle.textContent = "Connection Error";
+          errorMsg.textContent = "Please check your internet connection to load your pass.";
+        }
       }
-    }
 
     // 3. Render Sponsors & Offers (Sorted: Unredeemed top, Redeemed bottom with date)
-    function renderSponsors(sponsors) {
+        function renderSponsors(sponsors, offline = false) {
       const container = document.getElementById("vendorDirectory");
       container.innerHTML = "";
 
@@ -712,7 +739,9 @@
               <button class="btn-redeem" onclick="confirmCodeRedeem('${sponsor.name}', '${sponsor.id}', '${promoCode}')">Reveal Voucher Code</button>
             </div>`;
         }
-
+        if (offline && !sponsor.isRedeemed && actionHtml) {
+          actionHtml = `<div class="action-row"><span class="vendor-cat">Needs a signal to redeem</span></div>`;
+        }
         card.innerHTML = `
           <div class="card-main-row">
             <div>
@@ -820,6 +849,18 @@
     updateClock();
 
     // Start verification
+        // Season check used when showing a saved pass offline (same rule as the backend)
+    function currentSeasonLocal() {
+      const now = new Date();
+      const y = now.getFullYear();
+      return now.getMonth() >= 7 ? y + "-" + (y + 1) : (y - 1) + "-" + y;
+    }
+
+    // Lets the pass page open with no signal
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("effingham-sw.js").catch(() => {});
+    }
+
     validateAccess();
   </script>
 </body>
