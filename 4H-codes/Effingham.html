@@ -650,9 +650,10 @@
 
       const deviceId = getDeviceID();
 
-      try {
-                const isApp = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+           try {
+        const isApp = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
         const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(activePassCode)}&deviceId=${encodeURIComponent(deviceId)}&mode=${isApp ? "app" : "browser"}`);
+        const result = await response.json();
 
         loadingScreen.classList.add("hidden");
 
