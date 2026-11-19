@@ -9,45 +9,37 @@
       --text-dark: #111111;
       --text-muted: #555555;
       --border-gray: #e5e7eb;
-      --maroon: #3E0100;
+      --danger: #b42318;
     }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-
     body {
-      background-color: #f4f6f8;
+      background: #f4f6f8;
       color: var(--text-dark);
-      padding: 24px 16px;
+      padding: 16px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      justify-content: center;
     }
-
-    .main-wrapper {
+    .wrap {
       width: 100%;
-      max-width: 1200px;
+      max-width: 520px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 16px;
     }
-
-    /* Header / Hero Section - Clean White & Black */
-    .hero-card {
+    .card {
       background: #ffffff;
       border: 1px solid var(--border-gray);
-      border-radius: 18px;
-      padding: 24px;
+      border-radius: 16px;
+      padding: 20px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-      text-align: center;
     }
-
-    .badge-year {
+    .center { text-align: center; }
+    .badge {
       display: inline-block;
       background: #111111;
       color: #ffffff;
@@ -55,297 +47,226 @@
       font-weight: 700;
       padding: 4px 12px;
       border-radius: 20px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
-
-    .hero-title {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: #111111;
-      margin-bottom: 8px;
-    }
-
-    .hero-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-
-    .highlight-pill {
-      display: inline-block;
-      background: #f3f4f6;
-      border: 1px solid #d1d5db;
-      color: #111111;
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 8px;
-    }
-
-    /* Two-Column Grid */
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    @media (min-width: 900px) {
-      .content-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    /* Embedded Form Section */
-    .form-wrapper {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 24px 16px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-      border: 1px solid var(--border-gray);
-      text-align: center;
-    }
-
-    .form-heading {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #111111;
-      margin-bottom: 6px;
-    }
-
-    .form-subtext {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
-
-    iframe {
+    h1 { font-size: 1.4rem; margin-bottom: 8px; }
+    h2 { font-size: 1.2rem; margin-bottom: 4px; }
+    .muted { color: var(--text-muted); font-size: 0.95rem; line-height: 1.45; }
+    label { display: block; font-weight: 700; font-size: 0.95rem; margin: 16px 0 6px; }
+    input {
       width: 100%;
-      border: none;
-      min-height: 750px;
+      font-size: 16px; /* 16px stops iPhones from zooming in on the field */
+      padding: 14px;
+      border: 1px solid #d1d5db;
       border-radius: 10px;
     }
-
-    /* Sponsor Directory Preview Section */
-    .directory-wrapper {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 24px 20px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-      border: 1px solid var(--border-gray);
-      display: flex;
-      flex-direction: column;
+    button {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 18px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: #111111;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
     }
-
-    .section-title {
-      font-size: 1.3rem;
-      font-weight: 800;
+    button.secondary {
+      background: #f3f4f6;
       color: #111111;
-      margin-bottom: 6px;
-      text-align: center;
+      border: 1px solid #d1d5db;
+      margin-top: 10px;
     }
-
-    .directory-subtext {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    /* Notice Banners */
-    .preview-notice-banner {
-      background: #fff3cd;
-      border: 1px dashed #856404;
-      color: #856404;
-      font-size: 0.8rem;
-      font-weight: 800;
-      text-align: center;
-      padding: 9px 12px;
-      border-radius: 8px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .preview-notice-bottom {
-      margin-top: 14px;
-      margin-bottom: 0;
-      background: #f8d7da;
-      border: 1px dashed #721c24;
-      color: #721c24;
-    }
-
-    .sponsor-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-height: 650px;
-      overflow-y: auto;
-      padding-right: 6px;
-    }
-
-    /* Sponsor Card - All White Background */
-    .sponsor-card {
+    button:disabled { opacity: 0.6; }
+    .error { color: var(--danger); font-weight: 700; margin-top: 12px; min-height: 1.2em; }
+    .qr-box {
+      display: inline-block;
       background: #ffffff;
+      padding: 14px;
       border: 1px solid var(--border-gray);
       border-radius: 12px;
-      padding: 14px 16px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      margin: 14px 0 10px;
     }
-
-    .sponsor-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .sponsor-name {
-      font-size: 1rem;
-      font-weight: 800;
-      color: #111111;
-    }
-
-    .sponsor-cat {
+    .qr-box img, .qr-box canvas { display: block; max-width: 100%; height: auto; }
+    .pass-name { font-size: 1.2rem; font-weight: 800; }
+    .pass-code { font-weight: 700; margin-top: 2px; }
+    .link-text { word-break: break-all; font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; }
+    .hidden { display: none !important; }
+    details summary { font-weight: 800; font-size: 1.05rem; cursor: pointer; }
+    .sponsor { padding: 10px 0; border-top: 1px solid var(--border-gray); }
+    .sponsor:first-of-type { margin-top: 12px; }
+    .sponsor-name { font-weight: 800; }
+    .sponsor-sub { font-size: 0.85rem; color: var(--text-muted); }
+    .notice {
+      margin-top: 12px;
       font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .sponsor-body {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .preview-offer-text {
-      font-size: 0.9rem;
       font-weight: 700;
-      color: #111111;
-    }
-
-    .locked-badge {
-      font-size: 0.75rem;
-      font-weight: 700;
-      background: #f3f4f6;
-      color: #4b5563;
-      padding: 4px 8px;
-      border-radius: 6px;
-      border: 1px solid #d1d5db;
-      white-space: nowrap;
-    }
-
-    .loading-text {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      padding: 20px;
       text-align: center;
+      color: #721c24;
     }
   </style>
 </head>
 <body>
+  <div class="wrap">
 
-  <div class="main-wrapper">
-
-    <!-- Header Section -->
-    <div class="hero-card">
-      <div class="badge-year" id="seasonDisplay">2026–2027 Season</div>
-      <h1 class="hero-title">Effingham County 4-H Digital Pass</h1>
-      <p class="hero-desc">
-        Support local youth programs and unlock exclusive year-round savings at participating businesses across Effingham County.
-      </p>
-      <div class="highlight-pill">Valid on up to 2 devices per household</div>
+    <div class="card center">
+      <div class="badge" id="seasonDisplay">2026â€“2027 Season</div>
+      <h1>Effingham County 4-H Digital Pass</h1>
+      <p class="muted">Support local youth programs and unlock year-round savings at participating businesses across Effingham County. Valid on up to 2 devices per household.</p>
     </div>
 
-    <!-- Two-Column Grid -->
-    <div class="content-grid">
+    <!-- Step 1: enter the buyer's details -->
+    <div class="card" id="formCard">
+      <h2>Register a pass</h2>
+      <p class="muted">Enter the buyer's details. Their pass link is also sent to this email.</p>
 
-      <!-- Left Column: Registration Form -->
-      <div class="form-wrapper">
-        <div class="form-heading">Register for Your Digital Pass</div>
-        <div class="form-subtext">
-          Complete the form below to receive your pass link instantly by email.
-        </div>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScgyKZTmzFXvqBTkmIXcpv5DVS_F0IxYEoYXWKjiuvs6UturA/viewform?embedded=true" width="100%" height="750" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-      </div>
+      <label for="fullName">Full name</label>
+      <input id="fullName" type="text" autocomplete="off" placeholder="First and last name" />
 
-      <!-- Right Column: Sponsor Directory Preview -->
-      <div class="directory-wrapper">
-        <div class="section-title">Included Businesses & Offers</div>
-        <div class="directory-subtext">Explore the deals you unlock once your pass is activated.</div>
+      <label for="email">Email</label>
+      <input id="email" type="email" inputmode="email" autocomplete="off" autocapitalize="off" placeholder="name@example.com" />
 
-        <!-- Top Yellow Notice Banner -->
-        <div class="preview-notice-banner">
-          🔒 PREVIEW ONLY • NOT VALID FOR CASHIER REDEMPTION
-        </div>
+      <div class="error" id="formError"></div>
+      <button id="createBtn" type="button" onclick="createPass()">Create pass and show QR</button>
+    </div>
 
-        <!-- Scrollable List of White Cards with Black Text -->
-        <div class="sponsor-list" id="sponsorDirectory">
-          <div class="loading-text">Loading participating businesses...</div>
-        </div>
+    <!-- Step 2: show the QR so the buyer can scan it with their own phone -->
+    <div class="card center hidden" id="resultCard">
+      <h2>Pass created</h2>
+      <p class="muted">Ask the buyer to open their phone camera and scan this code.</p>
+      <div class="qr-box"><div id="qrTarget"></div></div>
+      <div class="pass-name" id="resultName"></div>
+      <div class="pass-code" id="resultCode"></div>
+      <p class="muted" style="margin-top:12px;">Please don't scan it with this device. The first phone that opens a pass uses one of its 2 device spots. A link was also emailed to the buyer.</p>
+      <div class="link-text" id="resultLink"></div>
+      <button class="secondary" type="button" onclick="copyLink()" id="copyBtn">Copy link</button>
+      <button type="button" onclick="newSignup()">Sign up someone else</button>
+    </div>
 
-        <!-- Bottom Red Alert Banner -->
-        <div class="preview-notice-banner preview-notice-bottom">
-          ⚠️ ACTIVE DIGITAL PASS REQUIRED AT TIME OF PURCHASE
-        </div>
-      </div>
-
+    <!-- Included businesses -->
+    <div class="card">
+      <details>
+        <summary>See included businesses and offers</summary>
+        <div id="sponsorDirectory"><p class="muted" style="margin-top:12px;">Loading participating businesses...</p></div>
+        <div class="notice">Preview only. The active digital pass is required at the time of purchase.</div>
+      </details>
     </div>
 
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
-    // Live Google Apps Script Endpoint
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyteGNfAEgGJ3IV1LZ1rYitfWKqPn4dS5X7liqAGj2a0RZ_VfeedFkV38SpcAXzsohK/exec";
+    let currentLink = "";
+
+    async function createPass() {
+      const name = document.getElementById("fullName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const err = document.getElementById("formError");
+      const btn = document.getElementById("createBtn");
+      err.textContent = "";
+
+      if (!name || !email || email.indexOf("@") === -1) {
+        err.textContent = "Enter the buyer's name and a valid email.";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Creating pass...";
+      try {
+        const url = `${SCRIPT_URL}?action=signup&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.status === "signup_success") {
+          showResult(data);
+        } else {
+          err.textContent = data.message || "Something went wrong. Please try again.";
+        }
+      } catch (e) {
+        err.textContent = "Could not reach the server. Check the signal and try again.";
+      }
+      btn.disabled = false;
+      btn.textContent = "Create pass and show QR";
+    }
+
+    function showResult(data) {
+      currentLink = data.passUrl;
+      document.getElementById("resultName").textContent = data.name;
+      document.getElementById("resultCode").textContent = "Pass code: " + data.code;
+      document.getElementById("resultLink").textContent = data.passUrl;
+
+      const target = document.getElementById("qrTarget");
+      target.innerHTML = "";
+      const size = Math.min(window.innerWidth - 100, 300);
+      if (window.QRCode) {
+        new QRCode(target, { text: data.passUrl, width: size, height: size, correctLevel: QRCode.CorrectLevel.M });
+      } else {
+        // Backup if the QR library did not load
+        const img = document.createElement("img");
+        img.width = size;
+        img.height = size;
+        img.alt = "Pass QR code";
+        img.src = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=" + encodeURIComponent(data.passUrl);
+        target.appendChild(img);
+      }
+
+      document.getElementById("formCard").classList.add("hidden");
+      document.getElementById("resultCard").classList.remove("hidden");
+      window.scrollTo(0, 0);
+    }
+
+    function newSignup() {
+      document.getElementById("fullName").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("qrTarget").innerHTML = "";
+      document.getElementById("copyBtn").textContent = "Copy link";
+      currentLink = "";
+      document.getElementById("resultCard").classList.add("hidden");
+      document.getElementById("formCard").classList.remove("hidden");
+      window.scrollTo(0, 0);
+    }
+
+    async function copyLink() {
+      try {
+        await navigator.clipboard.writeText(currentLink);
+        document.getElementById("copyBtn").textContent = "Link copied";
+      } catch (e) {
+        document.getElementById("copyBtn").textContent = "Press and hold the link above to copy";
+      }
+    }
 
     async function loadPublicDirectory() {
       const container = document.getElementById("sponsorDirectory");
       try {
         const response = await fetch(SCRIPT_URL);
         const data = await response.json();
-
         if (data.status === "public_directory" && data.sponsors) {
-          if (data.season) {
-            document.getElementById("seasonDisplay").textContent = `${data.season} Season`;
-          }
-
+          if (data.season) document.getElementById("seasonDisplay").textContent = data.season + " Season";
           container.innerHTML = "";
           data.sponsors.forEach(sp => {
-            const card = document.createElement("div");
-            card.className = "sponsor-card";
-            card.innerHTML = `
-              <div class="sponsor-header">
-                <div>
-                  <div class="sponsor-name">${sp.name}</div>
-                  <div class="sponsor-cat">${sp.category || "Local Merchant"}</div>
-                  ${sp.address ? `<div class="sponsor-cat" style="font-size:0.75rem;">📍 ${sp.address}</div>` : ""}
-                </div>
-                <span class="locked-badge">🔒 Locked</span>
-              </div>
-              <div class="sponsor-body">
-                <div class="preview-offer-text">${sp.discount}</div>
-              </div>
-            `;
-            container.appendChild(card);
+            const row = document.createElement("div");
+            row.className = "sponsor";
+            const n = document.createElement("div");
+            n.className = "sponsor-name";
+            n.textContent = sp.name;
+            const o = document.createElement("div");
+            o.textContent = sp.discount;
+            const c = document.createElement("div");
+            c.className = "sponsor-sub";
+            c.textContent = [sp.category, sp.address].filter(Boolean).join(" Â· ");
+            row.append(n, o, c);
+            container.appendChild(row);
           });
         } else {
-          container.innerHTML = `<div class="loading-text">Unable to load business listings at this moment.</div>`;
+          container.innerHTML = '<p class="muted" style="margin-top:12px;">Unable to load business listings right now.</p>';
         }
-      } catch (err) {
-        container.innerHTML = `<div class="loading-text">Live directory temporarily unavailable.</div>`;
+      } catch (e) {
+        container.innerHTML = '<p class="muted" style="margin-top:12px;">Business listings are temporarily unavailable.</p>';
       }
     }
-
     loadPublicDirectory();
   </script>
-
 </body>
 </html>
