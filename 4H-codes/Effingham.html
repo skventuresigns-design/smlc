@@ -651,8 +651,8 @@
       const deviceId = getDeviceID();
 
       try {
-        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(activePassCode)}&deviceId=${encodeURIComponent(deviceId)}`);
-        const result = await response.json();
+                const isApp = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+        const response = await fetch(`${SCRIPT_URL}?code=${encodeURIComponent(activePassCode)}&deviceId=${encodeURIComponent(deviceId)}&mode=${isApp ? "app" : "browser"}`);
 
         loadingScreen.classList.add("hidden");
 
