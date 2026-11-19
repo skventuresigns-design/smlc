@@ -610,24 +610,14 @@
     }
 
     // 1. Device Identifier
-    function getDeviceID() {
-  const params = new URLSearchParams(window.location.search);
-  const fromUrl = params.get("d");
-  const validFromUrl = fromUrl && /^dev_[a-z0-9]+$/.test(fromUrl) ? fromUrl : null;
-
-  let id = localStorage.getItem("four_h_device_id");
-  if (!id) {
-    id = validFromUrl || ("dev_" + Math.random().toString(36).substring(2, 12) + Date.now().toString(36));
-    localStorage.setItem("four_h_device_id", id);
-  }
-
-  // Keep the ID in the address bar so "Add to Home Screen" captures it
-  if (params.get("d") !== id) {
-    params.set("d", id);
-    history.replaceState(null, "", window.location.pathname + "?" + params.toString());
-  }
-  return id;
-}
+      function getDeviceID() {
+      let id = localStorage.getItem("four_h_device_id");
+      if (!id) {
+        id = "dev_" + Math.random().toString(36).substring(2, 12) + Date.now().toString(36);
+        localStorage.setItem("four_h_device_id", id);
+      }
+      return id;
+    }
 
     // 2. Validate Access on Load
     async function validateAccess() {
